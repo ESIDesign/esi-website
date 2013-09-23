@@ -143,7 +143,7 @@ if ( $_GET['settings-updated'] ) { ?>
 
 <tr valign="top">
 <th scope="row">Theme Credits</th>
-<td><p>The Theme was created by <a href="http://themeforest.net/user/WPExplorer?ref=wpexplorer"><strong>WPExplorer</strong></a></p>
+<td><p>The Theme is <a href="http://themeforest.net/user/WPExplorer?ref=wpexplorer"><strong>WPExplorer</strong></a></p>
 </td>
 </tr>
 

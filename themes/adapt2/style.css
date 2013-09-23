@@ -89,7 +89,7 @@ img.alignright,img.alignleft{-webkit-box-shadow:1px 1px 2px 0 rgba(0,0,0,0.2);-m
 .sf-menu li#menu-item-907 a:hover{background-color:#dc801c;color:#fff}
 .sf-menu li#menu-item-3041.current-menu-item a{color:#e2401f}
 .sf-menu li#menu-item-3041 a:hover{background-color:#e2401f;color:#fff}
-.sf-menu li#menu-item-843.current-menu-item a{color:#deb439}
+.sf-menu li#menu-item-843.current-menu-item a,.single-post li#menu-item-843 a{color:#deb439}
 .sf-menu li#menu-item-843 a:hover{background-color:#deb439;color:#fff}
 .sf-menu{float:left}
 .sf-menu a{border-right:1px solid #ddd;color:#999;font:19px/40px "proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;font-weight:400;display:block;float:left;padding:28px 8px 16px;text-decoration:none;text-align:center;letter-spacing:0;width:70px;transition:all .5s ease;-moz-transition:all .5s ease;-webkit-transition:all .5s ease;-o-transition:all .5s ease}
@@ -105,7 +105,7 @@ input[type="text"]#s{background:#fff url('./images/search_gray.png') no-repeat r
 input[type="text"]#s:focus{border-left:1px solid #ddd !important;border-top:none !important;border-right:none !important;border-bottom:none !important;box-shadow:3px 5px 17px -1px rgba(0,0,0,0.1);outline:none !important;padding-right:45px;text-indent:0;height:66px;width:258px !important}
 .white{background:#fff;height:100%;width:100%}
 body.home{position:relative;z-index:-10000}
-.home-wrap{position:relative;top:65px;left:0;height:950px;display:none}
+.home-wrap{position:relative;top:40px;left:0;height:950px;display:none}
 .home_item1{position:absolute;top:3px;left:0;height:332px;overflow:hidden;width:590px;-webkit-box-shadow:1px 1px 2px 0 rgba(0,0,0,0.2);-moz-box-shadow:1px 1px 2px 0 rgba(0,0,0,0.2);box-shadow:1px 1px 2px 0 rgba(0,0,0,0.2)}
 .placeholder{display:block;height:332px;background-color:#f2f2f2;position:relative;z-index:1;cursor:pointer}
 .home_item1 iframe{display:block;position:absolute;top:0;z-index:0}
@@ -139,6 +139,9 @@ a.people_button{float:left;margin-right:8px;height:115px}
 article.people1,article.people2,article.people3{float:left;overflow:hidden;position:relative;top:0;margin-bottom:8px;margin-right:8px;left:0;height:117px;width:117px}
 article.people1 .people-black,article.people2 .people-black,article.people3 .people-black{background:#61b1d6;position:absolute;top:0;left:0;height:115px;width:115px;overflow:hidden;z-index:1001}
 article.people1 img,article.people2 img,article.people3 img{height:115px;width:115px;-webkit-box-shadow:2px 2px 1px 0 rgba(0,0,0,0.2);box-shadow:1px 1px 2px 0 rgba(0,0,0,0.2)}
+article.people1 a,article.people2 a,article.people3 a{height:117px !important}
+.people1 p.caption_people,.people2 p.caption_people,.people3 p.caption_people{margin-bottom:0;opacity:.4;background-color:transparent}
+.people1:hover p.caption_people,.people2:hover p.caption_people,.people3:hover p.caption_people{opacity:1;background-color:rgba(0,0,0,0.4)}
 .home .caption_people{position:absolute;bottom:0;left:0;width:100%}
 .home_item13{position:absolute;top:689px;left:687px;display:block;height:210px;width:105px;padding:10px 0}
 .home_item13 h3{background:url('./images/tweet.png') left top no-repeat;font:20px "adelle","proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;font-weight:400;padding:0 16px 5px 32px !important;margin-bottom:2px !important;margin-left:16px;}
@@ -344,17 +347,19 @@ iframe#mosaic_player{position:relative;top:0;left:0;width:100%;height:100%}
 img.mosaic2,img.mosaic3{height:200px !important;width:324px !important;float:left}
 img.mosaic2{margin-bottom:10px}
 #project .flexslider{width:600px}
+#single-project-excerpt{display:none}
 #single-project{margin-bottom:20px}
-#single-project-left{float:left;width:61%}
-#featured-content #single-project-left{margin-left:5px;width:58%}
+#featured-content #single-project-left{float:left;margin-left:5px;width:58%}
 #single-project-right{float:right;width:36%;margin-top:5px}
 .pull-quote{font-family:"adelle","proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;font-size:24px;line-height:130%;padding-left:14px;clear:both;margin-bottom:40px;width:90%;border-bottom:1px solid #ddd}
 .pull-quote h3{font:22px "adelle","proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;font-weight:100;color:#777}
 .pull-quote p{font:18px "proxima-nova-alt-condensed","nimbus-sans-condensed" !important;text-align:right}
 .related-item{float:left;width:167px;margin-top:10px;margin-right:10px;padding-bottom:5px;position:relative;overflow:hidden;display:block}
-.post-template-single-lab-project-php .related-item{min-height:187px}
+.post-template-single-lab-project-php .related-item,.postid-3226 .related-item{min-height:187px}
 .related-item:hover{background-color:#3faaed}
-.related-caption{border-left:1px solid #ddd;font:16px "proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;padding:4px 20px 6px 8px;margin-left:9px;line-height:17px;}
+.related-item:hover .related-caption,.related-caption a:hover .related-caption{border-color:#fff}
+.related-item:hover .related-caption a,.related-caption a:hover .related-caption a{color:#fff}
+.related-caption{border-left:1px solid #ddd;font:16px "proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;padding:4px 20px 6px 7px;margin-left:9px;line-height:17px;}
 .related-caption a{color:#999;font-weight:500}
 .related-caption a:hover{color:#fff !important}
 .related{position:relative;}
@@ -390,12 +395,13 @@ ul.filter a#all span{width:351px !important;word-break:none}
 .all-projects{position:absolute;top:21px;right:11px;float:right;z-index:1001}
 .all-projects a{border-left:1px solid #b5b5b5;color:#b5b5b5;font:500 16px "proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;padding-left:10px}
 .all-projects a:after{content:""}
-.post-type-archive-project .project-overlay{position:absolute;top:200px;left:0;width:324px;height:100px;margin-top:4px}
-.home .project-overlay{left:8px;max-width:220px;z-index:1001;position:relative}
+.post-type-archive-project .project-overlay{position:absolute;bottom:-15px;left:0;width:324px;margin-top:4px}
+.home .project-overlay{left:8px;z-index:1001;position:relative}
 .home_item3 .project-overlay,.home_item4 .project-overlay{top:170px}
 .home_item5 .project-overlay{top:379px}
 .post-type-archive-project .project-overlay h3{border-left:1px solid #ddd;color:#999;font-size:18px;font-weight:400;line-height:119%;height:20px;padding:4px 20px 6px 8px;text-transform:none;margin-left:9px}
-.home .project-overlay h3,.home .caption_people,.about_work a.project-overlay{font:14px "proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;font-weight:300;color:#fff;opacity:.4;padding:5px;margin-left:-13px;margin-top:4px;text-align:left;padding:5px 20px;transition:background-color 1s ease;-moz-transition:background-color 1s ease;-webkit-transition:background-color 1s ease;-o-transition:background-color 1s ease}
+.item:hover .project-overlay h3{border-color:#fff;color:#fff}
+.home .project-overlay,.home .caption_people,.about_work a.project-overlay{font:14px "proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;font-weight:300;color:#fff;opacity:.4;padding:5px;margin-left:-13px;margin-top:4px;text-align:left;padding:5px 20px;transition:background-color 1s ease;-moz-transition:background-color 1s ease;-webkit-transition:background-color 1s ease;-o-transition:background-color 1s ease}
 .post-type-archive-project .project-overlay h3 a{color:#999;font-weight:400}
 .people-wrap{position:relative;display:none;top:10px;width:105%}
 .people_excerpt{float:left;margin-right:10px;height:162px;width:75%;padding:20px 20px 0;position:relative;left:10px;top:5px}
@@ -549,7 +555,6 @@ form#subForm input#submit{font:14px "proxima-nova",sans-serif;padding:5px 0;widt
 .sidebar-box h3{color:#deb439;margin-top:0 !important;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #ccc}
 .sidebar-box ul{list-style:none;list-style-position:inside;margin:0}
 .sidebar-box li{margin-bottom:10px;line-height:135%}
-.sidebar-box a{font-weight:400}
 .sidebar-box a:hover{color:#deb439}
 .single-post #sidebar{margin-top:15px}
 #sidebar .widget_recent_entries ul,#sidebar .widget_nav_menu ul,#sidebar .widget_categories ul{margin:0;list-style:none}

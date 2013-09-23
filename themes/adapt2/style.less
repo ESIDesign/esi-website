@@ -31,6 +31,8 @@
 
 @orange: #dc801c;
 
+@yellow: #deb439;
+
 @gray: #999;
 
 .box-shadow (@x: 1px, @y: 1px, @blur: 2px, @spread: 0px, @alpha: 0.2) {
@@ -514,12 +516,12 @@ img.alignright, img.alignleft {
 	color: #FFF;
 }
 
-.sf-menu li#menu-item-843.current-menu-item a {
-	color: #deb439;
+.sf-menu li#menu-item-843.current-menu-item a, .single-post li#menu-item-843 a {
+	color: @yellow;
 }
 
 .sf-menu li#menu-item-843 a:hover {
-	background-color: #deb439;
+	background-color: @yellow;
 	color: #FFF;
 }
 
@@ -655,7 +657,7 @@ body.home {
 
 .home-wrap{ 
 	position: relative;
-	top: 65px;
+	top: 40px;
 	left: 0px;
 	height: 950px;
 	display: none;
@@ -748,20 +750,6 @@ body.home {
 	overflow: hidden;
 	.box-shadow;
 }
-
-/*
-.black {
-	background: #61B1D6;
-	display: none;
-	position: absolute;
-	top: 86px;
-	left: 504px;
-	height: 170px;
-	width: 240px;
-	overflow: hidden;
-	z-index: 1001;
-}
-*/
 
 .home_item5 img {
 	position:absolute;
@@ -930,6 +918,21 @@ article.people1 img, article.people2 img, article.people3 img {
 	width: 115px;
 	-webkit-box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, .2);
 	box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, .2);
+}
+
+article.people1 a, article.people2 a, article.people3 a {
+	height: 117px !important;
+}
+
+.people1 p.caption_people, .people2 p.caption_people, .people3 p.caption_people {
+	margin-bottom: 0;
+	opacity: .4;
+	background-color: transparent;
+}
+
+.people1:hover p.caption_people, .people2:hover p.caption_people, .people3:hover p.caption_people {
+	opacity: 1;
+	background-color: rgba(0,0,0,.4);
 }
 
 .home .caption_people {
@@ -2454,17 +2457,16 @@ img.mosaic2 {
 	width: 600px;
 }
 
+#single-project-excerpt {
+	display: none;
+}
+
 #single-project {
 	margin-bottom: 20px;
 }
 
-#single-project-left{
-	float: left;
-/* 	width: 55%; */
-	width: 61%;
-}
-
 #featured-content #single-project-left {
+	float: left;
 	margin-left: 5px;
 	width: 58%;
 }
@@ -2517,7 +2519,7 @@ img.mosaic2 {
 	display: block;
 }
 
-.post-template-single-lab-project-php .related-item {
+.post-template-single-lab-project-php .related-item, .postid-3226 .related-item {
 	min-height: 187px;
 }
 
@@ -2525,10 +2527,18 @@ img.mosaic2 {
 	background-color: @blue;
 }
 
+.related-item:hover .related-caption, .related-caption a:hover .related-caption {
+	border-color: #FFF;
+}
+
+.related-item:hover .related-caption a, .related-caption a:hover .related-caption a {
+	color: #FFF;
+}
+
 .related-caption {
 	border-left: 1px solid #ddd;
 	font: 16px "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif;
-	padding: 4px 20px 6px 8px;
+	padding: 4px 20px 6px 7px;
 	margin-left: 9px;
 	line-height: 17px;
 /* 	width: 130px; */
@@ -2542,6 +2552,13 @@ img.mosaic2 {
 .related-caption a:hover {
 	color: #FFF !important;
 }
+
+/*
+a.awesome-icon-instagram:before {
+	color: #CCC;
+	padding-right: 5px;
+}
+*/
 
 .related {
 	position: relative;
@@ -2794,16 +2811,14 @@ ul.filter a#all span {
 /*-----------------------------------------------------------------------------------*/
 .post-type-archive-project .project-overlay {
 	position: absolute;
-	top: 200px;
+	bottom: -15px;
 	left: 0;
 	width: 324px;
-	height: 100px;
 	margin-top: 4px;
 }
 
 .home .project-overlay { 
 	left: 8px;
-	max-width: 220px;
 	z-index: 1001;
 	position: relative;
 }
@@ -2828,11 +2843,12 @@ ul.filter a#all span {
 	margin-left: 9px;
 }
 
-.post-type-archive-project .project-overlay h3:hover {
-
+.item:hover .project-overlay h3 {
+	border-color: #FFF;
+	color: #FFF;
 }
 
-.home .project-overlay h3, .home .caption_people, .about_work a.project-overlay {
+.home .project-overlay, .home .caption_people, .about_work a.project-overlay {
 	.caption-text;
 	margin-left: -13px;
 	margin-top: 4px;
@@ -3882,12 +3898,14 @@ form#subForm input#submit {
 	float: right;
 }
 
+
+/* Contact Us Career Opportunities Sidebar  */
 .sidebar-box {
 	margin-bottom: 25px;
 }
 
 .sidebar-box h3 {
-	color: #deb439;
+	color: @yellow;
     margin-top: 0px !important;
     margin-bottom: 10px;
 	padding-bottom: 10px;
@@ -3904,12 +3922,8 @@ form#subForm input#submit {
 	line-height: 135%;
 }
 
-.sidebar-box a {
-	font-weight: 400;
-}
-
 .sidebar-box a:hover {
-	color: #deb439;
+	color: @yellow;
 }
 
 .single-post #sidebar {

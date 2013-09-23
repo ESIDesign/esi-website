@@ -10,7 +10,7 @@
 	
 	<?php if(is_page(430)) { 
 	
-	 echo "<div class='sidebar-box'><h3 class='about'>Current Opportunities</h3>";
+	 echo "<div class='sidebar-box'><h3 class='about'>Career Opportunities</h3>";
 	 $children = get_pages('post_type=careers&post_status=publish');
 	 if( $children ) {
 		echo '<ul>';

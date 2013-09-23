@@ -33,6 +33,7 @@ $options = get_option( 'adapt_theme_settings' );
 <script type="text/javascript">
 jQuery(function($){
 	$(document).ready(function(){
+	if ( $(window).width() < 1600) {
     var user = 'esidesign';
       
     // using jquery built in get json method with twitter api, return only one result
@@ -49,6 +50,7 @@ jQuery(function($){
         // output the result
         $(".tweet p").html(tweet);
 });
+}
 });
 });
 </script> 

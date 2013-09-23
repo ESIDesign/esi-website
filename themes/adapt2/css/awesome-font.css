@@ -240,3 +240,6 @@ li[class^="awesome-icon-"].awesome-icon-large:before, li[class*=" awesome-icon-"
 .awesome-icon-github-sign:before        { content: "\f092"; }
 .awesome-icon-upload-alt:before         { content: "\f093"; }
 .awesome-icon-lemon:before              { content: "\f094"; }
+.awesome-icon-instagram:before {
+  content: "\f16d";
+}

@@ -241,20 +241,16 @@ Template Name Posts: Not Featured Template
     	<div class="featured-meta">
 
 	  	<h3 class="related">Related Projects <a class="all" href="<?php echo get_site_url(); ?>/work">See all projects</a></h3>
-	  	<?php 
+	  	
+<?php 
 
-$tags = wp_get_post_tags($post->ID);
+	$tags = wp_get_post_tags($post->ID);
 
-$tagsarray = array();
-		foreach ($tags as $tag) {
-			$tagsarray[] = $tag->slug;
-		}
-		$tagslist = implode(',', $tagsarray);
-/* 		$tagslist2 = implode(', ', $tagsarray); */
-		
+	$tag_ids = array();
+	foreach($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
 
-$images = get_posts( array('numberposts'=>2, 'post_type' => 'project', 'orderby' => 'rand', 'tag' => $tagslist, 'post__not_in' => array($post->ID))  );
-		
+	$images = get_posts( array('posts_per_page'=>2, 'post_type' => 'project', 'orderby' => 'rand', 'tag__in' => $tag_ids,'post__not_in' => array($post->ID), 'caller_get_posts' => 1)  );
+			
 if ( !empty($images) ) {
 	foreach ( $images as $image ) { 
 	setup_postdata( $image ); 

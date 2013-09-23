@@ -211,17 +211,41 @@ Template Name Posts: Lab Template
     	
 	  	<div class="featured-meta">
 	  	<h3 class="related">Recent Experiments </h3>
-<!-- 	  	<a class="all" href="<?php echo get_site_url(); ?>/work">See all projects</a> -->
 	  	</div>
-<?php 
-	
 
-$images = get_posts( array('numberposts'=>8, 'post_type' => 'lab', 'orderby' => 'date', )  );
+<?php
+/* Lab Custom Post — mostly Instagram Feed */
+$lab_args = array(
+			'post_type' => 'lab' 
+);
+$lab_posts = get_posts( $lab_args );
+
+/* Blog Posts Category Lab  */
+$labblog_args = array(
+    'post_type' => 'post',
+    'category' => '282'
+);
+$labblog_posts = get_posts( $labblog_args );
+
+$all_posts = array_merge( $lab_posts, $labblog_posts );
+
+$post_ids = wp_list_pluck( $all_posts, 'ID' );//Just get IDs from post objects
+
+// Do a new query with these IDs to get a properly-sorted list of posts
+$images = get_posts( array(
+	'post_type' => array('post','lab'),
+    'post__in'    => $post_ids,
+    'post_status' => 'publish',
+    'orderby' => 'date',
+    'order' => 'DESC',
+    'numberposts'=> 8
+) );
+
 		
 if ( !empty($images) ) {
 	foreach ( $images as $image ) { 
-	setup_postdata( $image ); 
 
+	setup_postdata( $image ); 
 		$rtagslist = implode(', ', $rtagsarray);
 		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'grid-thumb', true);
 		$site_url = get_site_url();
@@ -236,7 +260,7 @@ if ( !empty($images) ) {
 		if(!empty($value)) { 
 		echo '<a target="_blank" href="'. $value.'">';
 		} else {
-		echo '<a href="'.$site_url.'/lab/'.$image->post_name.'">';
+		echo '<a href="'.$site_url.'/'.$image->post_name.'">';
 		}
 
     $agent = $_SERVER['HTTP_USER_AGENT'];
@@ -252,7 +276,12 @@ if ( !empty($images) ) {
   if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
 		echo '<img src="'.$image_url[0].'"/></a>';
 		}
-		echo '<div class="related-caption"><a href="'.$site_url.'/lab/'.$image->post_name.'">';
+		echo '<div class="related-caption">';
+		if(!empty($value)) { 
+		echo '<a target="_blank" href="'. $value.'">';
+		} else {
+		echo '<a href="'.$site_url.'/'.$image->post_name.'">';
+		}
 	  	if (get_field('short', $image->ID) != "") { 
 	  	the_field("short", $image->ID);
 	  	}
@@ -306,10 +335,13 @@ jQuery(function($){
 
 	if ( $(window).width() > 767) {
 		var iframe = $('#player')[0];
-		if (iframe) {
-			    player = $f(iframe);	
-			    		 
-		}
+		var	player = $f(iframe);	
+
+		player.addEvent("ready", function(){    		 
+			player.addEvent("play", function(){
+				$('#featured .flexslider').flexslider("pause");
+			});
+		});
 		
 
 startAtSlideIndex = 0;
@@ -350,7 +382,7 @@ if (window.location.hash != '') {
 			},
 			before: function(){
 				if(iframe){
-								player.api('pause');	
+					player.api('pause');	
 				}
 			}, 
 			after: function(){

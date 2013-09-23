@@ -12,13 +12,7 @@
 
          
     	<div class="item0"><div id="map_canvas" style="width:1000px; height:353px"></div></div>
-      
 
-  <!--
-  <header id="page-heading">
-        <h1><?php the_title(); ?></h1>		
-    </header>
--->
     <!-- /page-heading -->
 <article class="post clearfix">   
 

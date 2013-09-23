@@ -27,6 +27,8 @@
     <p><em>Please no phone calls or unscheduled appointments/walk-ins.</em></p>
 
 <p>To be considered, please e-mail your cover letter and resume with the position as the subject to: <a href="mailto:recruit@esidesign.com?subject=<?php the_title(); ?>">recruit@esidesign.com</a></p>
+
+<?php setPostViews(get_the_ID()); ?>
     
 </article> 
 <article class="post clearfix">

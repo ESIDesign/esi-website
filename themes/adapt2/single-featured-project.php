@@ -52,54 +52,56 @@ Template Name Posts: Featured Template
 							'post_parent' => $id,
 							'post_mime_type' => 'image',
 							'post_status' => null,
-							'posts_per_page' => -1
+							'posts_per_page' => -1,
+							'meta_query' => array(
+						       array(
+						           'key' => 'not_in_carousel',
+						           'value' => 1,
+						           'type' => 'numeric',
+						           'compare' => 'NOT EXISTS',
+						       )
+						   )
                         );
                         $attachments = get_posts($args);
-						
-						//attachments count
-						$attachments_count = count($attachments);
+					if (get_field('video_order', $id) != "") { 
+                    $video_order = get_field('video_order', $id);
+                    }
+                    if (get_field('video_order') == "") { 
+                    $video_order = 2;
+                    }  	
+					//attachments count
+					$attachments_count = count($attachments);
                     $count = 0;
                         //start loop
                         foreach ($attachments as $attachment) :
                         $count++;
-                        //get images
+                        
                         $full_img = wp_get_attachment_image_src( $attachment->ID, 'slider');
-                        $portfolio_single = wp_get_attachment_image_src( $attachment->ID, 'slider'); ?>
-                            <?php $imgsize = wp_get_attachment_metadata($attachment->ID);?>
-                            <?php if ($imgsize['width'] == 590 ) { 
+                        $imgsize = wp_get_attachment_metadata($attachment->ID); ?>
                             
-                            $count = 0;
-                             } ?>
+                    <?php if ($imgsize['width'] == 590 ) { 
+                    
+                    $count = 0;
+                     } ?>
+                    
+                    
+                    <?php if ($imgsize['width'] != 590 ) { ?>
                             
-                            
-                            <?php if ($imgsize['width'] != 590 ) { ?>
-                            
-                         <?php if ($count == '2') { ?>   
-                         
-
-
-<?php $video = get_post_custom_values("video");
-						  	if (get_field('video') != "") { 
+	                <?php if ($count == $video_order && get_field('video', $id) != "") { ?>   
+                    <?php
+                     $video = get_post_custom_values("video");
 						  	echo '<li><iframe id="player" src="http://player.vimeo.com/video/'.$video[0].'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';
-                            }?>
+                    ?>
 
-
-                            <li>                            
-                            <img src="<?php echo $full_img[0]; ?>" alt="<?php echo apply_filters('the_title', $attachment->post_title); ?>" />
-                            <?php if ($attachment->post_excerpt) { ?>
-                            <p class="flex-caption"><?php echo $attachment->post_excerpt; ?></p>
-                            <?php } ?>
-                            </li>
-                            <?php } ?>
-                  
-	                        <?php if ($count != '2') { ?> 
-	                        <li>                            
+	                  <?php } ?>
+                            
+                        	<li>                            
                             <img src="<?php echo $full_img[0]; ?>" alt="<?php echo apply_filters('the_title', $attachment->post_title); ?>" /> 
                             <?php if ($attachment->post_excerpt) { ?>
                             <p class="flex-caption"><?php echo $attachment->post_excerpt; ?></p>
                             <?php } ?>
-                            </li>  
-	                         <?php } ?>   
+                            </li>   
+                                      
 	                         
 	                         <?php } ?>
                         
@@ -115,6 +117,22 @@ Template Name Posts: Featured Template
         <!-- /single-portfolio-left -->
         
         <div id="featured-content">
+        
+        <div id="single-project-excerpt">
+		<h2 class="excerpt-title"><?php the_title(); ?></h2>
+		<div class="excerpt-content">
+		<h3 class="excerpt">
+		<?php if (get_field('question') != "") { 
+	  	the_field('question');
+	  	} else {
+		  	echo get_the_excerpt(); 	
+	  	} ?>  
+	  	</h3>
+        <p><?php $string = get_the_content(); 
+        echo substr($string,0,380);
+        ?></p>
+		</div>
+        </div>
         
         <div id="single-project-left" class="clearfix">
           
@@ -228,19 +246,26 @@ Template Name Posts: Featured Template
 	  	
 	  	<h3 class="related">Related Projects <a class="all" href="<?php echo get_site_url(); ?>/work">See all projects</a></h3>
 	  	
-	  	<?php 
+<?php 
 
-$tags = wp_get_post_tags($post->ID);
+	$tags = get_the_terms($post->ID, 'project_cats');
 
-$tagsarray = array();
-		foreach ($tags as $tag) {
-			$tagsarray[] = $tag->slug;
-		}
-		$tagslist = implode(',', $tagsarray);
-/* 		$tagslist2 = implode(', ', $tagsarray); */
-		
+	$tag_ids = array();
+	foreach($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
+	if(is_single(3226)){
+		$posts_per_page = 6;
+	}
+	else {
+		$posts_per_page = 2;	
+	}
 
-$images = get_posts( array('numberposts'=>2, 'post_type' => 'project', 'orderby' => 'rand', 'tag' => $tagslist, 'post__not_in' => array($post->ID))  );
+	$images = get_posts( array('posts_per_page'=>$posts_per_page, 'post_type' => 'project', 'orderby' => 'rand', 'tax_query' => array(
+		array(
+			'taxonomy' => 'project_cats',
+			'field' => 'ID',
+			'terms' => $tag_ids
+		)
+	),'post__not_in' => array($post->ID), 'caller_get_posts' => 1)  );
 		
 if ( !empty($images) ) {
 	foreach ( $images as $image ) { 
@@ -288,12 +313,16 @@ jQuery(function($){
 
 	if ( $(window).width() > 767) {
 		var iframe = $('#player')[0];
-		if (iframe) {
-			    player = $f(iframe);	
-			    		 
-		}
-		
+		if(iframe) {
+		var	player = $f(iframe);	
 
+		player.addEvent("ready", function(){    		 
+			player.addEvent("play", function(){
+				$('#featured .flexslider').flexslider("pause");
+			});
+		});
+		}
+	
 startAtSlideIndex = 0;
 slideshowBoolean = true;
 // see if a tab anchor has been included in the url
@@ -306,6 +335,7 @@ if (window.location.hash != '') {
 		
 		$('#featured .flexslider').flexslider({
 			animation: "slide",
+			easing: "swing",
 			slideshow: slideshowBoolean,
 			slideshowSpeed: 6000,
 			animationDuration: 600,
@@ -332,11 +362,11 @@ if (window.location.hash != '') {
 			},
 			before: function(){
 				if(iframe){
-								player.api('pause');	
+					player.api('pause');	
 				}
 			}, 
 			after: function(){
-/* 				$('.flex-caption').fadeIn(); */
+
 			},
 		});
 		}
@@ -355,14 +385,7 @@ if (window.location.hash != '') {
 	});
 });
 	
-	
-/*
-// When the player is ready, add listeners for pause, finish, and playProgress
-player.addEvent('ready', function() {
-    setTimeout(function(){
-  $('.title').animate({opacity: 1}, 1000)}, 800);
-});
-*/
+
 </script>
 
 <?php get_footer(); ?>

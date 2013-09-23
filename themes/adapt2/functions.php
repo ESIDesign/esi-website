@@ -9,11 +9,6 @@
 if ( ! isset( $content_width ) ) 
     $content_width = 980;
 
-/*
-update_option('siteurl','http://esidesign.com');
-update_option('home','http://esidesign.com');
-*/
-
 /*-----------------------------------------------------------------------------------*/
 /*	Include functions
 /*-----------------------------------------------------------------------------------*/
@@ -340,6 +335,7 @@ function kc_attachment_taxonomies() {
 }
 add_action( 'init', 'kc_attachment_taxonomies' );
 
+/*
 function kc_attachment_fields_to_edit( $fields, $post ) {
 	$taxonomies = get_attachment_taxonomies( $post );
 	if ( empty($taxonomies) )
@@ -382,6 +378,7 @@ function kc_attachment_fields_to_edit( $fields, $post ) {
 	return $fields;
 }
 add_filter( 'attachment_fields_to_edit', 'kc_attachment_fields_to_edit', 10, 2 );
+*/
 
 function kc_attachment_fields_data() {
 	if ( empty($_POST['attachments']) )
@@ -782,3 +779,38 @@ function ucc_get_terms_list( $id = '' , $echo = true ) {
     return false;
   } 
 } 
+
+function getPostViews($postID){
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+        return "0 View";
+    }
+    return $count.' Views';
+}
+function setPostViews($postID) {
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        $count = 0;
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+    }else{
+        $count++;
+        update_post_meta($postID, $count_key, $count);
+    }
+}
+
+function posts_column_views($defaults){
+    $defaults['post_views'] = __('Views');
+    return $defaults;
+}
+function posts_custom_column_views($column_name, $id){
+    if($column_name === 'post_views'){
+        echo getPostViews(get_the_ID());
+    }
+}
+add_filter('manage_careers_columns', 'posts_column_views');
+add_action('manage_careers_custom_column', 'posts_custom_column_views',5,2);
