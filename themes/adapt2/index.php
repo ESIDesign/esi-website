@@ -76,7 +76,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 		
 		<div class="home_item1">
 		
-			<img class="placeholder" src="<?php echo the_field('video_placeholder', $video_post->ID); ?>"/><span class="circle"></span><span id="button" class="awesome-icon-play"></span>
+			<img class="placeholder" src="<?php echo the_field('video_placeholder', $video_post->ID); ?>"/><span id="button" class="awesome-icon-play"></span>
 			<iframe id="home_player" src="http://player.vimeo.com/video/<?php echo the_field('video', $video_post->ID); ?>?api=1&title=0&byline=0&portrait=0&player_id=home_player" width="590" height="332" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		
 		</div>
@@ -202,13 +202,13 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 			
 			<?php } ?><!-- if 3rd proj -->
 
+
             <?php } ?><!-- if proj feat img -->
             
 		<?php endforeach; ?>
 	<?php wp_reset_query(); ?>
 <?php } ?><!-- if projects -->
     
-
 
 <div class="home_item2" style="height:115px; width: 115px;">
 

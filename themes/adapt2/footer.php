@@ -29,10 +29,15 @@ $options = get_option( 'adapt_theme_settings' );
     
 </div>
 
-
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.kinetic.min.js"></script>
 <script type="text/javascript">
 jQuery(function($){
 	$(document).ready(function(){
+	
+	if ( $(window).width() > 1600) {
+		$('body').kinetic();
+	}
+
 	if ( $(window).width() < 1600) {
     var user = 'esidesign';
       

@@ -1,12 +1,13 @@
 <?php
-/**
- * @package WordPress
- * @subpackage Adapt Theme
- */
-$options = get_option( 'adapt_theme_settings' );
-?>
-<?php get_header('home'); ?>
-<!-- <div class="white"></div> -->
+// Our include
+define('WP_USE_THEMES', false);
+require_once('../../../wp-load.php');
+/*
+
+		wp_denqueue_script('custom', get_template_directory_uri() . '/js/home.js');
+*/
+ ?>
+
 <div class="home-wrap clearfix">
 
 <article class="home_item9">
@@ -86,7 +87,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 <?php $args = array(
     'post_type' =>'project',
     'meta_query' => array(
-                        array('key' => 'home',
+                        array('key' => 'lobby',
                               'value' => '1'
                         )
                     ),
@@ -132,8 +133,35 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 	  	} ?></h3></a>
 	</div>
 <?php } ?>
+
+
+<?php if ($count == '3') { ?>
+	<div class="home_item8">
+		<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
+        <h3 class="project-overlay">
+        <?php if (get_field('short') != "") { 
+	  	the_field("short");
+	  	}
+	  	else { 
+	  	the_title();  	
+	  	} ?></h3></a>
+	</div>
+<?php } ?>
+
+<?php if ($count == '4') { ?>
+	<div class="home_item14">
+		<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
+        <h3 class="project-overlay">
+        <?php if (get_field('short') != "") { 
+	  	the_field("short");
+	  	}
+	  	else { 
+	  	the_title();  	
+	  	} ?></h3></a>
+	</div>
+<?php } ?>
            
-<?php if ($count == '3') { ?>     
+<?php if ($count == '5') { ?>     
            
 <!-- People -->
 <div class="home_item12">
@@ -269,6 +297,8 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
             
 </div>
 
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/home_lobby.js"></script>
+
 <script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cycle.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cookie.js"></script>
@@ -288,5 +318,6 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 <!-- wrap --> 
 <!-- WP Footer -->
 <?php wp_footer(); ?>
+
 </body>
 </html>

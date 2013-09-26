@@ -69,12 +69,12 @@
 						
 						//attachments count
 						$attachments_count = count($attachments);
-                    $count = 0;
+	                    $count = 0;
                         //start loop
                         foreach ($attachments as $attachment) : setup_postdata($post);
             $count++;
             //get portfolio thumbnail
-            $full_img = wp_get_attachment_image_src( get_post_thumbnail_id($attachment->ID), 'slider');?>
+            $full_img = wp_get_attachment_image_src( get_post_thumbnail_id($attachment->ID), 'slider'); ?>
             
             		<li>   
             		            <div class="title">

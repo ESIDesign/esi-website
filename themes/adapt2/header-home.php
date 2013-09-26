@@ -57,7 +57,36 @@ $options = get_option( 'adapt_theme_settings' );
 <?php if ( is_single() || is_page() ) wp_enqueue_script( 'comment-reply' ); ?>
 <?php wp_head(); ?>
 <script type="text/javascript">
-
+jQuery(function($){
+ 
+		var load_lobby = function(){
+		$('#main').empty();
+		$.ajax({
+                type       : "GET",
+                dataType   : "html",
+                url        : "http://localhost:8888/wp-content/themes/adapt2/index_lobby.php",
+                beforeSend : function(){
+	                console.log("LOBBY INDEX BEFORE SEND");
+                },
+                success    : function(data){
+                    $data = $(data);
+                    if($data.length){
+/*                         $data.hide(); */
+						$('#main').append(data);
+                       
+                    } else {
+                        console.log("NO DATA");
+                    }
+                }
+		});
+		}   
+	$(document).ready(function(){
+ 	if ( $(window).width() > 1600) {
+ 		load_lobby();
+		return false;
+ 	}
+ 	});
+ 	});
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-2334506-6']);
   _gaq.push(['_trackPageview']);

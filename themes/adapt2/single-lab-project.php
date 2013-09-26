@@ -42,8 +42,13 @@ Template Name Posts: Lab Template
                     <ul class="slides">
                     
                                           
-                    <?php   
+                   <?php   
                     	$id = get_the_ID();
+                    	if(get_field('video', $id) != "") {
+							   $exclude_id = get_post_thumbnail_id( $id );
+						}
+                    	
+                    	$feat_id = get_post_thumbnail_id( $id ); 
                         //attachement loop
                         $args = array(
                             'orderby' => 'menu_order',
@@ -52,56 +57,66 @@ Template Name Posts: Lab Template
 							'post_parent' => $id,
 							'post_mime_type' => 'image',
 							'post_status' => null,
-							'posts_per_page' => -1
+							'posts_per_page' => -1,
+						   'exclude' => $exclude_id,
+							'meta_query' => array(
+						       array(
+						           'key' => 'not_in_carousel',
+						           'value' => 1,
+						           'type' => 'numeric',
+						           'compare' => 'NOT EXISTS',
+						       )
+						   )
                         );
                         $attachments = get_posts($args);
-						
-						//attachments count
-						$attachments_count = count($attachments);
+					if (get_field('video_order', $id) != "") { 
+                    $video_order = get_field('video_order', $id);
+                    }
+                    if (get_field('video_order') == "") { 
+                    $video_order = 2;
+                    }  	
+					//attachments count
+					$attachments_count = count($attachments);
                     $count = 0;
                         //start loop
                         foreach ($attachments as $attachment) :
                         $count++;
-                        //get images
+                        
                         $full_img = wp_get_attachment_image_src( $attachment->ID, 'slider');
-                        $portfolio_single = wp_get_attachment_image_src( $attachment->ID, 'slider'); ?>
-                            <?php $imgsize = wp_get_attachment_metadata($attachment->ID);?>
-                            <?php if ($imgsize['width'] == 590 ) { 
+                        $imgsize = wp_get_attachment_metadata($attachment->ID); 
+                        $feat_id = get_post_thumbnail_id( $id ); ?>
                             
-                            $count = 0;
-                             } ?>
+                    <?php if (($imgsize['width'] == 590) || ($attachment->ID == $feat_id && get_field('video', $id) != "")) { 
+                    
+                    $count = 0;
+                     } ?>
+                    
+                    
+                    <?php if (($imgsize['width'] != 590) || ($attachment->ID != $feat_id && get_field('video', $id) == "")) { ?>
+                    
+                    <!-- if adding second video remember jquery for img placeholder -->        
+	                <?php if ($count == $video_order && get_field('video', $id) != "") { ?>   
+                    <?php
+                    $feat_img = wp_get_attachment_image_src( get_post_thumbnail_id($id), 'slider');
+                     $video = get_post_custom_values("video");
+						  	echo '<li class="video-wrapper">
+						  	<img class="placeholder" src="'. $feat_img[0].'"/><span id="button" class="awesome-icon-play"></span>
+						  	<iframe id="player" src="http://player.vimeo.com/video/'.$video[0].'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';
+                    ?>
+
+	                 <?php } ?>
                             
-                            
-                            <?php if ($imgsize['width'] != 590 ) { ?>
-                            
-                         <?php if ($count == '2') { ?>   
-                         
-
-
-<?php $video = get_post_custom_values("video");
-						  	if (get_field('video') != "") { 
-						  	echo '<li><iframe id="player" src="http://player.vimeo.com/video/'.$video[0].'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';
-                            }?>
-
-
-                            <li>                            
-                            <img src="<?php echo $full_img[0]; ?>" alt="<?php echo apply_filters('the_title', $attachment->post_title); ?>" />
-                            <?php if ($attachment->post_excerpt) { ?>
-                            <p class="flex-caption"><?php echo $attachment->post_excerpt; ?></p>
-                            <?php } ?>
-                            </li>
-                            <?php } ?>
-                  
-	                        <?php if ($count != '2') { ?> 
-	                        <li>                            
+                    	<li>                            
                             <img src="<?php echo $full_img[0]; ?>" alt="<?php echo apply_filters('the_title', $attachment->post_title); ?>" /> 
                             <?php if ($attachment->post_excerpt) { ?>
-                            <p class="flex-caption"><?php echo $attachment->post_excerpt; ?></p>
+	                            <p class="flex-caption">
+	                            	<?php echo $attachment->post_excerpt; ?>
+	                            </p>
                             <?php } ?>
-                            </li>  
-	                         <?php } ?>   
+	                    </li>   
+                                      
 	                         
-	                         <?php } ?>
+                         <?php } ?>
                         
                         <?php endforeach; ?>
                     </ul>
@@ -115,6 +130,24 @@ Template Name Posts: Lab Template
         <!-- /single-portfolio-left -->
         
         <div id="featured-content">
+        
+        <div id="single-project-excerpt">
+		<h2 class="excerpt-title"><?php the_title(); ?></h2>
+			<div class="excerpt-content">
+				<h3 class="excerpt">
+				<?php 
+				if (get_field('question') != "") { 
+				  	the_field('question');
+			  	} 
+			  	else {
+				  	echo get_the_excerpt(); 	
+			  	} ?>  
+			  	</h3>
+		        <p><?php $string = get_the_content(); 
+			        echo substr($string,0,2000); ?>
+		        </p>
+			</div>
+        </div>
         
         <div id="single-project-left" class="clearfix">
           
@@ -333,15 +366,49 @@ jQuery(function($){
 		myVideo.pause();
 	});
 
-	if ( $(window).width() > 767) {
+	if ($(window).width() > 767) {
 		var iframe = $('#player')[0];
+		if(iframe) {
 		var	player = $f(iframe);	
 
 		player.addEvent("ready", function(){    		 
 			player.addEvent("play", function(){
 				$('#featured .flexslider').flexslider("pause");
 			});
+			player.addEvent("pause", function(){
+				$(".placeholder").fadeIn();
+				$('span#button').removeClass('awesome-icon-pause');
+				$('span#button').addClass('awesome-icon-play');
+				$("span#button").fadeIn();
+			});
+			player.addEvent("ended", function() {
+				$(".placeholder").fadeIn();
+				$('span#button').removeClass('awesome-icon-pause');
+				$('span#button').addClass('play');
+				$("span#button").fadeIn();
+		    });
 		});
+
+	   	$("img.placeholder, .circle, #button").click(function(){
+				player.api('play');
+				$("img.placeholder").fadeOut(200);
+				$('span#button').removeClass('awesome-icon-play');
+				$('span#button').addClass('awesome-icon-pause');
+				$("span#button").fadeOut(200);
+	   	});
+		
+		var isPaused = player.api('pause');
+		
+		if (isPaused == true) {
+			$('span#button').removeClass('awesome-icon-pause');
+		       $('span#button').addClass('awesome-icon-play');
+		}
+		if (isPaused == false) {
+		$('span#button').removeClass('awesome-icon-play');
+		       $('span#button').addClass('awesome-icon-pause');
+			$('span#button').text('Pause Video');
+		}
+	}
 		
 
 startAtSlideIndex = 0;

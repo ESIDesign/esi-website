@@ -147,6 +147,29 @@ Template Name Posts: Not Featured Template
         
         <div id="featured-content">
         
+        <div id="single-project-excerpt">
+		<h2 class="excerpt-title"><?php the_title(); ?></h2>
+			<div class="excerpt-content">
+				<h3 class="excerpt">
+				<?php if (get_field('question') != "") { 
+			  	the_field('question');
+			  	} else {
+				  	echo get_the_excerpt(); 	
+			  	} ?>  
+			  	</h3>
+		        <p><?php
+		        $string = get_the_content();
+/* 		        strlen($string) > 700 */
+		        if(get_field('lobby') != '') {
+			        the_field('lobby');
+		        } else {
+	 		        echo substr($string,0,700);   
+		        }
+		        ?></p>
+			</div>
+        </div>
+        
+        
         <div id="single-project-left" class="clearfix">
           
 				<h2 class="excerpt">
