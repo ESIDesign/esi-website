@@ -5,15 +5,9 @@ require_once('../../../wp-load.php');
 
 // Our variables
 $numPosts = (isset($_GET['numPosts'])) ? $_GET['numPosts'] : 0;
+// grab the current page number and set to 1 if no page number is set
+$page = (isset($_GET['pageNumber'])) ? $_GET['pageNumber'] : 0;
 
-/*
-echo $numPosts;
-echo $page;
-*/
-?>
-<?php
-
-$post_ids = wp_list_pluck( $all_posts, 'ID' );
 
 /*
 	global $wpdb;
@@ -26,19 +20,16 @@ $post_ids = wp_list_pluck( $all_posts, 'ID' );
 $count_args = array(
 	'fields' => 'all',
 	'role' => 'editor',
-	'posts_per_page' => $numPosts,
-    'paged'          => $page
+	'number' => 99999
 );
 
 // The Query
-$user_count_query = new WP_User_Query( $args );
-
+$user_count_query = new WP_User_Query( $count_args );
+$user_count = $user_count_query->get_results();
 
 // count the number of users found in the query
 $total_users = $user_count ? count($user_count) : 1;
 
-// grab the current page number and set to 1 if no page number is set
-$page = (isset($_GET['pageNumber'])) ? $_GET['pageNumber'] : 0;
 
 // how many users to show per page
 $limit = 1;
@@ -48,7 +39,7 @@ $total_pages = 1;
 $offset = $limit * ($page - 1);
 $total_pages = ceil($total_users / $users_per_page);
 
-$randomize_func = create_function( '&$query', '$query->query_orderby = "ORDER BY RAND()";' ); 
+$randomize_func = create_function( '&$query', '$query->query_orderby = "ORDER BY RAND()";' );  
 
 // Hook pre_user_query 
 add_action( 'pre_user_query', $randomize_func ); 
@@ -96,4 +87,4 @@ if ( ! empty( $user_query->results ) ) {
 	<?php endforeach; 
 		}
 	?>
-<?php wp_reset_query(); ?>
+<!-- <?php wp_reset_query(); ?> -->

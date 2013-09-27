@@ -2,7 +2,7 @@
 /**
  * @package WordPress
  * @subpackage Adapt Theme
- * Template Name: About
+ * Template Name: About Old
  */
 ?>
 

@@ -28,18 +28,14 @@ if (function_exists( 'add_theme_support')) {
 	
 	if ( function_exists('add_image_size')) {
 /* 		add_image_size( 'full-size',  9999, 9999, false ); */
-/* 		add_image_size( 'full-size',  492, 358, true ); */
-		add_image_size( 'slider',  1000, 568, true );
-		add_image_size( 'portfolio-single',  600, 400, true );
-/* 		add_image_size( 'blog',  240, 9999, false ); */
+		add_image_size( 'people',  115, 115, true );
 		add_image_size( 'small-thumb',  50, 50, true );
 		add_image_size( 'grid-thumb',  240, 180, true );
-		add_image_size( 'grid-thumb1',  115, 115, true );
 		add_image_size( 'archive-project',  324, 200, true );
 		add_image_size( 'notfeat-project',  656, 410, true );
-/* 		add_image_size( 'grid-thumb2',  260, 353, true ); */
-		add_image_size( 'grid-thumb2',  240, 370, true );
-		add_image_size( 'grid-thumb3',  513, 353, true );
+		add_image_size( 'grid-thumb2',  344, 410, true );
+		add_image_size( 'grid-thumb3',  590, 332, true );
+		add_image_size( 'slider',  1000, 568, true );
 	}
 }
 
@@ -75,7 +71,6 @@ function adapt_scripts_function() {
 	// Site wide js
 	wp_enqueue_script('hoverIntent', get_template_directory_uri() . '/js/jquery.hoverIntent.minified.js');
 	wp_enqueue_script('hoverIntent', get_template_directory_uri() . '/js/modernizr.video.js');
-/* 	wp_enqueue_script('superfish', get_template_directory_uri() . '/js/superfish.js'); */
 /* 	wp_enqueue_script('easing', get_template_directory_uri() . '/js/jquery.easing.1.3.js'); */
 	wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider-min.js');
 /* 	wp_enqueue_script('prettyphoto', get_template_directory_uri() . '/js/jquery.prettyPhoto.js'); */
@@ -86,13 +81,17 @@ function adapt_scripts_function() {
 		wp_enqueue_script('isotope', get_template_directory_uri() . '/js/jquery.isotope.min.js');
 		wp_enqueue_script('isotope_init', get_template_directory_uri() . '/js/isotope_init.js');
 	}
+	
+	if ( is_singular( 'project' ) ) {
+		wp_enqueue_script('froogaloop', get_template_directory_uri() . '/js/froogaloop2.min.js');
+	}
 
 	if(is_home()) {
 		wp_enqueue_script('custom', get_template_directory_uri() . '/js/home.js');
 		wp_enqueue_script('custom', get_template_directory_uri() . '/js/jquery.cookie.js');
 	}
 	else {
-		wp_enqueue_script('custom', get_template_directory_uri() . '/js/custom.js');
+		wp_enqueue_script('custom', get_template_directory_uri() . '/js/custom.js', array(), '', true);
 	}
 }
 
@@ -707,40 +706,13 @@ function ucc_get_terms( $id = '' ) {
 }
 
 function gradient_function($image) {
-/*
-	    echo 'background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 58%, rgba(0,0,0,0.65) 99%), url('.$image.'); '; 
-echo 'background-image: background: -webkit-gradient(linear, left top, left bottom, color-stop(58%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.65))), url('.$image.'); '; 
-echo 'background-image: -webkit-linear-gradient(top,  rgba(0,0,0,0) 58%,rgba(0,0,0,0.65) 99%), url('.$image.'); '; 
-echo 'background-image: -o-linear-gradient(top,  rgba(0,0,0,0) 58%,rgba(0,0,0,0.65) 99%), url('.$image.'); '; 
-echo 'background-image: -ms-linear-gradient(top,  rgba(0,0,0,0) 58%,rgba(0,0,0,0.65) 99%), url('.$image.'); '; 
-echo 'background-image: linear-gradient(to bottom,  rgba(0,0,0,0) 58%,rgba(0,0,0,0.65) 99%), url('.$image.'); '; 
-echo 'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#00000000", endColorstr="#a6000000",GradientType=0 ), url('.$image.'); '; 
-*/
-/*
-	    echo 'background-image: -moz-linear-gradient(top, rgba(0,0,0,0) 15%, rgba(0,0,0,0.65) 99%, rgba(0,0,0,0.65) 100%), url('.$image.'); '; 
-echo 'background-image: -webkit-gradient(linear, left top, left bottom, color-stop(15%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0.65))), url('.$image.'); '; 
-echo 'background-image: -webkit-linear-gradient(0,0,0,0) 15%,rgba(0,0,0,0.65) 99%,rgba(0,0,0,0.65) 100%), url('.$image.'); '; 
-echo 'background-image: -o-linear-gradient(top, rgba(0,0,0,0) 15%,rgba(0,0,0,0.65) 99%,rgba(0,0,0,0.65) 100%), url('.$image.'); '; 
-echo 'background-image: -ms-linear-gradient(top, rgba(0,0,0,0) 15%,rgba(0,0,0,0.65) 99%,rgba(0,0,0,0.65) 100%), url('.$image.'); '; 
-echo 'background-image: linear-gradient(to bottom, rgba(0,0,0,0) 15%,rgba(0,0,0,0.65) 99%,rgba(0,0,0,0.65) 100%), url('.$image.'); '; 
-echo 'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#00000000", endColorstr="#a6000000",GradientType=0 ), url('.$image.'); '; 
-*/
-/*
-	    echo 'background-image: -moz-linear-gradient(top, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 81%, rgba(0,0,0,0.7) 100%), url('.$image.'); '; 
-echo 'background-image: -webkit-gradient(linear, left top, left bottom, color-stop(45%,rgba(0,0,0,0)), color-stop(81%,rgba(0,0,0,0.5)), color-stop(100%,rgba(0,0,0,0.7))), url('.$image.'); '; 
-echo 'background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 45%,rgba(0,0,0,0.5) 81%,rgba(0,0,0,0.7) 100%), url('.$image.'); '; 
-echo 'background-image: -o-linear-gradient(top, rgba(0,0,0,0) 45%,rgba(0,0,0,0.5) 81%,rgba(0,0,0,0.7) 100%), url('.$image.'); '; 
-echo 'background-image: -ms-linear-gradient(top, rgba(0,0,0,0) 45%,rgba(0,0,0,0.5) 81%,rgba(0,0,0,0.7) 100%), url('.$image.'); '; 
-echo 'background-image: linear-gradient(to bottom, rgba(0,0,0,0) 45%,rgba(0,0,0,0.5) 81%,rgba(0,0,0,0.7) 100%), url('.$image.'); '; 
-echo 'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#00000000", endColorstr="#a6000000",GradientType=0 ), url('.$image.'); '; 
-*/
 	    echo 'background-image: -moz-linear-gradient(top, rgba(0,0,0,0) 55%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
 echo 'background-image: -webkit-gradient(linear, left top, left bottom, color-stop(55%,rgba(0,0,0,0)), color-stop(78%,rgba(0,0,0,0.6)), color-stop(100%,rgba(0,0,0,0.75))), url('.$image.'); '; 
 echo 'background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
 echo 'background-image: -o-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
 echo 'background-image: -ms-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
 echo 'background-image: linear-gradient(to bottom, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
-echo 'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#00000000", endColorstr="#a6000000",GradientType=0 ), url('.$image.'); '; 
+echo 'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\"\#00000000\"\, endColorstr=\"\#a6000000\"\,GradientType=0 ), url('.$image.'); '; 
 
 	    } 
 add_action('gradient', 'gradient_function', 10, 1);	    

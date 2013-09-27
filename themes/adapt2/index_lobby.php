@@ -87,8 +87,8 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 <?php $args = array(
     'post_type' =>'project',
     'meta_query' => array(
-                        array('key' => 'lobby',
-                              'value' => '1'
+                        array('key' => 'featured',
+                              'value' => '1',
                         )
                     ),
 	'post__not_in' => $video_ID,
@@ -108,7 +108,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
             <?php if ($feat_img) {  ?>
 
 <?php if ($count == '1') { ?>
-	<div class="home_item3">
+	<div class="project home_item3">
 		<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
 		<h3 class="project-overlay"> 
 		<?php if (get_field('short') != "") { 
@@ -122,7 +122,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 <?php } ?>
 
 <?php if ($count == '2') { ?>
-	<div class="home_item4">
+	<div class="project home_item4">
 		<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
         <h3 class="project-overlay">
         <?php if (get_field('short') != "") { 
@@ -136,7 +136,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 
 
 <?php if ($count == '3') { ?>
-	<div class="home_item8">
+	<div class="project home_item8">
 		<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
         <h3 class="project-overlay">
         <?php if (get_field('short') != "") { 
@@ -149,7 +149,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 <?php } ?>
 
 <?php if ($count == '4') { ?>
-	<div class="home_item14">
+	<div class="project home_item14">
 		<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
         <h3 class="project-overlay">
         <?php if (get_field('short') != "") { 
@@ -216,8 +216,8 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 </div><!-- home_item12 -->      
            
  
-<div class="home_item5">
-	<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img2[0]; ?>" height="<?php echo $feat_img2[2]; ?>" width="<?php echo $feat_img2[1]; ?>" alt="<?php echo the_title(); ?>" />
+<div class="project home_item5">
+	<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img2[0]; ?>" alt="<?php echo the_title(); ?>" />
 	<h3 class="project-overlay">
 	<?php if (get_field('short') != "") { 
 	  	the_field("short");
@@ -238,54 +238,38 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
     
 
 
-<div class="home_item2" style="height:115px; width: 115px;">
+<div class="home_button work">
 
 	<a href="<?php echo get_site_url(); ?>/work"><img src="<?php echo get_template_directory_uri(); ?>/images/work.png"/></a>
 
 </div>
 
 
-<div class="home_item6" style="height:115px; width: 115px;">
+<div class="home_button about">
 
 	<a href="<?php echo get_site_url(); ?>/about"><img src="<?php echo get_template_directory_uri(); ?>/images/about.png"/></a>
 
 </div>
 
-<div class="home_item6_blog" style="height:115px; width: 115px;">
+<div class="home_button blog">
 
 	<a href="<?php echo get_site_url(); ?>/blog"><img src="<?php echo get_template_directory_uri(); ?>/images/blog.png"/></a>
 
 </div>
 
-<div class="home_item13">
-	<article class="home_media">
-		<a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/home_twitter.png"/></a>
-		<a target="_blank" href="http://vimeo.com/channels/esi"><img src="<?php echo get_template_directory_uri(); ?>/images/home_vimeo.png"/></a>
-		<a target="_blank" href="http://www.linkedin.com/company/esi-design"><img src="<?php echo get_template_directory_uri(); ?>/images/home_in.png"/></a>
-	</article>
-</div>
-
-
-<div class="home_item7_lab" style="height:115px; width: 115px;">
+<div class="home_button lab">
 
 	<a href="<?php echo get_site_url(); ?>/work/lab"><img src="<?php echo get_template_directory_uri(); ?>/images/lab.png"/></a>
 
 </div>
     
 
-<div class="home_item7" style="height:115px; width: 115px;">
+<div class="home_button approach">
 
 	<a href="<?php echo get_site_url(); ?>/approach"><img src="<?php echo get_template_directory_uri(); ?>/images/approach.png"/></a>
 
 </div>
     
-
-<div class="home_item11" style="height:115px; width: 115px;">
-
-	<a href="<?php echo get_site_url(); ?>/contact"><img src="<?php echo get_template_directory_uri(); ?>/images/contact.png"/></a>
-
-</div>    
-
 <div class="home_item10">
 	<article class="description">
 	<h1><a href="<?php echo get_site_url(); ?>/about"> 
@@ -295,27 +279,28 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 	</article>
 </div>
             
-</div>
-
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/home_lobby.js"></script>
+</div><!-- END home-wrap -->   
 
 <script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/home_lobby.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cycle.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.kinetic.min.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+	$(document).ready(function(){
+		if ( $(window).width() > 1600) {
+			$('body').kinetic();
+		}
+	});
+});
+</script>
 
 
-<!-- END home-wrap -->   
-
-</div>
-<!-- /main -->
-
-    <div id="home_footer" class="clearfix">
-        
-	</div>
-	<!-- /footer -->
+</div><!-- /main -->
     
-</div>
-<!-- wrap --> 
+</div><!-- wrap --> 
+
 <!-- WP Footer -->
 <?php wp_footer(); ?>
 

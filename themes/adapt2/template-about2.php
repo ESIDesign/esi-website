@@ -10,7 +10,7 @@
 
 <div class="about-wrap clearfix">
 
-<div class="about">
+<div class="about_headline">
 <?php $image = wp_get_attachment_image_src( get_field('headline_img1'), 'slider');
 echo '<span class="gradient" style="';
 						do_action('gradient', $image[0]);

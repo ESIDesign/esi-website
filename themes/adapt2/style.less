@@ -50,6 +50,14 @@
 	padding: 5px;
 }
 
+.transition-all(@time: 0.5s) {
+	-webkit-transition: all @time ease-in-out;
+    -moz-transition: all @time ease-in-out;
+    -o-transition: all @time ease-in-out;
+    -ms-transition: all @time ease-in-out;
+    transition: all @time ease-in-out;
+}
+
 
 /*-----------------------------------------------------------------------------------*
 /* = Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
@@ -730,96 +738,110 @@ body.home {
 	left: 42%;
 }
 
-.home_item2 {
-	position: absolute;
-	top: 348px;
-	left: 223px;
+/* Projects  */
+.home {
+	.project {
+		position: absolute;
+		overflow: hidden;
+		.box-shadow;
+			&:hover .project-overlay {
+				background: rgba(0,0,0,.4);
+				opacity: 1;
+			}
+	}
+}
+
+/* 324x200 sized  */
+.home_item3, .home_item4, .home_item8, .home_item14 {
+	height: 200px;
+	width: 324px;
+		&:hover img {
+			bottom: -10px;
+		}
+	img {
+		position:absolute;
+		bottom: 0px;
+		width: 105%;
+		height: 105%;
+		max-width: 105% !important;
+		.transition-all;
+	}	
 }
 
 .home_item3 {
-	position: absolute;
 	top: 26px;
 	left: 604px;
-	height: 200px;
-	width: 324px;
-	overflow: hidden;
-	.box-shadow;
-}
-
-.home_item5 img {
-	position:absolute;
-	left: 0px;
-	width: 344px;
-	max-width: 110% !important;
-}
-
-.home_item3 img, .home_item4 img, .home_item8 img {
-	position:absolute;
-	bottom: 0px;
-	height: 210px;
-	max-width: 110% !important;
 }
 
 .home_item4 {
-	position: absolute;
 	top: 236px;
 	left: 604px;
-	height: 200px;
-	width: 324px;
-	overflow: hidden;
-	.box-shadow;
 }
 
-/* Project 3 */
+.home_item8, .home_14 {
+	display: none;
+}
+
+/* Tall Project */
 .home_item5 {
-	position: absolute;
 	top: 447px;
 	left: 349px;
 	height: 410px;
 	width: 324px;
-	overflow: hidden;
-	.box-shadow;
+		&:hover img {
+			left: -10px;
+		}
+		img {
+			position:absolute;
+			left: 0px;
+			height: 105%;
+			width: 105%;
+			max-width: 105% !important;
+			.transition-all;
+		}
 }
 
-.home_item6 {
+/* Home Buttons  */
+.home_button {
 	position: absolute;
+	height: 115px;
+	width: 115px;
+}
+
+.work {
+	top: 348px;
+	left: 223px;
+}
+
+.about {
 	top: 473px;
 	left: 223px;
 }
 
-.home_item6_blog {
-	position: absolute;
+.blog {
 	top: (473px + 125px);
 	left: 223px;
 }
 
-
-.home_item7_lab {
-	position: absolute;
+.lab {
 	top: (322px + 125px);
 	left: 941px;
 }
 
-.home_item7 {
-	position: absolute;
+.approach {
 	top: 322px;
 	left: 941px;
 }
 
-.home_item8 {
-	display: none;
-	height: 200px;
-	width: 324px;
-	overflow: hidden;
-	.box-shadow;
+.contact {
+	top: 197px;
+	left: 941px;
 }
 
-.home_item14 {
-	display: none;
-	height: 200px;
-	width: 324px;
-	overflow: hidden;
-	.box-shadow;
+.people_button {
+	float: left;
+	margin-right: 8px;
+	height: 115px;
 }
 
 .home_item9 {
@@ -836,7 +858,6 @@ body.home {
 
 .home_item10 {
 	position: absolute;
-/* 	top: 542px; */
 	top: 315px;
 	left: -88px;
 	width: 334px;
@@ -875,23 +896,10 @@ body.home {
 	line-height: 140%;
 }
 
-/* Contact Button */
-.home_item11 {
-	position: absolute;
-	top: 197px;
-	left: 941px;
-}
-
 .home_item12 {
 	position: absolute;
 	top: 447px;
 	left: 686px;
-}
-
-a.people_button {
-	float: left;
-	margin-right: 8px;
-	height: 115px;
 }
 
 article.people1, article.people2, article.people3 {
@@ -928,12 +936,6 @@ article.people1 a, article.people2 a, article.people3 a {
 	height: 117px !important;
 }
 
-.people1 p.caption_people, .people2 p.caption_people, .people3 p.caption_people {
-	margin-bottom: 0;
-	opacity: .4;
-	background-color: transparent;
-}
-
 .people1:hover p.caption_people, .people2:hover p.caption_people, .people3:hover p.caption_people {
 	opacity: 1;
 	background-color: rgba(0,0,0,.4);
@@ -944,6 +946,9 @@ article.people1 a, article.people2 a, article.people3 a {
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
+	margin-bottom: 0;
+	opacity: .4;
+	background-color: transparent;
 }
 
 .home_item13 {
@@ -963,7 +968,6 @@ article.people1 a, article.people2 a, article.people3 a {
 	padding: 0px 16px 5px 32px !important;
 	margin-bottom: 2px !important;
 	margin-left: 16px;
-/* 	color: #999999; */
 }
 
 .home_item13 p {
@@ -974,35 +978,8 @@ article.people1 a, article.people2 a, article.people3 a {
 	line-height: 140%;
 }
 
-
-#home_footer {
-	clear: both;
-	display: block;
-	width: 100%;
-	height: 200px;
-}
-
 .vjs-controls {
 	display: none;
-}
-
-.home_item9 .color1 {
-	backround-color: #EF4035;
-	display: block;
-	width: 200px;
-	height: 200px;
-}
-
-.home_item9 .color2 {
-	backround-color: #999933;
-}
-
-.home_item9 .color3 {
-	backround-color: #cccc33;
-}
-
-.home_item9 .color4 {
-	backround-color: #6699cc;
 }
 
 .home_item9_quote {
@@ -1053,371 +1030,7 @@ article.people1 a, article.people2 a, article.people3 a {
 	left: -46px;
 }
 
-.about_item1 {
-	position: absolute;
-	top: 30px;
-	left: 515px;
-}
 
-.about_item1 h1 {
-	font: 46px "adelle", "proxima-nova-alt-condensed", "nimbus-sans-condensed";
-	color: #e2401f;
-	font-weight: 300;
-	padding-left: 32px;
-	margin-bottom: -5px;
-	text-transform: none;
-}
-
-.about_item1 h3 {
-	font: 24px/130%;
-	padding-left: 31px;
-	font-weight: 300;
-	color: #999;
-	margin-top: 10px;
-	width: 82%;
-}
-
-.about_item8 span.awesome-icon-play, .about_item9 span.awesome-icon-play, .about_item14 span.awesome-icon-play {
-	float: right;
-	font-size: 8px;
-	margin-right: 22px;
-	position: relative;
-	top: 8px;
-	z-index: 1001;
-}
-
-.about_item8 .big {
-	height: 266px;
-}
-
-span.awesome-icon-caret-down {
-	font-size: 14px;
-	float: right;
-	margin-right: 22px;
-	position: relative;
-	top: -2px;
-	z-index: 1001;
-}
-
-.about_item8 span.circle, .about_item9 span.circle, .about_item14 span.circle {
-	position: absolute;
-	top: 19px;
-	left: 393px;
-	z-index: 1000;
-	background: #ff8870;
-	opacity: .6;
-	border-radius: 50%;
-	width: 24px;
-	height: 24px;
-}
-
-.about_item2 {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	height: 336px;
-	overflow: hidden;
-	width: 493px;	
-	.box-shadow;
-}
-
-.about_item3 {
-	background: #e2401f;
-	position: absolute;
-	top: 150px;
-	left: 507px;
-	height: 186px;
-	overflow: hidden;
-	width: 370px;	
-	.box-shadow;
-}
-
-.about_item3 h3 {
-	color: #fff;
-}
-
-.about_item3 p {
-	color: #FFF;
-	font-size: 14px;
-	line-height: 131%;
-	padding: 34px 22px 5px 21px;
-}
-
-.about_item4 {
-	background: none;
-	position: absolute;
-	top: 662px;
-	left: 899px;
-	height: 115px;
-	overflow: hidden;
-	width: 115px;	
-	.box-shadow;
-}
-
-.about_item4_2 {
-	background: none;
-	position: absolute;
-	top: 791px;
-	left: 774px;
-	height: 115px;
-	overflow: hidden;
-	width: 115px;	
-	.box-shadow;
-}
-
-.about_item4 .caption_people, .about_item4_2 .caption_people {
-	.caption-text;
-/* 	background: rgba(0,0,0,.4); */
-	transition: background-color 1s ease;
-	-moz-transition: background-color 1s ease; /* FF 4 */
-    -webkit-transition: background-color 1s ease; /* Safari & Chrome */
-    -o-transition: background-color 1s ease;
-    position: absolute;
-	bottom: 0px;
-	left: 0px;
-	width: 100%;
-}
-
-.about_item5 {
-	position: absolute;
-	top: 662px;
-	left: 774px;
-	height: 117px;
-	overflow: hidden;
-	width: 117px;	
-}
-
-a.about_item5 {
-	background: url('./images/people.png') no-repeat;
-	display: block;
-	height: 117px;
-	overflow: hidden;
-	text-indent: 100%;
-	width: 117px;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-.about_item6 {
-	position: absolute;
-	top: 479px;
-	left: 774px;
-	height: 170px;
-	overflow: hidden;
-	width: 240px;
-	.box-shadow;
-	z-index: 1001;
-}
-
-.about_item7 {
-	position: absolute;
-	top: 350px;
-	left: 634px;
-	height: 115px;
-	overflow: hidden;
-	width: 115px;	
-	.box-shadow;
-}
-
-.about_item8 p {
-	color: #FFF;
-	line-height: 145%;
-		
-	margin-bottom: 6px;
-}
-
-.awesome-icon-right {
-	font-size: 14px;
-	padding-left: 10px;
-	position: absolute;
-	top: 13px;
-}
-
-.about_item9:hover .awesome-icon-right:before, .about_item6:hover .awesome-icon-right:before {
-	content: "\f078";
-/* 	content: "\f107"; */
-	top: 5px;
-}
-
-.awesome-icon-right:before {
-	content: "\f054";
-/* 	content: "\f105"; */
-}
-
-.about_item9 a, .about_item8 a, .about_item14 a {
-	font: 22px"adelle", "proxima-nova-alt-condensed", "nimbus-sans-condensed";
-	font-weight: 100;
-	color: #FFF;
-	margin-bottom: 22px;
-	padding-top: 18px;
-	position: relative;
-}
-
-.about_item9 ul {
-	padding: 3px 22px 5px 18px;
-}
-
-.st-content ul li {
-	color: #FFF;
-	list-style-type: none;
-	line-height: 150%;
-	box-shadow: none !important;
-	padding: 2px 0px 0px 0px !important;
-	margin-bottom: 0px !important;
-	height: 100% !important;
-}
-
-.about_item10 {
-	position: absolute;
-	top: 350px;
-	left: 46px;
-	height: 170px;
-	overflow: hidden;
-	width: 240px;	
-	.box-shadow;
-}
-
-.about_item11 {
-	position: absolute;
-	top: 350px;
-	left: 774px;
-	height: 117px;
-	overflow: hidden;
-	width: 117px;	
-}
-
-a.about_item11 {
-	background: url('./images/careers.png') no-repeat;
-	display: block;
-	height: 117px;
-	overflow: hidden;
-	text-indent: 100%;
-	width: 117px;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-.about_item12 {
-	background: url('./images/process.png') no-repeat;
-	position: absolute;
-	top: 478px;
-	left: 0px;
-	height: 117px;
-	overflow: hidden;
-	width: 117px;	
-}
-
-a.about_item12 {
-	background: url('./images/process.png') no-repeat;
-	display: block;
-	height: 117px;
-	overflow: hidden;
-	text-indent: 100%;
-	width: 117px;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-.about_item13 {
-	position: absolute;
-	top: 536px;
-	left: 45px;
-	height: 170px;
-	overflow: hidden;
-	width: 240px;		
-	.box-shadow;
-}
-
-.about_item14 {
-/* 	height: 284px !important; */
-}
-
-.about_item14 ul {
-	padding: 6px 10px 5px 19px;
-}
-
-.about_item15 {
-	position: absolute;
-	top: 350px;
-	left: 899px;
-	height: 117px;
-	overflow: hidden;
-	width: 117px;	
-}
-
-a.about_item15 {
-	background: url('./images/contact.png') no-repeat;
-	display: block;
-	height: 117px;
-	overflow: hidden;
-	text-indent: 100%;
-	width: 117px;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-.about_item16 {
-	background: #e2401f;
-	position: absolute;
-	top: 720px;
-	left: 47px;
-	height: 65px;
-	overflow: hidden;
-	width: 240px;		
-	.box-shadow;
-}
-.about_item16 h2 {
-	font: 20px "proxima-nova-alt-condensed", "nimbus-sans-condensed";
-	font-weight: 100;
-	color: #FFF;
-	margin-bottom: 5px;
-	padding-left: 14px;
-	padding-top: 21px;
-	position: relative;
-}
-
-.about_item16 a {
-	color: #FFF;
-	position: absolute;
-	top: 0px;
-	left: 40px;
-}
-
-.about_item16 span {
-	color: #FFF;
-	padding-left: 15px;
-	padding-top: 25px;
-	font-size: 25px;
-	position: relative;
-	top: 20px;
-}
-
-
-#st-accordion_about {
-	position: absolute; 
-	top: 350px;
-	left: 298px;
-}
-
-#st-accordion_about ul li {
-	background: #e2401f;
-	height: 28px; 
- 	overflow: hidden;
- 	margin-bottom: 10px;
-	padding: 16px 8px 18px 24px;
-	width: 432px;	
-	.box-shadow;
-}
-
-#st-accordion ul li.st-open > a span, #st-accordion_about ul li.st-open > a span {
-    -webkit-transform:rotate(90deg);
-    -moz-transform:rotate(90deg);
-    transform:rotate(90deg);
-}
 
 /*-----------------------------------------------------------------------------------*/
 /* = New About 07/26/2013
@@ -1437,16 +1050,25 @@ a.about_item15 {
 	font-weight: 300;
 }
 
-.page-id-452 .about-wrap {
+.about-wrap{ 
+	position: relative;
 	font-size: 15px;
-/*     height: 2050px !important; */
+	top: 0px;
+	left: 0px;
+	height: 990px;
+	display: none;
 }
 
-.about {
+.new_about_wrapper {
+	position: relative;
+	left: -46px;
+}
+
+.about_headline {
 	position: relative;
 }
 
-.about h3 {
+.about_headline h3 {
 	font-family: "proxima-nova", "nimbus-sans-condensed" !important;
 	font-size: 130%;
 }
@@ -1463,7 +1085,7 @@ a.about_item15 {
 	width: 64%;
 }
 
-.about h1, .about h3, .about_phil h2, .about_phil h3, .about_phil_text h4, .about_phil_text h4 a {
+.about_headline h1, .about_headline h3, .about_phil h2, .about_phil h3, .about_phil_text h4, .about_phil_text h4 a {
 	color: #FFF;
 }
 
@@ -1567,6 +1189,16 @@ a.about_item15 {
     margin: 6% 0 0%;
     padding-bottom: 38%;
     width:100%;
+    article {
+	  	height: 115px;
+		overflow: hidden;
+		width: 115px;	
+		float: right; 
+		.box-shadow;
+		position: relative;
+		top: 0px;
+		left:0px; 
+    }
 }
 
 
@@ -1579,33 +1211,16 @@ a.about_item15 {
 .about_people_right {
     float: right;
     margin-top: 1%;
-    width: 40%;
+    width: 36%;
 }
 
 .about_people3, .about_people4, .about_people6, .about_people7 {
-	height: 115px;
-	overflow: hidden;
-	width: 115px;	
-	float: right;
 	margin-right: 4%;
 	margin-bottom: 4%;
-	.box-shadow;
-	position: relative;
-	top: 0px;
-	left:0px;
 }
 
 .about_people2, .about_people5 {
-	background: none;
-	height: 115px;
-	overflow: hidden;
-	width: 115px;	
-	.box-shadow;
-	float: right;
 	margin-bottom: 4%;
-	position: relative;
-	top: 0px;
-	left:0px;
 }
 
 
@@ -1708,6 +1323,7 @@ margin-bottom: 4px;
 
 .one {
 	display: block;
+	position: relative;
 	width: 100%;
 }
 
@@ -1719,6 +1335,7 @@ margin-bottom: 4px;
 
 .two {
 	display: block;
+	position: relative;
 	float: left;
 	margin-left: 1%;
 	width: 49.5%;
@@ -1734,6 +1351,7 @@ margin-bottom: 4px;
 
 .three {
 	display: block;
+	position: relative;
 	float: left;
 	margin-left: 1%;
 	width: 23.2%;
@@ -1941,16 +1559,6 @@ margin-bottom: 4px;
 	top: 366px;
 	left: 0px;
 }
-
-/*
-.st-content {
-	display: none !important;
-}
-*/
-
-#st-accordion span.circle, #st-accordion span.awesome-icon-play, #st-accordion_about span.circle, #st-accordion_about span.awesome-icon-play {
-}
-
 
 .process_text1 span.circle, .process_text2 span.circle, .process_text3 span.circle, .process_text4 span.circle, .process_text5 span.circle {
 	position: absolute;
@@ -2661,6 +2269,7 @@ a.pdf {
     transition: all 0.2s ease-in-out;
 }
 
+
 .post-type-archive-project #footer {
 	display: none;
 }
@@ -2823,12 +2432,7 @@ ul.filter a#all span {
 	position: relative;
 }
 
-.home_item3 .project-overlay, .home_item4 .project-overlay, .home_item8 .project-overlay {
-	top: 170px;
-}
-
-.home_item14 .project-overlay {
-	position: absolute;
+.home_item3 .project-overlay, .home_item4 .project-overlay, .home_item8 .project-overlay, .home_item14 .project-overlay {
 	top: 170px;
 }
 
@@ -2859,7 +2463,6 @@ ul.filter a#all span {
 	margin-top: 4px;
 	text-align: left;
 	padding: 5px 20px;
-/* 	background: rgba(0,0,0,.4); */
 	transition: background-color 1s ease;
 	-moz-transition: background-color 1s ease; /* FF 4 */
     -webkit-transition: background-color 1s ease; /* Safari & Chrome */
@@ -2875,13 +2478,6 @@ ul.filter a#all span {
 /*-----------------------------------------------------------------------------------*/
 /* = People
 /*-----------------------------------------------------------------------------------*/
-
-/*
-a.people {
-	float:left;
-	margin-bottom: 0px;
-}
-*/
 
 .people-wrap {
 	position: relative;
@@ -3066,11 +2662,10 @@ li.people-grid .caption_people  {
 
 .og-expander {
 	position: absolute;
-/* 	background: #ddd; */
 	background: rgb(250,250,250);
 	top: auto;
 	left: 0;
-	width: 1000px;
+	width: 100%;
 	margin-top: 50px;
 	text-align: left;
 	height: 0;

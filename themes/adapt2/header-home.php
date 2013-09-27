@@ -64,7 +64,7 @@ jQuery(function($){
 		$.ajax({
                 type       : "GET",
                 dataType   : "html",
-                url        : "http://localhost:8888/wp-content/themes/adapt2/index_lobby.php",
+                url        : "http://10.1.6.166:8888/wp-content/themes/adapt2/index_lobby.php",
                 beforeSend : function(){
 	                console.log("LOBBY INDEX BEFORE SEND");
                 },
@@ -99,7 +99,7 @@ jQuery(function($){
 
 </script>
 </head>
-<body <?php body_class(); ?>>
+<body class="home">
 
 <div id="wrap" class="clearfix">
 
