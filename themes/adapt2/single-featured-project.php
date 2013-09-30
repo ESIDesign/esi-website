@@ -141,7 +141,17 @@ Template Name Posts: Featured Template
 			  	} ?>  
 			  	</h3>
 		        <p><?php $string = get_the_content(); 
-			        echo substr($string,0,720); ?>
+		        if(strlen($string) > 700) {
+			    if(get_field('lobby_excerpt') != '') {
+			        the_field('lobby_excerpt');
+		        } else {
+	 		        echo substr($string,0,690);   
+		        }    
+		        }
+		        else {
+	 		        echo substr($string,0,690);   
+		        }  
+		        ?>
 		        </p>
 			</div>
         </div>

@@ -40,7 +40,7 @@ setInterval(function(){
 	}
 	load_people();
 	}
-}, 16000);
+}, 10000);
 }, 3000);
 
     var pageP = 1;
@@ -71,15 +71,15 @@ setInterval(function(){
         });
     }
 
+setTimeout(function(){
 setInterval(function(){
 	if(!loadingP) {
 		loadingP = true;
 		pageP++;		
 		load_project();	
 	}
-}, 10000);
-
-
+}, 17000);
+}, 4000);
 
 	$(document).ready(function(){
 
@@ -113,36 +113,11 @@ setInterval(function(){
       };
 
 
-		// set cookie
-		var visited = $.cookie("visited");
-		$.cookie('visited', 'yes', { expires: 1, path: '/'});
-        if (visited == "yes") {
             setTimeout(function(){
             fastImages();
              $('article.home_item9_quote').css({'opacity':'.5', 'top': '925px'}).fadeIn(400);
             },600);
-            }
-            else {
-		        console.log("Home NOT Visited");
-					 $('article.home_item9').fadeIn(600, function(){
-					 var $quote = $('.quote').text().length;
-				console.log($quote);
-				if($quote > 100) {
-					var $delay = 2000;
-					setTimeout(function(){
-				displayImages();
-				},6000);
-				}	
-				if($quote < 100) {
-					var $delay = 0;
-					setTimeout(function(){
-				displayImages();
-				},4000);
-				}	
-				$('article.home_item9_quote').delay(200).fadeIn(400).delay(2000+$delay).animate({'opacity':'.5'}).delay(300).animate({'top': '925'}, 600, 'swing'); 
-					 });
-            } //cookies
-	
+        	
 })();
 	
   

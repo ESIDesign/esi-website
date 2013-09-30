@@ -136,7 +136,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 <?php if ($count == '3') { ?>     
            
 <!-- People -->
-<div class="project home_item12">
+<div class="home_item12">
 
 <?php
 // Get the authors from the database ordered by user nicename
@@ -188,7 +188,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 </div><!-- home_item12 -->      
            
  
-<div class="home_item5">
+<div class="project home_item5">
 	<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img2[0]; ?>" height="<?php echo $feat_img2[2]; ?>" width="<?php echo $feat_img2[1]; ?>" alt="<?php echo the_title(); ?>" />
 	<h3 class="project-overlay">
 	<?php if (get_field('short') != "") { 

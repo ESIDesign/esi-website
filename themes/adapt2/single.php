@@ -66,6 +66,16 @@
   <script>
    _V_("lab");
     videojs.options.flash.swf = "http://www.esidesign.com/wp-content/themes/adapt2/js/video-js.swf";
+  
+jQuery(function($){
+	
+	$(document).ready(function(){
+/* lobby lightbox temp hack  */
+  if ($(window).width() > 1400 && $(window).width() < 1460) {
+  		$('body').kinetic(); 
+  }
+  });
+  });
   </script>
 
 <?php get_footer(); ?>

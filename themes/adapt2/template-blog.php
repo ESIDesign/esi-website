@@ -35,4 +35,17 @@
 <?php endif; ?>
 
 <?php get_sidebar(); ?>
+<script type="text/javascript">
+jQuery(function($){
+	$(document).ready(function(){
+var paras = $('.loop-entry').hide(),
+    i = 0;
+
+// If using jQuery 1.3 or lower, you need to do $(paras[i++] || []) to avoid an "undefined" error
+(function() {
+  $(paras[i++]).fadeIn(200, arguments.callee);
+})();
+});
+});
+</script>
 <?php get_footer(); ?>

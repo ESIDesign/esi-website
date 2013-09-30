@@ -165,7 +165,7 @@
 	
 	$grid_thumb = wp_get_attachment_image_src( $attachments[$i]->ID, 'grid-thumb');?>                       
 		<div class="people_item2">
-			<a href="<?php echo $grid_thumb[0]; ?>"><img src="<?php echo $grid_thumb[0]; ?>" alt="<?php echo apply_filters('the_title', $attachments[$i]->post_title); ?>" /></a> 
+			<img src="<?php echo $grid_thumb[0]; ?>" alt="<?php echo apply_filters('the_title', $attachments[$i]->post_title); ?>" /> 
 		</div>
 
 	<?php  $i++; } ?>

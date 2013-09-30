@@ -30,19 +30,27 @@ $options = get_option( 'adapt_theme_settings' );
 jQuery(function($){
 	$(document).ready(function(){
 	
-	if ( $(window).width() > 1600) {
-		$('body').kinetic();
+	if ( $(window).width() > 1400) {
+		$('body').kinetic(); 
 		
 	var timeout;
     $(document).on("mousemove keydown click", function() {
         clearTimeout(timeout);
         timeout = setTimeout(function() {
-             window.location = "http://10.1.6.166:8888/";
+             window.location = "<?php echo get_site_url(); ?>"; 
         }, 60 * 3000);
     }).click();
+	
 	}
 
 	if ( $(window).width() < 1600) {
+
+		if($('body').hasClass('page-template-template-blog-php')){
+			$('.loop-entry a').removeAttr('data-ob', 'lightbox');
+			$('.loop-entry a').removeAttr('rel', 'lightbox');
+			$('.loop-entry a').removeAttr('data-ob_iframe', 'true');	
+	}
+	
 	    var user = 'esidesign';
 	      
 	    // using jquery built in get json method with twitter api, return only one result

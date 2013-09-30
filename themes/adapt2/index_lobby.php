@@ -148,6 +148,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 	</div>
 <?php } ?>
 
+
 <?php if ($count == '4') { ?>
 	<div class="project home_item14">
 		<a href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
@@ -160,6 +161,7 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 	  	} ?></h3></a>
 	</div>
 <?php } ?>
+
            
 <?php if ($count == '5') { ?>     
            
@@ -236,7 +238,74 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 	<?php wp_reset_query(); ?>
 <?php } ?><!-- if projects -->
     
+<!--
+<?php
+/* Lab Custom Post — mostly Instagram Feed */
+$lab_args = array(
+			'post_type' => 'lab' 
+);
+$lab_posts = get_posts( $lab_args );
 
+/* Blog Posts Category Lab  */
+$labblog_args = array(
+    'post_type' => 'post',
+    'category' => '282'
+);
+$labblog_posts = get_posts( $labblog_args );
+
+$all_posts = array_merge( $lab_posts, $labblog_posts );
+
+$post_ids = wp_list_pluck( $all_posts, 'ID' );//Just get IDs from post objects
+
+// Do a new query with these IDs to get a properly-sorted list of posts
+$images = get_posts( array(
+	'post_type' => array('post','lab'),
+    'post__in'    => $post_ids,
+    'post_status' => 'publish',
+    'orderby' => 'rand',
+    'order' => 'DESC',
+    'numberposts'=> 1
+) );
+
+		
+if ( !empty($images) ) {
+	echo '<div class="project home_item14">';
+	foreach ( $images as $image ) { 
+
+	setup_postdata( $image ); 
+		$rtagslist = implode(', ', $rtagsarray);
+		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'grid-thumb', true);
+		$site_url = get_site_url();
+
+  ob_start();
+  ob_end_clean();
+    $output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $image->post_content, $matches);
+  $first_vid = $matches [1] [0];
+
+		$value = get_post_meta($image->ID, 'syndication_permalink', true);
+		echo '<a href="'.$site_url.'/lab">';
+
+    $agent = $_SERVER['HTTP_USER_AGENT'];
+
+	  if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
+
+ 	 
+	  echo '<div class="video-wrapper"><video id="related_lab" width="330" >
+		<source src="'.$first_vid.'" type="video/mp4">
+		</video><span class="awesome-icon-play"></span></div></a>';
+		}
+
+	  if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
+		echo '<img src="'.$image_url[0].'"/></a>';
+		}
+		echo '<h3 class="project-overlay">';
+		echo 'From The Lab';	
+		echo '</h3>';
+	}
+	echo '</div>';
+}
+?>
+-->
 
 <div class="home_button work">
 
@@ -291,6 +360,15 @@ jQuery(function($){
 	$(document).ready(function(){
 		if ( $(window).width() > 1600) {
 			$('body').kinetic();
+	
+	var timeout;
+    $(document).on("mousemove keydown click", function() {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+             window.location = "<?php echo get_site_url(); ?>"; 
+        }, 60 * 3000);
+    }).click();
+		
 		}
 	});
 });

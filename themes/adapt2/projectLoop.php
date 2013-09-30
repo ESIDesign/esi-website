@@ -13,7 +13,7 @@ query_posts(array(
                         array('key' => 'lobby',
                               'value' => '1'
                         )
-                    ),
+                    ),	
        'posts_per_page' => $numPosts,
        'paged'          => $page
 ));

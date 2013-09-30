@@ -143,8 +143,19 @@ Template Name Posts: Lab Template
 				  	echo get_the_excerpt(); 	
 			  	} ?>  
 			  	</h3>
-		        <p><?php $string = get_the_content(); 
-			        echo substr($string,0,2000); ?>
+		        <p>
+		        <?php $string = get_the_content(); 
+		        if(strlen($string) > 700) {
+			    if(get_field('lobby_excerpt') != '') {
+			        the_field('lobby_excerpt');
+		        } else {
+	 		        echo substr($string,0,650);   
+		        }    
+		        }
+		        else {
+	 		        echo substr($string,0,650);   
+		        }  
+		        ?>
 		        </p>
 			</div>
         </div>
