@@ -34,18 +34,41 @@
 <?php endwhile; ?>
 <?php endif; ?>
 
-<?php get_sidebar(); ?>
 <script type="text/javascript">
 jQuery(function($){
-	$(document).ready(function(){
-var paras = $('.loop-entry').hide(),
-    i = 0;
+var footer = document.getElementsByTagName('body')[0];
+var js = document.createElement("script");
 
-// If using jQuery 1.3 or lower, you need to do $(paras[i++] || []) to avoid an "undefined" error
-(function() {
-  $(paras[i++]).fadeIn(200, arguments.callee);
-})();
-});
+js.type = "text/javascript";
+    if($(window).width() > 1900) {
+        js.src = '<?php echo get_template_directory_uri(); ?>/js/orangebox.js';
+    }
+footer.appendChild(js);    
+/*
+$('.loop-entry').hide();
+		var paras = $('.loop-entry').hide();
+		function load(){
+		i = 0;
+		(function() {
+		  $(paras[i++]).fadeIn(200, arguments.callee);
+		})();	
+		}
+*/
+	$(document).ready(function(){
+		var paras = $('.loop-entry').hide();
+		i = 0;
+		(function() {
+		  $(paras[i++]).fadeIn(200, arguments.callee);
+		})();	
+/*
+		yepnope([{
+		    test: $(window).width() > 1900, // devices 768 and up
+		    yep: "<?php echo get_template_directory_uri(); ?>/js/orangebox.js",
+		    callback: load(),
+		    complete: console.log('loaded'),
+		}]);
+*/
+	});
 });
 </script>
 <?php get_footer(); ?>

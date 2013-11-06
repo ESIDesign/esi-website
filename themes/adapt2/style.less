@@ -1,16 +1,13 @@
 /*-----------------------------------------------------------
-
 	Theme Name: Adapt 2
 	Theme URI: http://www.wpexplorer.com/adapt-free-responsive-wordpress-theme
-	Description: Free responsive portfolio/blog theme
-	Author: WPExplorer
-	Author URI: http://themeforest.net/user/WPExplorer?ref=wpexplorer
+	Description: ESI Website
+	Author: Lauren Gibbons & Jonathan Grimm, based off of WPExplorer Adapt responsive theme
 	Version: 1.5
     License: GNU General Public License version 3.0
     License URI: http://www.gnu.org/licenses/gpl-3.0.html
-	
-	
 */
+
 @font-face {
     font-family: 'FontAwesome';
     src: url('../fonts/fontawesome-webfont.eot');
@@ -43,11 +40,11 @@
 
 .caption-text() {
 	font: 14px "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif;
-	font-weight: 300;
+	font-weight: 400;
 	color: #FFF;
 	text-align: left;
 	opacity: .4;
-	padding: 5px;
+/* 	padding: 5px; */
 }
 
 .transition-all(@time: 0.5s) {
@@ -56,6 +53,14 @@
     -o-transition: all @time ease-in-out;
     -ms-transition: all @time ease-in-out;
     transition: all @time ease-in-out;
+}
+
+.transition(@property: background-position) {
+	-webkit-transition: @property 0.5s ease-in-out;
+    -moz-transition: @property 0.5s ease-in-out;
+    -o-transition: @property 0.5s ease-in-out;
+    -ms-transition: @property 0.5s ease-in-out;
+    transition: @property 0.5s ease-in-out;
 }
 
 
@@ -222,9 +227,8 @@ h2,
 h3,
 h4 {
     line-height: 140%;
+    font-family: "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif;
 /* 	font-weight: 700; */
-	word-spacing: 2px;
-	font-family: "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif;
 }
 
 h1 {
@@ -238,7 +242,6 @@ h1 {
 .page-id-837 h1 {
 	margin-bottom: 40px;
 }
-
 
 h2 { 
 	font-size: 26px;
@@ -402,10 +405,11 @@ img.alignright, img.alignleft {
 	border:0 none;
 }
 .wp-caption p.wp-caption-text{
-	font-size:11px; 
-	line-height:17px; 
-	padding:0 4px 5px; 
-	margin:0;
+	color: @gray;
+	font-size: 14px;
+	line-height: 21px;
+	padding: 0 0 12px;
+	margin: 0;
 }
 
 
@@ -749,17 +753,41 @@ body.home {
 .home_item3, .home_item4, .home_item8, .home_item14 {
 	height: 200px;
 	width: 324px;
+/*
 		&:hover img {
 			bottom: -10px;
 		}
+*/
 	img {
 		position:absolute;
 		bottom: 0px;
 		width: 105%;
 		height: 105%;
 		max-width: 105% !important;
-		.transition-all;
+		-webkit-transition: top, bottom 0.5s ease-in-out;
+	    -moz-transition: top, bottom 0.5s ease-in-out;
+	    -o-transition: top, bottom 0.5s ease-in-out;
+	    -ms-transition: top, bottom 0.5s ease-in-out;
+	    transition: top, bottom 0.5s ease-in-out;
 	}	
+	.cycle {	
+		display: block;
+		height: (200px * 1.05);
+		width: (324px * 1.05);
+		-webkit-transition: top, bottom 0.5s ease-in-out;
+		-moz-transition: top, bottom 0.5s ease-in-out;
+		-o-transition: top, bottom 0.5s ease-in-out;
+		-ms-transition: top, bottom 0.5s ease-in-out;
+		transition: top, bottom 0.5s ease-in-out;
+	&:hover img {
+		bottom: -10px;
+	}
+	}
+	.cycle img {
+		display: block;
+		height: (200px * 1.05);
+		width: (324px * 1.05);
+	}
 }
 
 .home_item3 {
@@ -772,7 +800,7 @@ body.home {
 	left: 604px;
 }
 
-.home_item8, .home_item14 {
+.home_item8, .home_item14, .lab_item1 {
 	display: none;
 }
 
@@ -791,7 +819,17 @@ body.home {
 			height: 105%;
 			width: 105%;
 			max-width: 105% !important;
-			.transition-all;
+/* 			.transition-all; */
+		}
+		.cycle {	
+			display: block;
+			height: (410px * 1);
+			width: (324px * 1);
+		}
+		.cycle img {
+			display: block;
+			height: (410px * 1);
+			width: (324px * 1);
 		}
 }
 
@@ -872,7 +910,7 @@ body.home {
 .home_item10 h3 {
 	margin-bottom: 16px !important;
 	font: 16px "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif;
-	font-weight: 300;
+	font-weight: 400;
 	line-height: 130%;
 }
 
@@ -926,8 +964,8 @@ article.people1 a, article.people2 a, article.people3 a {
 
 .home .caption_people {
 	position: absolute;
-	bottom: 0px;
-	left: 0px;
+	bottom: 2px;
+	left: -5px;
 	width: 100%;
 	margin-bottom: 0;
 	opacity: .4;
@@ -1042,16 +1080,17 @@ article.people1 a, article.people2 a, article.people3 a {
 	left: -46px;
 }
 
-.about_headline {
+.photo_headline {
 	position: relative;
 }
 
-.about_headline h3 {
+.photo_headline h3 {
 	font-family: "proxima-nova", "nimbus-sans-condensed" !important;
-	font-size: 130%;
+	font-size: 120%;
 }
 
 .about_text, .about_phil_text {
+	clear: both;
 	position: absolute;
 	bottom: 4%;
 	left: 4%;
@@ -1063,7 +1102,7 @@ article.people1 a, article.people2 a, article.people3 a {
 	width: 64%;
 }
 
-.about_headline h1, .about_headline h3, .about_phil h2, .about_phil h3, .about_phil_text h4, .about_phil_text h4 a {
+.photo_headline h1, .photo_headline h3, .about_phil h2, .about_phil h3, .about_phil_text h4, .about_phil_text h4 a {
 	color: #FFF;
 }
 
@@ -1099,6 +1138,7 @@ article.people1 a, article.people2 a, article.people3 a {
     position: relative;
     top: 0px;
     left: 0px;
+    overflow: hidden;
 }
 
 .about_work2, .about_work3 {
@@ -1114,7 +1154,7 @@ article.people1 a, article.people2 a, article.people3 a {
     -webkit-transition: background-color 1s ease; /* Safari & Chrome */
     -o-transition: background-color 1s ease;
     margin-left: 0px !important;
-    padding: 1% 2% !important;
+    padding: 2% 3% !important;
     position: absolute;
 	bottom: 8px;
 	left: 0px;
@@ -1171,7 +1211,6 @@ article.people1 a, article.people2 a, article.people3 a {
     }
 }
 
-
 .about_people1 {
     float: left;
     margin: 0% 0 10% 2%;
@@ -1181,7 +1220,7 @@ article.people1 a, article.people2 a, article.people3 a {
 .about_people_right {
     float: right;
     margin-top: 1%;
-    width: 36%;
+    width: 38%;
 }
 
 .about_people3, .about_people4, .about_people6, .about_people7 {
@@ -1202,10 +1241,11 @@ article.people1 a, article.people2 a, article.people3 a {
 	-moz-transition: background-color 1s ease; /* FF 4 */
     -webkit-transition: background-color 1s ease; /* Safari & Chrome */
     -o-transition: background-color 1s ease;
+    padding: 0 0 4px 4px;
     position: absolute;
 	bottom: 0px;
 	left: 0px;
-	width: 92%;
+	width: 100%;
 }
 
 
@@ -1222,7 +1262,7 @@ article.people1 a, article.people2 a, article.people3 a {
 }
 */
 
-.approach-wrap {
+.approach-wrap, .careers_title {
 	font-size: 15px;
 }
 
@@ -1261,17 +1301,19 @@ article.people1 a, article.people2 a, article.people3 a {
 	padding: 0;
 }
 
-.approach_title h3 {
+.approach_title h3, .careers_title h3, .career_opps p {
 	color: @gray !important;
+	font-family: "proxima-nova";
 /* 	font-size: 17px !important; */
-	font-size: 113%;
+	font-weight: 300;
+	font-size: 100%;
 	padding: 0;
 }
 
 .approach-wrap h1 {
 	color: #FFF;
 /* 	font-size: 34px; */
-margin-bottom: 4px;
+	margin-bottom: 4px;
 	font-size: 226%;
 }
 
@@ -1877,7 +1919,7 @@ iframe#mosaic_player {
 .related-caption {
 	border-left: 1px solid #ddd;
 	font: 16px "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif;
-	padding: 4px 20px 6px 7px;
+	padding: 4px 12px 6px 7px;
 	margin-left: 9px;
 	line-height: 17px;
 /* 	width: 130px; */
@@ -1920,13 +1962,13 @@ a.awesome-icon-instagram:before {
 	font-size: 10px;
 	border-radius: 50%;
 	height: 18px;
-	width: 11px;
+	width: 18px;
 	position: absolute;
 	bottom: 3%;
 	right: 8px;
 	float: right;
 	line-height: 18px;
-	padding-left: 6px;
+	text-align: center;
 }
 
 a.all {
@@ -2159,20 +2201,19 @@ ul.filter a#all span {
 	margin-top: 4px;
 }
 
-.home .project-overlay { 
-	left: 8px;
+.home .project-overlay {
+	bottom: 0px; 
+	left: 0px;
 	z-index: 1001;
 	position: absolute;
 	width: 100%;
 }
 
-.home_item3 .project-overlay, .home_item4 .project-overlay, .home_item8 .project-overlay, .home_item14 .project-overlay {
-	top: 170px;
+/*
+.home_item3 .project-overlay, .home_item4 .project-overlay, .home_item8 .project-overlay, .home_item14 .project-overlay, .home_item5 .project-overlay {
+	bottom: 5px;
 }
-
-.home_item5 .project-overlay {
-	top: 379px;
-}
+*/
 
 .post-type-archive-project .project-overlay h3 {
 	border-left: 1px solid #ddd;
@@ -2193,10 +2234,8 @@ ul.filter a#all span {
 
 .home .project-overlay, .home .caption_people, .about_work a.project-overlay {
 	.caption-text;
-	margin-left: -13px;
-	margin-top: 4px;
-	text-align: left;
-	padding: 5px 20px;
+	margin-bottom: 0px;
+	padding: 5px 15px;
 	transition: background-color 1s ease;
 	-moz-transition: background-color 1s ease; /* FF 4 */
     -webkit-transition: background-color 1s ease; /* Safari & Chrome */
@@ -2246,12 +2285,17 @@ ul.filter a#all span {
 	width: 84%;
 }
 
+li.people-grid {
+	float: left;
+	width: 172px;
+}
+
 li.people-grid2 {
-	width: 10px;
+	width: 20px;
 }
 
 li.people-grid3 {
-	clear: both;
+	float: left;
 	width: 116px;
 }
 
@@ -2268,11 +2312,15 @@ li.people-grid img {
 
 .people_item {
 	float: left;
-/* 	margin-bottom: 12px; */
-	margin-right: 10px;
+	margin: 0 10px 10px 0;
 	position: relative;
 	height: 226px;
 	width: 172px;
+	.video-wrapper {
+		.box-shadow;
+		height: 171px;
+		overflow: hidden;
+	}
 }
 
 .people_item img {
@@ -2285,9 +2333,8 @@ li.people-grid img {
 .people_item .caption_people, li.people-grid .caption_people {
 	font: 14px "proxima-nova-alt-condensed", "proxima-nova", sans-serif;
 	font-weight: 300;
-    margin: 4px 0px 0px -13px;
 	text-align: left;
-	padding: 5px 20px;
+	padding: 0 0 0 6px;
 	color: #999;
 	transition: background-color 1s ease;
 	-moz-transition: background-color 1s ease; /* FF 4 */
@@ -2298,19 +2345,14 @@ li.people-grid img {
 li.people-grid .caption_people  {
 	position: absolute;
 	bottom: -45px;
-	left: 13px;
 	width: 97%;
-	padding: 4px 0 4px 5px;
 }
 
 .people_item .caption_people {
-	position: absolute;
-	bottom: 10px;
-	left: 0px;
 	width: 107%;
 }
 
-.people_item .caption_people p.name, li.people-grid .caption_people span.name {
+.people_item .caption_people .name, li.people-grid .caption_people .name {
 	margin: 0px;
 	font: 13px "adelle";
 	font-weight: 600;
@@ -2323,7 +2365,7 @@ li.people-grid .caption_people  {
 
 /* People Images & Blocks */
 .people_item2 {
-	height: 226px;
+	height: 236px;
 	overflow: hidden;
 	width: 240px;
 	float: left;
@@ -2339,7 +2381,7 @@ li.people-grid .caption_people  {
 .people_block {
 	background-color: #dc801c;
 	float: left;
-	margin: 0px 8px 56px 0px;
+	margin: 0px 8px 66px 0px;
 	overflow: hidden;
 	position: relative;
 	height: 170px;
@@ -2399,16 +2441,15 @@ li.people-grid .caption_people  {
 	background: rgb(250,250,250);
 	top: auto;
 	left: 0;
-	width: 100%;
 	margin-top: 50px;
 	text-align: left;
 	height: 0;
 	overflow: hidden;
+	width: 100%;
 }
 
 .og-expander-inner {
-	padding: 50px 30px;
-	height: 100%;
+	padding: 50px 30px 0px;
 }
 
 .og-close {
@@ -2461,7 +2502,6 @@ li.people-grid .caption_people  {
 .og-fullimg,
 .og-details {
 	float: left;
-	height: 100%;
 	overflow: hidden;
 	position: relative;
 }
@@ -2558,9 +2598,9 @@ li.people-grid .caption_people  {
 
 @media screen and (max-width: 830px) {
 
-	.og-expander h3 { font-size: 32px; }
-	.og-expander p { font-size: 13px; }
-	.og-expander a { font-size: 12px; }
+	.og-details h3 { font-size: 32px; }
+	.og-details p { font-size: 13px; }
+	.og-details a { font-size: 12px; }
 
 }
 
@@ -2569,6 +2609,114 @@ li.people-grid .caption_people  {
 	.og-fullimg { display: none; }
 	.og-details { float: none; width: 100%; }
 	
+}
+
+
+/*-----------------------------------------------------------------------------------*
+/* = Careers Page
+/*-----------------------------------------------------------------------------------*/
+.careers_title {
+	float: left;
+	margin: 0 3%;
+	width: 42%;
+	font-size: 100%;
+}
+
+.careers-wrap {
+	h1, h2 {
+	 	color: @orange;
+	 }
+	.people_item {
+		height: 180px;
+	}
+	.people_item2 {
+		height: 190px;
+	}
+}
+
+.career_opps {
+	float: left;
+	margin: 1% 4% 0 .5%;
+	width: 38%;
+	p {
+		line-height: 140%;
+	}
+}
+
+li.orange_gradient {
+	background: rgb(219,155,59); /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(219,155,59,.8) 0%, rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(219,155,59,.8)), color-stop(100%,rgba(220,128,28,.8))), url('wp-content/uploads/2011/08/about10-240x180.jpg'), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(219,155,59,.8) 0%,rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(219,155,59,1) 0%,rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(219,155,59,.8) 0%,rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(219,155,59,.8) 0%,rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db9b3b', endColorstr='#dc801c',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */	
+	float: left; 
+	padding: 0 10px;
+	position: relative;
+	margin-right: 1.5%;
+	height: 170px;
+	width: 220px;
+	.transition-all;
+	&:hover {
+		background: rgba(219,155,59, 0); /* Old browsers */
+		background: -moz-radial-gradient(center, ellipse cover,  rgba(219,155,59,0) 0%, rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* FF3.6+ */
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(219,155,59,0)), color-stop(100%,rgba(220,128,28,0))), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Chrome,Safari4+ */
+		background: -webkit-radial-gradient(center, ellipse cover,  rgba(219,155,59,0) 0%,rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Chrome10+,Safari5.1+ */
+		background: -o-radial-gradient(center, ellipse cover,  rgba(219,155,59,0) 0%,rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Opera 12+ */
+		background: -ms-radial-gradient(center, ellipse cover,  rgba(219,155,59,0) 0%,rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* IE10+ */
+		background: radial-gradient(ellipse at center,  rgba(219,155,59,0) 0%,rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* W3C */	
+		.transition-all;
+	}
+	a {
+		color: #FFF;
+		line-height: 130%;
+		position: absolute;
+		bottom: 5%;
+	}
+}
+
+
+li.orange_border {
+/* 	border-left: 1px solid @gray; */
+/* 	padding-left: 3%; */
+	margin-bottom: 4%;
+	h3 {
+		margin-bottom: 5px;
+	}
+	h3 a {
+/* 		color: @orange; */
+		margin-bottom: 0px;
+	}
+}
+
+/*-----------------------------------------------------------------------------------*
+/* = Pagination
+/*-----------------------------------------------------------------------------------*/
+.pagination{
+	clear: both;
+	display: none;
+	margin-top: 20px;
+}
+.pagination a,
+.pagination span {
+	font-size: 11px;
+    line-height: 25px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    margin-right: 5px;
+    display: block;
+    float: left;
+	background: #eee;
+	color: #666;
+}
+.pagination a:hover,
+.pagination span.current {
+    text-decoration: none;
+	color: #FFF;
+	background: #444;
 }
 
 
@@ -2860,226 +3008,6 @@ span.awesome-icon-comments {
 }
 
 
-
-/*-----------------------------------------------------------------------------------*
-/* = Pagination
-/*-----------------------------------------------------------------------------------*/
-.pagination{
-	clear: both;
-	display: none;
-	margin-top: 20px;
-}
-.pagination a,
-.pagination span {
-	font-size: 11px;
-    line-height: 25px;
-    height: 25px;
-    width: 25px;
-    text-align: center;
-    margin-right: 5px;
-    display: block;
-    float: left;
-	background: #eee;
-	color: #666;
-}
-.pagination a:hover,
-.pagination span.current {
-    text-decoration: none;
-	color: #FFF;
-	background: #444;
-}
-
-
-/*-----------------------------------------------------------------------------------*
-/* = Comments
-/*-----------------------------------------------------------------------------------*/
-#commentsbox {
-	width: 100%;
-	overflow: hidden;
-	margin-top: 30px;
-	margin-bottom: -20px;
-	font-size: 13px;
-}
-#comments{
-	margin: 0;
-	font-size: 13px;
-	font-weight: 700;
-	color: #333;
-	text-shadow: none;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	margin-top: 0;
-	margin-bottom: 20px;
-	padding: 15px 0;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-}
-#comments span{
-	color: #666;
-	font-size: 14px;
-	margin-right: 10px;
-}
-#commentsbox ol,
-#commentsbox ul {
-    list-style: none;
-    margin: 0 !important;
-}
-#commentsbox li { }
-.children {
-    list-style: none;
-    margin: 30px 0 0;
-    text-indent: 0;
-}
-.children li.depth-2 { margin: 0 0 0px 65px }
-.children li.depth-3 { margin: 0 0 0px 65px }
-.children li.depth-4 { margin: 0 0 0px 65px }
-.children li.depth-5 { margin: 0 0 0px 65px }
-.children li.depth-6 { margin: 0 0 0px 65px }
-.children li.depth-7 { margin: 0 0 0px 65px }
-.children li.depth-8 { margin: 0 0 0px 65px }
-.children li.depth-9 { margin: 0 0 0px 65px }
-.children li.depth-10 { margin: 0 0 0px 65px }
-.comment-body {
-    position: relative;
-	margin-left: 75px;
-	padding-bottom: 25px;
-	margin-bottom: 25px;
-	border-bottom: 1px solid #eee;
-}
-.comment-body p:last-child{
-	margin-bottom: 0;
-}
-#commentsbox .avatar {
-	position: absolute;
-	top: 0px;
-	left: -75px;
-	border: 4px solid #eee;
-}
-.comment-author {
-	line-height: 1em;
-	font-weight: bold;
-    color: #555;
-}
-.comment-author a{
-	color: #444;
-}
-.comment-author a:hover{
-	color: #000;
-}
-.says { display: none }
-.comment-meta{
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-	background: url("images/light-dash.png") left bottom no-repeat;
-}
-.comment-meta a {
-    font-size: 11px;
-    font-style: italic;
-    color: #666;
-}
-.comment-meta a:hover{
-	color: #000;
-	border-bottom: 1px dotted #000;
-}
-.reply{
-}
-.comment-meta  .comment-reply-link {
-	font-size: 11px;
-    color: #51A3BB;
-}
-.comment-meta  .comment-reply-link:hover{
-	color: #2e8484;
-	border-bottom: 1px dotted #2e8484;
-}
-.cancel-comment-reply {
-	margin-top: -10px;
-}
-.cancel-comment-reply a {
-    color: #F00;
-    line-height: 20px;
-    height: 20px;
-}
-.cancel-comment-reply a:hover{
-	text-decoration: underline;
-}
-#comments-respond {
-	clear: left;
-	text-transform: none;
-	font-weight: bold;
-	color: #333;
-	font-size: 14px;
-	margin-top: 0px;
-	margin-bottom: 15px;
-}
-#comments-respond-meta{
-	color: #666;
-	font-size: 11px;
-}
-#comments-respond-meta a{
-	color: #000;
-}
-#commentform label {
-    display: block;
-}
-#commentform input#author,
-#commentform input#email,
-#commentform input#url {
-	font-size: 12px;
-	width: 30%;
-	color: #666;
-	text-shadow: 1px 1px 0px #FFF;
-    border: 1px solid #cecece;
-    outline: none;
-	padding: 8px;
-	margin-top: 10px;
-	-webkit-border-radius: 1px;
-	-moz-border-radius: 1px;
-	border-radius: 1px;
-	background-color: #fff; 
-}
-#commentform textarea {
-    display: block;
-	padding: 10px;
-	width: 100%;
-	color: #666;
-	margin-top: 10px;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-#commentform input#author:focus,
-#commentform input#email:focus,
-#commentform input#url:focus,
-#commentform textarea:focus {
-	border-color: #bdbdbd !important;
-	-webkit-box-shadow: inset 1px 1px 4px rgba(0,0,0,0.1);
-	-moz-box-shadow: inset 1px 1px 4px rgba(0,0,0,0.1); 
-	box-shadow: inset 1px 1px 4px rgba(0,0,0,0.1); 
-}
-#commentSubmit {
-	margin-top: -5px;
-	margin-bottom: 20px;
-}
-
-.comment-waiting-moderation{
-	font-size: 12px;
-	font-weight: bold;
-	padding-top: 10px;
-	margin: 10px 0 0;
-	background: url("images/small-border.png") left top no-repeat;
-}
-
-/*WP JetPack*/
-.comment-subscription-form{
-	font-size: 12px;
-}
-.comment-subscription-form input{
-	float: left;
-	margin-right: 5px;
-}
-
-
-
 /*-----------------------------------------------------------------------------------*/
 /* = Form Styling
 /*-----------------------------------------------------------------------------------*/
@@ -3108,6 +3036,21 @@ textarea:focus, input[type="email"]:focus {
 	box-shadow: inset 1px 1px 4px rgba(0,0,0,0.1); 
 }
 
+/* Contact Form */
+form#subForm input {
+	margin-top: 0px;
+	width: 75%;
+}
+
+form#subForm div {
+	margin-bottom: 15px;
+}
+
+form#subForm input#submit {
+	font: 14px "proxima-nova", sans-serif;
+	padding: 5px 0;
+	width: 25%;
+}
 
 /*buttons*/
 input[type="clean-button"],
@@ -3138,98 +3081,8 @@ input[type="clean-button"]:active,
 #commentSubmit:active {
 }
 
-/*contact form 7 specific*/
-.wpcf7-form{
-}
-.wpcf7 input[type="text"] {
-	width: 250px;
-}
-.wpcf7 textarea {
-    width: 95%;
-	margin-top: 5px;
-}
-.wpcf7-form p {
-	margin: 0;
-	margin-bottom: 20px;
-	font-weight: bold;
-	}
-.wpcf7-submit{
-	margin-top: -5px;
-}
-
-div.wpcf7-validation-errors,
-.wpcf7-not-valid-tip { 
-	text-shadow: none;
-	border: transparent !important;
-	background: #f9cd00;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px; 
-	padding: 10px !important;
-	font-weight: bold;
-	color: #9C6533;
-	text-shadow: 1px 1px 1px rgba(255,255,255, 0.4);
-	text-align: center;
-	margin: 0 !important;
-} 
-div.wpcf7-validation-errors{
-	width: 95%;
-	padding: 10px 5px !important;
-}
-
-.wpcf7-not-valid-tip {
-	display: block;
-	position: relative !important;
-	top: 0 !important;
-	left: 0 !important;
-	background: #FFF780 !important;
-	font-size: 12px !important;
-	margin-top: 8px !important;
-	width: 40% !important;
-}
-span.wpcf7-not-valid-tip{
-	text-align: center;
-	text-shadow: none;
-	padding: 5px;
-	font-size: 11px;
-	background: #ff5454 !important;
-	border-color: #ff5454;
-	color: #fff;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-.wpcf7-mail-sent-ok{
-	text-align: center;
-	text-shadow: none;
-	padding: 10px;
-	font-size: 11px;
-	background: #59a80f !important;
-	border-color: #59a80f;
-	color: #fff;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-
-form#subForm input {
-	margin-top: 0px;
-	width: 75%;
-}
-
-form#subForm div {
-	margin-bottom: 15px;
-}
-
-form#subForm input#submit {
-	font: 14px "proxima-nova", sans-serif;
-	padding: 5px 0;
-	width: 25%;
-}
-
-
 /*-----------------------------------------------------------------------------------*
-/* = Blog Sidebar
+/* = Sidebar
 /*-----------------------------------------------------------------------------------*/
 #sidebar {
 	width: 242px;

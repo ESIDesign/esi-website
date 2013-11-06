@@ -44,10 +44,12 @@ Template Name Posts: Lab Template
                                           
                    <?php   
                     	$id = get_the_ID();
-                    	if(get_field('video', $id) != "") {
+                    	if(get_field('video', $id) != "" && get_field('video_img', $id) == "") {
 							   $exclude_id = get_post_thumbnail_id( $id );
 						}
-                    	
+						else {
+							$exclude_id = '';
+						}
                     	$feat_id = get_post_thumbnail_id( $id ); 
                         //attachement loop
                         $args = array(
@@ -86,7 +88,7 @@ Template Name Posts: Lab Template
                         $imgsize = wp_get_attachment_metadata($attachment->ID); 
                         $feat_id = get_post_thumbnail_id( $id ); ?>
                             
-                    <?php if (($imgsize['width'] == 590) || ($attachment->ID == $feat_id && get_field('video', $id) != "")) { 
+                    <?php if (($imgsize['width'] == 590) || ($attachment->ID == $feat_id && get_field('video', $id) != "") ) { 
                     
                     $count = 0;
                      } ?>
@@ -97,7 +99,13 @@ Template Name Posts: Lab Template
                     <!-- if adding second video remember jquery for img placeholder -->        
 	                <?php if ($count == $video_order && get_field('video', $id) != "") { ?>   
                     <?php
-                    $feat_img = wp_get_attachment_image_src( get_post_thumbnail_id($id), 'slider');
+                    if(get_field('video_img', $id) != "") {
+	                	$thumb_id = get_field('video_img', $id);    
+                    }
+                    else {
+						$thumb_id = get_post_thumbnail_id($id);   
+                    }
+                    $feat_img = wp_get_attachment_image_src( $thumb_id, 'slider');
                      $video = get_post_custom_values("video");
 						  	echo '<li class="video-wrapper">
 						  	<img class="placeholder" src="'. $feat_img[0].'"/><span id="button" class="awesome-icon-play"></span>
@@ -254,7 +262,7 @@ Template Name Posts: Lab Template
     	}?>
     	
 	  	<div class="featured-meta">
-	  	<h3 class="related">Recent Experiments </h3>
+		  	<h3 class="related">Recent Experiments</h3>
 	  	</div>
 
 <?php
@@ -290,7 +298,7 @@ if ( !empty($images) ) {
 	foreach ( $images as $image ) { 
 
 	setup_postdata( $image ); 
-		$rtagslist = implode(', ', $rtagsarray);
+
 		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'grid-thumb', true);
 		$site_url = get_site_url();
 

@@ -1,12 +1,7 @@
 <?php
-// Our include
 define('WP_USE_THEMES', false);
 require_once('../../../wp-load.php');
-/*
-
-		wp_denqueue_script('custom', get_template_directory_uri() . '/js/home.js');
-*/
- ?>
+?>
 
 <div class="home-wrap clearfix">
 
@@ -17,49 +12,21 @@ require_once('../../../wp-load.php');
 </article>
 
 <article class="home_item9_quote">
-<?php if (get_field('quote3', 2145) != "") { 
-	$rand_quote = rand(1,3);
-}
-if (get_field('quote3', 2145) == "" && get_field('quote2', 2145) != "") { 
-	$rand_quote = rand(1,2);
-}
-if (get_field('quote3', 2145) == "" && get_field('quote2', 2145) == "" && get_field('quote1', 2145) != "") { 
-	$rand_quote = 1;
-}
-if (get_field('quote'.$rand_quote, 2145) != "") { 
-	echo '<div class="quote">';
-		$quote_length = strlen(strval(get_field('quote'.$rand_quote, 2145)));
-			if ($quote_length > 100) {
-				echo '<h2>';
-			}
-			if ($quote_length < 99) {
-				echo '<h1>';
-			}
-			the_field('quote'.$rand_quote, 2145);
-			if ($quote_length > 100) {
-				echo '</h2>';
-			}
-			if ($quote_length < 99) {
-				echo '</h1>';
-			}
-		echo '</div>';
-		} ?>
-
-<h3 class="attrib">
-<?php if (get_field('attrib'.$rand_quote, 2145) != "") { 
-	  the_field('attrib'.$rand_quote, 2145);
-  	} ?></h3>
+<div class="quote"><h1>Touch to explore</h1></div>
 </article>
 
 <?php
     global $post;
     $args2 = array(
         'post_type' =>'project',
+        'post__in' => array( 418, 449, 125, 1802, 408, 2844, 3226, 446, 409 ),
         'meta_query' => array(
-	                        array('key' => 'home',
+/*
+	                        array('key' => 'featured',
 	                              'value' => '1'
 	                        ),
-	                         array('key' => 'video_placeholder',
+*/
+	                         array('key' => 'video',
 	                              'value' => '',
 	                              'compare' => '!='
 	                        )
@@ -73,11 +40,21 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
      foreach($video_posts as $video_post) : setup_postdata($video_post);
      $count++;
      
-		if ($count == '1') { ?>
-		
+		if ($count == '1') { 
+
+	if(get_field('video_img', $video_post->ID) != "") {
+    	$thumb_id = get_field('video_img', $video_post->ID);    
+    }
+    else {
+		$thumb_id = get_post_thumbnail_id($video_post->ID);   
+    }
+    $feat_img = wp_get_attachment_image_src($thumb_id, 'slider'); 
+    ?>
+
 		<div class="home_item1">
+<!-- 		<?php echo the_field('video_placeholder', $video_post->ID); ?> -->
 		
-			<img class="placeholder" src="<?php echo the_field('video_placeholder', $video_post->ID); ?>"/><span class="circle"></span><span id="button" class="awesome-icon-play"></span>
+			<img class="placeholder" src="<?php echo $feat_img[0]; ?>"/><span class="circle"></span><span id="button" class="awesome-icon-play"></span>
 			<iframe id="home_player" src="http://player.vimeo.com/video/<?php echo the_field('video', $video_post->ID); ?>?api=1&title=0&byline=0&portrait=0&player_id=home_player" width="590" height="332" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		
 		</div>
@@ -238,43 +215,26 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 	<?php wp_reset_query(); ?>
 <?php } ?><!-- if projects -->
     
-<!--
+
 <?php
 /* Lab Custom Post — mostly Instagram Feed */
-$lab_args = array(
-			'post_type' => 'lab' 
-);
-$lab_posts = get_posts( $lab_args );
-
-/* Blog Posts Category Lab  */
-$labblog_args = array(
-    'post_type' => 'post',
-    'category' => '282'
-);
-$labblog_posts = get_posts( $labblog_args );
-
-$all_posts = array_merge( $lab_posts, $labblog_posts );
-
-$post_ids = wp_list_pluck( $all_posts, 'ID' );//Just get IDs from post objects
-
-// Do a new query with these IDs to get a properly-sorted list of posts
 $images = get_posts( array(
-	'post_type' => array('post','lab'),
-    'post__in'    => $post_ids,
+	'post_type' => 'lab',
     'post_status' => 'publish',
     'orderby' => 'rand',
     'order' => 'DESC',
     'numberposts'=> 1
 ) );
 
-		
-if ( !empty($images) ) {
-	echo '<div class="project home_item14">';
-	foreach ( $images as $image ) { 
 
+if ( !empty($images) ) {
+	$count = 0;
+	foreach ( $images as $image ) { 
+	$count++;
+	
 	setup_postdata( $image ); 
-		$rtagslist = implode(', ', $rtagsarray);
-		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'grid-thumb', true);
+
+		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'thumbnail', true);
 		$site_url = get_site_url();
 
   ob_start();
@@ -283,7 +243,7 @@ if ( !empty($images) ) {
   $first_vid = $matches [1] [0];
 
 		$value = get_post_meta($image->ID, 'syndication_permalink', true);
-		echo '<a href="'.$site_url.'/lab">';
+		echo '<div class="lab_item'.$count.'">';
 
     $agent = $_SERVER['HTTP_USER_AGENT'];
 
@@ -292,17 +252,50 @@ if ( !empty($images) ) {
  	 
 	  echo '<div class="video-wrapper"><video id="related_lab" width="330" >
 		<source src="'.$first_vid.'" type="video/mp4">
-		</video><span class="awesome-icon-play"></span></div></a>';
+		</video><span class="awesome-icon-play"></span></div>';
 		}
 
 	  if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
-		echo '<img src="'.$image_url[0].'"/></a>';
+		echo '<img src="'.$image_url[0].'"/>';
 		}
 		echo '<h3 class="project-overlay">';
-		echo 'From The Lab';	
-		echo '</h3>';
+		echo 'Lab Experiment';	
+		echo '</h3></div>';
 	}
-	echo '</div>';
+}
+?>
+
+<!--
+
+<?php
+/* Lab Custom Post — mostly Instagram Feed */
+$images = get_posts( array(
+	'post_type' => 'post',
+    'post_status' => 'publish',
+    'orderby' => 'date',
+    'order' => 'DESC',
+    'numberposts'=> 2
+) );
+
+
+if ( !empty($images) ) {
+	$count = 0;
+	foreach ( $images as $image ) { 
+	$count++;
+	
+	setup_postdata( $image ); 
+		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'people', true);
+		$site_url = get_site_url();
+
+  ob_start();
+  ob_end_clean();
+
+		echo '<div class="blog_item'.$count.'"><a href="'.$site_url.'/blog">';
+		echo '<img src="'.$image_url[0].'"/></a>';
+		echo '<h3 class="project-overlay">';
+		echo substr($image->post_title,0,20).'...';	
+		echo '</h3></div>';
+	}
 }
 ?>
 -->
@@ -353,23 +346,25 @@ if ( !empty($images) ) {
 <script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/home_lobby.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cycle.js"></script>
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.kinetic.min.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/video.min.js"></script>
+  <script>
+    videojs.options.flash.swf = "<?php echo get_site_url(); ?>/wp-content/themes/adapt2/js/video-js.swf";
+  </script>
+
 <script type="text/javascript">
 jQuery(function($){
 	$(document).ready(function(){
-		if ( $(window).width() > 1600) {
-			$('body').kinetic();
+/* 			$('body').kinetic(); */
 	
 	var timeout;
     $(document).on("mousemove keydown click", function() {
         clearTimeout(timeout);
         timeout = setTimeout(function() {
-             window.location = "<?php echo get_site_url(); ?>"; 
-        }, 60 * 3000);
+/*              window.location = "<?php echo get_site_url(); ?>/work";  */
+				window.location.reload();
+        }, 60 * 3600);
     }).click();
-		
-		}
+
 	});
 });
 </script>

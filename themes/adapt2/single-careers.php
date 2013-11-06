@@ -37,10 +37,10 @@ $children = get_pages('post_type=careers&post_status=publish');
 if( $children ) {
 echo '<br /><h2>Additional Career Opportunities</h2>';
 		echo '<ul>';
-			$args = array(  'post_type' => careers,
-				            'post_status'=> publish,
-  							'sort_order' => ASC,
-  							'sort_column' => post_title,
+			$args = array(  'post_type' => 'careers',
+				            'post_status'=> 'publish',
+  							'sort_order' => 'ASC',
+  							'sort_column' => 'post_title',
 							'hierarchical' => 0  
  						);
 				$mypages = get_pages($args);

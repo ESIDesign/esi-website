@@ -22,7 +22,7 @@ $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb');
     if ( get_post_type() != 'page' || get_post_type() != 'project') { ?>
 	<div class="loop-entry-meta">
         <p class="by"><?php _e('By', 'surplus'); ?> <a href="<?php echo get_site_url(); ?>/people"><?php the_author(); ?></a>
-<!--         <span class="awesome-icon-comments"></span> <?php comments_popup_link('0', '1', '%'); ?></p> -->
+<!-- <span class="awesome-icon-comments"></span> <?php comments_popup_link('0', '1', '%'); ?></p> -->
     </div>
     <!-- /loop-entry-meta -->
     <?php } ?>

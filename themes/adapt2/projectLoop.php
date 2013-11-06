@@ -23,7 +23,7 @@ if (have_posts()) {
        while (have_posts()){
               the_post(); 
               $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'archive-project');
-	            $feat_img2 = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb2');
+	          $feat_img2 = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb2');
             ?>
 		<a style="height:208px; width:337px;" href="<?php the_permalink(); ?>"><img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
 	        <h3 class="project-overlay">

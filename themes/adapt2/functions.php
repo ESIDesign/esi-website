@@ -52,9 +52,7 @@ add_filter( 'wp_editor_set_quality', 'tgm_image_full_quality' );
  * @return int $quality Amended quality (100)
  */
 function tgm_image_full_quality( $quality ) {
-
     return 100;
-
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -69,29 +67,28 @@ function adapt_scripts_function() {
 	wp_enqueue_script('jquery');	
 	
 	// Site wide js
-	wp_enqueue_script('hoverIntent', get_template_directory_uri() . '/js/jquery.hoverIntent.minified.js');
-	wp_enqueue_script('hoverIntent', get_template_directory_uri() . '/js/modernizr.video.js');
-/* 	wp_enqueue_script('easing', get_template_directory_uri() . '/js/jquery.easing.1.3.js'); */
-	wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider-min.js');
+	wp_enqueue_script('yepnope', get_template_directory_uri() . '/js/yepnope.1.5.4-min.js');
+	//Uniform & Responsify create menu drop-down for mobile
+/*
 	wp_enqueue_script('uniform', get_template_directory_uri() . '/js/jquery.uniform.js');
 	wp_enqueue_script('responsify', get_template_directory_uri() . '/js/jquery.responsify.init.js');
+*/
 
-	if(is_page( 837 )) {
-		wp_enqueue_script('orangebox', get_template_directory_uri() . '/js/orangebox.js', array(), '', true);
-	}
-	
 	if(is_post_type_archive( 'project' )) {
 		wp_enqueue_script('isotope', get_template_directory_uri() . '/js/jquery.isotope.min.js');
 		wp_enqueue_script('isotope_init', get_template_directory_uri() . '/js/isotope_init.js');
+		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider-min.js');
 	}
 	
 	if ( is_singular( 'project' ) ) {
 		wp_enqueue_script('froogaloop', get_template_directory_uri() . '/js/froogaloop2.min.js');
+		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider-min.js');
 	}
 
 	if(is_home()) {
 		wp_enqueue_script('custom', get_template_directory_uri() . '/js/home.js');
-		wp_enqueue_script('custom', get_template_directory_uri() . '/js/jquery.cookie.js');
+		wp_enqueue_script('cookie', get_template_directory_uri() . '/js/jquery.cookie.js', array(), '', true);
+/* 		wp_enqueue_script('cycle', get_template_directory_uri() . '/js/jquery.cycle.js', array(), '', true); */
 	}
 	else {
 		wp_enqueue_script('custom', get_template_directory_uri() . '/js/custom.js', array(), '', true);
@@ -121,39 +118,6 @@ function adapt_enqueue_css() {
 //Register Sidebars
 if ( function_exists('register_sidebar') )
 	register_sidebar(array(
-		'name' => 'Home',
-		'id' => 'home',
-		'description' => __('Widgets in this area will be shown on the homepage.','adapt'),
-		'before_widget' => '<div class="sidebar-box clearfix">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3><span>',
-		'after_title' => '</span></h3>',
-));
-
-if ( function_exists('register_sidebar') )
-	register_sidebar(array(
-		'name' => 'About',
-		'id' => 'about',
-		'description' => __('Widgets in this area will be shown on the about page.','adapt'),
-		'before_widget' => '<div class="sidebar-box clearfix">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3><span>',
-		'after_title' => '</span></h3>',
-));
-
-if ( function_exists('register_sidebar') )
-	register_sidebar(array(
-		'name' => 'Process',
-		'id' => 'process',
-		'description' => __('Widgets in this area will be shown on the process page.','adapt'),
-		'before_widget' => '<div class="process_%1$s">',
-		'after_widget'  => '</div>',
-		'before_title' => '<h2>',
-		'after_title' => '</h2>',
-));
-
-if ( function_exists('register_sidebar') )
-	register_sidebar(array(
 		'name' => 'Sidebar',
 		'id' => 'sidebar',
 		'description' => __('Widgets in this area will be shown in the sidebar.','adapt'),
@@ -162,9 +126,21 @@ if ( function_exists('register_sidebar') )
 		'before_title' => '<h3><span>',
 		'after_title' => '</span></h3>',
 ));
+
 if ( function_exists('register_sidebar') )
 	register_sidebar(array(
-		'name' => 'Footer One',
+		'name' => 'Contact',
+		'id' => 'sidebar',
+		'description' => __('Widgets in this area will be shown on the Contact page.','adapt'),
+		'before_widget' => '<div class="sidebar-box clearfix">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3><span>',
+		'after_title' => '</span></h3>',
+));
+
+if ( function_exists('register_sidebar') )
+	register_sidebar(array(
+		'name' => 'Footer — Links',
 		'id' => 'footer-one',
 		'description' => __('Widgets in this area will be shown in the first footer area.','adapt'),
 		'before_widget' => '<div id="links">',
@@ -172,11 +148,12 @@ if ( function_exists('register_sidebar') )
 		'before_title' => '<h4>',
 		'after_title' => '</h4>',
 ));
+
 if ( function_exists('register_sidebar') )
 	register_sidebar(array(
-		'name' => 'Footer Two',
+		'name' => 'Footer — Social Media Icons',
 		'id' => 'footer-two',
-		'description' => __('Widgets in this area will be shown in the second footer area.','adapt'),
+		'description' => __('Widgets in this area will be shown in the right side of the footer.','adapt'),
 		'before_widget' => '<div id="social-media">',
 		'after_widget' => '</div>',
 		'before_title' => '<h4>',
@@ -296,28 +273,6 @@ function project_create_taxonomies() {
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Portfolio Cat Pagination
-/*-----------------------------------------------------------------------------------*/
-
-// Set number of posts per page for taxonomy pages
-$option_posts_per_page = get_option( 'posts_per_page' );
-add_action( 'init', 'my_modify_posts_per_page', 0);
-function my_modify_posts_per_page() {
-    add_filter( 'option_posts_per_page', 'my_option_posts_per_page' );
-}
-function my_option_posts_per_page( $value ) {
-	global $option_posts_per_page;
-	
-    if ( is_tax( 'portfolio_cats') ) {
-        return 12;
-    }
-	else {
-        return $option_posts_per_page;
-    }
-}
-
-
-/*-----------------------------------------------------------------------------------*/
 /*	Other functions
 /*-----------------------------------------------------------------------------------*/
 
@@ -334,51 +289,6 @@ function kc_attachment_taxonomies() {
 }
 add_action( 'init', 'kc_attachment_taxonomies' );
 
-/*
-function kc_attachment_fields_to_edit( $fields, $post ) {
-	$taxonomies = get_attachment_taxonomies( $post );
-	if ( empty($taxonomies) )
-		return $fields;
-
-	foreach ( $taxonomies as $tax ) {
-		$tax_object = (array) get_taxonomy( $tax );
-		if ( !$tax_object['public'] )
-			continue;
-		if ( empty($tax_object['label']) )
-			$tax_object['label'] = $tax;
-		if ( empty($t['args']) )
-			$tax_object['args'] = array();
-
-		$att_terms = array();
-		$post_terms = get_object_term_cache( $post->ID, $tax );
-		if ( empty($post_terms) )
-			$post_terms = wp_get_object_terms( $post->ID, $tax, $tax_object['args'] );
-		if ( !empty($post_terms) )
-			foreach ( $post_terms as $post_term )
-				$att_terms[$post_term->term_id] = $post_term->name;
-
-		$tax_terms = get_terms( $tax, array('hide_empty' => false) );
-
-		$html = "<ul class='attachment-terms-list'>\n";
-
-		if ( !empty($tax_terms) )
-			foreach ( $tax_terms as $term )
-				$html .= "\t<li><label><input type='checkbox' name='attachments[{$post->ID}][{$tax}][]' value='{$term->name}' ".checked(array_key_exists($term->term_id, $att_terms), true, false)." /> {$term->name}</label></li>\n";
-
-		$html .= "\t<li><input type='text' name='attachments[{$post->ID}][{$tax}][]' /></label></li>\n";
-		$html .= "</ul>\n";
-
-
-		$fields[$tax]['input'] = 'html';
-		$fields[$tax]['html'] = $html;
-		$fields[$tax]['helps'] = __( sprintf('Check/uncheck existing %s, or add new one(s), separated by commas.', $fields[$tax]['label']) );
-	}
-
-	return $fields;
-}
-add_filter( 'attachment_fields_to_edit', 'kc_attachment_fields_to_edit', 10, 2 );
-*/
-
 function kc_attachment_fields_data() {
 	if ( empty($_POST['attachments']) )
 		return;
@@ -394,9 +304,6 @@ function kc_attachment_fields_data() {
 	}
 }
 add_action( 'init', 'kc_attachment_fields_data' );
-
-  
-
 
 //add feeds
 add_theme_support( 'automatic-feed-links' );
@@ -795,3 +702,17 @@ function posts_custom_column_views($column_name, $id){
 }
 add_filter('manage_careers_columns', 'posts_column_views');
 add_action('manage_careers_custom_column', 'posts_custom_column_views',5,2);
+
+add_action( 'pre_user_query', 'wps_pre_user_query' );
+/*
+* Modify the WP_User_Query appropriately
+*
+* Checks for the proper query to modify and changes the default user_login for $wpdb->usermeta.meta_value
+*
+* @param WP_User_Query Object $query User Query object before query is executed
+*/
+function wps_pre_user_query( &$query ) {
+global $wpdb;
+if ( isset( $query->query_vars['query_id'] ) && 'wps_last_name' == $query->query_vars['query_id'] )
+$query->query_orderby = str_replace( 'user_login', "$wpdb->usermeta.meta_value", $query->query_orderby );
+}

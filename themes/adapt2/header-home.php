@@ -64,7 +64,7 @@ jQuery(function($){
 		$.ajax({
                 type       : "GET",
                 dataType   : "html",
-                url        : "http://10.1.6.166:8888/wp-content/themes/adapt2/index_lobby.php",
+                url        : "/wp-content/themes/adapt2/index_lobby.php",
                 beforeSend : function(){
 	                console.log("LOBBY INDEX BEFORE SEND");
                 },
@@ -81,21 +81,23 @@ jQuery(function($){
 		});
 		}   
 	$(document).ready(function(){
- 	if ( $(window).width() > 1600) {
+ 	if ( $(window).width() == 1920) {
  		load_lobby();
 		return false;
  	}
  	});
  	});
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-2334506-6']);
-  _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-2334506-6']);
+	_gaq.push(['_trackPageview']);
+	
+	(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();  
+
 
 </script>
 </head>

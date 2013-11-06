@@ -19,9 +19,16 @@ $page = (isset($_GET['pageNumber'])) ? $_GET['pageNumber'] : 0;
 
 $count_args = array(
 	'fields' => 'all',
-	'role' => 'editor',
+/* 	'role' => 'editor', */
+	'exclude' =>  array(1, 48, 65, 54, 53, 47, 15, 64, 17, 56, 57, 36, 38, 49, 45),
 	'number' => 99999
 );
+/*
+$randomize_func = create_function( '&$query', '$query->query_orderby = "ORDER BY RAND()";' );  
+// Hook pre_user_query 
+add_action( 'pre_user_query', $randomize_func ); 
+remove_action( 'pre_user_query', $randomize_func );
+*/
 
 // The Query
 $user_count_query = new WP_User_Query( $count_args );
@@ -37,16 +44,14 @@ $limit = 1;
 // calculate the total number of pages.
 $total_pages = 1;
 $offset = $limit * ($page - 1);
-$total_pages = ceil($total_users / $users_per_page);
+$total_pages = ceil($total_users / $limit);
 
-$randomize_func = create_function( '&$query', '$query->query_orderby = "ORDER BY RAND()";' );  
-
-// Hook pre_user_query 
-add_action( 'pre_user_query', $randomize_func ); 
 // main user query
 $args  = array(
-    // search only for Authors role
-    'role'      => 'editor',
+/*     'role' => 'editor', */
+    'exclude' => array(1, 48, 65, 54, 53, 47, 15, 64, 56, 57, 36, 38, 49, 45),
+    'meta_key' => 'last_name',
+	'query_id' => 'wps_last_name',
     // return all fields
     'fields'    => 'all',
     'number'    => $limit,
@@ -54,7 +59,6 @@ $args  = array(
 );
 
 $user_query = new WP_User_Query( $args );
-remove_action( 'pre_user_query', $randomize_func );
 
 // User Loop
 if ( ! empty( $user_query->results ) ) {
@@ -70,8 +74,7 @@ if ( ! empty( $user_query->results ) ) {
 			$avatar = 'wavatar';
 
 	// If user level is above 0 or login name is "admin", display profile
-		if($user->first_name != 'ESI') :
-		$count++;
+		if($user->user_level > 4&& $user->first_name != 'ESI') :
 ?>
 
 <a href="<?php echo get_site_url(); ?>/people"><?php 

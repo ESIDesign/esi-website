@@ -58,9 +58,8 @@ Template Name Posts: Not Featured Template
 						
 						//attachments count
 						$attachments_count = count($attachments);
-						
 					
-                    $count = 0;
+	                    $count = 0;
                         //start loop
                         foreach ($attachments as $attachment) :
                         $count++;
