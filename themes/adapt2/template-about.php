@@ -127,6 +127,9 @@ echo '<span class="gradient" style="';
 			echo strip_tags(get_field("module3"));
 			echo '</h3><h3 class="red">';
 			echo strip_tags(get_field("module3_link"), '<a>');
+			echo '   |  ';
+			echo '   ';
+			echo strip_tags(get_field("module4_link"), '<a>');
 			echo '</h3>';
 	} ?>
 </div>		
@@ -229,9 +232,9 @@ echo '<span class="gradient" style="';
 	</article>
 <? } ?>
 
-	<?php endif; ?>
+<?php endif; ?>
 
-	     	<?php endforeach; ?>
+     	<?php endforeach; ?>
     </div><!-- About People -->
 </div>
 

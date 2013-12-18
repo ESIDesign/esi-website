@@ -191,7 +191,7 @@ var Grid = (function() {
 		support = Modernizr.csstransitions,
 		// default settings
 		settings = {
-			minHeight : 380,
+			minHeight : 540,
 			speed : 350,
 			easing : 'ease'
 		};
@@ -215,6 +215,25 @@ var Grid = (function() {
 
 	}
 
+	// add more items to the grid.
+	// the new items need to appended to the grid.
+	// after that call Grid.addItems(theItems);
+	function addItems( $newitems ) {
+
+		$items = $items.add( $newitems );
+
+		$newitems.each( function() {
+			var $item = $( this );
+			$item.data( {
+				offsetTop : $item.offset().top,
+				height : $item.height()
+			} );
+		} );
+
+		initItemsEvents( $newitems );
+
+	}
+
 	// saves the item´s offset top and height (if saveheight is true)
 	function saveItemInfo( saveheight ) {
 		$items.each( function() {
@@ -231,18 +250,8 @@ var Grid = (function() {
 		// when clicking an item, show the preview with the item´s info and large image.
 		// close the item if already expanded.
 		// also close if clicking on the item´s cross
-		$items.on( 'click', 'span.og-close', function() {
-			hidePreview();
-			return false;
-		} ).children( 'a' ).on( 'click', function(e) {
-
-			var $item = $( this ).parent();
-			// check if item already opened
-			current === $item.index() ? hidePreview() : showPreview( $item );
-			return false;
-
-		} );
-
+		initItemsEvents( $items );
+		
 		// on window resize get the window´s size again
 		// reset some values..
 		$window.on( 'debouncedresize', function() {
@@ -259,6 +268,20 @@ var Grid = (function() {
 
 		} );
 
+	}
+
+	function initItemsEvents( $items ) {
+		$items.on( 'click', 'span.og-close', function() {
+			hidePreview();
+			return false;
+		} ).children( 'a' ).on( 'click', function(e) {
+
+			var $item = $( this ).parent();
+			// check if item already opened
+			current === $item.index() ? hidePreview() : showPreview( $item );
+			return false;
+
+		} );
 	}
 
 	function getWinSize() {
@@ -320,10 +343,9 @@ var Grid = (function() {
 		create : function() {
 			// create Preview structure:
 			this.$title = $( '<h3></h3>' );
-			this.$position = $( '<h4></h4>' );
-			this.$description = $( '<div class="og-descript"></div>' );
-			this.$href = $( '' );
-			this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$position, this.$description, this.$href );
+			this.$description = $( '<p></p>' );
+/* 			this.$href = $( '<a href="#">Visit website</a>' ); */
+			this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description );
 			this.$loading = $( '<div class="og-loading"></div>' );
 			this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
 			this.$closePreview = $( '<span class="og-close"></span>' );
@@ -357,17 +379,15 @@ var Grid = (function() {
 			// update preview´s content
 			var $itemEl = this.$item.children( 'a' ),
 				eldata = {
-					href : $itemEl.attr( 'href' ),
+/* 					href : $itemEl.attr( 'href' ), */
 					largesrc : $itemEl.data( 'largesrc' ),
 					title : $itemEl.data( 'title' ),
-					position : $itemEl.data( 'position' ),
 					description : $itemEl.data( 'description' )
 				};
 
 			this.$title.html( eldata.title );
-			this.$position.html( eldata.position );
 			this.$description.html( eldata.description );
-			this.$href.attr( 'href', eldata.href );
+/* 			this.$href.attr( 'href', eldata.href ); */
 
 			var self = this;
 			
@@ -436,7 +456,8 @@ var Grid = (function() {
 
 			var heightPreview = winsize.height - this.$item.data( 'height' ) - marginExpanded,
 				itemHeight = winsize.height;
-
+/*
+				LG HACK TO GET MIN HEIGHT AS HEIGHT
 			if( heightPreview < settings.minHeight ) {
 				heightPreview = settings.minHeight;
 				itemHeight = settings.minHeight + this.$item.data( 'height' ) + marginExpanded;
@@ -444,7 +465,10 @@ var Grid = (function() {
 
 			this.height = heightPreview;
 			this.itemHeight = itemHeight;
-
+*/
+			/* LG HACK TO GET MIN HEIGHT AS HEIGHT */
+			this.height = settings.minHeight;
+			this.itemHeight = itemHeight;
 		},
 		setHeights : function() {
 
@@ -455,11 +479,15 @@ var Grid = (function() {
 					}
 					self.$item.addClass( 'og-expanded' );
 				};
-
 			this.calcHeight();
 			this.$previewEl.css( 'height', this.height );
-			this.$item.css( 'height', this.itemHeight ).on( transEndEventName, onEndFn );
-
+/* 			this.$item.css( 'height', this.itemHeight ).on( transEndEventName, onEndFn ); */
+			if($(window).width() < 959 && $(window).width() > 479) {
+				this.$item.css( 'height', 864 ).on( transEndEventName, onEndFn );
+			}
+			else {
+				this.$item.css( 'height', 784 ).on( transEndEventName, onEndFn );	
+			}
 			if( !support ) {
 				onEndFn.call();
 			}
@@ -487,6 +515,9 @@ var Grid = (function() {
 		}
 	}
 
-	return { init : init };
+	return { 
+		init : init,
+		addItems : addItems
+	};
 
 })();

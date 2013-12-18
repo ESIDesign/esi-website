@@ -8,14 +8,6 @@
     License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-@font-face {
-    font-family: 'FontAwesome';
-    src: url('../fonts/fontawesome-webfont.eot');
-    src: url('../fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff') format('woff'), url('../fonts/fontawesome-webfont.ttf') format('truetype'), url('../fonts/fontawesome-webfont.svgz#FontAwesomeRegular') format('svg'), url('../fonts/fontawesome-webfont.svg#FontAwesomeRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
 @red: #e2401f;
 
 @blue: #3FAAED;
@@ -125,15 +117,9 @@ figure img {
 /* 	max-width: 100%; */
 }
 
-
 /* Block elements */
 header, hgroup, footer, section, article, aside {
 	display: block;
-}
-
-/*jetback wpstats smiley hide*/
-#wpstats{
-	display: none;
 }
 
 /*-----------------------------------------------------------------------------------*
@@ -199,6 +185,16 @@ blockquote{
 	visibility: hidden;
 	font-size: 0;
 }
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
 * html .clearfix{ zoom: 1; } /* IE6 */
 *:first-child+html .clearfix { zoom: 1; } /* IE7 */
 .remove-margin { margin-right: 0 !important }
@@ -206,7 +202,6 @@ blockquote{
 /*-----------------------------------------------------------------------------------*
 /* = Structure
 /*-----------------------------------------------------------------------------------*/
-
 #wrap{
 	background: #fff;
 	margin: 0 auto;
@@ -510,7 +505,7 @@ img.alignright, img.alignleft {
 	color: #FFF;
 }
 
-.sf-menu li#menu-item-907.current-menu-item a {
+.sf-menu li#menu-item-907.current-menu-item a, .post-type-archive-careers .sf-menu li#menu-item-907 a  {
 	color: @orange;
 }
 
@@ -860,6 +855,11 @@ body.home {
 	left: 941px;
 }
 
+.join {
+	top: (322px + 125px + 125px);
+	left: 941px;
+}
+
 .approach {
 	top: 322px;
 	left: 941px;
@@ -1060,7 +1060,7 @@ article.people1 a, article.people2 a, article.people3 a {
 
 .new_h3 (@color: @gray;){
 	font-family: "proxima-nova", "nimbus-sans-condensed" !important;
-	font-size: 118%;
+	font-size: 112%;
 	color: @color;
 	line-height: 150%;
 	font-weight: 300;
@@ -1086,7 +1086,9 @@ article.people1 a, article.people2 a, article.people3 a {
 
 .photo_headline h3 {
 	font-family: "proxima-nova", "nimbus-sans-condensed" !important;
-	font-size: 120%;
+/* 	font-size: 120%; */
+	font-size: 112%;
+	line-height: 150%;
 }
 
 .about_text, .about_phil_text {
@@ -1102,8 +1104,23 @@ article.people1 a, article.people2 a, article.people3 a {
 	width: 64%;
 }
 
-.photo_headline h1, .photo_headline h3, .about_phil h2, .about_phil h3, .about_phil_text h4, .about_phil_text h4 a {
+.photo_headline h1, .photo_headline h3, .about_phil h2, .about_phil h3 {
 	color: #FFF;
+}
+
+.about_phil_text h3, .about_work h3, .about_people h3 {
+	margin-bottom: 2%;
+	a:hover {
+		color: #999999;
+	}
+} 
+
+.about_people h3 a:first-child {
+	padding-right: 1%;
+}
+
+.about_people h3 a:nth-child(2) {
+	padding-left: 1%;
 }
 
 .about_work {
@@ -1111,10 +1128,13 @@ article.people1 a, article.people2 a, article.people3 a {
     clear: both;
     position: relative;
     top: 0px;
-    margin: 6% 0 5%;
+    margin: 3% 0 1%;
     height: 0;
     padding-bottom: 38%;
     width:100%;
+    img {
+	    .box-shadow;
+    }
 }
 
 .about_work1 {
@@ -1196,8 +1216,8 @@ article.people1 a, article.people2 a, article.people3 a {
     clear: both;
     position: relative;
     top: 0px;
-    margin: 6% 0 0%;
-    padding-bottom: 38%;
+    margin: 3% 0;
+    padding-bottom: 27%;
     width:100%;
     article {
 	  	height: 115px;
@@ -1214,7 +1234,7 @@ article.people1 a, article.people2 a, article.people3 a {
 .about_people1 {
     float: left;
     margin: 0% 0 10% 2%;
-    width: 56%;
+    width: 57%;
 }
 
 .about_people_right {
@@ -1278,7 +1298,7 @@ article.people1 a, article.people2 a, article.people3 a {
 .approach_title {
 	float: left;
 	margin: 0 3%;
-	width: 43%;
+	width: 44%;
 }
 
 .approach_title_imgs {
@@ -1892,8 +1912,7 @@ iframe#mosaic_player {
 .related-item {
 	float: left;
 	width: 167px;
-	margin-top: 10px;
-	margin-right: 10px;
+	margin: 10px 10px 10px 0;
 	padding-bottom: 5px;
 	position: relative;
 	overflow: hidden;
@@ -1901,7 +1920,7 @@ iframe#mosaic_player {
 }
 
 .post-template-single-lab-project-php .related-item, .postid-3226 .related-item {
-	min-height: 187px;
+	height: 170px;
 }
 
 .related-item:hover {
@@ -1919,7 +1938,7 @@ iframe#mosaic_player {
 .related-caption {
 	border-left: 1px solid #ddd;
 	font: 16px "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif;
-	padding: 4px 12px 6px 7px;
+	padding: 4px 10px 6px 7px;
 	margin-left: 9px;
 	line-height: 17px;
 /* 	width: 130px; */
@@ -2209,12 +2228,6 @@ ul.filter a#all span {
 	width: 100%;
 }
 
-/*
-.home_item3 .project-overlay, .home_item4 .project-overlay, .home_item8 .project-overlay, .home_item14 .project-overlay, .home_item5 .project-overlay {
-	bottom: 5px;
-}
-*/
-
 .post-type-archive-project .project-overlay h3 {
 	border-left: 1px solid #ddd;
 	color: #999;
@@ -2261,32 +2274,34 @@ ul.filter a#all span {
 
 .people_excerpt { 
 	float: left;
-	margin-right: 10px;
-	height: 162px;
-	width: 75%;
-	padding: 20px 20px 0px;
-	position: relative;
-	left: 10px;
-	top: 5px;
+	width: 80%;
+	padding: 5px 0px 0 30px;
 }
 
 .people_excerpt h1 {
-	color: #dc801c;
-	font: 46px "adelle", "proxima-nova-alt-condensed", "nimbus-sans-condensed";
+	color: @orange;
+	font: 38px "adelle", "proxima-nova-alt-condensed" , serif;
 	font-weight: 300;
-	margin-bottom: -3px;
-	margin-top: -16px;
+	margin-bottom: .9%;
 }
 
 .people_excerpt h3 {
-	color: #555;
-	font: 22px "proxima-nova-alt-condensed", "nimbus-sans-condensed";
+	color: @gray;
+	font: 18px "proxima-nova", "nimbus-sans-condensed";
 	font-weight: 300;
-	width: 84%;
+	line-height: 150%;
+	margin-bottom: 1.2%;
+	a {
+		color: @orange;
+		font-weight: 600;
+		&:hover {
+			color: @gray;
+		}
+	}
 }
 
 li.people-grid {
-	float: left;
+	display: inline-block !important;
 	width: 172px;
 }
 
@@ -2404,11 +2419,12 @@ li.people-grid .caption_people  {
 .og-grid {
 	list-style: none;
 	padding: 0px 0;
+	margin: 0 auto;
+/* 	text-align: center; */
 	width: 100%;
 }
 .og-grid li {
 	display: inline-block;
-/* 	float:left; */
 	margin: 0px 8px 0 0px;
 	vertical-align: top;
 	height: 234px;
@@ -2424,6 +2440,7 @@ li.people-grid .caption_people  {
 
 .og-grid li.og-expanded > a::after {
 	top: 210px;
+/* 	top: auto; */
 	border: solid transparent;
 	content: " ";
 	height: 0;
@@ -2449,7 +2466,8 @@ li.people-grid .caption_people  {
 }
 
 .og-expander-inner {
-	padding: 50px 30px 0px;
+	padding: 6% 3% 0px;
+	height: 100%;
 }
 
 .og-close {
@@ -2486,8 +2504,9 @@ li.people-grid .caption_people  {
 }
 
 .og-fullimg {
-	width:250px;
+	width: 25%;
 	float: left;
+	text-align: center;
 }
 
 .og-fullimg img {
@@ -2501,17 +2520,14 @@ li.people-grid .caption_people  {
 
 .og-fullimg,
 .og-details {
+	height: 100%;
 	float: left;
 	overflow: hidden;
 	position: relative;
 }
 
 .og-details {
-	padding: 0 20px 0 35px;
-}
-
-.og-fullimg {
-	text-align: center;
+	padding: 0 2% 0 3.5%;
 }
 
 .og-fullimg img {
@@ -2537,30 +2553,6 @@ li.people-grid .caption_people  {
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 22px;
-}
-
-.og-details a {
-	font-weight: 700;
-	font-size: 16px;
-	color: #333;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	padding: 10px 20px;
-	border: 3px solid #333;
-	display: inline-block;
-	margin: 30px 0 0;
-	outline: none;
-}
-
-.og-details a::before {
-	content: '\2192';
-	display: inline-block;
-	margin-right: 10px;
-}
-
-.og-details a:hover {
-	border-color: #999;
-	color: #999;
 }
 
 .og-loading {
@@ -2596,51 +2588,137 @@ li.people-grid .caption_people  {
 	66% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc; }
 }
 
-@media screen and (max-width: 830px) {
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+.og-expander {
+	height: 625px !important;
+	min-height: 625px !important;
+}
+	
+.og-details h3 { 
+	font-size: 32px; 
+}
 
-	.og-details h3 { font-size: 32px; }
-	.og-details p { font-size: 13px; }
-	.og-details a { font-size: 12px; }
+.og-details p { 
+	font-size: 15px; 
+}
 
 }
 
-@media screen and (max-width: 650px) {
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+.og-expander {
+	top: auto;
+	margin-top: -7%;
+	height: 625px !important;
+	min-height: 625px !important;
+	width: 95%;
+}
 
-	.og-fullimg { display: none; }
-	.og-details { float: none; width: 100%; }
+.og-fullimg { 
+	display: none;
+}
+
+.og-details {
+	float: none;
+	width: 88%;
+}
 	
+.og-details h3 { 
+	margin: .5% 0 .5%;
+	font-size: 30px; 
+}
+
+.og-details p { 
+	font-size: 91%; 
+}
+	
+}
+
+@media only screen and (max-width: 479px) {
+.og-expander {
+	top: auto;
+	margin-top: -7%;
+	height: 600px !important;
+	min-height: 600px !important;
+	width: 95%;
+}
+
+.og-fullimg, .og-close { display: none; }
+
+.og-details { 
+	float: none; 
+	height: 560px; 
+	overflow: hidden; 
+	overflow-y: scroll; 
+	width: 88%; 
+}
+	
+.og-details h3 { 
+	margin: .5% 0 .5%;
+	font-size: 24px; 
+}
+
+.og-details p { 
+	font-size: 85%;
+	line-height: 145%;
+}
+
 }
 
 
 /*-----------------------------------------------------------------------------------*
 /* = Careers Page
 /*-----------------------------------------------------------------------------------*/
+.careers_left {
+	float: left;
+	width: 46%;
+	img {
+		.box-shadow;
+	}
+}
+
 .careers_title {
 	float: left;
-	margin: 0 3%;
-	width: 42%;
+	margin: 6% 3% 2%;
+	width: 48%;
 	font-size: 100%;
 }
 
 .careers-wrap {
 	h1, h2 {
 	 	color: @orange;
+	 	font-weight: 300;
 	 }
 	.people_item {
-		height: 180px;
+		height: 155px;
+		width: 150px;
+		.video-wrapper {
+			height: 150px;
+		}
 	}
 	.people_item2 {
-		height: 190px;
+		.box-shadow;
+		height: 150px;
+		margin-bottom: 15px;
+		width: 199px;
 	}
 }
 
 .career_opps {
 	float: left;
 	margin: 1% 4% 0 .5%;
-	width: 38%;
+	width: 46%;
+	h3 {
+		font-size: 20px;
+	}
 	p {
 		line-height: 140%;
 	}
+}
+
+.career_people {
+	float: left;
+	margin-top: 2%;
+	width: 49%;	
 }
 
 li.orange_gradient {
@@ -2966,6 +3044,13 @@ span.awesome-icon-comments {
 .post-tags a {
 }
 
+/*-----------------------------------------------------------------------------------*
+/* = Contact
+/*-----------------------------------------------------------------------------------*/
+.page-id-430 h1 {
+	color: @yellow;
+}
+
 /*  Contact Page Map  */
 .item0 {
 	margin-bottom: 40px;
@@ -3047,9 +3132,13 @@ form#subForm div {
 }
 
 form#subForm input#submit {
+	color: #FFF;
 	font: 14px "proxima-nova", sans-serif;
-	padding: 5px 0;
+	float: right;
+	padding: 8px 0;
 	width: 25%;
+	border: none;
+	background: @yellow;
 }
 
 /*buttons*/
@@ -3088,7 +3177,6 @@ input[type="clean-button"]:active,
 	width: 242px;
 	float: right;
 }
-
 
 /* Contact Us Career Opportunities Sidebar  */
 .sidebar-box {

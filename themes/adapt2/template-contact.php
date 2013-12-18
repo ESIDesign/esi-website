@@ -11,7 +11,7 @@
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
          
-    	<div class="item0"><div id="map_canvas" style="width:1000px; height:353px"></div></div>
+    	<div class="item0"><div id="map_canvas" style="width:100%; height:353px"></div></div>
 
     <!-- /page-heading -->
 <article class="post clearfix">   

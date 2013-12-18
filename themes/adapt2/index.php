@@ -13,6 +13,7 @@ $options = get_option( 'adapt_theme_settings' );
 	<img class="active" src="<?php echo get_template_directory_uri(); ?>/images/esi_logo_red.jpg"/>
 </article>
 
+<!--
 <article class="home_item9_quote">
 <?php if (get_field('quote3', 2145) != "") { 
 	$rand_quote = rand(1,3);
@@ -46,41 +47,41 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 	  the_field('attrib'.$rand_quote, 2145);
   	} ?></h3>
 </article>
+-->
 
 <?php
-    global $post;
-    $args2 = array(
-        'post_type' =>'project',
-        'meta_query' => array(
-	                        array('key' => 'home',
-	                              'value' => '1'
-	                        ),
-	                         array('key' => 'video_placeholder',
-	                              'value' => '',
-	                              'compare' => '!='
-	                        )
-                    ),
-        'orderby' => 'rand',
-	   
-    );
-	$video_posts = get_posts($args2);
-	$video_ID = array($video_posts[0]->ID);
-	$count=0;
-	foreach($video_posts as $video_post) : setup_postdata($video_post);
-	$count++;
-     
-		if ($count == '1') { ?>
+global $post;
+$args2 = array(
+    'post_type' =>'project',
+    'meta_query' => array(
+                        array('key' => 'home',
+                              'value' => '1'
+                        ),
+                         array('key' => 'video_placeholder',
+                              'value' => '',
+                              'compare' => '!='
+                        )
+                ),
+    'orderby' => 'rand',
+   
+);
+$video_posts = get_posts($args2);
+$video_ID = array($video_posts[0]->ID);
+$count=0;
+foreach($video_posts as $video_post) : setup_postdata($video_post);
+$count++;
+	if ($count == '1') { ?>
+		<div class="home_item1">
 		
-			<div class="home_item1">
-			
-				<img class="placeholder" src="<?php echo the_field('video_placeholder', $video_post->ID); ?>"/><span id="button" class="awesome-icon-play"></span>
-				<iframe id="home_player" src="http://player.vimeo.com/video/<?php echo the_field('video', $video_post->ID); ?>?api=1&title=0&byline=0&portrait=0&player_id=home_player" width="590" height="332" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-			
-			</div>
-		<?php } ?>
-	<?php endforeach; ?>
+			<img class="placeholder" src="<?php echo the_field('video_placeholder', $video_post->ID); ?>"/><span id="button" class="awesome-icon-play"></span>
+			<iframe id="home_player" src="http://player.vimeo.com/video/<?php echo the_field('video', $video_post->ID); ?>?api=1&title=0&byline=0&portrait=0&player_id=home_player" width="590" height="332" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		
+		</div>
+	<?php }
+endforeach; ?>
 
-<?php $args = array(
+<?php 
+$args = array(
     'post_type' =>'project',
     'meta_query' => array(
                         array('key' => 'home',
@@ -90,41 +91,39 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 	'post__not_in' => $video_ID,
     'orderby' => 'rand',
 );
-    $portfolio_posts = get_posts($args);
+$portfolio_posts = get_posts($args);
     if($portfolio_posts) { 
-            $count=0;
-            
+		$count=0;  
             foreach($portfolio_posts as $post) : setup_postdata($post);
-            $count++;
-            
-                    	$id = get_the_ID();
-                    	if(get_field('video', $id) != "" && get_field('video_img', $id) == "") {
-							$exclude_id = get_post_thumbnail_id( $id );
-						}
-						else {
-							$exclude_id = '';
-						}
+	            $count++;
+				$id = get_the_ID();
+            	if(get_field('video', $id) != "" && get_field('video_img', $id) == "") {
+					$exclude_id = get_post_thumbnail_id( $id );
+				}
+				else {
+					$exclude_id = '';
+				}
                     	
-                    	$feat_id = get_post_thumbnail_id( $id ); 
-                        //attachement loop
-                        $args = array(
-                            'orderby' => 'menu_order',
-							'order' => 'ASC',
-							'post_type' => 'attachment',
-							'post_parent' => $id,
-							'post_mime_type' => 'image',
-							'post_status' => null,
-							'posts_per_page' => 4,
-/* 						    'exclude' => $exclude_id, */
-							'meta_query' => array(
-						       array(
-						           'key' => 'not_in_carousel',
-						           'value' => 1,
-						           'type' => 'numeric',
-						           'compare' => 'NOT EXISTS',
-						       )
-						   )
-                        );
+            	$feat_id = get_post_thumbnail_id( $id ); 
+                //attachement loop
+                $args = array(
+                    'orderby' => 'menu_order',
+					'order' => 'ASC',
+					'post_type' => 'attachment',
+					'post_parent' => $id,
+					'post_mime_type' => 'image',
+					'post_status' => null,
+					'posts_per_page' => 3,
+	/* 				'exclude' => $exclude_id, */
+					'meta_query' => array(
+				       array(
+				           'key' => 'not_in_carousel',
+				           'value' => 1,
+				           'type' => 'numeric',
+				           'compare' => 'NOT EXISTS',
+				       )
+				   )
+                );
 			$attachments = get_posts($args);
             $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'archive-project');
             $feat_img2 = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb2');
@@ -188,16 +187,17 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 
 <?php
 	global $wpdb;
-	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand()";
+	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand() LIMIT 0, 15";
 	$author_ids = $wpdb->get_results($query);
 	$count = 0;
 	foreach($author_ids as $author) :
 		$curauth = get_userdata($author->ID);
+		
 		// Set default avatar (values = default, wavatar, identicon, monsterid)
 		$avatar = 'wavatar';
 
-		// If user level is above 0 or login name is "admin", display profile
-		if($curauth->user_level > 4 && $curauth->first_name != 'ESI') :
+		// If user level is above author, not admin or Amanda who goes first in peopleLoop
+		if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->ID != 2) :
 		$count++; ?>
 		
 <?php if ($count == '1') { ?>
@@ -286,7 +286,6 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 	</article>
 </div>
 
-
 <div class="home_button lab">
 	<a href="<?php echo get_site_url(); ?>/work/lab"><img src="<?php echo get_template_directory_uri(); ?>/images/lab.png"/></a>
 </div>
@@ -312,9 +311,6 @@ if (get_field('quote'.$rand_quote, 2145) != "") {
 </div>
             
 </div><!-- END home-wrap -->  
-
-<script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cycle.js"></script>
 
 </div><!-- /main -->
 

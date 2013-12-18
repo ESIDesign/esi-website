@@ -10,16 +10,19 @@
 <div class="careers-wrap">
 
 <div class="careers_left">
+<!--
 <div class="people_item2">
 <img src="/wp-content/uploads/2011/08/about20-240x180.jpg"/>
 </div>
 <div class="people_item2">
 <img src="/wp-content/uploads/2011/08/about10-240x180.jpg"/>
 </div>
+-->
+<img src="/wp-content/uploads/2013/06/Process-022-513x353.jpg" />
 </div>
 
     <?php $args = array(
-            'page_id' =>'6',
+            'page_id' =>'471',
             'post_status'=>'publish', 
         ); ?>
 <?php query_posts ($args); ?>
@@ -27,6 +30,11 @@
 <div class="careers_title">
 <h1><?php the_title(); ?></h1>
 <h3><?php the_content(); ?></h3>
+<?php if (get_field('sub_headline') != "") { 
+	echo '<h3>';
+	the_field('sub_headline');
+	echo '</h3>';
+} ?>
 </div>
 <?php endwhile; ?>
 <?php endif; ?>   
@@ -46,7 +54,7 @@ echo '<h2>Current Opportunities</h2>';
  						);
 				$mypages = get_pages($args);
 				foreach( $mypages as $page ) {    
-					echo '<li class="orange_border"><h3><a href="'.get_permalink($page->ID).'">'.$page->post_title.'</a></h3><p>'.$page->post_excerpt.' <a href="'.get_permalink($page->ID).'">→</a></p></li>';
+					echo '<li class="orange_border"><h3><a href="'.get_permalink($page->ID).'">'.$page->post_title.'</a></h3><p>'.$page->post_excerpt.'<a href="'.get_permalink($page->ID).'"> →</a></p></li>';
 
 						}
 				echo '</ul>';	
@@ -57,18 +65,22 @@ else {
 } ?>
 </div>
 
+<div class="career_people">
 <?php
                     
 $people_args = array(
-	'post_type' => 'people' 
+	'post_type' => 'people',
+	'orderby' => 'rand',
+	'posts_per_page' => 4 
 );
 $people_posts = get_posts( $people_args );
 
 $peoplepage_args = array(
-	'orderby' => 'date',
+	'orderby' => 'rand',
 	'post_type' => 'attachment',
 	'post_parent' => 343,
 	'post_mime_type' => 'image',
+	'orderby' => 'rand',
 	'posts_per_page' => 1
 );
 $peoplepage_posts = get_posts($peoplepage_args);
@@ -130,6 +142,7 @@ $attachments = get_posts( array(
 	<?php $i++; ?>
 
 <?php endforeach; ?>
+</div>
 
 </div>
 

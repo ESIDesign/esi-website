@@ -1,6 +1,6 @@
 jQuery(function($){
 
-    var page = 1;
+    var page = 0;
     var loading = false;
     var options = ['.people1', '.people2'];
     var load_people = function(){
@@ -32,7 +32,7 @@ setTimeout(function(){
 setInterval(function(){
 	if(!loading) {
 		loading=true;
-	if(page >= 30) {
+	if(page >= 44) {
 		page = 1;
 	}
 	else {
@@ -40,8 +40,8 @@ setInterval(function(){
 	}
 	load_people();
 	}
-}, 9000);
-}, 3000);
+}, 8000);
+}, 1000);
 
 		
     var pageP = 1;
@@ -81,6 +81,49 @@ setInterval(function(){
 	}
 }, 24000);
 }, 4000);
+
+function playBigLab(){
+	var myVideo = $('.home_item1 .video-wrapper').find('video#related_lab')[0];
+	myVideo.play();
+}
+
+function playLab(){
+	var myVideo = $('.lab_item1 .video-wrapper').find('video#related_lab')[0];
+	$('.lab_item1 .video-wrapper').find('.awesome-icon-play').fadeOut();
+	myVideo.play();
+	setTimeout(function(){
+		$('.lab_item1 .video-wrapper').find('.awesome-icon-play').fadeIn();
+	}, 15000);	
+}
+
+function playPeople() {
+	var myVideo = $('.people_button .video-wrapper').find('video#people')[0];
+	$('.people_button .video-wrapper').find('.awesome-icon-play').fadeOut();
+	myVideo.play();
+	setTimeout(function(){
+			$('.people_button').find('.awesome-icon-play').fadeIn();	
+	}, 15000);
+}
+
+setTimeout(function(){
+setInterval(function(){
+	playBigLab();
+}, 15000);
+}, 0);	
+
+
+setTimeout(function(){
+setInterval(function(){
+	playLab();
+}, 30000);
+}, 18000);	
+
+setTimeout(function(){
+setInterval(function(){
+	playPeople();
+}, 30000);	
+}, 35000);	
+
 
 	$(document).ready(function(){
 
@@ -122,8 +165,9 @@ setInterval(function(){
 	})();
 	
   
-		var iframe = $('#home_player')[0],
-		player = $f(iframe);
+		var iframe = $('#home_player')[0];
+		if(iframe) {
+				player = $f(iframe);
 		
 		$("img.placeholder, #button").click(function(){
 			player.api('play');
@@ -163,28 +207,20 @@ setInterval(function(){
 		if (isPaused == false) {
 			$('.home_item1 a.video-caption h3 span#button').removeClass('awesome-icon-play').addClass('awesome-icon-pause');
 		}
+			
+		}
 		
 setTimeout(function(){
 	player.api('play');
 }, 9000);
-	
-setInterval(function(){
-		var myVideo = $('.video-wrapper').find('video#related_lab')[0];
-		$('.video-wrapper').find('.awesome-icon-play').fadeOut();
-		myVideo.play();
-		setTimeout(function(){
-		$('.video-wrapper').find('.awesome-icon-play').fadeIn();
-		}, 15000);
-}, 36000);
-		
+
 setTimeout(function(){
-	var myVideo = $('.video-wrapper').find('video#related_lab')[0];
-	$('.video-wrapper').find('.awesome-icon-play').fadeOut();
-	myVideo.play();
-	setTimeout(function(){
-	$('.video-wrapper').find('.awesome-icon-play').fadeIn();
-	}, 15000);
-}, 4000);
+	playLab();	
+}, 3000);
+
+setTimeout(function(){
+	playPeople();
+}, 20000);
 
 
 	});

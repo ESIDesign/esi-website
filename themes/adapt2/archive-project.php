@@ -156,7 +156,7 @@ $terms = get_the_terms( get_the_ID(), 'project_cats' );
 <?php endif; ?>
 
 <!-- <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.bbq.js"> </script> -->
-  <script type="text/javascript">
+<script type="text/javascript">
 
 function filter_toggle() {
 	$("ul.filter").toggle();

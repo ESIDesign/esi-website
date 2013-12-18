@@ -14,11 +14,6 @@ Template Name Posts: Lab Template
 <div class="all-projects"><a href="<?php echo get_site_url(); ?>/work">Back to all projects</a></div>
 </header>
 
-  <nav id="project-nav" class="clearfix"> 
-            <?php next_post_link('<div id="single-nav-left">%link</div>', '<span class="awesome-icon-chevron-left"></span> '.__('','adapt').'', false); ?>
-            <?php previous_post_link('<div id="single-nav-right">%link</div>', ''.__('','adapt').' <span class="awesome-icon-chevron-right"></span>', false); ?>
-        </nav>
-
 <article>
     <div id="single-project" class="post full-width clearfix">
 	    <div class="loading"></div>
@@ -44,12 +39,6 @@ Template Name Posts: Lab Template
                                           
                    <?php   
                     	$id = get_the_ID();
-                    	if(get_field('video', $id) != "" && get_field('video_img', $id) == "") {
-							   $exclude_id = get_post_thumbnail_id( $id );
-						}
-						else {
-							$exclude_id = '';
-						}
                     	$feat_id = get_post_thumbnail_id( $id ); 
                         //attachement loop
                         $args = array(
@@ -60,7 +49,7 @@ Template Name Posts: Lab Template
 							'post_mime_type' => 'image',
 							'post_status' => null,
 							'posts_per_page' => -1,
-						   'exclude' => $exclude_id,
+						    'exclude' => $exclude_id,
 							'meta_query' => array(
 						       array(
 						           'key' => 'not_in_carousel',
@@ -88,28 +77,26 @@ Template Name Posts: Lab Template
                         $imgsize = wp_get_attachment_metadata($attachment->ID); 
                         $feat_id = get_post_thumbnail_id( $id ); ?>
                             
-                    <?php if (($imgsize['width'] == 590) || ($attachment->ID == $feat_id && get_field('video', $id) != "") ) { 
+                    <?php if ($imgsize['width'] == 590) { 
                     
                     $count = 0;
                      } ?>
                     
                     
-                    <?php if (($imgsize['width'] != 590) || ($attachment->ID != $feat_id && get_field('video', $id) == "")) { ?>
+                    <?php if ($imgsize['width'] != 590) { ?>
                     
                     <!-- if adding second video remember jquery for img placeholder -->        
 	                <?php if ($count == $video_order && get_field('video', $id) != "") { ?>   
                     <?php
-                    if(get_field('video_img', $id) != "") {
-	                	$thumb_id = get_field('video_img', $id);    
-                    }
-                    else {
-						$thumb_id = get_post_thumbnail_id($id);   
-                    }
-                    $feat_img = wp_get_attachment_image_src( $thumb_id, 'slider');
                      $video = get_post_custom_values("video");
 						  	echo '<li class="video-wrapper">
-						  	<img class="placeholder" src="'. $feat_img[0].'"/><span id="button" class="awesome-icon-play"></span>
 						  	<iframe id="player" src="http://player.vimeo.com/video/'.$video[0].'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';
+                     $video2 = get_post_custom_values("video2");
+                     if($video2 != "") {
+	                  echo '<li class="video-wrapper">
+						  	<iframe id="player" src="http://player.vimeo.com/video/'.$video2[0].'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';   
+                     }                  
+                    
                     ?>
 
 	                 <?php } ?>
@@ -132,14 +119,11 @@ Template Name Posts: Lab Template
                 <!-- /flex-slider -->
             </div>
             <!-- /slider-wrap -->
-
+   
+</div><!-- /single-project -->
         
-        </div>
-        <!-- /single-portfolio-left -->
-        
-        <div id="featured-content">
-        
-        <div id="single-project-excerpt">
+<div id="featured-content">
+	<div id="single-project-excerpt">
 		<h2 class="excerpt-title"><?php the_title(); ?></h2>
 			<div class="excerpt-content">
 				<h3 class="excerpt">
@@ -166,116 +150,117 @@ Template Name Posts: Lab Template
 		        ?>
 		        </p>
 			</div>
-        </div>
+    </div>
         
-        <div id="single-project-left" class="clearfix">
+<div id="single-project-left" class="clearfix">
           
-            				<h2 class="excerpt">
-            				<?php if (get_field('question') != "") { 
-						  	the_field('question');
-						  	} else {
-							  	echo get_the_excerpt(); 	
-						  	} ?>  
-						  	</h2>
-                            
-            
-            <?php the_content(); ?>
-       <div class="featured-meta">     
+		<h2 class="excerpt">
+			<?php if (get_field('question') != "") { 
+			  	the_field('question');
+		  	} else {
+			  	echo get_the_excerpt(); 	
+		  	} ?>  
+	  	</h2>
+                                      
+        <?php the_content(); ?>
+		
+		<div class="featured-meta">     
+			<?php 
+			if (get_field('explore') != "") { 
+			  	echo "<h3>Explore</h3><div class='explore'>";
+			  	the_field("explore");
+			  	echo "</div>";
+			} 
+			if (get_field('news') != "") { 
+			  	echo "<h3>News</h3>";
+			  	the_field("news");
+			}
+			if (get_field('awards') != "") { 
+			  	echo "<h3>Awards</h3>";
+			  	the_field("awards");
+			} ?>
+        </div>  
+          
         <?php 
-	  	if (get_field('explore') != "") { 
-	  	echo "<h3>Explore</h3><div class='explore'>";
-	  	the_field("explore");
-	  	echo "</div>";
-	  	}?>
-        <?php 
-	  	if (get_field('news') != "") { 
-	  	echo "<h3>News</h3>";
-	  	the_field("news");
-	  	}?>
-                <?php 
-	  	if (get_field('awards') != "") { 
-	  	echo "<h3>Awards</h3>";
-	  	the_field("awards");
-	  	}?>
-       </div>    
-         <?php 
 	  	if (get_field('pdf') != "") { 
-	  	echo "<br /><a class='pdf' target='_blank' href='";
-	  	the_field("pdf");
-	  	echo "'>Download Project PDF</a>";
-	  	}?>
+		  	echo "<br /><a class='pdf' target='_blank' href='";
+		  	the_field("pdf");
+		  	echo "'>Download Project PDF</a>";
+	  	} ?>
        
       <?php $blogs = get_posts( array('numberposts'=>5, 'post_type' => 'post', 'orderby' => 'date', 'category' => '282')  );
       if(!empty($blogs)) {
-      	echo '<h3>Lab Blog Posts</h3>';
-      foreach($blogs as $blog) {
-	      echo '<a href="'.get_site_url().'/'.$blog->post_name.'">'.$blog->post_title.'</a><br />';
-      }	 
-      echo '<a class="all-text" href="'.get_site_url().'/category/lab">See all lab blog posts →</a>';     
-      }
-      ?>
+		  echo '<h3>Lab Blog Posts</h3>';
+		      foreach($blogs as $blog) {
+			      echo '<a href="'.get_site_url().'/'.$blog->post_name.'">'.$blog->post_title.'</a><br />';
+		      }	 
+	      echo '<a class="all-text" href="'.get_site_url().'/category/lab">See all lab blog posts →</a>';     
+      } ?>
 		
-       
-        </div>
-       
-        <!-- /single-portfolio-right -->
+</div><!-- /single-project-left -->
         
-    <div id="single-project-right" class="clearfix">
-          <?php 
-	  	if (get_field('quote1') != "") { 
+<div id="single-project-right" class="clearfix">
+    <?php 
+  	if (get_field('quote1') != "") { 
 	  	echo "<div class='pull-quote'><h3>";
 	  	the_field("quote1");
 	  	echo "</h3>";
-	  	if (get_field('attrib1') != "") { 
-	  	echo "<p>-";
-	  	the_field("attrib1");
-	  	echo "</p>";  
+		if (get_field('attrib1') != "") { 
+		  	echo "<p>-";
+		  	the_field("attrib1");
+		  	echo "</p>";  
     	}
     	echo "</div>";
-    	}?>
+	} ?>
     	
-	  	<?php 
-	  	if (get_field('quote2') != "") { 
+  	<?php 
+  	if (get_field('quote2') != "") { 
 	  	echo "<div class='pull-quote'><h3>";
 	  	the_field("quote2");
 	  	echo "</h3>";
 	  	if (get_field('attrib2') != "") { 
-	  	echo "<p>-";
-	  	the_field("attrib2");
-	  	echo "</p>";
+		  	echo "<p>-";
+		  	the_field("attrib2");
+		  	echo "</p>";
 	  	}     
     	echo "</div>";
-    	}?>
-    	
-    	
-    	<?php 
-	  	if (get_field('quote3') != "") { 
+	} ?>
+
+	<?php 
+  	if (get_field('quote3') != "") { 
 	  	echo "<div class='pull-quote'><h3>";
 	  	the_field("quote3");
 	  	echo "</h3>";
 	  	if (get_field('attrib3') != "") { 
-	  	echo "<p>-";
-	  	the_field("attrib3");
-	  	echo "</p>";
+		  	echo "<p>-";
+		  	the_field("attrib3");
+		  	echo "</p>";
 	  	}     
-    	echo "</div>";
-    	}?>
+		echo "</div>";
+	} ?>
     	
-	  	<div class="featured-meta">
-		  	<h3 class="related">Recent Experiments</h3>
-	  	</div>
+<div class="featured-meta">
+	<h3 class="related">Recent Experiments</h3>
+</div>
 
 <?php
 /* Lab Custom Post — mostly Instagram Feed */
 $lab_args = array(
-			'post_type' => 'lab' 
+	'post_type' => 'lab',
+	'post_status' => 'publish',
+    'orderby' => 'date',
+    'order' => 'DESC',
+    'numberposts' => 8
 );
 $lab_posts = get_posts( $lab_args );
 
 /* Blog Posts Category Lab  */
 $labblog_args = array(
     'post_type' => 'post',
-    'category' => '282'
+    'category' => '282',
+    'orderby' => 'date',
+    'order' => 'DESC',
+    'numberposts' => 8
 );
 $labblog_posts = get_posts( $labblog_args );
 
@@ -292,68 +277,61 @@ $images = get_posts( array(
     'order' => 'DESC',
     'numberposts'=> 8
 ) );
-
 		
 if ( !empty($images) ) {
 	foreach ( $images as $image ) { 
-
-	setup_postdata( $image ); 
-
+		setup_postdata( $image ); 
+	
 		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'grid-thumb', true);
 		$site_url = get_site_url();
-
-  ob_start();
-  ob_end_clean();
-    $output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $image->post_content, $matches);
-  $first_vid = $matches [1] [0];
-
+		
+		ob_start();
+		ob_end_clean();
+		$output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $image->post_content, $matches);
+		$first_vid = $matches [1] [0];
+	
 		echo '<div class="related-item">';
 		$value = get_post_meta($image->ID, 'syndication_permalink', true);
+	
 		if(!empty($value)) { 
-		echo '<a target="_blank" href="'. $value.'">';
+			echo '<a target="_blank" href="'. $value.'">';
 		} else {
-		echo '<a href="'.$site_url.'/'.$image->post_name.'">';
+			echo '<a href="'.$site_url.'/'.$image->post_name.'">';
 		}
-
-    $agent = $_SERVER['HTTP_USER_AGENT'];
-
-  if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
-
- 	 
-	  echo '<div class="video-wrapper"><video id="related_lab" width="200" >
-		<source src="'.$first_vid.'" type="video/mp4">
-		</video><span class="awesome-icon-play"></span></div></a>';
+	
+	    $agent = $_SERVER['HTTP_USER_AGENT'];
+	
+		if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
+		  echo '<div class="video-wrapper"><video id="related_lab" width="200" >
+			<source src="'.$first_vid.'" type="video/mp4">
+			</video><span class="awesome-icon-play"></span></div></a>';
 		}
-
-  if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
-		echo '<img src="'.$image_url[0].'"/></a>';
+	
+		if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
+			echo '<img src="'.$image_url[0].'"/></a>';
 		}
-		echo '<div class="related-caption">';
+			echo '<div class="related-caption">';
 		if(!empty($value)) { 
-		echo '<a target="_blank" href="'. $value.'">';
+			echo '<a target="_blank" href="'. $value.'">';
 		} else {
-		echo '<a href="'.$site_url.'/'.$image->post_name.'">';
+			echo '<a href="'.$site_url.'/'.$image->post_name.'">';
 		}
-	  	if (get_field('short', $image->ID) != "") { 
-	  	the_field("short", $image->ID);
-	  	}
-	  	else { 
+		if (get_field('short', $image->ID) != "") { 
+		  	the_field("short", $image->ID);
+		}
+		else { 
 			echo substr($image->post_title,0,35);
 			if	(strlen($image->post_title) > 35) {
 				echo '...';
 			}
-			 }		
+		}		
 		echo '</a></div></div>';
 	}
-}
-?>
+} ?>
 
-
-	  	</div>
+		  	</div>
     	</div>
     </div>
-
-
 </article>
 
 <?php endwhile; ?>
@@ -361,136 +339,28 @@ if ( !empty($images) ) {
 
 <script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/video.min.js"></script>
-  <script>
-    videojs.options.flash.swf = "http://www.esidesign.com/wp-content/themes/adapt2/js/video-js.swf";
-  </script>
-
+<script>
+    videojs.options.flash.swf = "<?php echo get_template_directory_uri(); ?>/js/video-js.swf";
+</script>
 
 <script type="text/javascript">
 
-
 jQuery(function($){
-
 	$(document).ready(function(){
 	
-	
-	jQuery('.related-item').hover(function() {
-		jQuery(this).find('.awesome-icon-play').fadeOut();
-		var myVideo = jQuery(this).find('video#related_lab')[0];
-		myVideo.play();
-	},
-	function() {
-		jQuery(this).find('.awesome-icon-play').fadeIn();
-		var myVideo = jQuery(this).find('video#related_lab')[0];
-		myVideo.pause();
-	});
-
-	if ($(window).width() > 767) {
-		var iframe = $('#player')[0];
-		if(iframe) {
-		var	player = $f(iframe);	
-
-		player.addEvent("ready", function(){    		 
-			player.addEvent("play", function(){
-				$('#featured .flexslider').flexslider("pause");
-			});
-			player.addEvent("pause", function(){
-				$(".placeholder").fadeIn();
-				$('span#button').removeClass('awesome-icon-pause');
-				$('span#button').addClass('awesome-icon-play');
-				$("span#button").fadeIn();
-			});
-			player.addEvent("ended", function() {
-				$(".placeholder").fadeIn();
-				$('span#button').removeClass('awesome-icon-pause');
-				$('span#button').addClass('play');
-				$("span#button").fadeIn();
-		    });
+		jQuery('.related-item').hover(function() {
+			jQuery(this).find('.awesome-icon-play').fadeOut();
+			var myVideo = jQuery(this).find('video#related_lab')[0];
+			myVideo.play();
+		},
+		function() {
+			jQuery(this).find('.awesome-icon-play').fadeIn();
+			var myVideo = jQuery(this).find('video#related_lab')[0];
+			myVideo.pause();
 		});
-
-	   	$("img.placeholder, .circle, #button").click(function(){
-				player.api('play');
-				$("img.placeholder").fadeOut(200);
-				$('span#button').removeClass('awesome-icon-play');
-				$('span#button').addClass('awesome-icon-pause');
-				$("span#button").fadeOut(200);
-	   	});
 		
-		var isPaused = player.api('pause');
-		
-		if (isPaused == true) {
-			$('span#button').removeClass('awesome-icon-pause');
-		       $('span#button').addClass('awesome-icon-play');
-		}
-		if (isPaused == false) {
-		$('span#button').removeClass('awesome-icon-play');
-		       $('span#button').addClass('awesome-icon-pause');
-			$('span#button').text('Pause Video');
-		}
-	}
-		
-
-startAtSlideIndex = 0;
-slideshowBoolean = true;
-// see if a tab anchor has been included in the url
-if (window.location.hash != '') {
-
-  startAtSlideIndex = window.location.hash.substr(1,1)-1;
-  slideshowBoolean = false;
-}
-
-		
-		$('#featured .flexslider').flexslider({
-			animation: "slide",
-			slideshow: slideshowBoolean,
-			slideshowSpeed: 6000,
-			animationDuration: 600,
-			smoothHeight: true,
-			directionNav: true,
-			controlNav: true,
-			keyboardNav: true,
-			touchSwipe: true,
-			prevText: '<span class="awesome-icon-chevron-left"></span>',
-			nextText: '<span class="awesome-icon-chevron-right"></span>',
-			randomize: false,
-			animationLoop: true,
-			pauseOnAction: true,
-			pauseOnHover: false,
-			startAt: startAtSlideIndex,
-			video: true,
-			start: function(){
-				$('.loading').fadeOut(function(){
-					$('#featured').fadeIn(600);
-					$('.flexslider').fadeIn(800);
-					$('.title').show();
-				});
-				
-			},
-			before: function(){
-				if(iframe){
-					player.api('pause');	
-				}
-			}, 
-			after: function(){
-/* 				$('.flex-caption').fadeIn(); */
-			},
-		});
-		}
-		else {
-			$('.loading').hide();
-		
-         $('.slides li img:gt(5)').hide(200);
-
-			console.log($("#slider-wrap").height());
-		}
-		
-
-		 $('#single-project-left a').attr('target', '_blank');
-	
-
 	});
 });
-
 </script>
 
 <?php get_footer(); ?>

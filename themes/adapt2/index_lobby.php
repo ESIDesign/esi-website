@@ -16,50 +16,90 @@ require_once('../../../wp-load.php');
 </article>
 
 <?php
-    global $post;
+/* Lab Custom Post — mostly Instagram Feed */
+$today = getdate();
+$lab_today = get_posts( 'post_type=lab&post_status=publish&year=' . $today["year"] .'&monthnum=' . $today["mon"] .'&day=' . $today["mday"] );
+/*'&monthnum=' . $today["mon"] .'&day=' . $today["mday"] */
+if(!empty($lab_today)) {
+	$images = get_posts( array(
+		'post_type' => 'lab',
+	    'post_status' => 'publish',
+/* 	    'include' => array(3531, 3481, 3409, 3374, 3092, 3328, 3083), */
+	    'year=' . $today["year"],
+	    'monthnum=' => $today["mon"],
+	    'orderby' => 'rand',
+	    'posts_per_page'=> 1
+	));
+		$count_images = 0;
+		foreach ( $images as $image ) { 
+			$count_images++;
+			if($count_images == 1) {
+			setup_postdata( $image ); 
+		
+			$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'slider', true);
+			$site_url = get_site_url();
+		
+			ob_start();
+			ob_end_clean();
+			$output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $image->post_content, $matches);
+			$first_vid = $matches [1] [0];
+		
+			$value = get_post_meta($image->ID, 'syndication_permalink', true);
+			echo '<div class="home_item1">';
+		
+		    $agent = $_SERVER['HTTP_USER_AGENT'];
+	
+			if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {	 
+			  echo '<div class="video-wrapper"><video id="related_lab" width="610" >
+				<source src="'.$first_vid.'" type="video/mp4">
+				</video></div>';
+			}
+	
+			if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
+				echo '<img src="'.$image_url[0].'"/>';
+			}
+			echo '<h3 class="project-overlay">';
+			echo $image->post_title;	
+			echo '</h3></div>';
+		}
+	}
+}
+if(empty($lab_today)) {
     $args2 = array(
         'post_type' =>'project',
         'post__in' => array( 418, 449, 125, 1802, 408, 2844, 3226, 446, 409 ),
         'meta_query' => array(
-/*
-	                        array('key' => 'featured',
-	                              'value' => '1'
-	                        ),
-*/
 	                         array('key' => 'video',
 	                              'value' => '',
 	                              'compare' => '!='
 	                        )
                     ),
         'orderby' => 'rand',
-	   
+        'numberposts' => 1,
     );
-    $video_posts = get_posts($args2);
-     $video_ID = array($video_posts[0]->ID);
-     $count=0;
-     foreach($video_posts as $video_post) : setup_postdata($video_post);
-     $count++;
-     
-		if ($count == '1') { 
-
-	if(get_field('video_img', $video_post->ID) != "") {
-    	$thumb_id = get_field('video_img', $video_post->ID);    
-    }
-    else {
-		$thumb_id = get_post_thumbnail_id($video_post->ID);   
-    }
-    $feat_img = wp_get_attachment_image_src($thumb_id, 'slider'); 
-    ?>
-
-		<div class="home_item1">
-<!-- 		<?php echo the_field('video_placeholder', $video_post->ID); ?> -->
+	$video_posts = get_posts($args2);
+	$video_ID = array($video_posts[0]->ID);
+	foreach($video_posts as $video_post) {
 		
-			<img class="placeholder" src="<?php echo $feat_img[0]; ?>"/><span class="circle"></span><span id="button" class="awesome-icon-play"></span>
-			<iframe id="home_player" src="http://player.vimeo.com/video/<?php echo the_field('video', $video_post->ID); ?>?api=1&title=0&byline=0&portrait=0&player_id=home_player" width="590" height="332" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-		
-		</div>
-		<?php } ?>
-	<?php endforeach; ?>
+		setup_postdata($video_post);
+	
+			if(get_field('video_img', $video_post->ID) != "") {
+		    	$thumb_id = get_field('video_img', $video_post->ID);    
+		    }
+		    else {
+				$thumb_id = get_post_thumbnail_id($video_post->ID);   
+		    }
+		    $feat_img = wp_get_attachment_image_src($thumb_id, 'slider'); ?>
+		    <div class="home_item1">
+					
+<img class="placeholder" src="<?php echo $feat_img[0]; ?>"/><span class="circle"></span><span id="button" class="awesome-icon-play"></span>
+					<iframe id="home_player" src="http://player.vimeo.com/video/<?php echo the_field('video', $video_post->ID); ?>?api=1&title=0&byline=0&portrait=0&player_id=home_player" width="590" height="332" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+				
+				</div>
+	<?php } 
+} 
+?>
+
 
 <?php $args = array(
     'post_type' =>'project',
@@ -146,22 +186,21 @@ require_once('../../../wp-load.php');
 <div class="home_item12">
 
 <?php
-// Get the authors from the database ordered by user nicename
+// Get the authors from the database ordered by user nicename get 10 to accommodate for some not meeting if requirements below
 	global $wpdb;
-	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand()";
+	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand() LIMIT 0,10";
 	$author_ids = $wpdb->get_results($query);
 	$count = 0;
-// Loop through each author
+
 	foreach($author_ids as $author) :
 
-	// Get user data
 		$curauth = get_userdata($author->ID);
 
 		// Set default avatar (values = default, wavatar, identicon, monsterid)
-			$avatar = 'wavatar';
+		$avatar = 'wavatar';
 
-	// If user level is above 0 or login name is "admin", display profile
-		if($curauth->user_level > 4 && $curauth->first_name != 'ESI') :
+		// If user level is above author, not admin or Amanda who goes first in peopleLoop
+		if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->ID != 2) :
 		$count++; ?>
 		
 <?php if ($count == '1') { ?>
@@ -179,14 +218,62 @@ require_once('../../../wp-load.php');
 		echo get_avatar($curauth->ID, '116', $avatar); ?> 
 		<p class="caption_people"><?php echo $curauth->first_name; ?></p></a>
 	</article>
-<?php } ?>
 
-<?php if ($count == '3') { ?>
-	<article class="people3">
-		<a href="<?php echo get_site_url(); ?>/people"><?php 
-	echo get_avatar($curauth->ID, '116', $avatar); ?> 
-		<p class="caption_people"><?php echo $curauth->first_name; ?></p></a>
-	</article>
+<?php
+/* People Custom Post — mostly Instagram Feed */
+$today = getdate();
+$people_today = get_posts( 'post_type=people&post_status=publish&year=' . $today["year"] . '&monthnum=' . $today["mon"] . '&day=' . $today["mday"]);
+
+if(!empty($people_today)) {
+	$order = 'date';
+}
+if(empty($lab_today)) {
+	$order = 'rand';
+}
+
+$people_images = get_posts( array(
+	'post_type' => 'people',
+    'post_status' => 'publish',
+    'orderby' => $order,
+    'posts_per_page'=> 1
+) );
+
+if ( !empty($people_images) ) {
+	foreach ( $people_images as $people_image ) { 
+		
+		setup_postdata( $people_image ); 
+	
+		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($people_image->ID),'people', true);
+		$site_url = get_site_url();
+	
+		ob_start();
+		ob_end_clean();
+		$output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $people_image->post_content, $matches);
+		$first_vid = $matches [1] [0];
+	
+		$value = get_post_meta($people_image->ID, 'syndication_permalink', true);
+		echo '<div class="people_button">';
+	
+	    $agent = $_SERVER['HTTP_USER_AGENT'];
+
+		if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {	 
+		  echo '<div class="video-wrapper"><video id="people" width="115" >
+			<source src="'.$first_vid.'" type="video/mp4">
+			</video><span class="awesome-icon-play"></span></div>';
+		}
+
+		if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
+			echo '<img src="'.$people_image_url[0].'"/>';
+		}
+/*
+		echo '<h3 class="project-overlay">';
+		echo 'ESI People';	
+		echo '</h3>';
+*/
+		echo '</div>';
+	}
+} ?>
+
 <?php } ?>
 
 	<?php endif; ?>
@@ -218,45 +305,51 @@ require_once('../../../wp-load.php');
 
 <?php
 /* Lab Custom Post — mostly Instagram Feed */
+$today = getdate();
+$lab_today = get_posts( 'post_type=lab&post_status=publish&year=' . $today["year"] . '&monthnum=' . $today["mon"] . '&day=' . $today["mday"]);
+if(!empty($lab_today)) {
+	$order = 'date';
+}
+if(empty($lab_today)) {
+	$order = 'rand';
+}
+
 $images = get_posts( array(
 	'post_type' => 'lab',
     'post_status' => 'publish',
-    'orderby' => 'rand',
+    'orderby' => $order,
     'order' => 'DESC',
     'numberposts'=> 1
 ) );
 
-
 if ( !empty($images) ) {
 	$count = 0;
 	foreach ( $images as $image ) { 
-	$count++;
+		$count++;
+		
+		setup_postdata( $image ); 
 	
-	setup_postdata( $image ); 
-
-		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'thumbnail', true);
+		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'people', true);
 		$site_url = get_site_url();
-
-  ob_start();
-  ob_end_clean();
-    $output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $image->post_content, $matches);
-  $first_vid = $matches [1] [0];
-
+	
+		ob_start();
+		ob_end_clean();
+		$output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $image->post_content, $matches);
+		$first_vid = $matches [1] [0];
+	
 		$value = get_post_meta($image->ID, 'syndication_permalink', true);
 		echo '<div class="lab_item'.$count.'">';
+	
+	    $agent = $_SERVER['HTTP_USER_AGENT'];
 
-    $agent = $_SERVER['HTTP_USER_AGENT'];
-
-	  if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
-
- 	 
-	  echo '<div class="video-wrapper"><video id="related_lab" width="330" >
-		<source src="'.$first_vid.'" type="video/mp4">
-		</video><span class="awesome-icon-play"></span></div>';
+		if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {	 
+		  echo '<div class="video-wrapper"><video id="related_lab" width="115" >
+			<source src="'.$first_vid.'" type="video/mp4">
+			</video><span class="awesome-icon-play"></span></div>';
 		}
 
-	  if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
-		echo '<img src="'.$image_url[0].'"/>';
+		if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
+			echo '<img src="'.$image_url[0].'"/>';
 		}
 		echo '<h3 class="project-overlay">';
 		echo 'Lab Experiment';	
@@ -266,9 +359,8 @@ if ( !empty($images) ) {
 ?>
 
 <!--
-
 <?php
-/* Lab Custom Post — mostly Instagram Feed */
+/* Blog Posts — To Use or Not to Use?  */
 $images = get_posts( array(
 	'post_type' => 'post',
     'post_status' => 'publish',
@@ -354,7 +446,6 @@ if ( !empty($images) ) {
 <script type="text/javascript">
 jQuery(function($){
 	$(document).ready(function(){
-/* 			$('body').kinetic(); */
 	
 	var timeout;
     $(document).on("mousemove keydown click", function() {
@@ -362,7 +453,7 @@ jQuery(function($){
         timeout = setTimeout(function() {
 /*              window.location = "<?php echo get_site_url(); ?>/work";  */
 				window.location.reload();
-        }, 60 * 3600);
+        }, 60 * 4000);
     }).click();
 
 	});

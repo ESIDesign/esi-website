@@ -28,7 +28,7 @@ $options = get_option( 'adapt_theme_settings' );
 <script type="text/javascript">
 jQuery(function($){
 
-	if($(window).width() > 1900 || ($(window).width() > 1445 && $(window).width() < 1450)) {
+	if($(window).width() == 1920 || ($(window).width() > 1445 && $(window).width() < 1450)) {
 		yepnope([{
 		    test: $(window).width() > 1900 || ($(window).width() > 1445 && $(window).width() < 1450), 
 		    yep: "<?php echo get_template_directory_uri(); ?>/js/jquery.kinetic.min.js",
@@ -36,16 +36,21 @@ jQuery(function($){
 		}]);
 	}
 	
-	
-	yepnope([{
-		    test: 769 >= screen.width, 
-		    yep: "<?php echo get_template_directory_uri(); ?>/js/jquery.uniform.js",
-	}]);
+	if ($(window).width() == 1920) {
+		var timeout;
+	    $(document).on("mousemove keydown click", function() {
+	        clearTimeout(timeout);
+	        timeout = setTimeout(function() {
+	             window.location = "<?php echo get_site_url(); ?>"; 
+	        }, 60 * 3000);
+	    }).click();
+	}
 	
 	yepnope([{
 		    test: $(window).width() < 769, 
-		    yep: "<?php echo get_template_directory_uri(); ?>/js/jquery.responsify.init.js",
+		    yep: "<?php echo get_template_directory_uri(); ?>/js/responsive.min.js",
 	}]);
+	
 	$(document).ready(function(){
 
 	});

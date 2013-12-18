@@ -7,7 +7,6 @@ Template Name Posts: Featured Template
 ?>
 <?php get_header(); ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>   
-<!-- <div id="dvLoading"></div> -->
 
 <header id="page-heading">
 	<h1 class="pagetitle">
@@ -133,7 +132,7 @@ Template Name Posts: Featured Template
 
         
         </div>
-        <!-- /single-portfolio-left -->
+        <!-- /single-project-left -->
         
         <div id="featured-content">
         

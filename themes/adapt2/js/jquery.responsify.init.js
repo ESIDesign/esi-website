@@ -1,44 +1,50 @@
 jQuery(function($){
 	$(document).ready(function(){
 		
-		//remove img height and width attributes for better responsiveness
+		//remove img & video height and width attributes for better responsiveness
 		$('img').each(function(){
 			$(this).removeAttr('width')
 			$(this).removeAttr('height');
 		});
 		
-		//responsive drop-down
+		$('video').each(function(){
+			$(this).removeAttr('width')
+			$(this).removeAttr('height');
+		});
+		
 		$("<select />").appendTo("#masternav");
 		$("<option />", {
-		   "selected": "selected",
-		   "value": "",
-		   "text": "Menu"
+			"selected": "selected",
+			"value" : "",
+			"text" : "Menu",
 		}).appendTo("#masternav select");
+
 		$("#masternav a").each(function() {
-		 var el = $(this);
-		 $("<option />", {
-			 "value"   : el.attr("href"),
-			 "text"    : el.text()
-		 }).appendTo("#masternav select");
-		});
-		
-		//remove options with # symbol for value
-		$("#masternav option").each(function() {
-			var navOption = $(this);
-			
-			if( navOption.val() == '#' ) {
-				navOption.remove();
+			var el = $(this);
+			if(el.parents('.sub-menu').length >= 1) {
+				$('<option />', {
+				 'value' : el.attr("href"),
+				 'text' : '- ' + el.text()
+				}).appendTo("#masternav select");
 			}
-		});
-		
+			else if(el.parents('.sub-menu .sub-menu').length >= 1) {
+				$('<option />', {
+				 'value' : el.attr('href'),
+				 'text' : '-- ' + el.text()
+				}).appendTo("#masternav select");
+			}
+			else {
+				$('<option />', {
+				 'value' : el.attr('href'),
+				 'text' : el.text()
+				}).appendTo("#masternav select");
+			}
+		});	
 		$("#masternav select").change(function() {
 		  window.location = $(this).find("option:selected").val();
 		});
 		
-		//uniform
-		$(function(){
-       		 $("#masternav select").uniform();
-      	});
+		$("#masternav select").uniform();
 	
-	}); // END doc ready
-}); // END function
+	});
+});

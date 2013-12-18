@@ -50,9 +50,10 @@ add_filter( 'wp_editor_set_quality', 'tgm_image_full_quality' );
  *
  * @param int $quality The default quality (90)
  * @return int $quality Amended quality (100)
+ * changed from 100 to 95 11/12/2013
  */
 function tgm_image_full_quality( $quality ) {
-    return 100;
+    return 95;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -64,20 +65,16 @@ function adapt_scripts_function() {
 	//get theme options
 	global $options;
 	
+	// Site wide js
 	wp_enqueue_script('jquery');	
 	
-	// Site wide js
-	wp_enqueue_script('yepnope', get_template_directory_uri() . '/js/yepnope.1.5.4-min.js');
-	//Uniform & Responsify create menu drop-down for mobile
-/*
-	wp_enqueue_script('uniform', get_template_directory_uri() . '/js/jquery.uniform.js');
-	wp_enqueue_script('responsify', get_template_directory_uri() . '/js/jquery.responsify.init.js');
-*/
+	//Uniform & Responsify menu mobile now enqueued with yepnope in footer
+
 
 	if(is_post_type_archive( 'project' )) {
 		wp_enqueue_script('isotope', get_template_directory_uri() . '/js/jquery.isotope.min.js');
 		wp_enqueue_script('isotope_init', get_template_directory_uri() . '/js/isotope_init.js');
-		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider-min.js');
+		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider.min.js');
 	}
 	
 	if ( is_singular( 'project' ) ) {
@@ -86,12 +83,11 @@ function adapt_scripts_function() {
 	}
 
 	if(is_home()) {
-		wp_enqueue_script('custom', get_template_directory_uri() . '/js/home.js');
-		wp_enqueue_script('cookie', get_template_directory_uri() . '/js/jquery.cookie.js', array(), '', true);
-/* 		wp_enqueue_script('cycle', get_template_directory_uri() . '/js/jquery.cycle.js', array(), '', true); */
+		wp_enqueue_script('home_min', get_template_directory_uri() . '/js/home.min.js');
 	}
 	else {
 		wp_enqueue_script('custom', get_template_directory_uri() . '/js/custom.js', array(), '', true);
+		wp_enqueue_script('yepnope', get_template_directory_uri() . '/js/yepnope.1.5.4-min.js');
 	}
 }
 
@@ -241,7 +237,6 @@ function custom_post_types_register() {
 	flush_rewrite_rules( true );
 }
 
-
 // Add taxonomies
 add_action( 'init', 'project_create_taxonomies' );
 flush_rewrite_rules();
@@ -281,7 +276,6 @@ function my_add_excerpts_to_pages() {
      add_post_type_support( 'page', 'excerpt' );
 }
 
-
 function kc_attachment_taxonomies() {
 	$taxonomies = array( 'post_tag' );
 	foreach ( $taxonomies as $tax )
@@ -318,6 +312,7 @@ function get_excerpt($count){
   $permalink = get_permalink($post->ID);
   $excerpt = get_the_content();
   $excerpt = strip_tags($excerpt);
+  $excerpt = strip_shortcodes($excerpt);
   $excerpt = substr($excerpt, 0, $count);
   $excerpt = $excerpt.'...';
   return $excerpt;
@@ -331,8 +326,10 @@ function new_excerpt_more($more) {
 }
 
 //custom excerpts
+//not sure if in use? 11/6/2013
 function excerpt($limit) {
-	$excerpt = explode(' ', get_the_excerpt(), $limit);
+	$excerpt = strip_shortcodes(get_the_excerpt());
+	$excerpt = explode(' ', $excerpt, $limit);
 	if (count($excerpt)>=$limit) {
 		array_pop($excerpt);
 		$excerpt = implode(" ",$excerpt).'...';
@@ -628,7 +625,7 @@ echo 'background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,
 echo 'background-image: -o-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
 echo 'background-image: -ms-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
 echo 'background-image: linear-gradient(to bottom, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
-echo 'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\"\#00000000\"\, endColorstr=\"\#a6000000\"\,GradientType=0 ), url('.$image.'); '; 
+echo 'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#00000000", endColorstr="#a6000000",GradientType=0 ), url('.$image.'); '; 
 
 	    } 
 add_action('gradient', 'gradient_function', 10, 1);	    

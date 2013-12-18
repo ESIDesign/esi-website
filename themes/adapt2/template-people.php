@@ -70,13 +70,18 @@
 					</article>
 				</a>
 			</li>
+			
+<!-- Hack for when there are top 9
 	<?php if ($count == '1') { ?>
 			<li class="people-grid2"><div class="clear"></div></li>
 	<?php } ?>
+-->
 
+<!--
 	<?php if ($count == '3') { ?>
 		<li class="people-grid3"><article class="people_block2"></article></li>
 	<?php } ?>
+-->
 
 	<?php endif; ?>
 
@@ -94,6 +99,7 @@
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <h3><?php echo get_the_content(); ?></h3>
+    <h3><a href="<?php echo get_site_url(); ?>/careers">Join Us</a></h3>
 <?php endwhile; ?>
 <?php endif; ?>
 </div>
