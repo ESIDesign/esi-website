@@ -23,21 +23,16 @@ require('functions/meta/meta-box-usage.php');
 /*-----------------------------------------------------------------------------------*/
 /*	Images
 /*-----------------------------------------------------------------------------------*/
-if (function_exists( 'add_theme_support')) {
-	add_theme_support( 'post-thumbnails');
-	
-	if ( function_exists('add_image_size')) {
-/* 		add_image_size( 'full-size',  9999, 9999, false ); */
-		add_image_size( 'people',  115, 115, true );
-		add_image_size( 'small-thumb',  50, 50, true );
-		add_image_size( 'grid-thumb',  240, 180, true );
-		add_image_size( 'archive-project',  324, 200, true );
-		add_image_size( 'notfeat-project',  656, 410, true );
-		add_image_size( 'grid-thumb2',  344, 410, true );
-		add_image_size( 'grid-thumb3',  590, 332, true );
-		add_image_size( 'slider',  1000, 568, true );
-	}
-}
+add_theme_support( 'post-thumbnails');
+
+add_image_size( 'people',  115, 115, true );
+add_image_size( 'small-thumb',  50, 50, true );
+add_image_size( 'grid-thumb',  240, 180, true );
+add_image_size( 'archive-project',  324, 200, true );
+add_image_size( 'notfeat-project',  656, 410, true );
+add_image_size( 'grid-thumb2',  344, 410, true );
+add_image_size( 'grid-thumb3',  590, 332, true );
+add_image_size( 'slider',  1000, 568, true );
 
 add_filter( 'jpeg_quality', 'tgm_image_full_quality' );
 add_filter( 'wp_editor_set_quality', 'tgm_image_full_quality' );
@@ -79,7 +74,7 @@ function adapt_scripts_function() {
 	
 	if ( is_singular( 'project' ) ) {
 		wp_enqueue_script('froogaloop', get_template_directory_uri() . '/js/froogaloop2.min.js');
-		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider-min.js');
+		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider.min.js');
 	}
 
 	if(is_home()) {
@@ -712,4 +707,19 @@ function wps_pre_user_query( &$query ) {
 global $wpdb;
 if ( isset( $query->query_vars['query_id'] ) && 'wps_last_name' == $query->query_vars['query_id'] )
 $query->query_orderby = str_replace( 'user_login', "$wpdb->usermeta.meta_value", $query->query_orderby );
+}
+
+add_filter('stylesheet_directory_uri','wpi_stylesheet_dir_uri',10,2);
+
+/**
+ * wpi_stylesheet_dir_uri
+ * overwrite theme stylesheet directory uri
+ * filter stylesheet_directory_uri
+ * @see get_stylesheet_directory_uri()
+ */
+function wpi_stylesheet_dir_uri($stylesheet_dir_uri, $theme_name){
+
+	$subdir = '/css';
+	return $stylesheet_dir_uri.$subdir;
+
 }

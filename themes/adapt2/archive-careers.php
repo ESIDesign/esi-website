@@ -10,15 +10,23 @@
 <div class="careers-wrap">
 
 <div class="careers_left">
-<!--
-<div class="people_item2">
-<img src="/wp-content/uploads/2011/08/about20-240x180.jpg"/>
-</div>
-<div class="people_item2">
-<img src="/wp-content/uploads/2011/08/about10-240x180.jpg"/>
-</div>
--->
-<img src="/wp-content/uploads/2013/06/Process-022-513x353.jpg" />
+<?php $img_args = array(
+			'post_type' =>'project',
+            'numberposts' => '1',
+            'orderby' => 'rand',
+            'meta_query' => array(
+                                array('key' => 'featured',
+                                      'value' => '1'
+                                )
+                            ),
+						);
+$imgs = get_posts($img_args);
+foreach($imgs as $img) {
+	$feat_img = wp_get_attachment_image_src( get_post_thumbnail_id($img->ID), 'grid-thumb3'); ?>
+	<img src="<?php echo $feat_img[0]; ?>" alt="<?php echo apply_filters('the_title', $img->post_title); ?>" />
+<?php } ?>
+
+<!-- <img src="/wp-content/uploads/2013/06/Process-022-513x353.jpg" /> -->
 </div>
 
     <?php $args = array(
@@ -54,7 +62,7 @@ echo '<h2>Current Opportunities</h2>';
  						);
 				$mypages = get_pages($args);
 				foreach( $mypages as $page ) {    
-					echo '<li class="orange_border"><h3><a href="'.get_permalink($page->ID).'">'.$page->post_title.'</a></h3><p>'.$page->post_excerpt.'<a href="'.get_permalink($page->ID).'"> →</a></p></li>';
+					echo '<li class="orange_border"><a href="'.get_permalink($page->ID).'"><h3>'.$page->post_title.'</h3><p><span class="gray">'.$page->post_excerpt.'. </span>  <span class="black"> View Listing→</span></a></p></li>';
 
 						}
 				echo '</ul>';	
@@ -71,6 +79,7 @@ else {
 $people_args = array(
 	'post_type' => 'people',
 	'orderby' => 'rand',
+	'exclude' => 3484,
 	'posts_per_page' => 4 
 );
 $people_posts = get_posts( $people_args );
@@ -81,7 +90,7 @@ $peoplepage_args = array(
 	'post_parent' => 343,
 	'post_mime_type' => 'image',
 	'orderby' => 'rand',
-	'posts_per_page' => 1
+	'posts_per_page' => 2
 );
 $peoplepage_posts = get_posts($peoplepage_args);
 
@@ -96,7 +105,7 @@ $attachments = get_posts( array(
     'post_status' => array('inherit','publish'),
     'orderby' => 'date',
     'order' => 'DESC',
-    'numberposts'=> 5
+    'numberposts'=> 6
 ) ); 
             
     $i=0;         
@@ -148,21 +157,28 @@ $attachments = get_posts( array(
 
 
 
-
-
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/video.min.js"></script>
+<script>
+    videojs.options.flash.swf = "<?php echo get_template_directory_uri(); ?>/js/video-js.swf";
+</script>
 <script type="text/javascript">
+
 jQuery(function($){
 	$(document).ready(function(){
-var paras = $('img.about').hide(),
-    i = 0;
+	
+		jQuery('.people_item').hover(function() {
+			jQuery(this).find('.awesome-icon-play').fadeOut();
+			var myVideo = jQuery(this).find('video#esipeople')[0];
+			myVideo.play();
+		},
+		function() {
+			jQuery(this).find('.awesome-icon-play').fadeIn();
+			var myVideo = jQuery(this).find('video#esipeople')[0];
+			myVideo.pause();
+		});
 
-// If using jQuery 1.3 or lower, you need to do $(paras[i++] || []) to avoid an "undefined" error
-(function() {
-  $(paras[i++]).fadeIn(300, arguments.callee);
-})();
-});
+	});
 });
 </script>
-
 
 <?php get_footer(); ?>

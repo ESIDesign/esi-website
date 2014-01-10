@@ -18,7 +18,6 @@
 <header id="page-heading">
 	<?php $post = $posts[0]; ?>
 	<h1 class="pagetitle">Our Work</h1>
-
 </header><!-- END page-heading -->
 
 <div id="post" class="full-width clearfix"> 

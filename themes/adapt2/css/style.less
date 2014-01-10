@@ -24,6 +24,8 @@
 
 @gray: #999;
 
+@black: #555;
+
 .box-shadow (@x: 1px, @y: 1px, @blur: 2px, @spread: 0px, @alpha: 0.2) {
     -webkit-box-shadow: @x @y @blur @spread rgba(0, 0, 0, @alpha);
     -moz-box-shadow: @x @y @blur @spread rgba(0, 0, 0, @alpha);
@@ -55,6 +57,32 @@
     transition: @property 0.5s ease-in-out;
 }
 
+/*-----------------------------------------------------------------------------------*
+/* = Fonts
+/*-----------------------------------------------------------------------------------*/
+
+/*
+proxima-nova
+Light 300
+Regular 400 
+Regular Italic 400 
+Semibold 600 
+Bold 700 
+*/
+
+/*
+proxima-nova-alt-condensed
+Thin 100
+Light 300
+Regular 400 
+*/
+
+/*
+adelle
+Thin 100
+Light 300
+Regular 400 
+*/
 
 /*-----------------------------------------------------------------------------------*
 /* = Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
@@ -357,6 +385,13 @@ span.orange {
 	color: @orange;
 }
 
+span.black, .black {
+	color: @black;
+}
+
+span.gray, .gray {
+	color: @gray;
+}
 
 /*-----------------------------------------------------------------------------------*
 /* = WordPress Styles
@@ -1672,24 +1707,30 @@ html[xmlns] .slides {display: block;}
 }
 
 .flexslider .video-wrapper {
+	display: table;
 	height: 568px;
 	overflow: hidden;
 }
 
-.flexslider span.awesome-icon-play, .flexslider span.awesome-icon-pause {
-	background: rgba(164, 225, 255, .7);
+.flexslider span#button {
+	background: rgba(164, 225, 255, .6);
+	color: rgba(255, 255, 255, .9);
 	border-radius: 50%;
 	cursor: pointer;
-	width: 100px;
-	height: 100px;
-	color: rgba(255, 255, 255, .9);
-	line-height: 100px;
+	display: table-cell;
+	width: 11%;
+	height: 0;
+	padding-bottom: 11%;
 	font-size: 48px;
 	margin-right: 3px;
 	z-index: 1001;
 	position: absolute;
 	top: 42%;
 	left: 42%;
+	&:before {
+		vertical-align: middle;
+		padding-top: 38%;
+	}
 }
 
 #not-featured .flexslider {
@@ -2670,7 +2711,7 @@ li.people-grid .caption_people  {
 /*-----------------------------------------------------------------------------------*/
 .careers_left {
 	float: left;
-	width: 46%;
+	width: 49%;
 	img {
 		.box-shadow;
 	}
@@ -2679,7 +2720,7 @@ li.people-grid .caption_people  {
 .careers_title {
 	float: left;
 	margin: 6% 3% 2%;
-	width: 48%;
+	width: 45%;
 	font-size: 100%;
 }
 
@@ -2709,9 +2750,19 @@ li.people-grid .caption_people  {
 	width: 46%;
 	h3 {
 		font-size: 20px;
+		font-weight: 400;
+		a {
+			font-weight: 400;
+		}
 	}
 	p {
 		line-height: 140%;
+		a {
+			font-weight: 300;
+		}
+		.black {
+			font-weight: 400;
+		}
 	}
 }
 
@@ -3363,7 +3414,6 @@ a.footer_twitter:hover {
 
 /*Other buttons*/
 .button {
-	font-family: 'Helvetica Nue', Arial, Helvetica, sans-serif;
 	margin-right: 5px;
 	margin-top: 10px;
 	display: inline-block;

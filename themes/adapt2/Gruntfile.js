@@ -33,14 +33,47 @@ module.exports = function(grunt) {
 		    }
 		},
 		
+		less: {
+		    main: {
+		        options: {
+		            compress: true,
+		            yuicompress: true,
+		            optimization: 2
+		        },
+		        files: {
+			        'css/style.css': 'css/style.less',
+		        }
+		    },
+		    responsive: {
+		        options: {
+		            compress: true,
+		            yuicompress: true,
+		            optimization: 2
+		        },
+		        files: {
+		            'css/responsive.css': 'css/responsive.less',	            
+		        } 
+			},
+		},
+		
 		watch: {
+			options: {
+				livereload: true
+			},
 		    scripts: {
 		        files: ['js/*.js'],
 		        tasks: ['concat', 'uglify'],
 		        options: {
 		            spawn: false,
 		        },
-		    } 
+		    },
+		    css: {
+			    files: ['css/*.less'],
+			    tasks: ['less'],
+			    options: {
+			        spawn: false,
+			    },
+			} 
 		}
 
     });
@@ -49,8 +82,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
+	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['concat', 'uglify', 'watch']);
+    grunt.registerTask('default', ['watch']);
 
 };

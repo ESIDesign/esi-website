@@ -184,7 +184,8 @@ Template Name Posts: Featured Template
 				the_field("explore");
 				echo "</div>";
 				}?>
-			<?php 
+		<!--
+	<?php 
 				if (get_field('news') != "") { 
 				echo "<h3>News</h3>";
 				the_field("news");
@@ -194,6 +195,7 @@ Template Name Posts: Featured Template
 				echo "<h3>Awards</h3>";
 				the_field("awards");
 				}?>
+-->
 			</div>    
 			 <?php 
 				if (get_field('pdf') != "") { 
@@ -204,6 +206,7 @@ Template Name Posts: Featured Template
 		</div><!-- /single-portfolio-left -->
         
     <div id="single-project-right" class="clearfix">
+<!--
 	<?php 
 	if (get_field('quote1') != "") { 
 		echo "<div class='pull-quote'><h3>";
@@ -243,7 +246,19 @@ Template Name Posts: Featured Template
 	}     
 	echo "</div>";
 	} ?>
-    	
+-->
+	<div class="featured-meta">     
+			<?php 
+				if (get_field('news') != "") { 
+				echo "<h3>News</h3>";
+				the_field("news");
+				}?>
+			        <?php 
+				if (get_field('awards') != "") { 
+				echo "<h3>Awards</h3>";
+				the_field("awards");
+				}?>
+			</div>      	
 	<div class="featured-meta">
 	<?php if (is_single('408') || is_single('409')) {
 		  	echo '<h3 class="related">Additional Labs </h3>';
@@ -285,7 +300,7 @@ Template Name Posts: Featured Template
 		$posts_per_page = 6;
 	}
 	else {
-		$posts_per_page = 2;	
+		$posts_per_page = 4;	
 	}
 
 	$images = get_posts( array('posts_per_page'=>$posts_per_page, 'post_type' => 'project', 'orderby' => 'rand', 'tax_query' => array(

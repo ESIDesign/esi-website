@@ -220,6 +220,7 @@ Template Name Posts: Not Featured Template
         <!-- /single-portfolio-right -->
         
     <div id="single-project-right" class="clearfix">
+<!--
     	    <?php 
 	  	if (get_field('quote1') != "") { 
 	  	echo "<div class='pull-quote'><h3>";
@@ -259,6 +260,7 @@ Template Name Posts: Not Featured Template
 	  	}     
     	echo "</div>";
     	}?>
+-->
     	
     	<div class="featured-meta">
 
@@ -271,7 +273,7 @@ Template Name Posts: Not Featured Template
 	$tag_ids = array();
 	foreach($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
 
-	$images = get_posts( array('posts_per_page'=>2, 'post_type' => 'project', 'orderby' => 'rand', 'tag__in' => $tag_ids,'post__not_in' => array($post->ID), 'caller_get_posts' => 1)  );
+	$images = get_posts( array('posts_per_page'=>4, 'post_type' => 'project', 'orderby' => 'rand', 'tag__in' => $tag_ids,'post__not_in' => array($post->ID), 'caller_get_posts' => 1)  );
 			
 if ( !empty($images) ) {
 	foreach ( $images as $image ) { 
