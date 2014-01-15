@@ -13,42 +13,6 @@ $options = get_option( 'adapt_theme_settings' );
 	<img class="active" src="<?php echo get_template_directory_uri(); ?>/images/esi_logo_red.jpg"/>
 </article>
 
-<!--
-<article class="home_item9_quote">
-<?php if (get_field('quote3', 2145) != "") { 
-	$rand_quote = rand(1,3);
-}
-if (get_field('quote3', 2145) == "" && get_field('quote2', 2145) != "") { 
-	$rand_quote = rand(1,2);
-}
-if (get_field('quote3', 2145) == "" && get_field('quote2', 2145) == "" && get_field('quote1', 2145) != "") { 
-	$rand_quote = 1;
-}
-if (get_field('quote'.$rand_quote, 2145) != "") { 
-	echo '<div class="quote">';
-		$quote_length = strlen(strval(get_field('quote'.$rand_quote, 2145)));
-			if ($quote_length > 100) {
-				echo '<h2>';
-			}
-			if ($quote_length < 99) {
-				echo '<h1>';
-			}
-			the_field('quote'.$rand_quote, 2145);
-			if ($quote_length > 100) {
-				echo '</h2>';
-			}
-			if ($quote_length < 99) {
-				echo '</h1>';
-			}
-		echo '</div>';
-		} ?>
-<h3 class="attrib">
-<?php if (get_field('attrib'.$rand_quote, 2145) != "") { 
-	  the_field('attrib'.$rand_quote, 2145);
-  	} ?></h3>
-</article>
--->
-
 <?php
 global $post;
 $args2 = array(
@@ -264,17 +228,17 @@ $portfolio_posts = get_posts($args);
     
 
 <div class="home_button work">
-	<a href="<?php echo get_site_url(); ?>/work"><img src="<?php echo get_template_directory_uri(); ?>/images/work.png"/></a>
+	<a href="<?php echo get_site_url(); ?>/work"><img src="<?php echo get_template_directory_uri(); ?>/images/work.png" alt="Work"/></a>
 </div>
 
 
 <div class="home_button about">
-	<a href="<?php echo get_site_url(); ?>/about"><img src="<?php echo get_template_directory_uri(); ?>/images/about.png"/></a>
+	<a href="<?php echo get_site_url(); ?>/about"><img src="<?php echo get_template_directory_uri(); ?>/images/about.png" alt="About"/></a>
 </div>
 
 
 <div class="home_button blog">
-	<a href="<?php echo get_site_url(); ?>/blog"><img src="<?php echo get_template_directory_uri(); ?>/images/blog.png"/></a>
+	<a href="<?php echo get_site_url(); ?>/blog"><img src="<?php echo get_template_directory_uri(); ?>/images/blog.png" alt="Blog"/></a>
 </div>
 
 
@@ -287,17 +251,17 @@ $portfolio_posts = get_posts($args);
 </div>
 
 <div class="home_button lab">
-	<a href="<?php echo get_site_url(); ?>/work/lab"><img src="<?php echo get_template_directory_uri(); ?>/images/lab.png"/></a>
+	<a href="<?php echo get_site_url(); ?>/work/lab"><img src="<?php echo get_template_directory_uri(); ?>/images/lab.png" alt="Lab"/></a>
 </div>
     
 
 <div class="home_button approach">
-	<a href="<?php echo get_site_url(); ?>/approach"><img src="<?php echo get_template_directory_uri(); ?>/images/approach.png"/></a>
+	<a href="<?php echo get_site_url(); ?>/approach"><img src="<?php echo get_template_directory_uri(); ?>/images/approach.png" alt="Approach"/></a>
 </div>
     
 
 <div class="home_button contact">
-	<a href="<?php echo get_site_url(); ?>/contact"><img src="<?php echo get_template_directory_uri(); ?>/images/contact.png"/></a>
+	<a href="<?php echo get_site_url(); ?>/contact"><img src="<?php echo get_template_directory_uri(); ?>/images/contact.png" alt="Contact"/></a>
 </div>    
 
 

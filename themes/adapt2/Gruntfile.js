@@ -27,6 +27,10 @@ module.exports = function(grunt) {
 		        src: 'js/home.min.js',
 		        dest: 'js/home.min.js'
 		    },
+		    build_lobby_home: {
+		        src: 'js/home_lobby.dev.js',
+		        dest: 'js/home_lobby.js'
+		    },
 		    build_responsive: {
 		        src: 'js/responsive.min.js',
 		        dest: 'js/responsive.min.js'

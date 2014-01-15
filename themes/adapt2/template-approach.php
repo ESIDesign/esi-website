@@ -166,48 +166,18 @@ if (get_field('module2_img') != "") {
 		echo '</h3></div></article>';
 	} ?>
 </div>
-
+             
 	                
-	                
-        </div>
+</div>
                     
-
-					
-
-  		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.accordion.js"></script>
-		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.easing.1.3.js"></script>
 
 
 <script type="text/javascript">
-		function cyclePrinciples(){
-      var active = jQuery('.process_item15 .active');
-      var white = jQuery('.white');
-      var next = (active.next().length > 0) ? active.next() : jQuery('.process_item15 article:first');
-      next.css('z-index',2);//move the next image up the pile
-      white.fadeIn(600,function(){//fade out the top image
-	  active.css('z-index',1).show().removeClass('active');//reset the z-index and unhide the image
-          next.css('z-index',3).addClass('active');//make the next image the top one
-          white.fadeOut(600);
-      });
-    }
-
-
 jQuery(function($){
     
 	$(document).ready(function(){
-	    	setTimeout(function(){
-  //where we can also call foo
-  setInterval('cyclePrinciples()', 9000);
-},2000);
-	
-	$('.process-wrap').fadeIn();
-	$('#st-accordion').accordion({
-		oneOpenedItem	: true,
-		open: 1,
-/* 		scrollSpeed: 0 */
-	});
 
-jQuery('.textwidget p').unwrap();
+	jQuery('.textwidget p').unwrap();
     $('span').hide().delay(600).fadeIn();
 var paras = $('div').hide();
 	$('div#wrap').show();
@@ -215,16 +185,14 @@ var paras = $('div').hide();
 	$('div#logo').show();
 	$('.st-content').show();
 	$('div.menu-primary-nav-container').show();
-	$('div.process-wrap').show();
+	$('div.approach-wrap').show();
     i = 3;
 
 // If using jQuery 1.3 or lower, you need to do $(paras[i++] || []) to avoid an "undefined" error
 (function() {
   $(paras[i++]).fadeIn(200, arguments.callee);
 })();
-	$('body').scrollTop(0);
-
-});
+	});
 });
 </script>
 <?php get_footer(); ?>

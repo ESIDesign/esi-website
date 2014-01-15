@@ -136,34 +136,6 @@ Template Name Posts: Featured Template
         
         <div id="featured-content">
         
-        <div id="single-project-excerpt">
-		<h2 class="excerpt-title"><?php the_title(); ?></h2>
-			<div class="excerpt-content">
-				<h3 class="excerpt">
-				<?php 
-				if (get_field('question') != "") { 
-				  	the_field('question');
-			  	} 
-			  	else {
-				  	echo get_the_excerpt(); 	
-			  	} ?>  
-			  	</h3>
-		        <p><?php $string = get_the_content(); 
-		        if(strlen($string) > 700) {
-			    if(get_field('lobby_excerpt') != '') {
-			        the_field('lobby_excerpt');
-		        } else {
-	 		        echo substr($string,0,690);   
-		        }    
-		        }
-		        else {
-	 		        echo substr($string,0,690);   
-		        }  
-		        ?>
-		        </p>
-			</div>
-        </div>
-        
         <div id="single-project-left" class="clearfix">
           
 			<h2 class="excerpt">
@@ -179,30 +151,27 @@ Template Name Posts: Featured Template
             <?php the_content(); ?>
 			<div class="featured-meta">     
 			<?php 
-				if (get_field('explore') != "") { 
+			if (get_field('explore') != "") { 
 				echo "<h3>Explore</h3><div class='explore'>";
 				the_field("explore");
 				echo "</div>";
-				}?>
-		<!--
-	<?php 
-				if (get_field('news') != "") { 
+			}
+			if (get_field('news') != "") { 
 				echo "<h3>News</h3>";
 				the_field("news");
-				}?>
-			        <?php 
-				if (get_field('awards') != "") { 
+			}
+			if (get_field('awards') != "") { 
 				echo "<h3>Awards</h3>";
 				the_field("awards");
-				}?>
--->
+			} ?>
+
 			</div>    
 			 <?php 
 				if (get_field('pdf') != "") { 
-				echo "<br /><a class='pdf' target='_blank' href='";
-				the_field("pdf");
-				echo "'>Download Project PDF</a>";
-				}?>
+					echo "<br /><a class='pdf' target='_blank' href='";
+					the_field("pdf");
+					echo "'>Download Project PDF</a>";
+				} ?>
 		</div><!-- /single-portfolio-left -->
         
     <div id="single-project-right" class="clearfix">
@@ -247,18 +216,7 @@ Template Name Posts: Featured Template
 	echo "</div>";
 	} ?>
 -->
-	<div class="featured-meta">     
-			<?php 
-				if (get_field('news') != "") { 
-				echo "<h3>News</h3>";
-				the_field("news");
-				}?>
-			        <?php 
-				if (get_field('awards') != "") { 
-				echo "<h3>Awards</h3>";
-				the_field("awards");
-				}?>
-			</div>      	
+     	
 	<div class="featured-meta">
 	<?php if (is_single('408') || is_single('409')) {
 		  	echo '<h3 class="related">Additional Labs </h3>';

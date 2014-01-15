@@ -22,7 +22,6 @@ if ($(window).width() != 1920) {
                 success    : function(data){
                     $data = $(data);
                     if($data.length){
-/*                         $data.hide(); */
 						$(toggle).append($data).delay(1000).cycle({timeout: 0}).delay(1000).cycle('next');
 						loading = false;
                     } 
@@ -55,7 +54,6 @@ setInterval(function(){
 		$('#wrap').show();
 		$('#main').show();
 		$('.home-wrap').show();
-		$('.quote').show();
 		var i = 3;
 		
 	function displayImages() {
@@ -84,34 +82,10 @@ setInterval(function(){
 		});
 	}
 	else {
-		var visited = $.cookie("visited");
-		$.cookie('visited', 'yes', { expires: 1, path: '/'});
-        if (visited == "yes") {
-            setTimeout(function(){
-            fastImages();
-             $('article.home_item9_quote').css({'opacity':'.5', 'top': '910px'}).fadeIn(400);
-            },400);
-        }
-        else {
-			$('article.home_item9').fadeIn(600, function(){
-			var $quote = $('.quote').text().length;
-			console.log($quote);
-			if($quote > 100) {
-				setTimeout(function(){
-				displayImages();
-				},5000);
-			}	
-			if($quote < 100) {
-				setTimeout(function(){
-				displayImages();
-				},4000);
-			}	
-			if($quote < 1) {
-				displayImages();
-			}	
-			$('article.home_item9_quote').delay(200).fadeIn(400).delay(2000+$delay).animate({'opacity':'.5'}).delay(300).animate({'top': '910'}, 600, 'swing'); 
-			});
-		} //cookies
+/* 01/13/2014 removed cookies if statement because there is no quote */
+	    setTimeout(function(){
+		    fastImages();
+	    },400);
 	}
 })();
 	
@@ -170,15 +144,4 @@ if ( $(window).width() > 767) {
 	}	
 		
 	});
-
 });
-	
-function cycleImages(){
-  var $active = $('.home_item9 .active');
-  var $next = ($active.next().length > 0) ? $active.next() : $('.home_item9 img:first');
-  $next.css('z-index',2);//move the next image up the pile
-  $active.fadeOut(600,function(){//fade out the top image
-  $active.css('z-index',1).show().removeClass('active');//reset the z-index and unhide the image
-      $next.css('z-index',3).addClass('active');//make the next image the top one
-  });
-}

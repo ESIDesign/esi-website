@@ -6,7 +6,7 @@ $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb');
 
 <article class="loop-entry clearfix">
 	<?php if($feat_img) { ?>
-    	<a href="<?php the_permalink(' ') ?>?iframe" rel="lightbox" data-ob="lightbox" data-ob_iframe="true" class="loop-entry-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
+    	<a href="<?php the_permalink(' ') ?>" class="loop-entry-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
 	<?php } ?>
 	<div class="text">
 	<p class="date"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>

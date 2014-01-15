@@ -614,15 +614,14 @@ function ucc_get_terms( $id = '' ) {
 }
 
 function gradient_function($image) {
-	    echo 'background-image: -moz-linear-gradient(top, rgba(0,0,0,0) 55%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
-echo 'background-image: -webkit-gradient(linear, left top, left bottom, color-stop(55%,rgba(0,0,0,0)), color-stop(78%,rgba(0,0,0,0.6)), color-stop(100%,rgba(0,0,0,0.75))), url('.$image.'); '; 
-echo 'background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
-echo 'background-image: -o-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
-echo 'background-image: -ms-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
-echo 'background-image: linear-gradient(to bottom, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.'); '; 
-echo 'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#00000000", endColorstr="#a6000000",GradientType=0 ), url('.$image.'); '; 
-
-	    } 
+	echo 'background-image: -moz-linear-gradient(top, rgba(0,0,0,0) 55%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.75) 100%), url('.$image.');'; 
+	echo 'background-image: -webkit-gradient(linear, left top, left bottom, color-stop(55%,rgba(0,0,0,0)), color-stop(78%,rgba(0,0,0,0.6)), color-stop(100%,rgba(0,0,0,0.75))), url('.$image.');'; 
+	echo 'background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.');'; 
+	echo 'background-image: -o-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.');'; 
+	echo 'background-image: -ms-linear-gradient(top, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.');'; 
+	echo 'background-image: linear-gradient(to bottom, rgba(0,0,0,0) 55%,rgba(0,0,0,0.6) 78%,rgba(0,0,0,0.75) 100%), url('.$image.');'; 
+	echo 'filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.$image.') progid:DXImageTransform.Microsoft.gradient( startColorstr=#00000000, endColorstr=#a6000000, GradientType=0 );'; 
+} 
 add_action('gradient', 'gradient_function', 10, 1);	    
  
 function ucc_get_terms_list( $id = '' , $echo = true ) {

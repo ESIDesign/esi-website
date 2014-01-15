@@ -164,7 +164,7 @@ $.fn.imagesLoaded = function( callback ) {
 var Grid = (function() {
 
 		// list of items
-	var $grid = $( '#og-grid' ),
+		var $grid = $( '.og-grid' ),
 		// the items
 		$items = $grid.children( 'li' ),
 		// current expanded item's index
@@ -197,7 +197,7 @@ var Grid = (function() {
 		};
 
 	function init( config ) {
-		
+		console.log(current);
 		// the settings..
 		settings = $.extend( true, {}, settings, config );
 
@@ -274,11 +274,13 @@ var Grid = (function() {
 		$items.on( 'click', 'span.og-close', function() {
 			hidePreview();
 			return false;
+			console.log("onClose:" + current);
 		} ).children( 'a' ).on( 'click', function(e) {
 
 			var $item = $( this ).parent();
 			// check if item already opened
 			current === $item.index() ? hidePreview() : showPreview( $item );
+			console.log("aClick:" + current);
 			return false;
 
 		} );
@@ -329,6 +331,7 @@ var Grid = (function() {
 		var preview = $.data( this, 'preview' );
 		preview.close();
 		$.removeData( this, 'preview' );
+		console.log("HidePreview:" + current);
 	}
 
 	// the preview obj / overlay
@@ -337,6 +340,7 @@ var Grid = (function() {
 		this.expandedIdx = this.$item.index();
 		this.create();
 		this.update();
+		console.log("Preview:" + current);
 	}
 
 	Preview.prototype = {
@@ -362,6 +366,7 @@ var Grid = (function() {
 
 			if( $item ) {
 				this.$item = $item;
+				console.log(current);
 			}
 			
 			// if already expanded remove class "og-expanded" from current item and add it to new item
@@ -371,6 +376,7 @@ var Grid = (function() {
 				this.$item.addClass( 'og-expanded' );
 				// position the preview correctly
 				this.positionPreview();
+				console.log("REMOVE OG-EXPANDED");
 			}
 
 			// update current value

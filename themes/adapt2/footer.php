@@ -27,14 +27,6 @@ $options = get_option( 'adapt_theme_settings' );
 
 <script type="text/javascript">
 jQuery(function($){
-
-	if($(window).width() == 1920 || ($(window).width() > 1445 && $(window).width() < 1450)) {
-		yepnope([{
-		    test: $(window).width() > 1900 || ($(window).width() > 1445 && $(window).width() < 1450), 
-		    yep: "<?php echo get_template_directory_uri(); ?>/js/jquery.kinetic.min.js",
-		    complete: function() {$('body').kinetic();}
-		}]);
-	}
 	
 	if ($(window).width() == 1920) {
 		var timeout;

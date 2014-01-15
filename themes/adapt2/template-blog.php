@@ -36,38 +36,12 @@
 
 <script type="text/javascript">
 jQuery(function($){
-var footer = document.getElementsByTagName('body')[0];
-var js = document.createElement("script");
-
-js.type = "text/javascript";
-    if($(window).width() > 1900) {
-        js.src = '<?php echo get_template_directory_uri(); ?>/js/orangebox.js';
-    }
-footer.appendChild(js);    
-/*
-$('.loop-entry').hide();
-		var paras = $('.loop-entry').hide();
-		function load(){
-		i = 0;
-		(function() {
-		  $(paras[i++]).fadeIn(200, arguments.callee);
-		})();	
-		}
-*/
 	$(document).ready(function(){
 		var paras = $('.loop-entry').hide();
 		i = 0;
 		(function() {
 		  $(paras[i++]).fadeIn(200, arguments.callee);
 		})();	
-/*
-		yepnope([{
-		    test: $(window).width() > 1900, // devices 768 and up
-		    yep: "<?php echo get_template_directory_uri(); ?>/js/orangebox.js",
-		    callback: load(),
-		    complete: console.log('loaded'),
-		}]);
-*/
 	});
 });
 </script>

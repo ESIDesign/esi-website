@@ -849,7 +849,11 @@ body.home {
 			height: 105%;
 			width: 105%;
 			max-width: 105% !important;
-/* 			.transition-all; */
+			-webkit-transition: right, left 0.5s ease-in-out;
+		    -moz-transition: right, left 0.5s ease-in-out;
+		    -o-transition: right, left 0.5s ease-in-out;
+		    -ms-transition: right, left 0.5s ease-in-out;
+		    transition: right, left 0.5s ease-in-out;
 		}
 		.cycle {	
 			display: block;
@@ -1958,6 +1962,8 @@ iframe#mosaic_player {
 	position: relative;
 	overflow: hidden;
 	display: block;
+    /* hack to fix break if only 1 column with 2 lines */
+	min-height: 177px;
 }
 
 .post-template-single-lab-project-php .related-item, .postid-3226 .related-item {
@@ -2316,7 +2322,7 @@ ul.filter a#all span {
 .people_excerpt { 
 	float: left;
 	width: 80%;
-	padding: 5px 0px 0 30px;
+	padding: 5px 0px 15px 30px;
 }
 
 .people_excerpt h1 {
@@ -2351,7 +2357,8 @@ li.people-grid2 {
 }
 
 li.people-grid3 {
-	float: left;
+/* 	float: left;  */
+	display: inline-block;
 	width: 116px;
 }
 
@@ -2362,12 +2369,15 @@ li.people-grid img {
 	.box-shadow;
 }
 
+/*
 .lower {
 	clear: both;
 }
+*/
 
 .people_item {
-	float: left;
+/* 	float: left; */
+	display: inline-block;
 	margin: 0 10px 10px 0;
 	position: relative;
 	height: 226px;
@@ -2424,7 +2434,8 @@ li.people-grid .caption_people  {
 	height: 236px;
 	overflow: hidden;
 	width: 240px;
-	float: left;
+/* 	float: left; */
+	display: inline-block;
 	margin-right: 10px;
 }
 
@@ -2436,11 +2447,11 @@ li.people-grid .caption_people  {
 
 .people_block {
 	background-color: #dc801c;
-	float: left;
+/* 	float: left; */
 	margin: 0px 8px 66px 0px;
 	overflow: hidden;
 	position: relative;
-	height: 170px;
+	height: 170px !important;
 	width: 115px;
 	.box-shadow;
 }
@@ -2768,44 +2779,9 @@ li.people-grid .caption_people  {
 
 .career_people {
 	float: left;
-	margin-top: 2%;
+	margin-top: 1%;
 	width: 49%;	
 }
-
-li.orange_gradient {
-	background: rgb(219,155,59); /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(219,155,59,.8) 0%, rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(219,155,59,.8)), color-stop(100%,rgba(220,128,28,.8))), url('wp-content/uploads/2011/08/about10-240x180.jpg'), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(219,155,59,.8) 0%,rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  rgba(219,155,59,1) 0%,rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  rgba(219,155,59,.8) 0%,rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* IE10+ */
-	background: radial-gradient(ellipse at center,  rgba(219,155,59,.8) 0%,rgba(220,128,28,.8) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db9b3b', endColorstr='#dc801c',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */	
-	float: left; 
-	padding: 0 10px;
-	position: relative;
-	margin-right: 1.5%;
-	height: 170px;
-	width: 220px;
-	.transition-all;
-	&:hover {
-		background: rgba(219,155,59, 0); /* Old browsers */
-		background: -moz-radial-gradient(center, ellipse cover,  rgba(219,155,59,0) 0%, rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* FF3.6+ */
-		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(219,155,59,0)), color-stop(100%,rgba(220,128,28,0))), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Chrome,Safari4+ */
-		background: -webkit-radial-gradient(center, ellipse cover,  rgba(219,155,59,0) 0%,rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Chrome10+,Safari5.1+ */
-		background: -o-radial-gradient(center, ellipse cover,  rgba(219,155,59,0) 0%,rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* Opera 12+ */
-		background: -ms-radial-gradient(center, ellipse cover,  rgba(219,155,59,0) 0%,rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* IE10+ */
-		background: radial-gradient(ellipse at center,  rgba(219,155,59,0) 0%,rgba(220,128,28,0) 100%), url('/wp-content/uploads/2011/08/about10-240x180.jpg'); /* W3C */	
-		.transition-all;
-	}
-	a {
-		color: #FFF;
-		line-height: 130%;
-		position: absolute;
-		bottom: 5%;
-	}
-}
-
 
 li.orange_border {
 /* 	border-left: 1px solid @gray; */

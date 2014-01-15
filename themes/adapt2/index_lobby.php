@@ -11,10 +11,6 @@ require_once('../../../wp-load.php');
 
 </article>
 
-<article class="home_item9_quote">
-<div class="quote"><h1>Touch to explore</h1></div>
-</article>
-
 <?php
 /* Lab Custom Post — mostly Instagram Feed */
 $today = getdate();
@@ -442,24 +438,6 @@ if ( !empty($images) ) {
   <script>
     videojs.options.flash.swf = "<?php echo get_site_url(); ?>/wp-content/themes/adapt2/js/video-js.swf";
   </script>
-
-<script type="text/javascript">
-jQuery(function($){
-	$(document).ready(function(){
-	
-	var timeout;
-    $(document).on("mousemove keydown click", function() {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-/*              window.location = "<?php echo get_site_url(); ?>/work";  */
-				window.location.reload();
-        }, 60 * 4000);
-    }).click();
-
-	});
-});
-</script>
-
 
 </div><!-- /main -->
     

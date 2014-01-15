@@ -123,34 +123,6 @@ Template Name Posts: Lab Template
 </div><!-- /single-project -->
         
 <div id="featured-content">
-	<div id="single-project-excerpt">
-		<h2 class="excerpt-title"><?php the_title(); ?></h2>
-			<div class="excerpt-content">
-				<h3 class="excerpt">
-				<?php 
-				if (get_field('question') != "") { 
-				  	the_field('question');
-			  	} 
-			  	else {
-				  	echo get_the_excerpt(); 	
-			  	} ?>  
-			  	</h3>
-		        <p>
-		        <?php $string = get_the_content(); 
-		        if(strlen($string) > 700) {
-			    if(get_field('lobby_excerpt') != '') {
-			        the_field('lobby_excerpt');
-		        } else {
-	 		        echo substr($string,0,650);   
-		        }    
-		        }
-		        else {
-	 		        echo substr($string,0,650);   
-		        }  
-		        ?>
-		        </p>
-			</div>
-    </div>
         
 <div id="single-project-left" class="clearfix">
           

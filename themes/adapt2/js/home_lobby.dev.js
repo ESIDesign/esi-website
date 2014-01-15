@@ -19,14 +19,13 @@ jQuery(function($){
                 success    : function(data){
                     $data = $(data);
                     if($data.length){
-/*                         $data.hide(); */
 		   				console.log(page);
 						$(toggle).append($data).delay(1000).cycle({timeout: 0}).delay(1000).cycle('next');
 						loading = false;
                     } 
                 },
         });
-    }
+    } //var load_people
 
 setTimeout(function(){
 setInterval(function(){
@@ -82,98 +81,45 @@ setInterval(function(){
 }, 24000);
 }, 4000);
 
-function playBigLab(){
-	var myVideo = $('.home_item1 .video-wrapper').find('video#related_lab')[0];
-	myVideo.play();
-}
-
-function playLab(){
-	var myVideo = $('.lab_item1 .video-wrapper').find('video#related_lab')[0];
-	$('.lab_item1 .video-wrapper').find('.awesome-icon-play').fadeOut();
-	myVideo.play();
-	setTimeout(function(){
-		$('.lab_item1 .video-wrapper').find('.awesome-icon-play').fadeIn();
-	}, 15000);	
-}
-
-function playPeople() {
-	var myVideo = $('.people_button .video-wrapper').find('video#people')[0];
-	$('.people_button .video-wrapper').find('.awesome-icon-play').fadeOut();
-	myVideo.play();
-	setTimeout(function(){
-			$('.people_button').find('.awesome-icon-play').fadeIn();	
-	}, 15000);
-}
-
-setTimeout(function(){
-setInterval(function(){
-	playBigLab();
-}, 15000);
-}, 0);	
-
-
-setTimeout(function(){
-setInterval(function(){
-	playLab();
-}, 30000);
-}, 18000);	
-
-setTimeout(function(){
-setInterval(function(){
-	playPeople();
-}, 30000);	
-}, 35000);	
-
 
 	$(document).ready(function(){
 
-
-	$('.white').fadeOut(); 
 	$('.home-wrap').fadeIn(); 
 	
-	
 	// Wrapping, self invoking function prevents globals
-(function() {
-   // Hide the elements initially
-   var lis = $('div').hide();
-/*    var left = this.left(); */
-	$('div#wrap').show();
-	$('div#main').show();
-	$('div.home-wrap').show();
-	$('div.quote').show();
-		 var i = 3;
+	(function() {
+	   // Hide the elements initially
+		var lis = $('div').hide();
+		$('#wrap').show();
+		$('#main').show();
+		$('.home_item9').show();
+		var i = 3;
+		
+		function displayImages() {
+	         lis.eq(i++).fadeIn(200, displayImages);
+	    };
+	      
+		function fastImages() {
+		    lis.fadeIn(400);
+	    };
 	
-	
-	function displayImages() {
-
-         lis.eq(i++).fadeIn(200, displayImages);
-
-      };
-      
-      	function fastImages() {
-
-         lis.fadeIn(400);
-
-      };
-
-
-    setTimeout(function(){
-        fastImages();
-        	$('article.home_item9_quote').css({'opacity':'.9'}).delay(1400).fadeIn(700);
-        }, 400);
-        	
+	    setTimeout(function(){
+	        fastImages();
+	    }, 100);
+	        	
 	})();
 	
   
-		var iframe = $('#home_player')[0];
-		if(iframe) {
-				player = $f(iframe);
+	var iframe = $('#home_player')[0];
+	if(iframe) {
+	player = $f(iframe);
 		
 		$("img.placeholder, #button").click(function(){
 			player.api('play');
 			$("img.placeholder").fadeOut(200);
 			$(".home_item1 span#button").removeClass('awesome-icon-play').addClass('awesome-icon-pause').fadeOut(200);
 		});
+		
 		player.addEvent('ready', function() {
 			player.addEvent("play", function() {
 				$("img.placeholder").fadeOut(200);
@@ -194,11 +140,10 @@ setInterval(function(){
 					$(".placeholder").fadeIn();
 					$(".home_item1 span#button").removeClass('awesome-icon-pause').addClass('play').fadeIn();
 				}
-			});
-		
-		});
-		
-		
+			});	
+		}); //player ready
+			
+			
 		var isPaused = player.api('paused');
 		
 		if (isPaused == true) {
@@ -208,30 +153,6 @@ setInterval(function(){
 			$('.home_item1 a.video-caption h3 span#button').removeClass('awesome-icon-play').addClass('awesome-icon-pause');
 		}
 			
-		}
-		
-setTimeout(function(){
-	player.api('play');
-}, 9000);
-
-setTimeout(function(){
-	playLab();	
-}, 3000);
-
-setTimeout(function(){
-	playPeople();
-}, 20000);
-
-
+		} //if iframe
 	});
 });
-	
-	function cycleImages(){
-      var $active = $('.home_item9 .active');
-      var $next = ($active.next().length > 0) ? $active.next() : $('.home_item9 img:first');
-      $next.css('z-index',2);//move the next image up the pile
-      $active.fadeOut(600,function(){//fade out the top image
-	  $active.css('z-index',1).show().removeClass('active');//reset the z-index and unhide the image
-          $next.css('z-index',3).addClass('active');//make the next image the top one
-      });
-    }
