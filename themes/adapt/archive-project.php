@@ -22,8 +22,8 @@
 
 <div id="post" class="full-width clearfix"> 
 	   
-	   <div class="project-drop"> 
-        <h2 class="project_dropdown">Filter by: <span class="project_name">All Projects </span><span class="awesome-icon-caret-down">&nbsp;</span></h2>
+	   <div class="drop"> 
+        <h2 class="dropdown">Filter by: <span class="name">Featured Projects </span><span class="awesome-icon-caret-down">&nbsp;</span></h2>
  <?php 
 		//get project categories
 		$cats = get_terms('project_cats');
@@ -31,21 +31,19 @@
 		if($cats[0]) { ?>
         <!-- Project Filter -->
         <ul id="project-cats" class="filter">
-            <li><a href="#" id="all" class="active" data-filter="*"><span><?php _e('All Projects', 'wpex'); ?></span></a></li>
+            <li><a href="#" id="all" class="active" data-filter=".featured"><span><?php _e('Featured Projects', 'wpex'); ?></span></a></li>
             <?php
             foreach ($cats as $cat ) : ?>
             <li><a href="#" data-filter=".<?php echo $cat->slug; ?>"><span><?php echo $cat->name; ?></span></a></li>
             <?php endforeach; ?>
+            <li><a href="#" data-filter="*"><span><?php _e('All Projects', 'wpex'); ?></span></a></li>
         </ul><!-- /project-cats -->
 	<?php } ?>	 
-
-</div>	    
-	   
+</div>	       
 	    
 	    <div id="projects_slider">
 	    
-	    <div class="loading"></div>
-          
+	    <div class="loading"></div>   
            
             <div id="slider-wrap">
                 <div class="flexslider clearfix">
@@ -56,7 +54,7 @@
         global $post;
         $args2 = array(
             'post_type' =>'project',
-            'numberposts' => '5',
+            'numberposts' => '10',
             'meta_query' => array(
                                 array('key' => 'featured',
                                       'value' => '1'
@@ -106,8 +104,6 @@
                     </ul>
                 </div>
             </div>
-	  	   
-	   
 	    </div>
 	    
 	  	    
@@ -118,7 +114,7 @@ $count = 0;
 while (have_posts()) : the_post();
 
 $featured = get_post_meta(get_the_ID(), 'featured', true);
-/* if($featured != '1') :  ADD BACK IN ENDIF */
+/* if($featured != 1) :  ADD BACK IN ENDIF */
 
 $count++;
 //get featured img
@@ -129,7 +125,8 @@ $terms = get_the_terms( get_the_ID(), 'project_cats' );
 ?>  
 
 <?php if($feat_img) { ?>
-	<div class="item <?php if($terms) foreach ($terms as $term) echo $term->slug .' '; ?>">
+
+	<div class="item <?php if($terms) foreach ($terms as $term) echo $term->slug .' '; if($featured == 1) : echo 'featured'; endif; ?>">
 	    <a href="<?php the_permalink(' ') ?>" class="project-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
 		<div class="project-overlay">
 		   <a href="<?php the_permalink(' ') ?>"><?php
@@ -144,7 +141,15 @@ $terms = get_the_terms( get_the_ID(), 'project_cats' );
 		    </a>
 		</div>
 </div><!-- item -->
+
 <?php } ?>
+<!--
+<?php $title = get_the_title(); 
+	if(strlen($title) > 50) {
+	echo '<div class="clearfix"></div>';
+			the_title();
+	} ?>
+-->
    
 <?php endwhile; ?>                	     
 	<?php pagination(); ?>
@@ -156,35 +161,24 @@ $terms = get_the_terms( get_the_ID(), 'project_cats' );
 
 <!-- <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.bbq.js"> </script> -->
 <script type="text/javascript">
-
 function filter_toggle() {
 	$("ul.filter").toggle();
 }
 
 jQuery(function($){
 	$(document).ready(function(){
-var $container = $('.project-content');
+		var $container = $('.project-content');
 /* 				$container.imagesLoaded(function(){ */
 					$container.isotope({
+						filter: '.featured',
 						itemSelector: '.item'
 					});
-	
-	$("#footer").hide();
-	var paras = $('.item').hide(),
-    i = 0;
 
-(function() {
-  $(paras[i++]).fadeIn(100, arguments.callee);
-})();
+		$("h2.dropdown").click(function() {
+			$("ul.filter").toggle();
+		});
 
-
-$("h2.project_dropdown").click(function() {
-	$("ul.filter").toggle();
+	});
 });
-
-
-});
-});
-
 </script>
 <?php get_footer(); ?>

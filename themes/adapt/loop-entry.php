@@ -2,9 +2,11 @@
 while (have_posts()) : the_post();
 //get featured img
 $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb');
+//get terms
+$terms = get_the_terms( get_the_ID(), 'category' );
 ?>  
 
-<article class="loop-entry clearfix">
+<div class="loop-entry <?php if($terms) foreach ($terms as $term) echo $term->slug .' '; ?>">
 	<?php if($feat_img) { ?>
     	<a href="<?php the_permalink(' ') ?>" class="loop-entry-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
 	<?php } ?>
@@ -12,8 +14,8 @@ $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb');
 	<p class="date"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
 	<h2><a href="<?php the_permalink(' ') ?>" rel="lightbox" data-ob="lightbox" data-ob_iframe="true"> 
 	<?php $title = get_the_title(); 
-			        echo substr($title, 0, 40);
-			        if(strlen($title) > 40) {
+			        echo substr($title, 0, 55);
+			        if(strlen($title) > 55) {
 				        echo '...';
 			        }  ?>
 	</a></h2>
@@ -28,7 +30,7 @@ $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb');
     <?php } ?>
 	<p><?php echo get_excerpt(195); ?></p>
 	</div>
-</article>
+</div>
 <!-- loop-entry -->
 
 <?php endwhile; ?>

@@ -83,7 +83,8 @@ Template Name Posts: Featured Template
                         
                         $full_img = wp_get_attachment_image_src( $attachment->ID, 'slider');
                         $imgsize = wp_get_attachment_metadata($attachment->ID); 
-                        $feat_id = get_post_thumbnail_id( $id ); ?>
+                        $feat_id = get_post_thumbnail_id( $id ); 
+                        $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true); ?>
                             
                     <?php if (($imgsize['width'] == 590) || ($attachment->ID == $feat_id && get_field('video', $id) != "")) { 
                     
@@ -117,9 +118,12 @@ Template Name Posts: Featured Template
 	                            <p class="flex-caption">
 	                            	<?php echo $attachment->post_excerpt; ?>
 	                            </p>
+                            <?php } if($alt && $id == 4682) { ?>
+                            	<p class="flex-alt">
+	                            	<?php echo $alt; ?>
+                            	</p>
                             <?php } ?>
-	                    </li>   
-                                      
+	                    </li>               
 	                         
                          <?php } ?>
                         
@@ -130,7 +134,6 @@ Template Name Posts: Featured Template
             </div>
             <!-- /slider-wrap -->
 
-        
         </div>
         <!-- /single-project-left -->
         
@@ -175,47 +178,6 @@ Template Name Posts: Featured Template
 		</div><!-- /single-portfolio-left -->
         
     <div id="single-project-right" class="clearfix">
-<!--
-	<?php 
-	if (get_field('quote1') != "") { 
-		echo "<div class='pull-quote'><h3>";
-		the_field("quote1");
-		echo "</h3>";
-	if (get_field('attrib1') != "") { 
-		echo "<p>-";
-		the_field("attrib1");
-		echo "</p>";  
-	}
-	echo "</div>";
-	} ?>
-	
-	<?php 
-	if (get_field('quote2') != "") { 
-		echo "<div class='pull-quote'><h3>";
-		the_field("quote2");
-		echo "</h3>";
-	if (get_field('attrib2') != "") { 
-		echo "<p>-";
-		the_field("attrib2");
-		echo "</p>";
-	}     
-	echo "</div>";
-	} ?>
-	
-	
-	<?php 
-	if (get_field('quote3') != "") { 
-		echo "<div class='pull-quote'><h3>";
-		the_field("quote3");
-		echo "</h3>";
-	if (get_field('attrib3') != "") { 
-		echo "<p>-";
-		the_field("attrib3");
-		echo "</p>";
-	}     
-	echo "</div>";
-	} ?>
--->
      	
 	<div class="featured-meta">
 	<?php if (is_single('408') || is_single('409')) {
@@ -231,7 +193,7 @@ Template Name Posts: Featured Template
 	  /* 	$short = the_field("short"); */
 		echo '<div class="related-item">';
 		echo '<a href="'.$site_url.'/work/'.$image->post_name.'"><img src="'.$image_url[0].'"/></a>';
-		echo '<div class="related-caption"><a href="'.$site_url.'/project/'.$image->post_name.'">';
+		echo '<div class="related-caption"><a href="'.$site_url.'/work/'.$image->post_name.'">';
 	  	if (get_field('short', $image->ID) != "") { 
 	  	the_field("short", $image->ID);
 	  	}
@@ -284,7 +246,7 @@ if ( !empty($images) ) {
 	  /* 	$short = the_field("short"); */
 		echo '<div class="related-item">';
 		echo '<a href="'.$site_url.'/work/'.$image->post_name.'"><img src="'.$image_url[0].'"/></a>';
-		echo '<div class="related-caption"><a href="'.$site_url.'/project/'.$image->post_name.'">';
+		echo '<div class="related-caption"><a href="'.$site_url.'/work/'.$image->post_name.'">';
 	  	if (get_field('short', $image->ID) != "") { 
 	  	the_field("short", $image->ID);
 	  	}
@@ -306,5 +268,36 @@ if ( !empty($images) ) {
 
 <?php endwhile; ?>
 <?php endif; ?>	
+<script type="text/javascript">
 
+jQuery(function($){
+// 	if($('.accordion') {
+(function($) {
+    
+  var allPanels = $('.accordion > dd').hide();
+  var allParents = $('.accordion > dt');
+    
+  $('.accordion > dt > a').click(function() {
+      $this = $(this);
+      $target =  $this.parent().next();
+      
+    
+      if($target.hasClass('active')){
+        $this.removeClass('active');
+        $target.removeClass('active').slideUp(); 
+      }else{
+		allParents.removeClass('active');
+        allPanels.removeClass('active').slideUp();
+        $this.addClass('active');
+        $target.addClass('active').slideDown();
+      }
+      
+    return false;
+  });
+
+})(jQuery);
+// 	}
+});
+
+</script>
 <?php get_footer(); ?>

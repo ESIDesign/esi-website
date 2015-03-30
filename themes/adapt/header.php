@@ -50,6 +50,7 @@ endif; ?>" />
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-2334506-6', 'esidesign.com');
+  ga('require', 'displayfeatures');
   ga('send', 'pageview');
 
 </script>

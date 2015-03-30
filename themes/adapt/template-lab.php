@@ -14,7 +14,7 @@
 		<a href="<?php echo get_site_url(); ?>/work"><?php the_title(); ?></a>
 	</h1>
 	<div class="all-projects">
-		<a href="<?php echo get_site_url(); ?>/work">Back to the lab</a>
+		<a href="<?php echo get_site_url(); ?>/work/lab">Back to the lab</a>
 	</div>
 </header>
 
@@ -94,14 +94,27 @@ if ( !empty($images) ) {
 <?php endwhile; ?>
 <?php endif; ?>
 
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/video.min.js"></script>
+<script>
+    videojs.options.flash.swf = "<?php echo get_template_directory_uri(); ?>/js/video-js.swf";
+</script>
+
 <script type="text/javascript">
+
 jQuery(function($){
 	$(document).ready(function(){
-		var paras = $('.loop-entry').hide();
-		i = 0;
-		(function() {
-		  $(paras[i++]).fadeIn(200, arguments.callee);
-		})();	
+	
+		jQuery('.video-wrapper').hover(function() {
+			jQuery(this).find('.awesome-icon-play').fadeOut();
+			var myVideo = jQuery(this).find('video#related_lab')[0];
+			myVideo.play();
+		},
+		function() {
+			jQuery(this).find('.awesome-icon-play').fadeIn();
+			var myVideo = jQuery(this).find('video#related_lab')[0];
+			myVideo.pause();
+		});
+		
 	});
 });
 </script>

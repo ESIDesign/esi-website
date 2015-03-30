@@ -3,6 +3,7 @@
  * @package WordPress
  * @subpackage Adapt Theme
  */
+$options = get_option( 'adapt_theme_settings' );
 ?>
 </div><!-- /main -->
 
@@ -26,12 +27,7 @@
 
 <script type="text/javascript">
 jQuery(function($){
-	
-	yepnope([{
-		    test: $(window).width() < 769, 
-		    yep: "<?php echo get_template_directory_uri(); ?>/js/responsive.min.js",
-	}]);
-	
+
 	$(document).ready(function(){
 
 	});

@@ -87,6 +87,7 @@ setInterval(function(){
 })();
 	
 if ( $(window).width() > 767) {
+	if($('#home_player')[0]) {
 	var iframe = $('#home_player')[0],
 	player = $f(iframe);
 
@@ -113,6 +114,13 @@ if ( $(window).width() > 767) {
 	if (isPaused == false) {
 	$('.home_item1 a.video-caption h3 span#button').removeClass('awesome-icon-play').addClass('awesome-icon-pause');
 	}
+	}
+	
+	$('.home_item1 .cycle').cycle({
+			fx: 'fade',
+			speed: 1000,
+			timeout: 20000
+	});
 	
 	$('.home_item3 .cycle').cycle({
 			fx: 'fade',

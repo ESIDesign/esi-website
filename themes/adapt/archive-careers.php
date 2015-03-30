@@ -62,7 +62,7 @@ echo '<h2>Current Opportunities</h2>';
  						);
 				$mypages = get_pages($args);
 				foreach( $mypages as $page ) {    
-					echo '<li class="orange_border"><a href="'.get_permalink($page->ID).'"><h3>'.$page->post_title.'</h3><p><span class="gray">'.$page->post_excerpt.'. </span>  <span class="black"> View Listing→</span></a></p></li>';
+					echo '<li class="orange_border"><a href="'.get_permalink($page->ID).'"><h3>'.$page->post_title.'</h3><p><span class="gray">'.$page->post_excerpt.' </span>  <span class="black"> View Listing→</span></a></p></li>';
 
 						}
 				echo '</ul>';	
@@ -80,7 +80,7 @@ $people_args = array(
 	'post_type' => 'people',
 	'orderby' => 'rand',
 	'exclude' => 3484,
-	'posts_per_page' => 4 
+	'posts_per_page' => 5 
 );
 $people_posts = get_posts( $people_args );
 
@@ -90,7 +90,7 @@ $peoplepage_args = array(
 	'post_parent' => 343,
 	'post_mime_type' => 'image',
 	'orderby' => 'rand',
-	'posts_per_page' => 2
+	'posts_per_page' => 3
 );
 $peoplepage_posts = get_posts($peoplepage_args);
 
@@ -100,23 +100,24 @@ $post_ids = wp_list_pluck( $all_posts, 'ID' );
 
 // Do a new query with these IDs to get a properly-sorted list of posts
 $attachments = get_posts( array(
-	'post_type' => array('attachment', 'people'),
-	'post__in' => array(3602, 3420, 3426, 3532, 1233, 3431, 1196, 3368), 
+	'post_type' => array('attachment', 'people', 'lab'),
+/*     'post__in'    => $post_ids, */
+	'post__in' => array(4522, 3804, 3602, 3409, 3420, 3426, 3532, 1233, 3431, 1196, 3368), 
     'post_status' => array('inherit','publish'),
 /*     'orderby' => 'date', */
 	'orderby' => 'post__in',
     'order' => 'DESC',
-    'numberposts'=> 5
+    'numberposts'=> 8
 ) ); 
             
     $i=0;         
 
 	foreach($attachments as $attachment) :
 		  
-	if('people' == get_post_type($attachment->ID)) {
+	if('people' == get_post_type($attachment->ID) || 'lab' == get_post_type($attachment->ID)) {
 	setup_postdata( $attachment ); 
 
-	$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($attachment->ID),'grid-thumb', true);
+	$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($attachment->ID),'insta', true);
 	$site_url = get_site_url();
 
 	ob_start();

@@ -16,30 +16,33 @@ $options = get_option( 'adapt_theme_settings' );
 <?php
 global $post;
 $args2 = array(
-        'orderby' => 'menu_order',
-		'order' => 'ASC',
-		'post_type' => 'attachment',
-		'post_parent' => '4682',
-		'post_mime_type' => 'image',
-		'post_status' => null,
-		'posts_per_page' => 8,
+    'post_type' =>'project',
+    'meta_query' => array(
+                        array('key' => 'home',
+                              'value' => '1'
+                        ),
+                         array('key' => 'video_placeholder',
+                              'value' => '',
+                              'compare' => '!='
+                        )
+                ),
+    'orderby' => 'rand',
+   
 );
-$posts = get_posts($args2); ?>
-<div class="home_item1">
-<a href="<?php echo get_permalink(4682); ?>">
-<div class="cycle">
-<?php foreach($posts as $post) : setup_postdata($post);
-$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
-			<img class="emki" src="<?php echo $feat_img[0]; ?>"/>
-	<?php endforeach; ?>
-</div>
-			<div class="project-overlay">
-				<h3>Announcing the opening of the<br /> Edward M. Kennedy Institute for the U.S. Senate</h3>
-				<p>An immersive and collaborative civic experience</p>
-<!-- 				<p>Learn more <span class="awesome-icon-play"></span></p> -->
-			</div>
-</a>
-</div>
+$video_posts = get_posts($args2);
+$video_ID = array($video_posts[0]->ID);
+$count=0;
+foreach($video_posts as $video_post) : setup_postdata($video_post);
+$count++;
+	if ($count == '1') { ?>
+		<div class="home_item1">
+		
+			<img class="placeholder" src="<?php echo the_field('video_placeholder', $video_post->ID); ?>"/><span id="button" class="awesome-icon-play"></span>
+			<iframe id="home_player" src="http://player.vimeo.com/video/<?php echo the_field('video', $video_post->ID); ?>?api=1&title=0&byline=0&portrait=0&player_id=home_player" width="590" height="332" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		
+		</div>
+	<?php }
+endforeach; ?>
 
 <?php 
 $args = array(
@@ -52,10 +55,10 @@ $args = array(
 	'post__not_in' => $video_ID,
     'orderby' => 'rand',
 );
-$project_posts = get_posts($args);
-    if($project_posts) { 
+$portfolio_posts = get_posts($args);
+    if($portfolio_posts) { 
 		$count=0;  
-            foreach($project_posts as $post) : setup_postdata($post);
+            foreach($portfolio_posts as $post) : setup_postdata($post);
 	            $count++;
 				$id = get_the_ID();
             	if(get_field('video', $id) != "" && get_field('video_img', $id) == "") {

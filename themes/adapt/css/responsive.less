@@ -27,7 +27,7 @@ img, video { max-width: 100%; }
 
 /*hide redundant menu*/
 #masternav select { display: none; width: 100% !important; }
-#masternav .selector { display: none; margin-top: 5px; }
+#masternav .selector { display: none !important; margin-top: 5px; }
 
 
 
@@ -340,16 +340,20 @@ body {
 	max-width: 122%;
 }
 
-.home_item3 .project-overlay, .home_item4 .project-overlay, .home_item5 .project-overlay {
-	bottom: 0%;
+.home_item3 .project-overlay, .home_item4 .project-overlay {
+	top: 137px;
 }
 
 .home_item5 {
 /* 	display: none !important; */
 	left: 303px;
 	top: 398px;
-	height: 350px;
-	width: 250px;
+	height: 300px;
+	width: 240px;
+}
+
+.home_item5 .project-overlay {
+	top: 267px;
 }
 
 .home_item9 {
@@ -382,18 +386,18 @@ body {
 
 /* people */
 .home_item12 {
-	left: 566px;
+	left: 558px;
 	top: 398px;
 }
 
 .blog {
-	left: 566px;
+	left: 558px;
 	top: (398px + 125px);	
 }
 
 /* social media  */
 .home_item13 {
-	left: 566px;
+	left: 558px;
 	top: (398px + 245px);
 }
 
@@ -454,6 +458,10 @@ a.all {
 
 .related-item, .related-item img {
 	max-width: 100%;
+}
+
+.lab-entry {
+	height: 292px;
 }
 
 #og-grid .clear {
@@ -577,7 +585,7 @@ a.all {
 	margin-left: 0;
 }
 
-.single-post .post, .category .post, .page-template-template-blog-php .post {
+.page-template-template-blog-php .post {
 	width: 95%;
 }
 
@@ -586,9 +594,7 @@ a.all {
 }
 
 #sidebar {
-/* 	no blog sidebars at this time 03132014 */
-/* 	width: 33%; */
-	width: 100%;
+	width: 33%;
 }
 
 }
@@ -636,9 +642,9 @@ a.all {
 	right: 0; 
 	cursor: pointer;
 	.selector {
-		*display:inline;
-		display: inline-block;
-		display: -moz-inline-box;
+		*display:inline !important;
+		display: inline-block !important;
+		display: -moz-inline-box !important;
 		zoom: 1;
 		vertical-align: middle; 
 		width: 100%;
@@ -733,14 +739,7 @@ h1 {
 	display: none !important;
 }
 
-.home_item10 {
-	left: 0px;
-	top: 500px;
-	background: none;
-	padding-top: 2px;
-	padding-left: 0px;
-	width: 100%;
-}
+.home_item10{left:0px;top:500px;background:none;padding-top:2px;padding-left:0px;width:100%}
 
 .home_item10 h1 a {
 	color: #B0B0B0;
@@ -778,7 +777,7 @@ h1 {
 .home_item13 {
 	left: 130px;
 	top: (325px + 120px);
-/* 	height: 50px; */
+	height: 50px;
 }
 
 .home_item9_quote {
@@ -789,9 +788,18 @@ h1 {
 	margin-right: 120px;
 }
 
-.project-drop {
+.archive-post {
+	width: 100%;
+}
+
+.drop {
 	margin-top: 0px;
 	float: left;
+}
+
+.archive-post .drop {
+	margin-left: 0 !important;
+	height: 40px;
 }
 
 .project-content {
@@ -809,7 +817,7 @@ h1 {
 }
 
 .post-type-archive-project .project-overlay {
-	top: 85%;
+	top: 78%;
 	width: 90%;
 }
 
@@ -860,6 +868,10 @@ h1 {
 	height: 250px !important;
 }
 
+.flexslider span#button {
+	background: none;
+}
+
 #not-featured .flexslider {
 	height: auto;
 }
@@ -882,10 +894,6 @@ iframe#mosaic_player {
 
 .flex-caption {
 	display: none;
-}
-
-.flexslider span#button {
-	background: none;
 }
 
 #single-project-left, #single-project-right {
@@ -1018,6 +1026,8 @@ a.all {
 
 #sidebar{ margin-top: 25px; padding-top: 25px; }
 
+#page-heading{ margin-top: 20px; }
+
 #single-nav{  
 	text-align: center; 
 }
@@ -1028,6 +1038,23 @@ a.all {
 }
 
 .children li { margin: 0 !important; }
+
+.lab-entry:nth-child(4n+4) {
+	margin-right: 1.1%;
+}
+
+.lab-entry:nth-child(2n+2) {
+	margin-right: 0;
+}
+
+.lab-entry {
+	height: 295px;
+	width: 49%;
+}
+
+.lab-entry h3 {
+	font-size: 18px;
+}
 
 /* New About  */
 .about-wrap {
@@ -1258,6 +1285,10 @@ li.people-grid, .people_item {
 	margin-bottom: 6px;
 }
 
+.blog-content {
+	width: 100%;
+}
+
 .loop-entry-thumbnail {
 	float: none;
 }
@@ -1365,7 +1396,7 @@ a.all {
 }
 
 .approach-wrap {
-	font-size: 10px;
+	text-size: 10px;
 }
 
 .approach-wrap h1 {
@@ -1393,6 +1424,19 @@ a.all {
 	width: 98%;
 }
 
+h2 {
+	font-size: 22px;
+}
+
+p {
+	font-size: 15px;
+	line-height: 150%;
+}
+
+p.by {
+	margin-bottom: 3%;
+}
+
 /* 	this may be lab only - video-wrapper was used when adding photo overlay - may take  */
 	#featured .video-wrapper {
 		height: 157px;
@@ -1402,6 +1446,24 @@ a.all {
 		height: 147px;
 	}
 	
+.flexslider span#button {
+	font-size: 40px; 
+	top: 35%;
+}
+	
+.lab-entry {
+	height: 235px;
+}
+
+.lab-entry h3 {
+	font-size: 16px;
+}
+
+.lab-entry p.date {
+	font-size: 11px;
+	line-height: 135%;
+}
+
 	.about-wrap h2 {
 		font-size: 160%;
 	}

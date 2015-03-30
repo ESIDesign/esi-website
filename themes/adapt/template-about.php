@@ -12,7 +12,7 @@
 
 <div class="photo_headline">
 <?php $image = wp_get_attachment_image_src( get_field('headline_img1'), 'slider');
-echo '<span class="gradient" style="';
+						echo '<span class="gradient" style="';
 						do_action('gradient', $image[0]);
 						echo '">Image</span>'; ?>
 <div class="about_text"><h1><?php the_title(); ?></h1>
@@ -41,7 +41,7 @@ echo '<span class="gradient" style="';
         global $post;
         $args2 = array(
             'post_type' =>'project',
-            'posts_per_page' => '-1',
+            'posts_per_page' => 4,
             'meta_query' => array(
                                 array('key' => 'featured',
                                       'value' => '1'
@@ -57,38 +57,12 @@ echo '<span class="gradient" style="';
                         //start loop
         foreach ($projects as $project) : setup_postdata($post);
             $count++;
-	$project_thumb = wp_get_attachment_image_src( get_post_thumbnail_id($project->ID), 'grid-thumb');
-	
-?>
+	$project_thumb = wp_get_attachment_image_src( get_post_thumbnail_id($project->ID), 'grid-thumb'); ?>
 
-		<?php if ($count == '1') { ?> 
-		    <article class="about_work2"> 
-			  <a href="/<?php echo $project->post_name; ?>"><img src="<?php echo $project_thumb[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
-			  <a href="<?php echo get_site_url(); ?>/<?php echo $project->post_name; ?>" class="project-overlay"><?php echo $project->post_title; ?></a>
+		    <article class="about_work<?php echo $count+1;?>"> 
+			  <a href="<?php echo get_permalink($project->ID); ?>"><img src="<?php echo $project_thumb[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
+			  <a href="<?php echo get_permalink($project->ID); ?>" class="project-overlay"><?php echo $project->post_title; ?></a>
 		    </article>
-	    <?php } ?>
-					    
-		<?php if ($count == '2') { ?> 
-		   <article class="about_work3"> 
-			   	 <a href="/<?php echo $project->post_name; ?>"><img src="<?php echo $project_thumb[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
-			  <a href="<?php echo get_site_url(); ?>/<?php echo $project->post_name; ?>" class="project-overlay"><?php echo $project->post_title; ?></a>
-		    </article>
-	    <?php } ?>
-					    
-	    <?php if ($count == '3') { ?> 
-		    <article class="about_work4"> 
-			     <a href="/<?php echo $project->post_name; ?>"><img src="<?php echo $project_thumb[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
-			  <a href="<?php echo get_site_url(); ?>/<?php echo $project->post_name; ?>" class="project-overlay"><?php echo $project->post_title; ?></a>
-		    </article>
-		<?php } ?>
-					    
-		<?php if ($count == '4') { ?> 
-		   <article class="about_work5"> 
-			    <a href="/<?php echo $project->post_name; ?>"><img src="<?php echo $project_thumb[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
-			    			  <a href="<?php echo get_site_url(); ?>/<?php echo $project->post_name; ?>" class="project-overlay"><?php echo $project->post_title; ?></a>
-		    </article>
-		<?php } ?>
-					    
         				       					
 	<?php endforeach; 
 	wp_reset_postdata();
@@ -155,7 +129,7 @@ echo '<span class="gradient" style="';
 	$avatar = 'wavatar';
 
 	// If user level is editor or above or login name is not "admin", display profile
-	if($curauth->user_level > 4 && $curauth->first_name != 'ESI') :
+	if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->first_name != 'Rosemary') :
 	$count2++;
 ?>
 
@@ -259,74 +233,21 @@ jQuery(function($){
 
 
 	
-	jQuery('.about_work2').hover(function() {
+	jQuery('.about_work2, .about_work3, .about_work4, .about_work5').hover(function() {
 		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
 	},
 	function() {
 		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
-	jQuery('.about_work3').hover(function() {
-		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
-		jQuery('.about_work4').hover(function() {
-		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
-		jQuery('.about_work5').hover(function() {
-		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
+	});	
 	
-	
-	jQuery('.about_people2').hover(function() {
+	jQuery('.about_people2, .about_people3, .about_people4, .about_people5, .about_people6, .about_people7').hover(function() {
 		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
 	},
 	function() {
 		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
 	});
 	
-	jQuery('.about_people3').hover(function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
-	
-	jQuery('.about_people4').hover(function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
-	
-	jQuery('.about_people5').hover(function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
-	
-	jQuery('.about_people6').hover(function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
-	
-		jQuery('.about_people7').hover(function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
-	
+	$('body').scrollTop(0);
 	
 });
 });

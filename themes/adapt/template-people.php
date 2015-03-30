@@ -12,9 +12,9 @@
 <!-- LEADERSHIP -->
 <ul id="og-grid" class="og-grid">
 <?php
-// Get the authors from the database ordered by user lastname = (hack to get Ed, Susan, ...)
+// Get the authors from the database ordered by user lastname = (hack to get Ed, Susan, Gideon)
 	global $wpdb;
-	$query = "SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'last_name' ORDER BY meta_value DESC";
+	$query = "SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'last_name' ORDER BY user_id ASC";
 	$author_ids = $wpdb->get_results($query);
 	$count = 0;
 
@@ -23,7 +23,7 @@
 		$curauth = get_userdata($author->user_id);
 
 		// If user level is above 0 or login name is "admin", display profile
-		if($curauth->user_level > 4 && $curauth->leadership == 'on' && $curauth->first_name != 'ESI' && $curauth->ID != 72) :
+		if($curauth->user_level > 4 && $curauth->leadership == 'on' && $curauth->first_name != 'ESI') :
 		$count++;
 		$user_link = get_author_posts_url($curauth->ID);
 		$avatar = 'wavatar';
@@ -100,7 +100,7 @@
 	</div>
 </div>
 
-<ul id="og-grid" class="og-grid">
+<ul class="og-grid">
 <?php
 	global $wpdb;
 	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand()";
@@ -171,7 +171,7 @@ foreach($author_ids as $author) :
 	if('people' == get_post_type($attachments[$i]->ID)) {
 	setup_postdata( $attachments[$i] ); 
 
-	$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($attachments[$i]->ID),'grid-thumb', true);
+	$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($attachments[$i]->ID),'insta', true);
 	$site_url = get_site_url();
 
 	ob_start();
@@ -216,6 +216,7 @@ foreach($author_ids as $author) :
 </ul>
 
 <div class="clear"></div>
+</div>
 
 <script src="<?php echo get_template_directory_uri(); ?>/js/modernizr.custom.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -223,11 +224,11 @@ foreach($author_ids as $author) :
 
 <script type="text/javascript">
 jQuery(function($){
-$('.people-wrap').show();
+/* $('.people-wrap').show(); */
 /* $('#og-grid li, .info, .lower div, .lower li, #footer').hide(); */
 
 	$(document).ready(function(){
-Grid.init();
+		Grid.init();
 		/*
 var li_length = $('#og-grid li').length - 3;
 		var div_length = $('.lower div').length - 1;
