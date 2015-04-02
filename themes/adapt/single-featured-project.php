@@ -275,7 +275,7 @@ jQuery(function($){
 (function($) {
     
   var allPanels = $('.accordion > dd').hide();
-  var allParents = $('.accordion > dt');
+  var allParents = $('.accordion > dt > a');
     
   $('.accordion > dt > a').click(function() {
       $this = $(this);

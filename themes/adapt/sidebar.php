@@ -40,8 +40,7 @@
 
 <div class='sidebar-box twitter'><h3><a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/tweet.png" alt="Twitter"> Twitter</a></h3>	
 <div class="twitter">
-	<p>Three cheers for the people-first design of the most crowded square in the world. <a href="#">http://t.co/Ulk56qBE3l</a></p>
-	<p>Design by game engines is happening all around us. Two examples of developer and fabricator in action. <a href="#">http://t.co/RGRfmW7Bam</a></p>
+
 </div>
 </div>
 

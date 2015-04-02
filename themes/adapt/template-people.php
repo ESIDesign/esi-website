@@ -147,7 +147,7 @@ foreach($author_ids as $author) :
 	$curauth = get_userdata($author->ID);
 
 	// All current users are editors or higher 
-	if($curauth->user_level > 4 && $curauth->leadership != 'on' && $curauth->director != 'on') :
+	if($curauth->user_level > 4 && $curauth->leadership != 'on' && $curauth->director != 'on' && $curauth->first_name != 'Rosemary') :
 		$count++;
 	
 		// Get link to author page - not in use

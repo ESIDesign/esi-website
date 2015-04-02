@@ -49,7 +49,7 @@
         <?php wp_link_pages(' '); ?>
          
         <div class="post-bottom">
-        	<?php the_tags('<div class="post-tags"><span class="awesome-icon-tags"></span>',' , ','</div>'); ?>
+        	<?php the_tags('<div class="post-tags"><span class="awesome-icon-tags"></span>',', ','</div>'); ?>
         </div>
         <!-- /post-bottom -->
         
@@ -68,8 +68,7 @@
 
 <?php endwhile; ?>
 <?php endif; ?>
-             
-<?php get_sidebar(); ?>
+
 <!-- <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/video.min.js"></script> -->
   <script type="text/javascript">
 /*

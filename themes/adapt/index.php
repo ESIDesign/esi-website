@@ -22,7 +22,7 @@ $args2 = array(
 		'post_parent' => '4682',
 		'post_mime_type' => 'image',
 		'post_status' => null,
-		'posts_per_page' => 8,
+		'post__in' => array(4687,4691,4689,4690,4692)
 );
 $posts = get_posts($args2); ?>
 <div class="home_item1">
@@ -158,7 +158,7 @@ $project_posts = get_posts($args);
 		$avatar = 'wavatar';
 
 		// If user level is above author, not admin or Amanda who goes first in peopleLoop
-		if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->ID != 2) :
+		if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->ID != 2 && $curauth->first_name != 'Rosemary') :
 		$count++; ?>
 		
 <?php if ($count == '1') { ?>
@@ -275,7 +275,7 @@ $project_posts = get_posts($args);
 
 </div><!-- wrap --> 
 <!-- WP Footer -->
-<script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
+<!-- <script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script> -->
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cycle.js"></script>
 <?php wp_footer(); ?>
 </body>
