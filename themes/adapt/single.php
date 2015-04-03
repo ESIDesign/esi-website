@@ -50,9 +50,9 @@
 			$author_email = get_the_author_meta('user_email');
 			echo '<div class="author">';
 			echo get_avatar($author_email, 160);
-			echo '<div class="bio"><p><strong>';
+			echo '<div class="bio"><p><strong><a href="'.get_site_url().'/people">';
 			the_author();
-			echo '</p></strong><p>';
+			echo '</a></strong></p><p>';
 		    the_field('author_bio'); 
 			echo '</p></div></div>';
 	    } ?>
