@@ -46,7 +46,16 @@
 		<?php the_content(); ?>
         <div class="clear"></div>
         
-        <?php wp_link_pages(' '); ?>
+        <?php if(get_field('author_bio')) {
+			$author_email = get_the_author_meta('user_email');
+			echo '<div class="author">';
+			echo get_avatar($author_email, 160);
+			echo '<div class="bio"><p><strong>';
+			the_author();
+			echo '</p></strong><p>';
+		    the_field('author_bio'); 
+			echo '</p></div></div>';
+	    } ?>
          
         <div class="post-bottom">
         	<?php the_tags('<div class="post-tags"><span class="awesome-icon-tags"></span>',', ','</div>'); ?>

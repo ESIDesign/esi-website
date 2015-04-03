@@ -22,7 +22,7 @@ $args2 = array(
 		'post_parent' => '4682',
 		'post_mime_type' => 'image',
 		'post_status' => null,
-		'post__in' => array(4687,4691,4689,4690,4692)
+		'post__in' => array(4687,4691,4689,4690,4693)
 );
 $posts = get_posts($args2); ?>
 <div class="home_item1">
@@ -274,8 +274,7 @@ $project_posts = get_posts($args);
 </div><!-- /main -->
 
 </div><!-- wrap --> 
-<!-- WP Footer -->
-<!-- <script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script> -->
+
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cycle.js"></script>
 <?php wp_footer(); ?>
 </body>

@@ -382,7 +382,7 @@ span.green {
 	color: @green;
 }
 
-span.yellow {
+span.yellow, .yellow {
 	color: @yellow;
 }
 
@@ -708,7 +708,6 @@ input[type="submit"]#searchsubmit {
 
 body.home {
 	position: relative;
-	z-index: -10000;
 }
 
 .home-wrap{ 
@@ -721,9 +720,9 @@ body.home {
 
 .home_item1 {
 	position: absolute;
-	top: 3px;
+	top: -11px;
 	left: 0px;
-	height: 332px;
+	height: 347px;
 // 	overflow: hidden;
 	width: 590px;	
 // 	.box-shadow;
@@ -751,14 +750,14 @@ body.home {
 		h3 {
 			font: 22px "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif !important;
 			font-weight: 300 !important;
-			line-height: 145%;
-			margin-bottom: 1px;
+			line-height: 140%;
+			margin-bottom: 2px;
 			color: #FFF;
 			}
 			p {
 // 				font-size: 14px !important;
-				font: 13px "proxima-nova-alt-condensed", "proxima-nova-alt-condensed", sans-serif !important;
-				margin-bottom: 2px;
+				font: 14px "proxima-nova-alt-condensed", "proxima-nova-alt-condensed", sans-serif !important;
+				margin-bottom: 1px;
 				font-weight: 300;
 /*
 				letter-spacing: 1px;
@@ -782,9 +781,9 @@ body.home {
 		}
 		.cycle {	
 			display: block;
-			height: 332px;
+			height: 247px;
 			width: 590px;
-			top: -98px;
+// 			top: -98px;
 			.box-shadow;
 			overflow: hidden;
 		}
@@ -792,7 +791,21 @@ body.home {
 			display: block;
 			height: 332px;
 			width: 590px;
-			bottom: 0px !important;
+			&:nth-of-type(1){
+				top: -85px !important;
+			}
+			&:nth-of-type(2){
+				top: -70px !important;
+			}
+			&:nth-of-type(3){
+				top: -70px !important;
+			}
+			&:nth-of-type(4){
+				top: -60px !important;
+			}
+			&:nth-of-type(5){
+				top: -40px !important;
+			}
 		}
 }
 
@@ -895,7 +908,7 @@ body.home {
 }
 
 .home_item3 {
-	top: 26px;
+	top: 24px;
 	left: 604px;
 }
 
@@ -3164,6 +3177,26 @@ span.awesome-icon-comments {
 
 .page-template-template-lab-php .post {
 	width: 100%;
+}
+
+.author {
+	border-top: 1px solid #ddd;
+	padding-top: 5%;
+	img {
+		display: inline-block;
+		margin-right: 4%;
+		.box-shadow;
+		max-width: 25%;
+	}
+	.bio {
+		color: #999;
+		display: inline-block;
+		width: 71%;
+		vertical-align: top;
+		p {
+			margin-bottom: 5px;
+		}
+	}
 }
 
 .lab-entry{
