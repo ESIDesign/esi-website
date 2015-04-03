@@ -776,3 +776,28 @@ function php_text($text) {
  }
  return $text;
 }
+
+add_filter('img_caption_shortcode', 'caption_shortcode_with_credits', 10, 3);
+function caption_shortcode_with_credits($empty, $attr, $content) {
+	extract(shortcode_atts(array(
+		'id'	=> '',
+		'align'	=> 'alignnone',
+		'width'	=> '',
+		'caption' => ''
+	), $attr));
+
+	// Extract attachment $post->ID
+	preg_match('/\d+/', $id, $att_id);
+	if (is_numeric($att_id[0]) && $credit = get_post_meta($att_id[0], 'credit', true)) {
+		$caption .= ' <span class="credit">'. $credit .'</span>';
+	}
+
+	if (1 > (int) $width || empty($caption))
+		return $content;
+
+	if ($id)
+		$id = 'id="' . esc_attr($id) . '" ';
+
+	return '<div ' . $id . 'class="wp-caption ' . esc_attr($align) . '" style="width: ' . (10 + (int) $width) . 'px">'
+		. do_shortcode($content) . '<p class="wp-caption-text">' . $caption . '</p></div>';
+}
