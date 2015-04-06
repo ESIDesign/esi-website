@@ -2430,11 +2430,7 @@ ul.filter a#all span {
 /* = Archive Project & Home Project Captions
 /*-----------------------------------------------------------------------------------*/
 .post-type-archive-project .project-overlay {
-	position: absolute;
-	bottom: -15px;
-	left: 0;
 	width: 324px;
-	margin-top: 4px;
 }
 
 .home .project-overlay {
@@ -2449,10 +2445,9 @@ ul.filter a#all span {
 	border-left: 1px solid #ddd;
 	color: #999;
 	font-size: 18px;
-	font-weight: 400;
-	line-height: 119%;
-	height: 20px;
-	padding: 4px 20px 6px 8px;
+	font-weight: 500;
+	line-height: 105%;
+	padding: 4px 20px 4px 8px;
 	text-transform: none;
 	margin-left: 9px;
 }
@@ -3020,7 +3015,7 @@ li.orange_border {
 	right: 0px;
 */
 	margin-top: 0px;
-	margin-bottom: 50px;
+	margin-bottom: 5%;
 }
 #single-nav-left,
 #single-nav-right {
@@ -3042,36 +3037,22 @@ li.orange_border {
 	background: #deb439;
 }
 
-
-#single-nav-right {
-	margin-left: 6px;
+#single-nav-left {
+	margin-right: 6px;
 }
 
 #single-nav a {
-	font-size: 11px;
+	font-size: 12px;
 	color: #FFF;
-	padding: 0 10px;
-	height: 25px;
-	line-height: 25px;
+	line-height: 26px;
 	display: block;
 	-webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     -ms-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
+    text-align: center;
 }
-
-/*
-#single-nav-left a:hover,
-#single-nav-right a:hover{
-    color: #fff;
-	background: #EF4035;
-		width: 30px;
-	height: 30px;
-		padding: 4px;
-	border-radius: 50%;
-}
-*/
 
 #project-nav #single-nav-left a span {
 	margin-right: 2px;
@@ -3084,7 +3065,7 @@ li.orange_border {
 }
 
 #single-nav-left a span{
-	margin-right: 4px;
+	margin-right: 2px;
 }
 #single-nav-right a span{
 	margin-left: 2px;
@@ -3217,8 +3198,20 @@ span.awesome-icon-comments {
 		}
 		p {
 			margin-bottom: 5px;
+			&:nth-of-type(2) {
+				a {
+				color: #999 !important;
+				}
+			}
 		}
 	}
+}
+
+.share {
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 25px;
+	vertical-align: top;
 }
 
 .lab-entry{
@@ -3379,13 +3372,17 @@ span.awesome-icon-comments {
 	position: relative;
 	height: 240px;
 	width: 240px;
+	img {
+		.box-shadow;
+	}
 }
 
 .search-results .project-overlay h4 {
+	border-left: 1px solid #ddd;
 	font-weight: 500;
-	padding-left: 5px;
-	color: #555555;
-	margin-top: 5px;
+	padding-left: 8px;
+	color: #999;
+	margin: 5px 0 0 3px;
 }
 
 

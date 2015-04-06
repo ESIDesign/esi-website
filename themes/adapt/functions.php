@@ -36,7 +36,7 @@ add_image_size( 'grid-thumb3',  590, 332, true );
 add_image_size( 'slider',  1000, 568, true );
 add_image_size( 'blog',  800, 600, true, array( 'left', 'top' ) );
 
-add_filter( 'jpeg_quality', 'tgm_image_full_quality' );
+add_filter('jpeg_quality', 'tgm_image_full_quality');
 add_filter( 'wp_editor_set_quality', 'tgm_image_full_quality' );
 /**
  * Filters the image quality for thumbnails to be at the highest ratio possible.
@@ -50,7 +50,7 @@ add_filter( 'wp_editor_set_quality', 'tgm_image_full_quality' );
  * changed from 100 to 95 11/12/2013
  */
 function tgm_image_full_quality( $quality ) {
-    return 95;
+    return 100;
 }
 
 /*-----------------------------------------------------------------------------------*/

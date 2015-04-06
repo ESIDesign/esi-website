@@ -7,7 +7,6 @@ Template Name Posts: Lab Template
 ?>
 <?php get_header(); ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>   
-<!-- <div id="dvLoading"></div> -->
 
 <header id="page-heading">
 <h1 class="pagetitle"><a href="<?php echo get_site_url(); ?>/work">Our Work</a></h1>
