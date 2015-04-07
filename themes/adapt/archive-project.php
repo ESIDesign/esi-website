@@ -78,14 +78,14 @@
 			</div>
                                 
 			<a href="<?php echo get_permalink($attachment->ID); ?>"><img src="<?php echo $full_img[0]; ?>" alt="<?php echo apply_filters('the_title', $attachment->post_title); ?>" /></a>
-                <?php if ($attachment->post_excerpt || get_field('slideshow_caption', $attachment->ID)) { ?>
+                <?php if ($attachment->post_excerpt || get_field('slideshow_caption', $attachment->ID) || get_field('question', $attachment->ID)) { ?>
 	                <p class="flex-caption">
 	                <?php if(get_field('slideshow_caption', $attachment->ID) != "") { 
 					  the_field('slideshow_caption', $attachment->ID);
 				  	} else if($attachment->post_excerpt != ""){
 					  	echo strip_tags($attachment->post_excerpt); 	
-				  	} else if(get_field('question') != ""){
-					  	the_field('question');	
+				  	} else if(get_field('question', $attachment->ID) != ""){
+					  	the_field('question', $attachment->ID);	
 				  	} ?>  
 	                </p>
                 <?php } ?>
