@@ -44,7 +44,7 @@
 </div>
 </div>
 
-<div class='sidebar-box'><h3><a target="_blank" href="http://instagram.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/instagram.png" alt="Twitter"> Instagram</a></h3>	
+<div class='sidebar-box'><h3><a target="_blank" href="http://instagram.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/instagram.png" alt="Instagram"> Instagram</a></h3>	
 	<?php
 /* Only Lab Posts */
 
@@ -55,7 +55,7 @@ $images = get_posts( array(
     'orderby' => 'date',
     'order' => 'DESC',
     'posts_per_page' => 6
-) );
+));
 		
 if ( !empty($images) ) {
 	foreach ( $images as $image ) { 
@@ -93,7 +93,7 @@ if ( !empty($images) ) {
 		</article>
 	<?php }
 } ?>
-     <div class="instagram"></div>
+
 </div>
 <div class="clearfix"></div>
 

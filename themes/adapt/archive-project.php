@@ -21,15 +21,13 @@
 </header><!-- END page-heading -->
 
 <div id="post" class="full-width clearfix"> 
-	   
-	   <div class="drop"> 
+	<div class="drop"> 
         <h2 class="dropdown">Filter by: <span class="name">Featured Projects </span><span class="awesome-icon-caret-down">&nbsp;</span></h2>
  <?php 
 		//get project categories
 		$cats = get_terms('project_cats');
 		//show filter if categories exist
 		if($cats[0]) { ?>
-        <!-- Project Filter -->
         <ul id="project-cats" class="filter">
             <li><a href="#" id="all" class="active" data-filter=".featured"><span><?php _e('Featured Projects', 'wpex'); ?></span></a></li>
             <?php
@@ -41,72 +39,66 @@
 	<?php } ?>	 
 </div>	       
 	    
-	    <div id="projects_slider">
-	    
-	    <div class="loading"></div>   
-           
-            <div id="slider-wrap">
-                <div class="flexslider clearfix">
-                    <ul class="slides">
-                         <div class="blue_nug"></div>
-                               <div class="triangle"></div>
- <?php
-        global $post;
-        $args2 = array(
-            'post_type' =>'project',
-            'numberposts' => '10',
-            'meta_query' => array(
-                                array('key' => 'featured',
-                                      'value' => '1'
-                                )
-                            ),
-            'orderby' => 'rand'
-        );
-       $attachments = get_posts($args2);
-						
-						//attachments count
-						$attachments_count = count($attachments);
-	                    $count = 0;
-                        //start loop
-                        foreach ($attachments as $attachment) : setup_postdata($post);
+	<div id="projects_slider">
+	
+	<div class="loading"></div>   
+	   
+	    <div id="slider-wrap">
+	        <div class="flexslider clearfix">
+	            <ul class="slides">
+	                 <div class="blue_nug"></div>
+	                       <div class="triangle"></div>
+	<?php global $post;
+		$args2 = array(
+		    'post_type' =>'project',
+		    'numberposts' => '10',
+		    'meta_query' => array(
+		                        array('key' => 'featured',
+		                              'value' => '1'
+		                        )
+		                    ),
+		    'orderby' => 'rand'
+		);
+		$attachments = get_posts($args2);
+
+		$attachments_count = count($attachments);
+        $count = 0;
+        foreach ($attachments as $attachment) : setup_postdata($post);
             $count++;
-            //get portfolio thumbnail
             $full_img = wp_get_attachment_image_src( get_post_thumbnail_id($attachment->ID), 'slider'); ?>
-            
-            		<li>   
-            		            <div class="title">
-           <div class="band">
-	             <h1><?php if (get_field('short', $attachment->ID) != "") { 
-							  the_field('short', $attachment->ID);
-						  	} else {
-							  	echo $attachment->post_title; 	
-						  	} ?></h1>
-           </div>
-           </div>
-                                     
-	            <a href="<?php echo get_permalink($attachment->ID); ?>"><img src="<?php echo $full_img[0]; ?>" alt="<?php echo apply_filters('the_title', $attachment->post_title); ?>" /></a>
-                            <?php if ($attachment->post_excerpt || get_field('slideshow_caption', $attachment->ID)) { ?>
-                            <p class="flex-caption">
-                            <?php if (get_field('slideshow_caption', $attachment->ID) != "") { 
-							  the_field('slideshow_caption', $attachment->ID);
-						  	} else {
-							  	echo strip_tags($attachment->post_excerpt); 	
-						  	} ?>  
-                            </p>
-                            <?php } ?>
-                     </li>
+			<li>   
+	        <div class="title">
+	           <div class="band">
+		             <h1><?php if (get_field('short', $attachment->ID) != "") { 
+								  the_field('short', $attachment->ID);
+							  	} else {
+								  	echo $attachment->post_title; 	
+							  	} ?></h1>
+	           </div>
+			</div>
+                                
+			<a href="<?php echo get_permalink($attachment->ID); ?>"><img src="<?php echo $full_img[0]; ?>" alt="<?php echo apply_filters('the_title', $attachment->post_title); ?>" /></a>
+                <?php if ($attachment->post_excerpt || get_field('slideshow_caption', $attachment->ID)) { ?>
+	                <p class="flex-caption">
+	                <?php if(get_field('slideshow_caption', $attachment->ID) != "") { 
+					  the_field('slideshow_caption', $attachment->ID);
+				  	} else if($attachment->post_excerpt != ""){
+					  	echo strip_tags($attachment->post_excerpt); 	
+				  	} else if(get_field('question') != ""){
+					  	the_field('question');	
+				  	} ?>  
+	                </p>
+                <?php } ?>
+			</li>
 
 	<?php endforeach; 
-	wp_reset_postdata();
-	?>
-	
+	wp_reset_postdata(); ?>
 	
                     </ul>
                 </div>
             </div>
 	    </div>
 	    
-	  	    
 <div class="project-content">  
 
 <?php 
@@ -143,13 +135,6 @@ $terms = get_the_terms( get_the_ID(), 'project_cats' );
 </div><!-- item -->
 
 <?php } ?>
-<!--
-<?php $title = get_the_title(); 
-	if(strlen($title) > 50) {
-	echo '<div class="clearfix"></div>';
-			the_title();
-	} ?>
--->
    
 <?php endwhile; ?>                	     
 	<?php pagination(); ?>

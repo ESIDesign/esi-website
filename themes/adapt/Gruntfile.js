@@ -23,13 +23,13 @@ module.exports = function(grunt) {
 		    }
 		},
 		uglify: {
-		    build_home: {
-		        src: 'js/home.min.js',
-		        dest: 'js/home.min.js'
-		    },
-		    build_responsive: {
-		        src: 'js/responsive.min.js',
-		        dest: 'js/responsive.min.js'
+		    build: {
+			    files: [
+				    {src: 'js/custom.dev.js', dest: 'js/custom.js'},
+				    {src: 'js/application.dev.js', dest: 'js/application.js'},
+				    {src: 'js/home.min.js', dest: 'js/home.min.js'},
+				    {src: 'js/responsive.min.js', dest: 'js/responsive.min.js'},
+			    ]
 		    }
 		},
 		
