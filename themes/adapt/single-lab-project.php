@@ -299,7 +299,7 @@ if ( !empty($images) ) {
 		echo '</a></div></div>';
 	}
 } ?>
-
+<a class="all-text" href="<?php echo get_site_url(); ?>/lab-archive">See all lab experiments →</a>
 		  	</div>
     	</div>
     </div>

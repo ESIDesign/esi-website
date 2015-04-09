@@ -14,41 +14,44 @@ $options = get_option( 'adapt_theme_settings' );
 </div>
 
 <?php
-global $post;
+$post_object = get_field('featured_module',2145);
+$post = $post_object;
+setup_postdata( $post ); 
 $args2 = array(
-        'orderby' => 'menu_order',
-		'order' => 'ASC',
-		'post_type' => 'attachment',
-		'post_parent' => '4682',
-		'post_mime_type' => 'image',
-		'post_status' => null,
-		'post__in' => array(4687,4691,4689,4690,4693)
+    'orderby' => 'menu_order',
+	'order' => 'ASC',
+	'post_type' => 'attachment',
+	'post_parent' => $post->ID,
+	'post_mime_type' => 'image',
+	'post_status' => null,
+	'post__in' => array(4687,4691,4689,4690,4693)
 );
 $posts = get_posts($args2); ?>
 <div class="home_item1">
-<a href="<?php echo get_permalink(4682); ?>">
-<div class="cycle">
-<?php foreach($posts as $post) : setup_postdata($post);
-$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
+	<a href="<?php echo get_permalink($post->ID); ?>">
+		<div class="cycle">
+		<?php foreach($posts as $post) : setup_postdata($post);
+			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
 			<img class="emki" src="<?php echo $feat_img[0]; ?>"/>
-	<?php endforeach; ?>
-</div>
-			<div class="project-overlay">
-				<h3>Announcing the opening of the<br /> Edward M. Kennedy Institute for the U.S. Senate</h3>
-				<p>An immersive and collaborative civic experience</p>
-<!-- 				<p>Learn more <span class="awesome-icon-play"></span></p> -->
-			</div>
-</a>
+		<?php endforeach; ?>
+		</div>
+		<div class="project-overlay">
+			<?php if(get_field('headline',2145)) {
+				echo '<h3>'.get_field('headline',2145).'</h3>';
+			} if(get_field('subheadline',2145)) {
+				echo '<p>'.get_field('subheadline',2145).'</p>';
+			} ?>
+		</div>
+	</a>
 </div>
 
-<?php 
-$args = array(
+<?php $args = array(
     'post_type' =>'project',
     'meta_query' => array(
-                        array('key' => 'home',
-                              'value' => '1'
-                        )
-                    ),
+        array('key' => 'home',
+              'value' => '1'
+        )
+    ),
 	'post__not_in' => $video_ID,
     'orderby' => 'rand',
 );
@@ -263,7 +266,7 @@ $project_posts = get_posts($args);
 
 
 <div class="home_item10">
-	<h1><a href="<?php echo get_site_url(); ?>/about-is"> 
+	<h1><a href="<?php echo get_site_url(); ?>/about-us"> 
 	<?php if (get_field('about', 2145) != "") { 
 		the_field('about', 2145);
 	} ?>  </a></h1>
