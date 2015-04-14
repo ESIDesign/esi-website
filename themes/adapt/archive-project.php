@@ -18,26 +18,25 @@
 <header id="page-heading">
 	<?php $post = $posts[0]; ?>
 	<h1 class="pagetitle">Our Work</h1>
-</header><!-- END page-heading -->
 
-<div id="post" class="full-width clearfix"> 
 	<div class="drop"> 
-        <h2 class="dropdown">Filter by: <span class="name">Featured Projects </span><span class="awesome-icon-caret-down">&nbsp;</span></h2>
- <?php 
-		//get project categories
-		$cats = get_terms('project_cats');
+		<h2 class="dropdown">Filter by: <span class="name">Featured Projects </span><span class="awesome-icon-caret-down">&nbsp;</span></h2>
+		<?php $cats = get_terms('project_cats');
 		//show filter if categories exist
 		if($cats[0]) { ?>
-        <ul id="project-cats" class="filter">
-            <li><a href="#" id="all" class="active" data-filter=".featured"><span><?php _e('Featured Projects', 'wpex'); ?></span></a></li>
-            <?php
-            foreach ($cats as $cat ) : ?>
-            <li><a href="#" data-filter=".<?php echo $cat->slug; ?>"><span><?php echo $cat->name; ?></span></a></li>
-            <?php endforeach; ?>
-            <li><a href="#" data-filter="*"><span><?php _e('All Projects', 'wpex'); ?></span></a></li>
-        </ul><!-- /project-cats -->
-	<?php } ?>	 
-</div>	       
+			<ul id="project-cats" class="filter">
+			    <li><a href="#" id="all" class="active" data-filter=".featured"><span><?php _e('Featured Projects', 'wpex'); ?></span></a></li>
+			    <?php
+			    foreach ($cats as $cat ) : ?>
+			    <li><a href="#" data-filter=".<?php echo $cat->slug; ?>"><span><?php echo $cat->name; ?></span></a></li>
+			    <?php endforeach; ?>
+			    <li><a href="#" data-filter="*"><span><?php _e('All Projects', 'wpex'); ?></span></a></li>
+			</ul><!-- /project-cats -->
+		<?php } ?>	 
+	</div><!-- /drop -->
+</header><!-- END page-heading -->
+
+<div id="post" class="full-width clearfix">       
 	    
 	<div id="projects_slider">
 	
@@ -162,7 +161,6 @@ jQuery(function($){
 		$("h2.dropdown").click(function() {
 			$("ul.filter").toggle();
 		});
-
 	});
 });
 </script>

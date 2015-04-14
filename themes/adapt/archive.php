@@ -9,33 +9,27 @@
 
 <div id="post" class="post clearfix archive-post"> 
 
-<header id="page-heading" class="archive-post">
+<header id="page-heading">
 	<?php $post = $posts[0]; ?>
 	<?php if(is_page(837)) { ?>
-	<h1><span class="yellow">Read Our Minds</span></h1>	
+	<h1 class="blog-title"><span class="yellow">Read Our Minds</span></h1>	
 	<?php } if (is_category()) { ?>
 	<h1><span class="yellow"><?php single_cat_title(); ?></span></h1>
 	<?php } elseif( is_tag() ) { ?>
 	<h1><span class="yellow">Posts tagged &quot;<?php single_tag_title(); ?>&quot;</span></h1>
 	<?php  } elseif (is_day()) { ?>
-	<h1>Archive for <?php the_time('F jS, Y'); ?></h1>
+	<h1><span class="yellow">Archive for <?php the_time('F jS, Y'); ?></span></h1>
 	<?php  } elseif (is_month()) { ?>
-	<h1>Archive for <?php the_time('F, Y'); ?></h1>
+	<h1><span class="yellow">Archive for <?php the_time('F, Y'); ?></span></h1>
 	<?php  } elseif (is_year()) { ?>
-	<h1>Archive for <?php the_time('Y'); ?></h1>
+	<h1><span class="yellow">Archive for <?php the_time('Y'); ?></span></h1>
 	<?php  } elseif (isset($_GET['paged']) && !empty($_GET['paged'])) { ?>
-	<h1>Blog Archives</h1>
+	<h1><span class="yellow">Blog Archives</span></h1>
 	<?php } ?>
-
-</header>
-<!-- END page-heading -->
-
 <?php if(is_page(837)) { ?> 
 <div class="drop"> 
         <h2 class="dropdown">Filter by: <span class="name">All Posts </span><span class="awesome-icon-caret-down">&nbsp;</span></h2>
- <?php 
-		//get project categories
-		$cats = get_terms('category');
+ <?php $cats = get_terms('category');
 		//show filter if categories exist
 		if($cats[0]) { ?>
         <!-- Blog Filter -->
@@ -45,7 +39,7 @@
             <li><a href="#" data-filter=".<?php echo $cat->slug; ?>"><span><?php echo $cat->name; ?></span></a></li>
             <?php endforeach; ?>
             <li><a href="#" id="all" class="active" data-filter="*"><span><?php _e('All Posts', 'wpex'); ?></span></a></li>
-        </ul><!-- /project-cats -->
+        </ul><!-- /blog-cats -->
 	<?php } ?>	 
 </div>	
 <?php query_posts(
@@ -54,6 +48,9 @@
             'paged'=>$paged
         ));
 }  ?>
+</header>
+<!-- END page-heading -->
+
 <div class="blog-content">  
 	<?php get_template_part( 'loop' , 'entry') ?>    
 </div>            	     
@@ -75,22 +72,24 @@ function filter_toggle() {
 
 jQuery(function($){
 	$(window).load(function(){
-/*main function*/
-function blogIsotope() {
-	var $container = $('.blog-content');
-		$container.isotope({
-			itemSelector: '.loop-entry'
-		});
-} blogIsotope();
-
+		function blogIsotope() {
+			var $container = $('.blog-content');
+			$container.isotope({
+				itemSelector: '.loop-entry'
+			});
+		} 
+		
+		blogIsotope();
+		
 		$("h2.dropdown").click(function() {
 			$("ul.filter").toggle();
 		});	
-		
-			window.onresize = function() {
-    blogIsotope();
-};
+				
+		window.onresize = function() {
+		    blogIsotope();
+		};
 	});
+	
 	$(document).ready(function(){
 	
 		jQuery('.video-wrapper').hover(function() {
