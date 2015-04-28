@@ -27,7 +27,7 @@ $args2 = array(
 );
 $posts = get_posts($args2); ?>
 <div class="home_item1">
-<!-- 	<a href="http://www.cbsnews.com/news/putting-a-new-face-on-old-buildings/"> --><span id="button" class="awesome-icon-play"></span>
+		<span id="button" class="awesome-icon-play"></span>
 		<div class="cycle">
 		<?php foreach($posts as $post) : setup_postdata($post);
 			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
@@ -36,12 +36,10 @@ $posts = get_posts($args2); ?>
 		</div>
 		<div class="project-overlay">
 			<?php
-// 				echo '<h3></h3>';
 				echo '<p>WATCH: ESI Design on <em>CBS This Morning</em></p>';
 			?>
 		</div>
-		<embed id="home_player" src="http://www.cbsnews.com/common/video/cbsnews_video.swf" scale="noscale" salign="lt" type="application/x-shockwave-flash" background="#000000" width="590" height="332" allowFullScreen="true" allowScriptAccess="always" FlashVars="pType=embed&si=254&pid=N_igAUIZ_EkW&url=http://www.cbsnews.com/videos/how-led-lights-are-changing-architecture" />
-<!-- 	</a> -->
+		<embed src="http://www.cbsnews.com/common/video/cbsnews_video.swf" quality="high" scale="noscale" salign="lt" type="application/x-shockwave-flash" background="#000000" width="590" height="332" allowFullScreen="true" allowScriptAccess="always" FlashVars="pType=embed&si=254&pid=N_igAUIZ_EkW&url=http://www.cbsnews.com/videos/how-led-lights-are-changing-architecture" />
 </div>
 
 <?php

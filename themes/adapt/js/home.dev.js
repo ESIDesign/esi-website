@@ -123,19 +123,15 @@ function dynamicSize() {
 	}
 })();
 	
-if ( $(window).width() > 767) {
-	if($('#home_player')[0]) {
-		var iframe = $('#home_player')[0],
-	// 	player = $f(iframe);
-		player = $("#home_player")[0];
+if ( $(window).width() > 479) {
+		var player = $('embed')[0];
 		
-		$('.home_item1').on('click', function(ev) {
+		$('.home_item1 .cycle').on('click touchstart', function(ev) {
 		    $('.home_item1 .cycle, .home_item1 .project-overlay, #button').fadeOut();
-		    player.src += "&autoPlay=true";
-// 		    document.getElementById('home_player').Play();
+// 		    player.src += "&autoPlay=true";
 		    ev.preventDefault();
 		});
-	}
+
 /*
 	player.onended = function() {
 		$('img.placeholder').fadeIn();
