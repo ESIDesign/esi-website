@@ -18,37 +18,6 @@ $post_object = get_field('featured_module',2145);
 $post = $post_object;
 setup_postdata( $post ); 
 $args2 = array(
-    'orderby' => 'ID',
-	'order' => 'DESC',
-	'post_type' => 'attachment',
-	'post_mime_type' => 'image',
-	'post_status' => null,
-	'post__in' => array(4848,4847)
-);
-$posts = get_posts($args2); ?>
-<div class="home_item1">
-<!-- 	<a href="http://www.cbsnews.com/news/putting-a-new-face-on-old-buildings/"> --><span id="button" class="awesome-icon-play"></span>
-		<div class="cycle">
-		<?php foreach($posts as $post) : setup_postdata($post);
-			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
-			<img class="placeholder" src="<?php echo $feat_img[0]; ?>"/>
-		<?php endforeach; ?>
-		</div>
-		<div class="project-overlay">
-			<?php
-// 				echo '<h3></h3>';
-				echo '<p>WATCH: ESI Design on <em>CBS This Morning</em></p>';
-			?>
-		</div>
-		<embed id="home_player" src="http://www.cbsnews.com/common/video/cbsnews_video.swf" scale="noscale" salign="lt" type="application/x-shockwave-flash" background="#000000" width="590" height="332" allowFullScreen="true" allowScriptAccess="always" FlashVars="pType=embed&si=254&pid=N_igAUIZ_EkW&url=http://www.cbsnews.com/videos/how-led-lights-are-changing-architecture" />
-<!-- 	</a> -->
-</div>
-
-<?php
-$post_object = get_field('featured_module',2145);
-$post = $post_object;
-setup_postdata( $post ); 
-$args2 = array(
     'orderby' => 'menu_order',
 	'order' => 'ASC',
 	'post_type' => 'attachment',
@@ -58,19 +27,21 @@ $args2 = array(
 	'post__in' => array(4687,4691,4689,4690,4693)
 );
 $posts = get_posts($args2); ?>
-<div class="project home_item3">
+<div class="home_item1">
 	<a href="<?php echo get_permalink($post->ID); ?>">
 		<div class="cycle">
 		<?php foreach($posts as $post) : setup_postdata($post);
 			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
-			<img src="<?php echo $feat_img[0]; ?>"/>
+			<img class="emki" src="<?php echo $feat_img[0]; ?>"/>
 		<?php endforeach; ?>
 		</div>
-			<h3 class="project-overlay">
+		<div class="project-overlay">
 			<?php if(get_field('headline',2145)) {
-				the_field('headline',2145);
+				echo '<h3>'.get_field('headline',2145).'</h3>';
+			} if(get_field('subheadline',2145)) {
+				echo '<p>'.get_field('subheadline',2145).'</p>';
 			} ?>
-			</h3>
+		</div>
 	</a>
 </div>
 
@@ -83,7 +54,6 @@ $posts = get_posts($args2); ?>
     ),
 // 	'post__not_in' => $video_ID,
     'orderby' => 'rand',
-    'posts_per_page' => 2
 );
 $project_posts = get_posts($args);
     if($project_posts) { 
@@ -126,6 +96,31 @@ $project_posts = get_posts($args);
 <?php if ($feat_img) {  ?>
 
 <?php if ($count == '1') { ?>
+	<div class="project home_item3">
+		<a href="<?php the_permalink(); ?>">
+		<?php if($post->ID == 3226) { ?>
+			<img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
+			<?php }
+			else {
+			echo '<div class="cycle">';
+			foreach ($attachments as $attachment) :
+			$feat_img = wp_get_attachment_image_src($attachment->ID, 'archive-project'); ?>
+			<img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
+			<?php endforeach; 
+			echo '</div>'; 
+			} ?>
+		<h3 class="project-overlay"> 
+		<?php if (get_field('short') != "") { 
+	  	the_field("short");
+	  	}
+	  	else { 
+	  	the_title();  	
+	  	 } ?>
+	    </h3></a>
+    </div>
+<?php } ?>
+
+<?php if ($count == '2') { ?>
 	<div class="project home_item4">
 		<a href="<?php the_permalink(); ?>">
 		<?php if($post->ID == 3226) { ?>
@@ -149,7 +144,7 @@ $project_posts = get_posts($args);
 	</div>
 <?php } ?>
            
-<?php if ($count == '2') { ?>     
+<?php if ($count == '3') { ?>     
            
 <!-- People -->
 <div class="home_item12">
