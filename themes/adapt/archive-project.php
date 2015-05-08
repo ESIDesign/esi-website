@@ -136,7 +136,7 @@ $terms = get_the_terms( get_the_ID(), 'project_cats' );
 <?php } ?>
    
 <?php endwhile; ?>                	     
-	<?php pagination(); ?>
+<!-- 	<?php pagination(); ?> -->
 </div><!-- END project-content -->
 
 </div><!-- END post -->

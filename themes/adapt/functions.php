@@ -575,12 +575,10 @@ function get_the_category_bytax( $id = false, $tcat = 'category' ) {
     return apply_filters( 'get_the_categories', $categories );
 }
 
-/*
-function get_avatar_url($get_avatar){
+function esi_get_avatar_url($get_avatar){
 	preg_match( '/src="([^"]*)"/i', $get_avatar, $matches);
     return $matches[1];
 }
-*/
 
 function ucc_get_terms( $id = '' ) {
   global $post;

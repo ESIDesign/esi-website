@@ -28,9 +28,8 @@
 		$user_link = get_author_posts_url($curauth->ID);
 		$avatar = 'wavatar';
 ?>
-
 			<li class="people-grid">
-				<a data-largesrc="<?php echo get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
+				<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
 					<?php echo get_avatar($curauth->user_email, '170', $avatar); ?> 
 					<article class="caption_people">
 						<span class="name"><?php echo $curauth->display_name; ?></span><br />
@@ -44,7 +43,6 @@
 	<?php endforeach; ?>
 
 <!-- DIRECTORS -->
-
 <?php
 	// Get the authors from the database ordered by user nicename
 	global $wpdb;
@@ -62,7 +60,7 @@
 			$user_link = get_author_posts_url($curauth->ID);
 ?>
 		<li class="people-grid">
-			<a data-largesrc="<?php echo get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
+			<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
 				<?php echo get_avatar($curauth->user_email, '170', $avatar); ?>
 					<article class="caption_people">
 						<span class="name"><?php echo $curauth->display_name; ?></span><br />
@@ -70,21 +68,8 @@
 					</article>
 				</a>
 			</li>
-			
-<!-- Hack for when there are top 9
-	<?php if ($count == '1') { ?>
-			<li class="people-grid2"><div class="clear"></div></li>
-	<?php } ?>
--->
-
-<!--
-	<?php if ($count == '3') { ?>
-		<li class="people-grid3"><article class="people_block2"></article></li>
-	<?php } ?>
--->
 
 	<?php endif; ?>
-
 <?php endforeach; ?>
 
 </ul><!-- og-grid -->
@@ -140,25 +125,20 @@ $attachments = get_posts( array(
 //people attachments count
 $i=0;         
 
-// Loop through each author
 foreach($author_ids as $author) :
 
-	// Get user data
 	$curauth = get_userdata($author->ID);
 
 	// All current users are editors or higher 
 	if($curauth->user_level > 4 && $curauth->leadership != 'on' && $curauth->director != 'on' && $curauth->first_name != 'Rosemary') :
 		$count++;
-	
-		// Get link to author page - not in use
-		$user_link = get_author_posts_url($curauth->ID);
 
 		// Set default avatar (values = default, wavatar, identicon, monsterid)
 		$avatar = 'default';
 ?>
 
 <li class="people-grid">
-<!-- 	<a data-largesrc="<?php echo get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>"> -->
+<!-- 	<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>"> -->
 	<?php echo get_avatar($curauth->user_email, '170', $avatar); ?>
 	<article class="caption_people">
 		<span class="name"><?php echo $curauth->display_name; ?></span><br />
@@ -265,7 +245,5 @@ var li_length = $('#og-grid li').length - 3;
 
 	});
 });
-
-</script>
-		
+</script>	
 <?php get_footer(); ?>

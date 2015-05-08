@@ -765,6 +765,7 @@ body.home {
 		display: block;
 		position: absolute;
 		top: 0px;
+// 		width: 100%;
 		z-index: 0;
 	}
 	.project-overlay {
@@ -2028,10 +2029,17 @@ iframe#mosaic_player {
 	margin-bottom: 20px;
 }
 
-#featured-content #single-project-left {
+#single-project-left {
 	float: left;
 	margin-left: 5px;
 	width: 58%;
+	ul {
+		list-style-type: disc;
+		padding: .5% 0% 3% 6%;
+		li {
+			margin-bottom: .5%;
+		}
+	}
 }
 
 .accordion {
@@ -2069,8 +2077,7 @@ iframe#mosaic_player {
 
 #single-project-right{
 	float: right;
-/* 	width: 41%; */
-	width: 36%;
+	width: 35%;
 	margin-top: 5px;
 }
 
@@ -2105,18 +2112,15 @@ iframe#mosaic_player {
 
 .related-item {
 	display: inline-block;
-	width: 166px;
-	margin: 10px 10px 10px 0;
+	width: 48%;
+	margin: 1% 10px 2% 0;
 	padding-bottom: 5px;
 	position: relative;
 	overflow: hidden;
-    /* hack to fix break if only 1 column with 2 lines */
-	min-height: 177px;
 	vertical-align: top;
-}
-
-.post-template-single-lab-project-php .related-item, .postid-3226 .related-item {
-	height: 170px;
+	&:nth-child(2n+1) {
+		margin-right: 0;
+	}
 }
 
 .related-item:hover {
@@ -2137,7 +2141,6 @@ iframe#mosaic_player {
 	padding: 4px 10px 6px 7px;
 	margin-left: 9px;
 	line-height: 17px;
-/* 	width: 130px; */
 }
 
 .related-caption a {
@@ -2928,7 +2931,8 @@ li.people-grid .caption_people  {
 	 	font-weight: 300;
 	 }
 	.people_item {
-		height: 155px;
+		height: 150px;
+		overflow: hidden;
 		width: 150px;
 		float: left;
 		.video-wrapper {
@@ -3584,42 +3588,6 @@ input[type="clean-button"]:active,
 	margin-top: 15px;
 }
 
-
-/*-----------------------------------------------------------------------------------*/
-/* = Widgets
-/*-----------------------------------------------------------------------------------*/
-
-#sidebar .widget_recent_entries ul,
-#sidebar .widget_nav_menu ul,
-#sidebar .widget_categories ul{
-	margin: 0;
-	list-style: none;
-}
-.widget_recent_entries a,
-.widget_nav_menu a,
-.widget_categories a,
-.widget_pages a,
-.widget_links a,
-.widget_archive a,
-.widget_meta a{
-
-}
-#sidebar .current-menu-item a,
-#sidebar .current-cat a,
-.widget_pages .current_page_item a{
-	color: #000 !important;
-}
-#sidebar .widget_recent_entries a,
-#sidebar .widget_nav_menu ul a,
-#sidebar .widget_categories a{
-}
-.widget_recent_entries a:hover,
-.widget_nav_menu ul a:hover,
-.widget_categories a:hover{
-	text-decoration: none;
-	color: #000;
-}
-
 /*-----------------------------------------------------------------------------------*
 /* = Footer/Copyright
 /*-----------------------------------------------------------------------------------*/
@@ -3684,7 +3652,6 @@ input[type="clean-button"]:active,
 
 #links {
 	margin-left: 16px;
-	width: 65%;
 }
 
 #links ul li, #social-media ul li {
@@ -3694,8 +3661,7 @@ input[type="clean-button"]:active,
 
 #links ul li a {
 	border-left: 1px solid #ddd;
-	padding-left: 16px;
-	padding-right: 16px;
+	padding: 0 16px;
 	font-weight: 300;
 }
 
@@ -3711,8 +3677,6 @@ input[type="clean-button"]:active,
 a.footer_twitter:hover {
 	
 }
-
-
 
 /*-----------------------------------------------------------------------------------*
 /* Main Shortcodes

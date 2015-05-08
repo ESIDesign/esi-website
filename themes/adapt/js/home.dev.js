@@ -126,7 +126,7 @@ function dynamicSize() {
 if ( $(window).width() > 479) {
 		var player = $('embed')[0];
 		
-		$('.home_item1 .cycle').on('click touchstart', function(ev) {
+		$('.home_item1 .cycle, .home_item1 #button, .home_item1').on('click touchstart', function(ev) {
 		    $('.home_item1 .cycle, .home_item1 .project-overlay, #button').fadeOut();
 // 		    player.src += "&autoPlay=true";
 		    ev.preventDefault();

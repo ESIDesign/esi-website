@@ -21,12 +21,13 @@ Template Name Posts: Lab Template
            <div class="title">
            <div class="band">
 	           <h1><?php
-	  	if (get_field('short') != "") { 
-	  	the_field("short");
-	  	}
-	  	else { ?>
-			<?php the_title(); ?>	  	
-	  	<?php } ?></h1>
+			  	if (get_field('short') != "") { 
+				  	the_field("short");
+			  	}
+			  	else { ?>
+					<?php the_title(); 
+				} ?>  	
+				</h1>
            </div>
            <div class="triangle"></div>
            </div>
@@ -108,17 +109,13 @@ Template Name Posts: Lab Template
 	                            </p>
                             <?php } ?>
 	                    </li>   
-                                      
-	                         
+   
                          <?php } ?>
                         
                         <?php endforeach; ?>
                     </ul>
-                </div>
-                <!-- /flex-slider -->
-            </div>
-            <!-- /slider-wrap -->
-   
+                </div><!-- /flex-slider -->
+        </div><!-- /slider-wrap -->
 </div><!-- /single-project -->
         
 <div id="featured-content">
@@ -150,7 +147,6 @@ Template Name Posts: Lab Template
 			  	echo "<h3>Awards</h3>";
 			  	the_field("awards");
 			} ?>
-        </div>  
           
         <?php 
 	  	if (get_field('pdf') != "") { 
@@ -163,53 +159,15 @@ Template Name Posts: Lab Template
       if(!empty($blogs)) {
 		  echo '<h3>Lab Blog Posts</h3>';
 		      foreach($blogs as $blog) {
-			      echo '<a href="'.get_site_url().'/'.$blog->post_name.'">'.$blog->post_title.'</a><br />';
+			      echo '<a href="'.get_site_url().'/blog/'.$blog->post_name.'">'.$blog->post_title.'</a><br />';
 		      }	 
 	      echo '<a class="all-text" href="'.get_site_url().'/category/lab">See all lab blog posts →</a>';     
       } ?>
+      </div>  
 		
 </div><!-- /single-project-left -->
         
-<div id="single-project-right" class="clearfix">
-    <?php 
-  	if (get_field('quote1') != "") { 
-	  	echo "<div class='pull-quote'><h3>";
-	  	the_field("quote1");
-	  	echo "</h3>";
-		if (get_field('attrib1') != "") { 
-		  	echo "<p>-";
-		  	the_field("attrib1");
-		  	echo "</p>";  
-    	}
-    	echo "</div>";
-	} ?>
-    	
-  	<?php 
-  	if (get_field('quote2') != "") { 
-	  	echo "<div class='pull-quote'><h3>";
-	  	the_field("quote2");
-	  	echo "</h3>";
-	  	if (get_field('attrib2') != "") { 
-		  	echo "<p>-";
-		  	the_field("attrib2");
-		  	echo "</p>";
-	  	}     
-    	echo "</div>";
-	} ?>
-
-	<?php 
-  	if (get_field('quote3') != "") { 
-	  	echo "<div class='pull-quote'><h3>";
-	  	the_field("quote3");
-	  	echo "</h3>";
-	  	if (get_field('attrib3') != "") { 
-		  	echo "<p>-";
-		  	the_field("attrib3");
-		  	echo "</p>";
-	  	}     
-		echo "</div>";
-	} ?>
-    	
+<div id="single-project-right" class="clearfix">    	
 <div class="featured-meta">
 	<h3 class="related">Recent Experiments</h3>
 </div>
@@ -235,7 +193,8 @@ $labblog_args = array(
 );
 $labblog_posts = get_posts( $labblog_args );
 
-$all_posts = array_merge( $lab_posts, $labblog_posts );
+// $all_posts = array_merge( $lab_posts, $labblog_posts );
+$all_posts = array_merge( $lab_posts);
 
 $post_ids = wp_list_pluck( $all_posts, 'ID' );//Just get IDs from post objects
 
@@ -254,6 +213,7 @@ if ( !empty($images) ) {
 		setup_postdata( $image ); 
 	
 		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'grid-thumb', true);
+		$thumb_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'insta', true);
 		$site_url = get_site_url();
 		
 		ob_start();
@@ -273,8 +233,9 @@ if ( !empty($images) ) {
 	    $agent = $_SERVER['HTTP_USER_AGENT'];
 	
 		if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
-		  echo '<div class="video-wrapper"><video id="related_lab" width="200" >
-			<source src="'.$first_vid.'" type="video/mp4">
+		  echo '<div class="video-wrapper">
+		  <video id="related_lab" poster="'.$thumb_url[0].'">
+			<source src="'.$first_vid.'" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2">
 			</video><span class="awesome-icon-play"></span></div></a>';
 		}
 	
@@ -285,7 +246,7 @@ if ( !empty($images) ) {
 		if(!empty($value)) { 
 			echo '<a target="_blank" href="'. $value.'">';
 		} else {
-			echo '<a href="'.$site_url.'/'.$image->post_name.'">';
+			echo '<a href="'.$site_url.'/blog/'.$image->post_name.'">';
 		}
 		if (get_field('short', $image->ID) != "") { 
 		  	the_field("short", $image->ID);
