@@ -14,10 +14,10 @@ $terms = get_the_terms( get_the_ID(), 'category' );
 	<p class="date"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
 	<h2><a href="<?php the_permalink(' ') ?>" rel="lightbox" data-ob="lightbox" data-ob_iframe="true"> 
 	<?php $title = get_the_title(); 
-			        echo substr($title, 0, 60);
-			        if(strlen($title) > 60) {
-				        echo '...';
-			        }  ?>
+    echo substr($title, 0, 60);
+    if(strlen($title) > 60) {
+        echo '...';
+    } ?>
 	</a></h2>
     <?php
 	//show meta only on blog posts

@@ -6,8 +6,7 @@
  $options = get_option( 'adapt_theme_settings' );
 ?>
 <aside id="sidebar" class="clearfix">
-	
-	
+
 	<?php if(is_page(430)) { 
 	
 	 echo "<div class='sidebar-box'><h3 class='careers'>Career Opportunities</h3>";
@@ -36,11 +35,10 @@
 
 	}	?>
 
-<div class="archive-sidebar">
-
+<div class="archive-sidebar <?php if(is_page(2)) { echo 'news'; } ?>">
+<?php if(!is_page(2)) { ?>
 <div class='sidebar-box twitter'><h3><a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/tweet.png" alt="Twitter"> Twitter</a></h3>	
 <div class="twitter">
-
 </div>
 </div>
 
@@ -95,17 +93,64 @@ if ( !empty($images) ) {
 } ?>
 
 </div>
+<?php } ?>
+
+<?php if(is_page(2)) { ?>
+<div class='sidebar-box twitter'>
+<h3>Press Inquiries</h3>
+<p><strong>Rosemary Siciliano</strong><br />
+Communications Director<br />
+212-989-9389<br />
+207.332.9008 (c)<br />
+rsiciliano (at) esidesign.com</p>
+</div>
+
+<div class='sidebar-box video'>
+	<h3>Video<a class="all" href="https://vimeo.com/esidesign">See all video</a></h3>
+	<?php echo '<div class="related-item">';
+		echo '<a href=""><iframe id="player" src="http://player.vimeo.com/video/74313412?api=1&title=0&byline=0&portrait=0&player_id=player"></iframe></li></a>';
+
+		echo '<div class="related-caption"><a href="https://vimeo.com/74313412">';
+	  	echo 'Media Architecture';		
+		echo '</a></div>';
+
+		echo '</div>';
+		?>
+		<?php echo '<div class="related-item">';
+		echo '<a href=""><iframe id="player" src="http://player.vimeo.com/video/109265859?api=1&title=0&byline=0&portrait=0&player_id=player"></iframe></li></a>';
+
+		echo '<div class="related-caption"><a href="https://vimeo.com/109265859">';
+	  	echo 'Beacon Capital Partners: 745 Atlantic';		
+		echo '</a></div>';
+
+		echo '</div>';
+		?>
+</div>
+	
+
+<div class='sidebar-box'>
+<?php
+global $post;
+$args = array(
+	'post_type' =>'press',
+	'orderby' => 'date',
+	'order' => 'ASC',
+	'numberposts' => 4
+);
+$posts = get_posts($args);
+$count = 0;
+if($posts) {
+echo '<h3>Press Releases</h3>';
+	foreach ($posts as $post) : setup_postdata($post);
+		echo '<p><a href="'.get_the_permalink().'">'.get_the_title().'</a><br />
+		'.get_the_date().'</p>';
+	endforeach; 
+} ?>
+</div>
+<?php } ?>
+
 <div class="clearfix"></div>
 
-<!--
-<div class='sidebar-box padding-top'>
-<?php $args = array(
-	'title_before' => '<h3>',
-	'title_after' => '</h3>',
-); ?>
-<?php wp_list_bookmarks($args); ?> 
-</div>
--->
 </div>
 
 </aside>

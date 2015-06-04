@@ -41,24 +41,13 @@ $options = get_option( 'adapt_theme_settings' );
 ================================================== -->
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" />
 
-
-<script type="text/javascript" src="//use.typekit.net/ras6pdl.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script src="//use.typekit.net/xgw2vch.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
 <!-- WP Head
 ================================================== -->
 
 <?php wp_head(); ?>
-<script type="text/javascript">
-
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-2334506-6', 'esidesign.com');
-ga('require', 'displayfeatures');
-ga('send', 'pageview');
-</script>
+<?php include('analytics.php'); ?>
 </head>
 <body class="home">
 

@@ -797,3 +797,9 @@ function caption_shortcode_with_credits($empty, $attr, $content) {
 	return '<div ' . $id . 'class="wp-caption ' . esc_attr($align) . '" style="width: ' . (10 + (int) $width) . 'px">'
 		. do_shortcode($content) . '<p class="wp-caption-text">' . $caption . '</p></div>';
 }
+
+function remove_menus(){
+	remove_menu_page( 'link-manager.php' );             
+}
+
+add_action( 'admin_menu', 'remove_menus' );

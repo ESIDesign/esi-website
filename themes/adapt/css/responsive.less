@@ -259,8 +259,16 @@ a.all {
 	width: 100% !important;
 }
 
+.post {
+	width: 63%;
+}
+
 #sidebar {
 	width: 33%;
+}
+
+.loop-entry-thumbnail {
+  float: none;
 }
 
 }
@@ -521,11 +529,13 @@ ul.filter a#all span {
 	margin-bottom: 10px;
 }
 
-a.all {
-	position: relative;
-	top: 0;
-	right: 0;
-	display: block;
+.featured-content, #sidebar {
+	a.all {
+		position: relative;
+		top: 0;
+		right: 0;
+		display: block;
+	}
 }
 
 .nf-loading {
@@ -916,7 +926,7 @@ html {
 	width: 100%;
 }
 
-#wrap{ width: 420px; }
+#wrap, .home #wrap { width: 420px; }
 
 .home-wrap {
 	left: -15px;
@@ -1122,10 +1132,10 @@ a.all {
 	html { width: 280px; margin: 0 auto;}
 /* 	html {width: 95%; margin: 0 auto;}  */
 
-#wrap{ 
+#wrap, .home #wrap { 
 	padding: 0px 1%;
 	overflow: hidden; 
-	width: 98%;
+	width: 90%;
 }
 
 .home-wrap {
