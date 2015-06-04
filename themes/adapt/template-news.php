@@ -8,28 +8,6 @@
 
 <?php get_header(); ?>
 
-<?php 
-$sources = array(
-	array('source' =>'The New York Times', 'logo_id' => 4939),
-	array('source' =>'Fast Company', 'logo_id' => 4964)
-	);
-function search($array, $key, $value) 
-{ 
-    $results = array(); 
-
-    if (is_array($array)) 
-    { 
-        if (isset($array[$key]) && $array[$key] == $value) 
-            $results[] = $array; 
-
-        foreach ($array as $subarray) 
-            $results = array_merge($results, search($subarray, $key, $value)); 
-    } 
-
-    return $results; 
-} 
-?>
-
 <div id="post" class="post clearfix archive-post news"> 
 
 <header id="page-heading">
@@ -81,7 +59,7 @@ function search($array, $key, $value)
 			$link = $link['url'];
 		}
 	?>
-	<h3><a href="<?php echo $link; ?>"> 
+	<h3><a target="_blank" href="<?php echo $link; ?>"> 
 	<?php echo the_title(); ?></a></h3>
 	<?php $project_title = get_the_title($project_ids[0]); ?>
 	<div class="loop-entry-meta">

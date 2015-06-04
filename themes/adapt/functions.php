@@ -803,3 +803,23 @@ function remove_menus(){
 }
 
 add_action( 'admin_menu', 'remove_menus' );
+
+$sources = array(
+	array('source' =>'The New York Times', 'logo_id' => 4939),
+	array('source' =>'Fast Company', 'logo_id' => 4964)
+	);
+function search($array, $key, $value) 
+{ 
+    $results = array(); 
+
+    if (is_array($array)) 
+    { 
+        if (isset($array[$key]) && $array[$key] == $value) 
+            $results[] = $array; 
+
+        foreach ($array as $subarray) 
+            $results = array_merge($results, search($subarray, $key, $value)); 
+    } 
+
+    return $results; 
+} 

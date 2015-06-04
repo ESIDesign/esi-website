@@ -103,7 +103,7 @@ $people_posts = get_posts( $people_args );
 $peoplepage_args = array(
 	'orderby' => 'rand',
 	'post_type' => 'attachment',
-	'post_parent' => $id,
+	'tag' => 'people',
 	'post_mime_type' => 'image',
 	'posts_per_page' => 4
 );
