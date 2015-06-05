@@ -38,6 +38,13 @@ Template Name Posts: Lab Template
                     
                                           
                    <?php   
+                      	$id = get_the_ID();
+                    	if(get_field('video', $id) != "" && get_field('video_img', $id) == "") {
+							$exclude_id = get_post_thumbnail_id( $id );
+						}
+						else {
+							$exclude_id = '';
+						}
                     	$id = get_the_ID();
                     	$feat_id = get_post_thumbnail_id( $id ); 
                         //attachement loop
@@ -91,10 +98,10 @@ Template Name Posts: Lab Template
                      $video = get_post_custom_values("video");
                      $video2 = get_post_custom_values("video2");
 						  	echo '<li class="video-wrapper">
-						  	<iframe id="player" src="http://player.vimeo.com/video/'.$video[0].'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';
+						  	<iframe id="player" src="http://player.vimeo.com/video/'.$video[0].'?api=1&title=0&byline=0&portrait=0&player_id=player" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';
                      if (get_field('video2', $id) != "") {
 	                  echo '<li class="video-wrapper">
-						  	<iframe id="player" src="http://player.vimeo.com/video/'.the_field('video2',$id).'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';   
+						  	<iframe id="player" src="http://player.vimeo.com/video/'.the_field('video2',$id).'?api=1&title=0&byline=0&portrait=0&player_id=player" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';   
                      }                  
                     
                     ?>

@@ -69,10 +69,10 @@ Template Name Posts: Featured Template
                         );
                     $attachments = get_posts($args);
 					if (get_field('video_order', $id) != "") { 
-                    $video_order = get_field('video_order', $id);
+		                $video_order = get_field('video_order', $id);
                     }
                     if (get_field('video_order') == "") { 
-                    $video_order = 2;
+	                    $video_order = 2;
                     }  	
 					//attachments count
 					$attachments_count = count($attachments);
@@ -105,9 +105,14 @@ Template Name Posts: Featured Template
                     }
                     $feat_img = wp_get_attachment_image_src( $thumb_id, 'slider');
                      $video = get_post_custom_values("video");
+                     $video2 = get_post_custom_values("video2");
 						  	echo '<li class="video-wrapper">
 						  	<img class="placeholder" src="'. $feat_img[0].'"/><span id="button" class="awesome-icon-play"></span>
 						  	<iframe id="player" src="http://player.vimeo.com/video/'.$video[0].'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';
+				  	if (get_field('video2', $id) != "") {
+						echo '<li class="video-wrapper">
+						  	<iframe id="player" src="http://player.vimeo.com/video/'.the_field('video2',$id).'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';   
+                     }       
                     ?>
 
 	                 <?php } ?>
@@ -205,8 +210,11 @@ Template Name Posts: Featured Template
 }
 }
 	  	?>
+	  	<?php if(is_single(2844)) { 
+	  		get_sidebar('lab');
+	  	} ?>
 	  	
-	  	<?php if(!is_single('408') && !is_single('409')) { ?>
+	  	<?php if(!is_single('408') && !is_single('409') && !is_single(2844)) { ?>
 	  	
 	  	<h3 class="related">Related Projects <a class="all" href="<?php echo get_site_url(); ?>/work">See all projects</a></h3>
 	  	
@@ -268,8 +276,9 @@ if ( !empty($images) ) {
 
 <?php endwhile; ?>
 <?php endif; ?>	
-<script type="text/javascript">
 
+<?php if(is_single(1884)) { ?>
+<script type="text/javascript">
 jQuery(function($){
 // 	if($('.accordion') {
 (function($) {
@@ -298,6 +307,34 @@ jQuery(function($){
 })(jQuery);
 // 	}
 });
-
 </script>
+<?php } ?>
+
+<?php if(is_single(2844)) { ?>
+<script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/video.min.js"></script>
+<script>
+    videojs.options.flash.swf = "<?php echo get_template_directory_uri(); ?>/js/video-js.swf";
+</script>
+
+<script type="text/javascript">
+
+jQuery(function($){
+	$(document).ready(function(){
+	
+		jQuery('.related-item').hover(function() {
+			jQuery(this).find('.awesome-icon-play').fadeOut();
+			var myVideo = jQuery(this).find('video#related_lab')[0];
+			myVideo.play();
+		},
+		function() {
+			jQuery(this).find('.awesome-icon-play').fadeIn();
+			var myVideo = jQuery(this).find('video#related_lab')[0];
+			myVideo.pause();
+		});
+		
+	});
+});
+</script>
+<?php } ?>
 <?php get_footer(); ?>
