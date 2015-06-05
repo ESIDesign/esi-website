@@ -180,7 +180,9 @@ foreach($author_ids as $author) :
 	if('attachment' == get_post_type($attachments[$i]->ID)) {
 	$grid_thumb2 = wp_get_attachment_image_src($attachments[$i]->ID, 'grid-thumb'); ?>
 		<li class="people_item2">
+		<div class="crop">
 			<img src="<?php echo $grid_thumb2[0]; ?>" alt="<?php echo apply_filters('the_title', $attachments[$i]->post_title); ?>" /> 
+		</div>
 		</li>
 	<?php } ?>                    
 	

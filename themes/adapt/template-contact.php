@@ -46,7 +46,7 @@
 				});
 				
 			
-	var companyImage = new google.maps.MarkerImage('/images/map_marker_sm.png',
+	var companyImage = new google.maps.MarkerImage('<?php echo get_template_directory_uri(); ?>/images/map_marker_sm.png',
 					new google.maps.Size(100,50),
 					new google.maps.Point(0,0),
 					new google.maps.Point(50,50)
@@ -54,7 +54,7 @@
 
 
 
-				var companyShadow = new google.maps.MarkerImage('/images/logo_shadow.png',
+				var companyShadow = new google.maps.MarkerImage('<?php echo get_template_directory_uri(); ?>/images/logo_shadow.png',
 					new google.maps.Size(130,50),
 					new google.maps.Point(0,0),
 					new google.maps.Point(65, 50));

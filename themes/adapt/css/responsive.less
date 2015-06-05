@@ -58,18 +58,24 @@ img, video { max-width: 100%; }
 
 /* Note: Design for a width of 740px */
 @media only screen and (min-width: 768px) and (max-width: 959px) {
-	#wrap{ width: 680px; }
+#wrap, .home #wrap { 
+	width: 85%; 
+}
 	.home-entry, #footer-one,#footer-two,#footer-three,#footer-four{ width: 155px;  }
 	#search { text-indent: -9999px; }
 	#header {width: 768px; }
-    form#searchform { left: 650px; }
-
-.home #wrap {
-	width: 700px;
-}
-
+    
 .home-wrap {
 	left: 30px;	
+}
+
+.sf-menu a {
+	font: 18px/40px "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif;
+	padding: 28px 2px 16px;
+}
+
+form#searchform { 
+	right: -2px;
 }
 
 .project-content {
@@ -267,10 +273,6 @@ a.all {
 	width: 33%;
 }
 
-.loop-entry-thumbnail {
-  float: none;
-}
-
 }
 
 
@@ -377,11 +379,6 @@ h1 {
 .drop {
 	margin-top: 0px;
 	float: left;
-}
-
-.archive-post .drop {
-	margin-left: 0 !important;
-	height: 40px;
 }
 
 .project-content {
@@ -529,7 +526,7 @@ ul.filter a#all span {
 	margin-bottom: 10px;
 }
 
-.featured-content, #sidebar {
+.featured-content, #sidebar, #main {
 	a.all {
 		position: relative;
 		top: 0;
@@ -598,11 +595,9 @@ a.all {
 	width: 100%; 
 }
 
-/*
-.loop-entry-meta { 
-	display: none; 
+.loop-entry-thumbnail {
+  float: none;
 }
-*/
 
 .loop-entry h2{ margin-bottom: 10px; }
 
@@ -914,6 +909,15 @@ form#subForm input#submit {
 	padding: 5px 6px;
 }
 
+.search-results {
+	.item {
+		width: 95%;
+		img {
+			width: 100%;
+		}
+	}
+}
+
 }
 
 
@@ -926,7 +930,9 @@ html {
 	width: 100%;
 }
 
-#wrap, .home #wrap { width: 420px; }
+#wrap, .home #wrap { 
+	width: 85%; 
+}
 
 .home-wrap {
 	left: -15px;
@@ -1063,7 +1069,7 @@ html {
 
 .responsive-clear{ clear: both; }
 
-.loop-entry-thumbnail{width: 33%;}
+.loop-entry-thumbnail{ width: 33%;}
 
 
 .post-type-archive-project .project-overlay {
@@ -1123,19 +1129,42 @@ a.all {
 	
 }
 
+@media only screen and (max-width: 600px) {
+.search-left, .search-right {
+	float: none;
+	width: 95%;
+}
+
+.search-results {
+	.item {
+		width:48%;
+		img {
+			width: 100%;
+		}
+	}
+}
+
+h1.blog-title {
+	width: 100%;
+}
+
+.archive-post .drop {
+	margin-left: 0 !important;
+	height: 40px;
+}
+
+}
 
 /*  #Mobile (Portrait)
 ================================================== */
 
 /* Note: Design for a width of 420px */
 @media only screen and (max-width: 479px) {
-	html { width: 280px; margin: 0 auto;}
-/* 	html {width: 95%; margin: 0 auto;}  */
 
 #wrap, .home #wrap { 
 	padding: 0px 1%;
 	overflow: hidden; 
-	width: 90%;
+	width: 85%;
 }
 
 .home-wrap {
@@ -1248,13 +1277,13 @@ p.by {
 }
 
 /* 	this may be lab only - video-wrapper was used when adding photo overlay - may take  */
-	#featured .video-wrapper {
-		height: 157px;
-	} 
-		
-	#featured .flexslider img, #featured iframe, .archive-project .flexslider img {
-		height: 147px;
-	}
+#featured .video-wrapper {
+	height: 157px;
+} 
+	
+#featured .flexslider img, #featured iframe, .archive-project .flexslider img {
+	height: 147px;
+}
 	
 .flexslider span#button {
 	font-size: 40px; 
@@ -1278,167 +1307,182 @@ p.by {
 	line-height: 135%;
 }
 
-	.about-wrap h2 {
-		font-size: 160%;
-	}
-	
-	.about_text {
-		border-bottom: 1px solid #999;
-		position: relative;
-		left: 0%;
-		padding-left: 3%;
-		width: 100%;
-	}
-	
-	.about_text h1 {
-		margin: -45px 1% 15px;
-	}
-	
-	.about_text h3 {
-		color: #999999;
-	}
-	
-	.about_phil { 
-		padding-bottom: 32%;
-		clear: both;
-	}
-	
-	.about_people3 {
-		display: none;
-	}
-	
-	@light_green: #a3ad34;
-	@dark_green: #767d26;
-	
-	.approach3 span.gradient, .approach4 span.gradient, .approach5 span.gradient, .approach6 span.gradient, .approach8 span.gradient {
-		display: none !important;
-	}
-	
-	.approach1 {
-		padding-bottom: 117%;
-	}
-	
-	.approach1 span.gradient {
-		float: none;
-		clear: both;
-		display: block;
-	}
-	
-	.approach1 div {
-		clear: both;
-		display: block;
-		background: @light_green;
-		margin-top: 1%;	
-		width: 100% !important;
-	}
-	
-	.approach1 h1 {
-		line-height: 140%;
-	}
-	
-	.approach2 {
-		margin-bottom: 1%;
-		padding-bottom: 42%;
-	}
+.about-wrap h2 {
+	font-size: 160%;
+}
 
-	.approach2 .two div {
-		background: @green !important;	
-		margin-right: 0%;
-		width: 90% !important;
-	}
-	
-	.approach3 {
-		background: @dark_green;	
-		padding-bottom: 54%;
-	}
-		
-	.approach3 h3 {
-		width: 95% !important;
-	}
-	
-	.approach4 div {
-		background: @light_green !important;
-	}
-	
-	.approach4 img {
-		display: none;
-	}
-	
-	.approach4 div {
-		margin: 0% 0 2% -1.9%;
-		padding: 8% 10% 85%;
-		width: 174.9%;
-	}
-	
-	.approach5 .two, .approach6 .two {
-		float: none;
-		margin-bottom: 1%;
-		padding-bottom: 37%;
-		width: 100%;
-	}
+.about_text {
+	border-bottom: 1px solid #999;
+	position: relative;
+	left: 0%;
+	padding-left: 3%;
+	width: 100%;
+}
 
-	.approach6 .two:first-child {
-		margin-left: 0;
-		margin-bottom: 0;
-	}
+.about_text h1 {
+	margin: -45px 1% 15px;
+}
+
+.about_text h3 {
+	color: #999999;
+}
+
+.about_phil { 
+	padding-bottom: 32%;
+	clear: both;
+}
+
+.about_people3 {
+	display: none;
+}
+
+@light_green: #a3ad34;
+@dark_green: #767d26;
+
+.approach3 span.gradient, .approach4 span.gradient, .approach5 span.gradient, .approach6 span.gradient, .approach8 span.gradient {
+	display: none !important;
+}
+
+.approach1 {
+	padding-bottom: 117%;
+}
+
+.approach1 span.gradient {
+	float: none;
+	clear: both;
+	display: block;
+}
+
+.approach1 div {
+	clear: both;
+	display: block;
+	background: @light_green;
+	margin-top: 1%;	
+	width: 100% !important;
+}
+
+.approach1 h1 {
+	line-height: 140%;
+}
+
+.approach2 {
+	margin-bottom: 1%;
+	padding-bottom: 42%;
+}
+
+.approach2 .two div {
+	background: @green !important;	
+	margin-right: 0%;
+	width: 90% !important;
+}
+
+.approach3 {
+	background: @dark_green;	
+	padding-bottom: 54%;
+}
 	
-	.approach5 {
-		float: none;
-		background: @green;
+.approach3 h3 {
+	width: 95% !important;
+}
+
+.approach4 div {
+	background: @light_green !important;
+}
+
+.approach4 img {
+	display: none;
+}
+
+.approach4 div {
+	margin: 0% 0 2% -1.9%;
+	padding: 8% 10% 85%;
+	width: 174.9%;
+}
+
+.approach5 .two, .approach6 .two {
+	float: none;
+	margin-bottom: 1%;
+	padding-bottom: 37%;
+	width: 100%;
+}
+
+.approach6 .two:first-child {
+	margin-left: 0;
+	margin-bottom: 0;
+}
+
+.approach5 {
+	float: none;
+	background: @green;
+}
+
+.approach6 {
+	float: none;
+	background: @dark_green;
+	padding-bottom: 2%;
+}
+
+.approach1 div, .approach2 .two div, .approach3 div, .approach5 div, .approach6 div, .approach8 div {
+	position: relative !important;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 5% 5% 10%;
+	width: 88%;
+}
+
+.approach6 h3 {
+	margin-bottom: 0px;
+}
+
+.approach7 {
+			padding-bottom: 48%;
+}
+
+.approach7 div {
+	background: @light_green !important;
+	margin-bottom: 0%;
+}
+
+.approach8  {
+	background: @green !important;
+}
+
+.approach8 div {
+	padding-bottom: 3%;
+}
+
+.approach8 h3 {
+	width: 98% !important;
+}
+
+.people_item .video-wrapper {
+	height: 126px;
+	max-width: 100%;
+}
+
+li.people-grid, .people_item {
+	height: auto;
+	min-height: 193px;
+}
+
+li.people-grid {
+	height: 193px;
+}
+
+.search-results {
+	.item {
+		width: 100%;
+		&:hover {
+			background-color: #FFFFFF;
+			.project-overlay h4 {
+				color: @gray;
+			}
+		}
+		img {
+			width: 240px;
+		}
 	}
-	
-	.approach6 {
-		float: none;
-		background: @dark_green;
-		padding-bottom: 2%;
-	}
-	
-	.approach1 div, .approach2 .two div, .approach3 div, .approach5 div, .approach6 div, .approach8 div {
-		position: relative !important;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		padding: 5% 5% 10%;
-		width: 88%;
-	}
-	
-	.approach6 h3 {
-		margin-bottom: 0px;
-	}
-	
-	.approach7 {
-				padding-bottom: 48%;
-	}
-	
-	.approach7 div {
-		background: @light_green !important;
-		margin-bottom: 0%;
-	}
-	
-	.approach8  {
-		background: @green !important;
-	}
-	
-	.approach8 div {
-		padding-bottom: 3%;
-	}
-	
-	.approach8 h3 {
-		width: 98% !important;
-	}
-	
-	.people_item .video-wrapper {
-		height: 126px;
-		max-width: 100%;
-	}
-	
-	li.people-grid, .people_item {
-		height: auto;
-		min-height: 193px;
-	}
-	
-	li.people-grid {
-		height: 193px;
-	}
+}
 
 }

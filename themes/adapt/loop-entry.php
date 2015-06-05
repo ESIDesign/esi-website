@@ -12,23 +12,23 @@ $terms = get_the_terms( get_the_ID(), 'category' );
 	<?php } ?>
 	<div class="text">
 	<p class="date"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
-	<h2><a href="<?php the_permalink(' ') ?>" rel="lightbox" data-ob="lightbox" data-ob_iframe="true"> 
+	<h3><a href="<?php the_permalink(' ') ?>"> 
 	<?php $title = get_the_title(); 
-    echo substr($title, 0, 60);
-    if(strlen($title) > 60) {
+    echo substr($title, 0, 80);
+    if(strlen($title) > 80) {
         echo '...';
     } ?>
-	</a></h2>
+	</a></h3>
     <?php
 	//show meta only on blog posts
     if ( get_post_type() != 'page' || get_post_type() != 'project') { ?>
 	<div class="loop-entry-meta">
-        <p class="by"><?php _e('By', 'surplus'); ?> <a href="<?php echo get_site_url(); ?>/people"><?php the_author(); ?></a>
+        <p class="by gray">By <a href="<?php echo get_site_url(); ?>/people"><?php the_author(); ?></a>
 <!-- <span class="awesome-icon-comments"></span> <?php comments_popup_link('0', '1', '%'); ?></p> -->
     </div>
     <!-- /loop-entry-meta -->
     <?php } ?>
-	<p><?php echo get_excerpt(195); ?></p>
+	<p><?php echo get_excerpt(220); ?></p>
 	</div>
 </div>
 <!-- loop-entry -->

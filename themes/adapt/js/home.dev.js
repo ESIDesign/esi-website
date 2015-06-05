@@ -1,6 +1,6 @@
 jQuery(function($){
 
-// $('.home-wrap').fadeIn(); 
+// $('.home-wrap').hide(); 
 
     var page = 0;
     var loading = false;

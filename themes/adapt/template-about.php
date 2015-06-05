@@ -25,13 +25,13 @@
 <div class="about_work"> 
      <div class="about_work1">
     			<?php
-					if (get_field('module2') != "") { 
+					if (get_field('module1') != "") { 
 						echo '<h2>';
-						echo get_field("module2_title");
+						echo get_field("module1_title");
 						echo '</h2><h3>';
-						echo strip_tags(get_field("module2"));
+						echo strip_tags(get_field("module1"));
 						echo '</h3><h3 class="red">';
-						echo strip_tags(get_field("module2_link"), '<a>');
+						echo strip_tags(get_field("module1_link"), '<a>');
 						echo '</h3>';
 				} ?>
     </div>
@@ -78,13 +78,13 @@
 	echo '">Image</span>'; ?>
 	<div class="about_phil_text">
 		<?php
-		if (get_field('module1') != "") { 
+		if (get_field('module2') != "") { 
 			echo '<h2>';
-			echo get_field("module1_title");
+			echo get_field("module2_title");
 			echo '</h2><h3>';
-			echo strip_tags(get_field("module1"));
+			echo strip_tags(get_field("module2"));
 			echo '</h3><h3>';
-			echo strip_tags(get_field("module1_link"), '<a>');
+			echo strip_tags(get_field("module2_link"), '<a>');
 			echo '</h3>';
 		} ?>
 	</div>

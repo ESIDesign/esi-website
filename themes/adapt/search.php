@@ -19,8 +19,8 @@ $query_string = $query_string[1];
 ?>
 
 <div class="search-left">
-	<div class="search-careers">
 <?php if($query_string == 'jobs' || $query_string == 'careers' || $query_string == 'internships') { ?>
+	<div class="search-careers">
 	<?php
 $children = get_pages('post_type=careers&post_status=publish');
 if( $children ) {
@@ -85,15 +85,12 @@ while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 
 
 <?php
-$query_string = explode("=", $query_string);
-$query_string = $query_string[1];
-global $post;
 $args = array(
 	's' => $query_string,
 	'post_type' =>'news',
 	'orderby' => 'menu_order',
 	'order' => 'ASC',
-	'posts_per_page' => 4
+	'posts_per_page' => 5
 );
 $the_query = new WP_Query($args);
 if ( $the_query->have_posts() ) :
@@ -147,9 +144,6 @@ while ( $the_query->have_posts() ) : $the_query->the_post();
 <div class="search-right">
 <h2>Blog</h2>
 <?php
-$query_string = explode("=", $query_string);
-$query_string = $query_string[1];
-global $post;
 $args = array(
 	's' => $query_string,
 	'post_type' =>'post',
@@ -165,8 +159,7 @@ while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 		<p class="date gray"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
 		<h3><a href="<?php the_permalink(' ') ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
 		<div class="loop-entry-meta">
-	        <p class="date gray"><?php _e('By', 'surplus'); ?> <a href="<?php echo get_site_url(); ?>/people"><?php the_author(); ?></a>
-	        <span class="awesome-icon-comments gray"></span> <?php comments_popup_link('0', '1', '%'); ?></p>
+	        <p class="date gray"><?php _e('By', 'surplus'); ?> <a href="<?php echo get_site_url(); ?>/people"><?php the_author(); ?></a></p>
 	    </div><!-- /loop-entry-meta -->
 		<p><?php echo get_excerpt(100); ?></p>
 	</article><!-- loop-entry -->

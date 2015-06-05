@@ -8,9 +8,8 @@
 <?php $args = array(
             'post_type' =>'project',
             'post_status'=>'publish', 
-            'meta_key' => 'date',
-            'orderby' => 'meta_value_num',
-            'order' => 'DESC'
+            'orderby' => 'menu_order',
+            'order' => 'ASC'
         ); ?>
 <?php query_posts ($args); ?>
 <?php if (have_posts()) : ?>

@@ -483,8 +483,9 @@ img.wp-image-3811, img.no-shadow {
 #masterhead {
 	position: relative;
 	padding: 30px 0px 0px;
-/* 	border-bottom: 1px solid #DDD; */
+	margin-bottom: 4%;
 }
+
 #logo{
 	float:left;
 	max-width: 30%;
@@ -550,13 +551,6 @@ img.wp-image-3811, img.no-shadow {
 .sf-menu li#menu-item-481 a:hover {
 	background-color: @blue;
 	color: #FFF;
-}
-
-.sf-menu li#menu-item-840 a {
-/*
-	padding-left: 5px !important;
-	padding-right: 5px !important;
-*/
 }
 
 .sf-menu li#menu-item-3040.current-menu-item a {
@@ -677,9 +671,9 @@ li#menu-item-4966 {
 }
 
 form#searchform {
-	position: relative;
-	top: -30px;
-	left: 960px;
+	position: absolute;
+	top: 46px;
+	right: -1px;
 	width: 40px;
 	height: 79px;
 }
@@ -2708,10 +2702,15 @@ li.people-grid .caption_people  {
 	margin-right: 10px;
 }
 
-.people_item2 img {
-	height: 170px;
-	width: 240px;
-	.box-shadow;
+.people_item2 {
+	.crop {
+		height: 170px;
+		overflow: hidden;
+		width: 240px;
+	} 
+	img {
+		.box-shadow;
+	}
 }
 
 .people_block {
@@ -3182,6 +3181,9 @@ li.orange_border {
 	margin-bottom: 25px;
 	padding-bottom: 15px;
 	border-bottom: 1px solid #ddd;
+	h3 {
+		margin-bottom: 5px;
+	}
 }
 
 .post .loop-entry:last-child {
@@ -3505,7 +3507,7 @@ span.awesome-icon-comments {
 		padding-bottom: 3px;
 		position: relative;
 		height: auto;
-		width: 240px;
+		width: 48%;
 		img {
 			.box-shadow;
 		}
