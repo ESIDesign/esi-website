@@ -144,23 +144,6 @@ $terms = get_the_terms( get_the_ID(), 'project_cats' );
 
 <!-- <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.bbq.js"> </script> -->
 <script type="text/javascript">
-function filter_toggle() {
-	$("ul.filter").toggle();
-}
 
-jQuery(function($){
-	$(document).ready(function(){
-		var $container = $('.project-content');
-/* 				$container.imagesLoaded(function(){ */
-					$container.isotope({
-						filter: '.featured',
-						itemSelector: '.item'
-					});
-
-		$("h2.dropdown").click(function() {
-			$("ul.filter").toggle();
-		});
-	});
-});
 </script>
 <?php get_footer(); ?>

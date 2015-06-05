@@ -98,10 +98,12 @@ Template Name Posts: Featured Template
 	                <?php if ($count == $video_order && get_field('video', $id) != "") { ?>   
                     <?php
                     if(get_field('video_img', $id) != "") {
-	                	$thumb_id = get_field('video_img', $id);    
-                    }
-                    else {
+	                	$thumb_id = get_field('video_img', $id);   
+                    } else {
 						$thumb_id = get_post_thumbnail_id($id);   
+                    }
+                    if($thumb_id == 3894) {
+	                   $thumb_id = 3784; 
                     }
                     $feat_img = wp_get_attachment_image_src( $thumb_id, 'slider');
                      $video = get_post_custom_values("video");
