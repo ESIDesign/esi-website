@@ -1871,7 +1871,7 @@ html[xmlns] .slides {display: block;}
 	width: 100%;
 	margin: 0 auto;
 	position: relative;
-	z-index: 999;
+	z-index: 10;
 // 	display: none;
 	top: 0px;
 }
@@ -1902,11 +1902,9 @@ html[xmlns] .slides {display: block;}
 	}
 	iframe {
 		display: block;
-		height: auto !important;
+// 		height: auto !important;
 		position: absolute;
 		top: 0px;
-		height: 568px;
-		width: 1000px;
 		z-index: 1;
 	}
 }
@@ -1956,12 +1954,14 @@ html[xmlns] .slides {display: block;}
 #featured .flex-alt {
 	color: #FFFFF;
 	color: rgba(255,255,255,.8);
+	float: left;
 	font-family: "proxima-nova-alt-condensed", "proxima-nova", Helvetica, sans-serif !important;
 	font-size: 50px;
-	bottom: 55px;
+	margin-bottom: 0;
+	bottom: 4%;
 	padding: 0 3%;
-	position: relative;
-	z-index: 1002;
+	position: absolute;
+	z-index: 3;
 }
 
 .loading {
@@ -2642,10 +2642,10 @@ li.people-grid img {
 	height: 226px;
 	width: 172px;
 	.video-wrapper {
-		.box-shadow;
 		height: 171px;
 		overflow: hidden;
 		video {
+			.box-shadow;
 			max-width: 104%;
 		}
 	}

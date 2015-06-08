@@ -179,7 +179,7 @@ jQuery(function($){
 
 	jQuery('.textwidget p').unwrap();
     $('span').hide().delay(600).fadeIn();
-var paras = $('div').hide();
+	var paras = $('div').hide();
 	$('div#wrap').show();
 	$('div#main').show();
 	$('div#logo').show();
@@ -190,7 +190,7 @@ var paras = $('div').hide();
 
 // If using jQuery 1.3 or lower, you need to do $(paras[i++] || []) to avoid an "undefined" error
 (function() {
-  $(paras[i++]).fadeIn(200, arguments.callee);
+  $(paras[i++]).fadeIn(150, arguments.callee);
 })();
 	});
 });
