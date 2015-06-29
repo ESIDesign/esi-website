@@ -49,7 +49,7 @@ $options = get_option( 'adapt_theme_settings' );
 <?php wp_head(); ?>
 <?php include('analytics.php'); ?>
 </head>
-<body class="home">
+<body class="home preload">
 
 <div id="wrap" class="clearfix">
 

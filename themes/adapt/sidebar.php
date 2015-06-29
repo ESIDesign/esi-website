@@ -37,7 +37,7 @@
 
 <div class="archive-sidebar <?php if(is_page(2)) { echo 'news'; } ?>">
 <?php if(!is_page(2)) { ?>
-<div class='sidebar-box twitter'><h3><a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/tweet.png" alt="Twitter"> Twitter</a></h3>	
+<div class='sidebar-box'><h3><a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/tweet.png" alt="Twitter"> Twitter</a></h3>	
 <div class="twitter">
 </div>
 </div>

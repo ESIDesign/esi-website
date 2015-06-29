@@ -34,7 +34,17 @@
 	} ?>
 <div class="loop-entry">
 	<?php if(!$thumb) {
-		$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($project_ids[0]), 'grid-thumb');
+		$attachment_args = array(
+		'posts_per_page' => 1,
+		'orderby'=> 'rand',
+		'post_mime_type' => 'image',
+		'post_parent' => $project_ids[0],
+		'post_type' => 'attachment'
+		);
+		$attachments = get_posts($attachment_args);
+		if(!empty($attachments)) {
+			$thumb = wp_get_attachment_image_src($attachments[0]->ID, 'grid-thumb');	
+		}
 		} ?>
     	<?php if($count < 5) { ?>
     	<a target="_blank" href="<?php the_permalink(' ') ?>" class="loop-entry-thumbnail"><img src="<?php echo $thumb[0]; ?>" alt="<?php echo the_title(); ?>" /></a>

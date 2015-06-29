@@ -1,7 +1,5 @@
 jQuery(function($){
 
-// $('.home-wrap').hide(); 
-
     var page = 0;
     var loading = false;
     var options = ['.people1', '.people2', '.people3'];
@@ -76,29 +74,25 @@ function dynamicSize() {
 	    $('.home-wrap').css({'-webkit-transform': 'scale(' + scale + ')', 'transform': 'scale(' + scale + ')'});
 	    $('#wrap').css({ width: maxWidth * scale });
 }
-	
-	$(document).ready(function(){
-	if ( $(window).width() < 1200) {
-		dynamicSize();
-	}
-	
+
+
+function displayImages() {
+	lis.eq(i++).fadeIn(200, displayImages);
+}
+
+function fastImages() {
+	lis.fadeIn(400);
+}
+
 (function() {
-		var lis = $('div').hide();
-		$('#wrap').show();
-		$('#main').show();
-		$('.home-wrap').show();
-		$('.home_item9').show();
+// 		var lis = $('div').hide();
+// 		$('#wrap').show();
+// 		$('#main').show();
+// 		$('.home-wrap').show();
+// 		$('.home_item9').show();
 		var i = 3;
 		
-	function displayImages() {
-		lis.eq(i++).fadeIn(200, displayImages);
-	};
-	
-	function fastImages() {
-		lis.fadeIn(400);
-	};
-		
-	if ( $(window).width() < 767) {
+	if ( $(window).width() < 500) {
 		$('.work').fadeIn(200, function(){
 			$('.about').fadeIn(200, function(){
 				$('.home_item12').fadeIn(200, function(){
@@ -117,12 +111,26 @@ function dynamicSize() {
 	}
 	else {
 /* 01/13/2014 removed cookies if statement because there is no quote */
+/*
 	    setTimeout(function(){
 		    fastImages();
 	    },400);
+*/
 	}
 })();
 	
+$(document).ready(function(){
+	console.log("BODY");
+	$("body").removeClass("preload");
+	setTimeout(function(){
+		$('.home_item, .home_button, .project, .home_media').css('display','block');
+		$('.home_item, .home_button, .project, .home_media').addClass('fadeIn');
+	}, 400);
+	
+	if ( $(window).width() < 1200) {
+		dynamicSize();
+	}
+	  
 if ( $(window).width() > 479) {
 		var player = $('embed')[0];
 		
@@ -165,16 +173,18 @@ if ( $(window).width() > 479) {
 */
 	} //window bigger than 767
 	
+/*
 	$('.home_item1 .cycle').cycle({
 			fx: 'fade',
 			speed: 400,
 			timeout: 20000
 	});
+*/
 	
 	$('.home_item3 .cycle').cycle({
 			fx: 'fade',
 			speed: 1200,
-			timeout: 10000
+			timeout: 30000
 	});
 	
 	$('.home_item4 .cycle').cycle({

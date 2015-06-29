@@ -6,13 +6,6 @@ function filter_toggle() {
 
 jQuery(function($){
 	$(document).ready(function(){
-			var $container = $('.project-content');
-/* 				$container.imagesLoaded(function(){ */
-				$container.isotope({
-					filter: '.featured',
-					itemSelector: '.item',
-					layoutMode: 'fitRows'
-				});
 
 		$("h2.dropdown").click(function() {
 			$("ul.filter").toggle();

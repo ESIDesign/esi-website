@@ -29,6 +29,8 @@ module.exports = function(grunt) {
 				    {src: 'js/application.dev.js', dest: 'js/application.js'},
 				    {src: 'js/home.min.js', dest: 'js/home.min.js'},
 				    {src: 'js/responsive.min.js', dest: 'js/responsive.min.js'},
+				    {src: 'js/jquery.flexslider.dev.js', dest: 'js/jquery.flexslider.min.js'},
+				    {src: 'js/grid.dev.js', dest: 'js/grid.js'},
 			    ]
 		    }
 		},
@@ -55,7 +57,18 @@ module.exports = function(grunt) {
 		        } 
 			},
 		},
-		
+		htmlmin: {                                     // Task
+		    dist: {                                      // Target
+		      options: {                                 // Target options
+		        removeComments: true,
+		        collapseWhitespace: true
+		      },
+		      tasks: ['clean:php'],
+		      files: {       
+		        'index.php': 'dev/index.php'
+		      }
+		    }
+		},
 		watch: {
 			options: {
 				livereload: true
@@ -73,7 +86,14 @@ module.exports = function(grunt) {
 			    options: {
 			        spawn: false,
 			    },
-			} 
+			},
+		    htmlmin: {
+			    files: ['dev/*.php'],
+			    tasks: ['htmlmin'],
+			    options: {
+			        spawn: false,
+			    },
+			}  
 		}
 
     });
@@ -84,7 +104,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-htmlmin');
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['watch', 'htmlmin']);
 
 };

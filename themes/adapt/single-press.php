@@ -27,20 +27,28 @@
 <article class="post clearfix">
 
 	<header>
-	<p class="date gray"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
+<!-- 	<p class="date gray"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p> -->
+	<p class="date gray" style="text-transform:uppercase">For Immediate Release</p>
         <h1 class="single-title"><?php the_title(); ?></h1>
     </header>
-
-    <br />
+		<?php
+			if(get_field('sub-headline') != '') {
+				$subheadline = get_field('sub-headline');
+				echo '<h4 style="text-align:center">'.$subheadline.'</h4>';
+			} ?>
     <div class="entry clearfix">
         
 		<?php the_content(); 
 			if(get_field('pdf') != '') {
 				$pdf = get_field('pdf');
 				$pdf = $pdf['url'];
-				echo '<p><a href="'.$pdf.'">Download PDF</a></p>';
+				echo '<p><a href="'.$pdf.'">Download Press Release</a></p>';
 			}
-		?>
+			if(get_field('fact') != '') {
+				$fact = get_field('fact');
+				$fact = $fact['url'];
+				echo '<p><a href="'.$fact.'">Download Fact Sheet</a></p>';
+			} ?>
         <div class="clear"></div>
         
         </div>

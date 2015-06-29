@@ -106,15 +106,18 @@ Template Name Posts: Featured Template
 	                   $thumb_id = 3784; 
                     }
                     $feat_img = wp_get_attachment_image_src( $thumb_id, 'slider');
-                     $video = get_post_custom_values("video");
-                     $video2 = get_post_custom_values("video2");
+                     $video = get_field('video',$id);
+                     $video2 = get_field('video2',$id);
 						  	echo '<li class="video-wrapper">
 						  	<img class="placeholder" src="'. $feat_img[0].'"/><span id="button" class="awesome-icon-play"></span>
-						  	<iframe id="player" src="http://player.vimeo.com/video/'.$video[0].'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';
-				  	if (get_field('video2', $id) != "") {
+						  	<iframe id="player" src="http://player.vimeo.com/video/'.$video.'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';
+/*
+				  	if($video2) {
 						echo '<li class="video-wrapper">
-						  	<iframe id="player" src="http://player.vimeo.com/video/'.the_field('video2',$id).'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';   
-                     }       
+						<img class="placeholder" src="'. $feat_img[0].'"/><span id="button" class="awesome-icon-play"></span>
+						  	<iframe id="player" src="http://player.vimeo.com/video/'.$video2.'?api=1&title=0&byline=0&portrait=0&player_id=player" width="1000" height="568" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>';   
+                     } 
+*/      
                     ?>
 
 	                 <?php } ?>
@@ -268,21 +271,21 @@ if ( !empty($images) ) {
 }
 }
 ?>
-
-	  	</div>
+<?php if(!is_single(1884)) { ?>
+		  	</div>
+	  	<?php } ?>
     	</div>
     </div>
-  </div>
+</div>
 
 </article>
 
 <?php endwhile; ?>
 <?php endif; ?>	
 
-<?php if(is_single(1884)) { ?>
+<?php if(is_single(4682)) { ?>
 <script type="text/javascript">
 jQuery(function($){
-// 	if($('.accordion') {
 (function($) {
     
   var allPanels = $('.accordion > dd').hide();
@@ -307,7 +310,6 @@ jQuery(function($){
   });
 
 })(jQuery);
-// 	}
 });
 </script>
 <?php } ?>
@@ -323,15 +325,14 @@ jQuery(function($){
 
 jQuery(function($){
 	$(document).ready(function(){
-	if($(body).hasClass('postid-2844')) {
-		jQuery('.related-item').hover(function() {
-			jQuery(this).find('.awesome-icon-play').fadeOut();
-			var myVideo = jQuery(this).find('video#related_lab')[0];
+	if($('body').hasClass('postid-2844')) {
+		var myVideo = jQuery(this).find('video#related_lab')[0];
+		$('.related-item').hover(function() {
+			$(this).find('.awesome-icon-play').fadeOut();
 			myVideo.play();
 		},
 		function() {
-			jQuery(this).find('.awesome-icon-play').fadeIn();
-			var myVideo = jQuery(this).find('video#related_lab')[0];
+			$(this).find('.awesome-icon-play').fadeIn();
 			myVideo.pause();
 		});
 	}
