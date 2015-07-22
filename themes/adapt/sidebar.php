@@ -59,7 +59,7 @@ if ( !empty($images) ) {
 	foreach ( $images as $image ) { 
 		setup_postdata( $image ); 
 	
-		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'grid-thumb', true);
+		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'insta', true);
 		$site_url = get_site_url();
 		
 		ob_start();

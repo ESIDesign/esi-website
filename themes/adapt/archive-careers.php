@@ -25,8 +25,6 @@ foreach($imgs as $img) {
 	$feat_img = wp_get_attachment_image_src( get_post_thumbnail_id($img->ID), 'grid-thumb3'); ?>
 	<img src="<?php echo $feat_img[0]; ?>" alt="<?php echo apply_filters('the_title', $img->post_title); ?>" />
 <?php } ?>
-
-<!-- <img src="/wp-content/uploads/2013/06/Process-022-513x353.jpg" /> -->
 </div>
 
     <?php $args = array(
@@ -62,7 +60,7 @@ echo '<h2>Current Opportunities</h2>';
  						);
 				$mypages = get_pages($args);
 				foreach( $mypages as $page ) {    
-					echo '<li class="orange_border"><a href="'.get_permalink($page->ID).'"><h3>'.$page->post_title.'</h3><p><span class="gray">'.$page->post_excerpt.' </span>  <span class="black"> View Listing→</span></a></p></li>';
+					echo '<li><a href="'.get_permalink($page->ID).'"><h3>'.$page->post_title.'</h3><p><span class="gray">'.$page->post_excerpt.' </span>  <span class="black"> View Listing→</span></a></p></li>';
 
 						}
 				echo '</ul>';	
@@ -102,7 +100,7 @@ $post_ids = wp_list_pluck( $all_posts, 'ID' );
 $attachments = get_posts( array(
 	'post_type' => array('attachment', 'people', 'lab'),
 /*     'post__in'    => $post_ids, */
-	'post__in' => array(4522, 3804, 4853, 3409, 3420, 3426, 3532, 1233, 3431, 1196, 3368), 
+	'post__in' => array(5273, 4522, 4853, 3409, 4988, 3426, 3532, 4974, 1233, 3804, 3431, 3420, 1196, 3368), 
     'post_status' => array('inherit','publish'),
 /*     'orderby' => 'date', */
 	'orderby' => 'post__in',

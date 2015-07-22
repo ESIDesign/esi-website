@@ -8,21 +8,17 @@
 
 <?php get_header(); ?>
 
-    	  <!--
-  <header id="page-heading">
-        <h1><?php the_title(); ?></h1>		
-    </header>
--->
-    <!-- /page-heading -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 <article class="post clearfix disc">    
-    <h1><?php the_title(); ?></h1>
+   	<header>
+	<p class="date"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
+        <h1 class="single-title"><?php the_title(); ?></h1>
         <?php if (get_field('intro', 6) != "") { 
-							  the_field('intro', 6);
-						  	} ?>
+				  the_field('intro', 6);
+			  	} ?>
+   	</header>
     <?php the_content(); ?>
-    <!-- /post -->
     
     <p><em>Please no phone calls or unscheduled appointments/walk-ins.</em></p>
 
@@ -31,6 +27,7 @@
 <?php setPostViews(get_the_ID()); ?>
     
 </article> 
+
 <article class="post clearfix">
 <?php
 $children = get_pages('post_type=careers&post_status=publish');
