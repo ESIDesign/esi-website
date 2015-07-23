@@ -266,7 +266,7 @@ if ( !empty($images) ) {
 
 	  /* 	$short = the_field("short"); */
 		echo '<div class="related-item">';
-		echo '<a href="'.$site_url.'/project/'.$image->post_name.'"><img src="'.$image_url[0].'"/></a>';
+		echo '<a href="'.$site_url.'/work/'.$image->post_name.'"><img src="'.$image_url[0].'"/></a>';
 		echo '<div class="related-caption"><a href="'.$site_url.'/project/'.$image->post_name.'">';
 	  	if (get_field('short', $image->ID) != "") { 
 	  	the_field("short", $image->ID);

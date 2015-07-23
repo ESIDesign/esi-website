@@ -235,14 +235,26 @@ Template Name Posts: Featured Template
 	else {
 		$posts_per_page = 4;	
 	}
-
+	$featured = get_post_meta($post->ID, 'featured', true);
+	if($featured == 1) {
+		$featured_array = array('1');
+	} else {
+		$featured_array = array('1','0');
+	}
 	$images = get_posts( array('posts_per_page'=>$posts_per_page, 'post_type' => 'project', 'orderby' => 'rand', 'tax_query' => array(
 		array(
 			'taxonomy' => 'project_cats',
 			'field' => 'ID',
 			'terms' => $tag_ids
 		)
-	),'post__not_in' => array($post->ID), 'caller_get_posts' => 1)  );
+	),
+    'meta_query' => array(
+        array('key' => 'featured',
+              'value' => $featured_array,
+              'compare' => 'IN'
+        )
+    ),
+    'post__not_in' => array($post->ID), 'caller_get_posts' => 1)  );
 		
 if ( !empty($images) ) {
 	foreach ( $images as $image ) { 
