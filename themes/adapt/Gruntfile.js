@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 		      },
 		      tasks: ['clean:php'],
 		      files: {       
-		        'index.php': 'dev/index.php'
+		        './index.php': 'dev/index.php'
 		      }
 		    }
 		},
@@ -87,6 +87,7 @@ module.exports = function(grunt) {
 			        spawn: false,
 			    },
 			},
+/*
 		    htmlmin: {
 			    files: ['dev/*.php'],
 			    tasks: ['htmlmin'],
@@ -94,6 +95,7 @@ module.exports = function(grunt) {
 			        spawn: false,
 			    },
 			}  
+*/
 		}
 
     });
@@ -106,6 +108,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-htmlmin');
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['watch', 'htmlmin']);
+    grunt.registerTask('default', ['watch']);
 
 };

@@ -23,18 +23,13 @@ $out_excerpt = str_replace(array("\r\n", "\r", "\n"), "", get_the_excerpt());
 echo apply_filters('the_excerpt_rss', $out_excerpt);
 endwhile;
 endif; ?>" />
-<!-- Title Tag
-================================================== -->
+
 <title><?php wp_title(''); ?><?php if(wp_title('', false)) { echo ' |'; } ?> <?php bloginfo('name'); ?></title>
     
 <?php if(!empty($options['favicon'])) { ?>
-<!-- Favicon
-================================================== -->
 <link rel="icon" type="image/png" href="<?php echo $options['favicon']; ?>" />
 <?php } ?>
 
-<!-- Main CSS
-================================================== -->
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" />
 
 <script src="//use.typekit.net/jrd6ldj.js"></script>
@@ -43,39 +38,36 @@ endif; ?>" />
 ================================================== -->
 <?php wp_head(); ?>
 <?php include('analytics.php'); ?>
+<?php function isMobile() {
+    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+} ?>
 </head>
 <body <?php body_class(); ?>>
 
 <div id="wrap" class="clearfix">
 
-    <header id="masterhead" class="clearfix">
-            <div id="logo">
-                <?php
-                    if($options['upload_mainlogo'] !='') { ?>
-                        <a href="<?php bloginfo( 'url' ); ?>/" title="<?php bloginfo( 'name' ); ?>"><img src="<?php echo $options['upload_mainlogo']; ?>" alt="<?php bloginfo( 'name' ); ?>" /></a>
-                    <?php } else { ?>
-                    <a href="<?php bloginfo( 'url' ); ?>/" title="<?php bloginfo( 'name' ) ?>"><?php bloginfo( 'name' ); ?></a>
-                <?php } ?>
-                
-            </div>
-            <!-- END logo -->
+<header id="masterhead" class="clearfix">
+    <div id="logo">
+        <?php
+            if($options['upload_mainlogo'] !='') { ?>
+                <a href="<?php bloginfo( 'url' ); ?>/" title="<?php bloginfo( 'name' ); ?>"><img src="<?php echo $options['upload_mainlogo']; ?>" alt="<?php bloginfo( 'name' ); ?>" /></a>
+            <?php } else { ?>
+            <a href="<?php bloginfo( 'url' ); ?>/" title="<?php bloginfo( 'name' ) ?>"><?php bloginfo( 'name' ); ?></a>
+        <?php } ?>
+    </div><!-- END logo -->
             
-            <nav id="masternav" class="clearfix">
-                <?php wp_nav_menu( array(
-                    'theme_location' => 'menu',
-                    'sort_column' => 'menu_order',
-                    'menu_class' => 'sf-menu',
-                    'fallback_cb' => 'default_menu'
-                )); ?>
-            </nav>
-            <!-- /masternav -->
+    <nav id="masternav" class="clearfix">
+        <?php wp_nav_menu( array(
+            'theme_location' => 'menu',
+            'sort_column' => 'menu_order',
+            'menu_class' => 'sf-menu',
+            'fallback_cb' => 'default_menu'
+        )); ?>
+    </nav><!-- /masternav -->
             
-            	<form role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
+	<form role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
         <input type="text" value="" name="s" id="s" />
-<!--         <div class="search_button"></div> -->
-<!--         <input type="submit" id="searchsubmit"/> -->
-</form>
-                  
-    </header><!-- /masterhead -->
+	</form>                  
+</header><!-- /masterhead -->
     
 <div id="main" class="clearfix">

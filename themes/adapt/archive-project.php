@@ -36,9 +36,8 @@
 </header><!-- END page-heading -->
 
 <div id="post" class="full-width clearfix">       
-	    
-	<div id="projects_slider">
-	
+    
+	<div id="projects_slider">	
 	<div class="loading"></div>   
 	   
 	    <div id="slider-wrap">
