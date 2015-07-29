@@ -43,6 +43,37 @@ $posts = get_posts($args2); ?>
 		<embed src="http://www.cbsnews.com/common/video/cbsnews_video.swf" quality="high" scale="noscale" salign="lt" type="application/x-shockwave-flash" background="#000000" width="590" height="332" allowFullScreen="true" allowScriptAccess="always" FlashVars="pType=embed&si=254&pid=N_igAUIZ_EkW&url=http://www.cbsnews.com/videos/how-led-lights-are-changing-architecture" />
 </div>
 
+<!--
+<?php
+$post_object = get_field('featured_module',2145);
+$post = $post_object;
+setup_postdata( $post ); 
+$args2 = array(
+    'orderby' => 'menu_order',
+	'order' => 'ASC',
+	'post_type' => 'attachment',
+	'post_parent' => $post->ID,
+	'post_mime_type' => 'image',
+	'post_status' => null,
+	'post__in' => array(4687,4691,4689,4690,4693)
+);
+$posts = get_posts($args2); ?>
+<div class="project home_item3">
+	<a href="<?php echo get_permalink($post->ID); ?>">
+		<div class="cycle">
+		<?php foreach($posts as $post) : setup_postdata($post);
+			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
+			<img src="<?php echo $feat_img[0]; ?>"/>
+		<?php endforeach; ?>
+		</div>
+			<h3 class="project-overlay">
+			<?php if(get_field('headline',2145)) {
+				the_field('headline',2145);
+			} ?>
+			</h3>
+	</a>
+</div>
+-->
 <?php
 $post_object = get_field('featured_module',2145);
 $post = $post_object;
@@ -184,7 +215,7 @@ if ($count == '3') { ?>
 <?php }
 if ($count <= '3') { ?>	
 		<a href="<?php echo get_site_url(); ?>/people"><?php 
-	echo get_avatar($curauth->ID, '116', $avatar, $curauth->display_name); ?> 
+	echo get_avatar($curauth->ID, '116', $avatar); ?> 
 		<p class="caption_people"><span itemprop="name"><?php echo $curauth->first_name; ?></span></p></a>
 	</article>
 <?php } ?>

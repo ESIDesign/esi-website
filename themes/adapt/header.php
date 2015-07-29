@@ -31,7 +31,7 @@ endif; ?>" />
 <?php } ?>
 
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" />
-
+<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="print" />
 <script src="//use.typekit.net/jrd6ldj.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
 <!-- WP Head

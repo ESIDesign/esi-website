@@ -17,6 +17,8 @@
 
 @orange: #dc801c;
 
+@light-orange: #e9a153;
+
 @yellow: #deb439;
 
 @gray: #999;
@@ -544,7 +546,7 @@ img.wp-image-3811, img.no-shadow {
 /* 	border-bottom: 2px solid #333; */
 }
 
-.sf-menu li#menu-item-481.current-menu-item a, .page-template-template-lab-php .sf-menu li#menu-item-481 a{
+.sf-menu li#menu-item-481.current-menu-item a, .page-template-template-lab-php .sf-menu li#menu-item-481 a {
 	color: @blue;
 }
 
@@ -563,9 +565,20 @@ img.wp-image-3811, img.no-shadow {
 	color: #FFF;
 }
 
-.sf-menu li#menu-item-907.current-menu-item a, .post-type-archive-careers .sf-menu li#menu-item-907 a, .single-careers .sf-menu li#menu-item-907 a  {
+.sf-menu li#menu-item-907.current-menu-item a, .post-type-archive-careers .sf-menu li#menu-item-5403 a, .single-careers .sf-menu li#menu-item-5403 a  {
 	color: @orange;
 }
+
+.sf-menu li#menu-item-5403 a:hover, .sf-menu li#menu-item-5403:hover a {
+	background-color: @light-orange;
+	color: #FFF !important;
+}
+
+/*
+.post-type-archive-careers .sf-menu li#menu-item-5403 a, .single-careers .sf-menu li#menu-item-5403 a {
+	color: @light-orange;
+}
+*/
 
 .sf-menu li#menu-item-907 a:hover {
 	background-color: @orange;
@@ -1142,7 +1155,8 @@ body.home {
 	}
 }
 
-.lab {
+
+.home_button.lab {
 	background-color: #878787;
 	.box-shadow();
 	top: (322px + 125px);
@@ -2772,6 +2786,11 @@ li.sort{
 li.people-grid {
 	display: inline-block !important;
 	width: 172px;
+	img {
+		height: 170px;
+		position: relative;
+		.box-shadow;
+	}
 }
 
 li.people-grid2 {
@@ -2784,13 +2803,6 @@ li.people-grid3 {
 	width: 116px;
 }
 
-li.people-grid img {
-	cursor: pointer;
-	height: 170px;
-	position: relative;
-	.box-shadow;
-}
-
 .people_item {
 	.box-shadow();
 	display: inline-block;
@@ -2801,17 +2813,15 @@ li.people-grid img {
 		overflow: hidden;
 		video {
 // 			.box-shadow();
-			max-width: 104%;
+			max-width: 100%;
+			vertical-align: top;
 		}
 	}
-}
-
-.people_item img {
-	max-width: 100%;
-	height: 170px;
-	width: 170px;
-	.box-shadow;
-	vertical-align: top;
+	img {
+		max-width: 100%;
+// 		.box-shadow;
+		vertical-align: top;
+	}
 }
 
 .people_item .caption_people, li.people-grid .caption_people {
@@ -2900,6 +2910,7 @@ li.people-grid .caption_people  {
 .og-grid li > a,
 .og-grid li > a img {
 	border: none;
+	cursor: pointer;
 	outline: none;
 /* 	display: block; */
 	position: relative;

@@ -167,9 +167,9 @@ foreach($author_ids as $author) :
 	  if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
 
  	 
-	  echo '<li class="video-wrapper"><video id="esipeople" width="240" >
+	  echo '<article class="video-wrapper"><video id="esipeople" width="240" >
 		<source src="'.$first_vid.'" type="video/mp4">
-		</video><span class="awesome-icon-play"></span></li>';
+		</video><span class="awesome-icon-play"></span></article>';
 		}
 
 	  if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	

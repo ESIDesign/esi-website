@@ -106,7 +106,7 @@ rsiciliano (at) esidesign.com</p>
 </div>
 
 <div class='sidebar-box video'>
-	<h3>Video<a class="all" href="https://vimeo.com/esidesign">See all video</a></h3>
+	<h3>Video<a class="all" target="_blank" href="https://vimeo.com/esidesign">See all video</a></h3>
 	<?php echo '<div class="related-item">';
 		echo '<a href=""><iframe id="player" src="http://player.vimeo.com/video/74313412?api=1&title=0&byline=0&portrait=0&player_id=player"></iframe></li></a>';
 
