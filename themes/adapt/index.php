@@ -244,8 +244,12 @@ if ($count <= '3') { ?>
 <div class="home_item13">
 	<article class="home_media">
 		<a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/home-twitter.png" alt="Twitter"/></a>
-		<a target="_blank" href="http://vimeo.com/channels/esi"><img src="<?php echo get_template_directory_uri(); ?>/images/home-vimeo.png" alt="Vimeo"/></a>
+		<a target="_blank" href="http://www.instagram.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/home-insta.png" alt="Instagram"/></a>
+
 		<a target="_blank" href="http://www.linkedin.com/company/esi-design"><img src="<?php echo get_template_directory_uri(); ?>/images/home-in.png" alt="LinkedIn"/></a>
+		<a target="_blank" href="http://vimeo.com/channels/esi"><img src="<?php echo get_template_directory_uri(); ?>/images/home-vimeo.png" alt="Vimeo"/></a>
+
+		<a target="_blank" href="https://www.facebook.com/pages/ESI-Design/148102548567381"><img src="<?php echo get_template_directory_uri(); ?>/images/home-fb.png" alt="Facebook"/></a>
 	</article>
 </div>
 

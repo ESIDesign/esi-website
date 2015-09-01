@@ -14,7 +14,7 @@
 
 <?php
 
-$jsonurl = "https://api.instagram.com/v1/tags/esipeople/media/recent?access_token=4332136.f4e0d9a.707c9fef4c834edda34de2e7d2ac73ba&count=2";
+$jsonurl = "https://api.instagram.com/v1/tags/esipeople/media/recent?access_token=4332136.f4e0d9a.707c9fef4c834edda34de2e7d2ac73ba&count=1";
 $json = file_get_contents($jsonurl,0,null,null);
 $json_output = json_decode($json, true);
 /* var_dump($json_output); */
