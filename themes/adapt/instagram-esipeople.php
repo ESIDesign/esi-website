@@ -5,7 +5,7 @@
     echo '<rss version="2.0">';
     echo '<channel>';
     echo '<title>Any User Instagram #esipeople</title>';
-    echo '<link>http://www.esidesign.com/test/esipeople_instagram.php</link>';
+    echo '<link>http://www.esidesign.com/wp-content/themes/adapt/instagram-esipeople.php</link>';
     echo '<description>Built October 22, 2013</description>';
     echo '<language>en-us</language>';
     echo '<copyright>Copyright (C) 2013 ESI Design</copyright>';
@@ -28,6 +28,7 @@ foreach($json_output['data'] as $item) {
 //     $description = substr($item['images']['standard_resolution']['url'],$start,100);  
 //     $length = strpos($description,".jpg") + 4; 
     $image = $item['images']['standard_resolution']['url'];  
+    $image = substr($image, 0, strpos($image, "?"));
     
     $v_start = strpos($item['videos']['standard_resolution']['url'],"http://distilleryimage");  
     $v_description = substr($item['videos']['standard_resolution']['url'],$v_start,100);  
@@ -36,8 +37,8 @@ foreach($json_output['data'] as $item) {
 // 		$video = $item['images']['standard_resolution']['url'];
     
     $date = date('m/d/y', strtotime($item['caption']['created_time']));
-    echo '<item><title>'.$title.'</title><link>'.$link.'</link>';
-    echo '<description><![CDATA[';
+    echo '<item>';
+    echo '<title>'.$title.'</title><link>'.$link.'</link><description><![CDATA[';
     if($video) {
 	    echo '<video id="lab" class="video-js vjs-default-skin" controls width="600" height="600"
       poster="'.$image.'" data-setup="{}">
@@ -47,9 +48,8 @@ foreach($json_output['data'] as $item) {
     else {
 	    echo '<a href="'.$link.'"><img src="'.$image.'" border=0 alt="'.$title.'" width="300" height="300"></a>';
     }  
-    echo '<p style="margin-top:0px; margin-bottom:0px;"><a href="'.$link.'" title="'.$title.'">'.$title.'</a></p><p>Posted via <a href="http://instagram.com/esidesign">Instagram</a></p>]]></description>';
+    echo '<p style="margin-top:0px; margin-bottom:0px;"><a href="'.$link.'" title="'.$title.'">'.$title.'</a></p> <p> Posted via <a href="http://instagram.com/esidesign">Instagram</a></p>]]></description>';
     echo '</item>';
-
 }
  ?>
   

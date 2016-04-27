@@ -29,7 +29,7 @@
 	} ?>
 </div>
 	        
-<div class="approach1">
+<div class="approach__block approach1">
 <?php			
 if (get_field('module1_img') != "") { 
 	$image = wp_get_attachment_image_src( get_field('module1_img'), 'slider');
@@ -46,7 +46,7 @@ if (get_field('module1') != "") {
 } ?>
 </div>
 
-<div class="approach2">
+<div class="approach__block approach2">
 <?php
 if (get_field('module2') != "") { 
 	echo '<article class="two"><div><h1>';
@@ -61,7 +61,7 @@ if (get_field('module2_img') != "") {
 } ?>
 </div>
 	                
-<div class="approach3">
+<div class="approach__block approach3">
 <?php			
 	if (get_field('module3_img') != "") { 
 		$image = wp_get_attachment_image_src( get_field('module3_img'), 'slider');
@@ -78,12 +78,11 @@ if (get_field('module2_img') != "") {
 	} ?>
 </div>
 	                
-<div class="approach4">
+<div class="approach__block approach4">
 <?php
 	if (get_field('module4_img') != "") { 
 		$image = wp_get_attachment_image_src( get_field('module4_img'), 'grid-thumb');
-		$image2 = wp_get_attachment_image_src( get_field('module4_img3'), 'grid-thumb');
-		echo '<article class="three"><img src="'.$image[0].'"/><img src="'.$image2[0].'"/></article>';
+		echo '<article class="three"><img src="'.$image[0].'"/></article>';
 	}
 	if (get_field('module4') != "") { 
 		echo '<article class="three"><div><h1>';
@@ -92,13 +91,13 @@ if (get_field('module2_img') != "") {
 		echo strip_tags(get_field("module4"));
 		echo '</h3></div></article>';
 	}
-	if (get_field('module4_img') != "") { 
-		$image3 = wp_get_attachment_image_src( get_field('module4_img2'), 'grid-thumb2');
-		echo '<article class="three"><img src="'.$image3[0].'"/></article>';
+	if (get_field('module4_img3') != "") { 
+		$image2 = wp_get_attachment_image_src( get_field('module4_img3'), 'grid-thumb');
+		echo '<article class="three"><img src="'.$image2[0].'"/></article>';
 	}?>
 </div>
 	                
-<div class="approach5_6">
+<div class="approach__block approach5_6">
 	<div class="approach5">
 		<?php
 			if (get_field('module5_img') != "") { 
@@ -135,7 +134,7 @@ if (get_field('module2_img') != "") {
 </div>
 	                
 	                
-<div class="approach7">
+<div class="approach__block approach7">
     <?php
 		if (get_field('module7_img') != "") { 
 			$project_thumb = wp_get_attachment_image_src( get_field('module7_img'), 'grid-thumb3');
@@ -150,7 +149,7 @@ if (get_field('module2_img') != "") {
 		} ?>
 </div>
     
-<div class="approach8">
+<div class="approach__block approach8">
 <?php
 	if (get_field('module8_img') != "") { 
 	$image = wp_get_attachment_image_src( get_field('module8_img'), 'slider');

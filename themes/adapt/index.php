@@ -3,9 +3,7 @@
  * @package WordPress
  * @subpackage Adapt Theme
  */
-$options = get_option( 'adapt_theme_settings' );
-?>
-<?php get_header('home'); ?>
+get_header('home'); ?>
 
 <div class="home-wrap">
 
@@ -15,9 +13,6 @@ $options = get_option( 'adapt_theme_settings' );
 </div>
 
 <?php
-$post_object = get_field('featured_module',2145);
-$post = $post_object;
-setup_postdata( $post ); 
 $args2 = array(
     'orderby' => 'ID',
 	'order' => 'DESC',
@@ -46,7 +41,8 @@ $posts = get_posts($args2); ?>
 <?php
 $post_object = get_field('featured_module',2145);
 $post = $post_object;
-setup_postdata( $post ); 
+$featuredid = $post->ID;
+setup_postdata($post); 
 $args2 = array(
     'orderby' => 'menu_order',
 	'order' => 'ASC',
@@ -54,21 +50,14 @@ $args2 = array(
 	'post_parent' => $post->ID,
 	'post_mime_type' => 'image',
 	'post_status' => null,
-	'post__in' => array(4687,4691,4689,4690,4693),
 	'numberposts' => 1
 );
 $posts = get_posts($args2); ?>
 <div class="project home_item3 news_module">
 	<div class="cycle">
-	<a href="<?php echo get_site_url(); ?>/news" class="news_item">
-		<div class="text">
-	<h3>"How do you design an experience that makes learning about the U.S. Senate fun? You let visitors role-play senators."</h3>
-	<h4>— Fast Company</h4>
-		</div>
-	</a>
-		<a href="<?php echo get_site_url(); ?>/news" class="news_item">
-			<?php foreach($posts as $post) : setup_postdata($post);
-			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
+		<a href="<?php echo get_permalink($post->ID); ?>" class="news_item">
+		<?php foreach($posts as $post) : setup_postdata($post);
+			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'archive-project'); ?>
 			<img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>"/>
 		<?php endforeach; ?>
 			<h3 class="project-overlay">
@@ -76,13 +65,21 @@ $posts = get_posts($args2); ?>
 				the_field('headline',2145);
 			} ?>
 			</h3>
+		</a>
+		<a href="<?php echo get_site_url(); ?>/news" class="news_item">
+		<div class="text">
+			<h3>"How do you design an experience that makes learning about the U.S. Senate fun? You let visitors role-play senators."</h3>
+			<h4>— Fast Company</h4>
+		</div>
+		</a>
 	</div>
-	</a>
 </div>
 
 
-<?php $args = array(
+<?php 
+	$args = array(
     'post_type' =>'project',
+    'post__not_in' => array($featuredid),
     'meta_query' => array(
         array('key' => 'home',
               'value' => '1'
@@ -98,13 +95,12 @@ $project_posts = get_posts($args);
 	            $count++;
 				$id = get_the_ID();
             	if(get_field('video', $id) != "" && get_field('video_img', $id) == "") {
-					$exclude_id = get_post_thumbnail_id( $id );
+					$exclude_id = get_post_thumbnail_id($id);
 				}
 				else {
 					$exclude_id = '';
-				}
-                    	
-            	$feat_id = get_post_thumbnail_id( $id ); 
+				} 	
+            	$feat_id = get_post_thumbnail_id($id); 
                 $args = array(
                     'orderby' => 'menu_order',
 					'order' => 'ASC',
@@ -113,14 +109,18 @@ $project_posts = get_posts($args);
 					'post_mime_type' => 'image',
 					'post_status' => null,
 					'posts_per_page' => 3,
-	/* 				'exclude' => $exclude_id, */
+					'exclude' => $exclude_id,
 					'meta_query' => array(
-				       array(
-				           'key' => 'not_in_carousel',
-				           'value' => 1,
-				           'type' => 'numeric',
-				           'compare' => 'NOT EXISTS',
-				       )
+						'relation' => 'OR',
+						array(
+							'key' => 'not_in_carousel',
+							'value' => '1',
+							'compare' => '!='
+						),
+						array(
+							'key' => 'not_in_carousel',
+							'compare' => 'NOT EXISTS'
+						)
 				   )
                 );
 			$attachments = get_posts($args);
@@ -132,25 +132,25 @@ $project_posts = get_posts($args);
 
 <?php if ($count == '1') { ?>
 	<div class="project home_item4">
-		<a href="<?php the_permalink(); ?>">
+		<a href="<?php echo get_permalink(get_the_ID()); ?>">
 		<?php if($post->ID == 3226) { ?>
 			<img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
 			<?php } 
 			else {
 			echo '<div class="cycle">';
 			foreach ($attachments as $attachment) :
-			$feat_img = wp_get_attachment_image_src($attachment->ID, 'archive-project'); ?>
-			<img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
+				$feat_img = wp_get_attachment_image_src($attachment->ID, 'archive-project'); ?>
+				<img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
 			<?php endforeach; 
 			echo '</div>'; 
 			} ?>
-        <h3 class="project-overlay">
-        <?php if (get_field('short') != "") { 
-	  	the_field("short");
-	  	}
-	  	else { 
-	  	the_title();  	
-	  	} ?></h3></a>
+	        <h3 class="project-overlay">
+	        <?php if (get_field('short') != "") { 
+		  		the_field("short");
+		  	} else { 
+		  		the_title();  	
+		  	} ?></h3>
+	  	</a>
 	</div>
 <?php } ?>
            
@@ -169,7 +169,7 @@ $project_posts = get_posts($args);
 
 		$avatar = 'wavatar';
 
-		if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->ID != 2 && $curauth->first_name != 'Rosemary') :
+		if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->ID != 2 && $curauth->first_name != 'Rosemary' && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler') :
 		$count++; ?>
 		
 <?php if ($count == '1') { ?>
@@ -201,8 +201,7 @@ if ($count <= '3') { ?>
 		<?php }
 		else {
 		echo '<div class="cycle">';
-		foreach ($attachments as $attachment) :
-		$feat_img2 = wp_get_attachment_image_src($attachment->ID, 'grid-thumb2'); ?>
+		foreach ($attachments as $attachment) : ?>
 		<img src="<?php echo $feat_img2[0]; ?>" alt="<?php echo the_title(); ?>" />
 		<?php endforeach; 
 		echo '</div>'; 
@@ -245,10 +244,8 @@ if ($count <= '3') { ?>
 	<article class="home_media">
 		<a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/home-twitter.png" alt="Twitter"/></a>
 		<a target="_blank" href="http://www.instagram.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/home-insta.png" alt="Instagram"/></a>
-
 		<a target="_blank" href="http://www.linkedin.com/company/esi-design"><img src="<?php echo get_template_directory_uri(); ?>/images/home-in.png" alt="LinkedIn"/></a>
 		<a target="_blank" href="http://vimeo.com/channels/esi"><img src="<?php echo get_template_directory_uri(); ?>/images/home-vimeo.png" alt="Vimeo"/></a>
-
 		<a target="_blank" href="https://www.facebook.com/pages/ESI-Design/148102548567381"><img src="<?php echo get_template_directory_uri(); ?>/images/home-fb.png" alt="Facebook"/></a>
 	</article>
 </div>
@@ -274,10 +271,10 @@ if ($count <= '3') { ?>
     
 
 <div class="home_item home_item10">
-	<h2><a href="<?php echo get_site_url(); ?>/about-us"> 
+	<h1><a href="<?php echo get_site_url(); ?>/about-us"> 
 	<?php if (get_field('about', 2145) != "") { 
 		the_field('about', 2145);
-	} ?>  </a></h2>
+	} ?>  </a></h1>
 </div>
             
 </div><!-- END home-wrap -->  
@@ -286,7 +283,6 @@ if ($count <= '3') { ?>
 
 </div><!-- wrap --> 
 
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cycle.js"></script>
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -16,6 +16,7 @@
 <?php
 $query_string = explode("=", $query_string);
 $query_string = $query_string[1];
+$query_string = str_replace('%20',' ',$query_string);
 ?>
 
 <div class="search-left">
@@ -61,9 +62,9 @@ while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 	<?php $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb'); ?>  
 	<?php if($feat_img) { ?>
 	<div class="item">
-	    	<a href="<?php the_permalink(' ') ?>" class="project-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
+	    	<a href="<?php echo get_permalink(get_the_ID()); ?>" class="project-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
 		<div class="project-overlay">
-			<a href="<?php the_permalink(' ') ?>">
+			<a href="<?php echo get_permalink(get_the_ID()); ?>">
 				<?php if (get_field('short') != "") { 
 				  	echo "<h4>";
 				  	the_field("short");
@@ -157,7 +158,7 @@ while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 
 	<article class="loop-entry clearfix">
 		<p class="date gray"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
-		<h3><a href="<?php the_permalink(' ') ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
+		<h3><a href="<?php echo get_permalink(get_the_ID()); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
 		<div class="loop-entry-meta">
 	        <p class="date gray"><?php _e('By', 'surplus'); ?> <a href="<?php echo get_site_url(); ?>/people"><?php the_author(); ?></a></p>
 	    </div><!-- /loop-entry-meta -->

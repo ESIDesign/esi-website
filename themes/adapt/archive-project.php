@@ -9,7 +9,8 @@
             'post_type' =>'project',
             'post_status'=>'publish', 
             'orderby' => 'menu_order',
-            'order' => 'ASC'
+            'order' => 'ASC',
+            'posts_per_page' => -1
         ); ?>
 <?php query_posts ($args); ?>
 <?php if (have_posts()) : ?>
@@ -66,11 +67,11 @@
 			<li>   
 	        <div class="title">
 	           <div class="band">
-		             <h1><?php if (get_field('short', $attachment->ID) != "") { 
+		             <h2><?php if (get_field('short', $attachment->ID) != "") { 
 								  the_field('short', $attachment->ID);
 							  	} else {
 								  	echo $attachment->post_title; 	
-							  	} ?></h1>
+							  	} ?></h2>
 	           </div>
 			</div>
                                 
@@ -116,7 +117,7 @@ $terms = get_the_terms( get_the_ID(), 'project_cats' );
 <?php if($feat_img) { ?>
 
 	<div class="item <?php if($terms) foreach ($terms as $term) echo $term->slug .' '; if($featured == 1) : echo 'featured'; endif; ?>">
-	    <a href="<?php the_permalink(' ') ?>" class="project-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
+	    <a href="<?php echo get_permalink(get_the_ID()); ?>" class="project-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
 		<div class="project-overlay">
 		   <a href="<?php the_permalink(' ') ?>"><?php
 		  	if (get_field('short') != "") { 

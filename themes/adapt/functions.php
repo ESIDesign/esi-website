@@ -66,8 +66,6 @@ function adapt_scripts_function() {
 	wp_enqueue_script('jquery');	
 	
 	//Uniform & Responsify menu mobile now enqueued with yepnope in footer
-
-
 	if(is_post_type_archive( 'project' )) {
 		wp_enqueue_script('isotope', get_template_directory_uri() . '/js/jquery.isotope.min.js');
 		wp_enqueue_script('isotope_init', get_template_directory_uri() . '/js/isotope_init.js');
@@ -826,3 +824,23 @@ function search($array, $key, $value)
 
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
+
+add_action("wp_enqueue_scripts", "nm_scripts", 11);
+
+function nm_scripts() {
+
+if (!is_admin()) {
+wp_enqueue_script('thickbox', null,  array('jquery'), true);
+wp_enqueue_style('thickbox.css', includes_url('/js/thickbox/thickbox.css'), null, '1.0');
+}
+
+}
+
+function wpsd_add_project_args() {
+    global $wp_post_types;
+ 
+    $wp_post_types['project']->show_in_rest = true;
+    $wp_post_types['project']->rest_base = 'book';
+    $wp_post_types['project']->rest_controller_class = 'WP_REST_Posts_Controller';
+}
+add_action( 'init', 'wpsd_add_project_args', 30 );

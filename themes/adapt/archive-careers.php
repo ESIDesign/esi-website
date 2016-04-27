@@ -10,27 +10,27 @@
 <div class="careers-wrap">
 
 <div class="careers_left">
-<?php $img_args = array(
-			'post_type' =>'project',
-            'numberposts' => '1',
-            'orderby' => 'rand',
-            'meta_query' => array(
-                                array('key' => 'featured',
-                                      'value' => '1'
-                                )
-                            ),
+	<?php $img_args = array(
+		'post_type' =>'project',
+        'numberposts' => '1',
+        'orderby' => 'rand',
+        'meta_query' => array(
+                            array('key' => 'featured',
+                                  'value' => '1'
+	                            )
+	                        ),
 						);
-$imgs = get_posts($img_args);
-foreach($imgs as $img) {
-	$feat_img = wp_get_attachment_image_src( get_post_thumbnail_id($img->ID), 'grid-thumb3'); ?>
-	<img src="<?php echo $feat_img[0]; ?>" alt="<?php echo apply_filters('the_title', $img->post_title); ?>" />
-<?php } ?>
+	$imgs = get_posts($img_args);
+	foreach($imgs as $img) {
+		$feat_img = wp_get_attachment_image_src( get_post_thumbnail_id($img->ID), 'grid-thumb3'); ?>
+		<img src="<?php echo $feat_img[0]; ?>" alt="<?php echo apply_filters('the_title', $img->post_title); ?>" />
+	<?php } ?>
 </div>
 
-    <?php $args = array(
-            'page_id' =>'6',
-            'post_status'=>'publish', 
-        ); ?>
+<?php $args = array(
+    'page_id' =>'6',
+    'post_status'=>'publish', 
+); ?>
 <?php query_posts ($args); ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 <div class="careers_title">
@@ -48,33 +48,29 @@ foreach($imgs as $img) {
 <div class="clear"></div>
 
 <div class="career_opps">
-<?php
-$children = get_pages('post_type=careers&post_status=publish');
-if( $children ) {
-echo '<h2>Current Opportunities</h2>';
+	<?php $children = get_pages('post_type=careers&post_status=publish');
+	if( $children ) {
+		echo '<h2>Current Opportunities</h2>';
 		echo '<ul>';
-			$args = array(  'post_type' => 'careers',
-				            'post_status'=> 'publish',
-  							'sort_column' => 'post_title',
-							'hierarchical' => 0  
- 						);
-				$mypages = get_pages($args);
-				foreach( $mypages as $page ) {    
-					echo '<li><a href="'.get_permalink($page->ID).'"><h3>'.$page->post_title.'</h3><p><span class="gray">'.$page->post_excerpt.' </span>  <span class="black"> View Listing→</span></a></p></li>';
-
-						}
-				echo '</ul>';	
-
-}
-else { 
-	echo "<h3>There are no opportunities at this time.</h3>";
-} ?>
+		$args = array(  
+			'post_type' => 'careers',
+			'post_status'=> 'publish',
+			'sort_column' => 'post_title',
+			'hierarchical' => 0  
+		);
+		$mypages = get_pages($args);
+		foreach( $mypages as $page ) {    
+			echo '<li><a href="'.get_permalink($page->ID).'"><h3>'.$page->post_title.'</h3><p><span class="gray">'.$page->post_excerpt.' </span>  <span class="black"> View Listing →</span></a></p></li>';
+		}
+		echo '</ul>';	
+	}
+	else { 
+		echo "<h3>There are no opportunities at this time.</h3>";
+	} ?>
 </div>
 
 <div class="career_people">
-<?php
-                    
-$people_args = array(
+<?php $people_args = array(
 	'post_type' => 'people',
 	'orderby' => 'rand',
 	'exclude' => 3484,
@@ -100,7 +96,7 @@ $post_ids = wp_list_pluck( $all_posts, 'ID' );
 $attachments = get_posts( array(
 	'post_type' => array('attachment', 'people', 'lab'),
 /*     'post__in'    => $post_ids, */
-	'post__in' => array(5273, 4522, 4853, 5329, 4988, 3426, 3532, 4973, 4974, 1233, 3804, 3431, 3420, 1196, 3368), 
+	'post__in' => array(5273, 6514, 4988, 5329, 5727, 5596, 5934, 4973, 4974, 1233, 3804, 3431, 3420, 1196, 3368, 4853), 
     'post_status' => array('inherit','publish'),
 /*     'orderby' => 'date', */
 	'orderby' => 'post__in',
@@ -128,8 +124,7 @@ $attachments = get_posts( array(
 
     $agent = $_SERVER['HTTP_USER_AGENT'];
 
-	  if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
-
+	if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
  	 
 	  echo '<div class="video-wrapper"><video id="esipeople" width="240" >
 		<source src="'.$first_vid.'" type="video/mp4">
@@ -142,8 +137,8 @@ $attachments = get_posts( array(
 		echo '</div>';
 	}
 	if('attachment' == get_post_type($attachment->ID)) {
-	$grid_thumb2 = wp_get_attachment_image_src($attachment->ID, 'grid-thumb'); ?>
-		<div class="people_item2">
+	$grid_thumb2 = wp_get_attachment_image_src($attachment->ID, 'insta'); ?>
+		<div class="people_item">
 			<img src="<?php echo $grid_thumb2[0]; ?>" alt="<?php echo apply_filters('the_title', $attachment->post_title); ?>" /> 
 		</div>
 	<?php } ?>                    
@@ -166,7 +161,7 @@ $attachments = get_posts( array(
 jQuery(function($){
 	$(document).ready(function(){
 	
-		jQuery('.people_item').hover(function() {
+		jQuery('.video-wrapper').hover(function() {
 			jQuery(this).find('.awesome-icon-play').fadeOut();
 			var myVideo = jQuery(this).find('video#esipeople')[0];
 			myVideo.play();

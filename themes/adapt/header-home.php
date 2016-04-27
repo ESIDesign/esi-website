@@ -41,8 +41,8 @@ $options = get_option( 'adapt_theme_settings' );
 ================================================== -->
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" />
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="print" />
-<script src="//use.typekit.net/xgw2vch.js"></script>
-<script>try{Typekit.load();}catch(e){}</script>
+<script src="https://use.typekit.net/xgw2vch.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
 <!-- WP Head
 ================================================== -->
 

@@ -55,9 +55,10 @@ Template Name Posts: Featured Template
 							'post_type' => 'attachment',
 							'post_parent' => $id,
 							'post_mime_type' => 'image',
-							'post_status' => null,
+// 							'post_status' => null,
 							'posts_per_page' => -1,
-						    'exclude' => $exclude_id,
+// 						    'exclude' => $exclude_id,
+/*
 							'meta_query' => array(
 						       array(
 						           'key' => 'not_in_carousel',
@@ -66,6 +67,7 @@ Template Name Posts: Featured Template
 						           'compare' => 'NOT EXISTS',
 						       )
 						   )
+*/
                         );
                     $attachments = get_posts($args);
 					if (get_field('video_order', $id) != "") { 
@@ -295,7 +297,7 @@ if ( !empty($images) ) {
 <?php endwhile; ?>
 <?php endif; ?>	
 
-<?php if(is_single(4682)) { ?>
+<?php if(is_single(4682) || is_single(5764)) { ?>
 <script type="text/javascript">
 jQuery(function($){
 (function($) {

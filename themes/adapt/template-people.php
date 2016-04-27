@@ -32,7 +32,7 @@
 				<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
 					<?php echo get_avatar($curauth->user_email, '170', $avatar); ?> 
 					<article class="caption_people">
-						<span class="name"><?php echo $curauth->display_name; ?></span><br />
+						<h3 class="name"><?php echo $curauth->display_name; ?></h3>
 						<?php echo $curauth->position; ?>
 					</article>
 				</a>
@@ -46,7 +46,7 @@
 <?php
 	// Get the authors from the database ordered by user nicename
 	global $wpdb;
-	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY user_nicename";
+	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY ID ASC";
 	$author_ids = $wpdb->get_results($query);
 	$count = 0;
 
@@ -63,7 +63,7 @@
 			<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
 				<?php echo get_avatar($curauth->user_email, '170', $avatar); ?>
 					<article class="caption_people">
-						<span class="name"><?php echo $curauth->display_name; ?></span><br />
+						<h3 class="name"><?php echo $curauth->display_name; ?></h3>
 						<?php echo $curauth->position; ?>
 					</article>
 				</a>
@@ -130,7 +130,7 @@ foreach($author_ids as $author) :
 	$curauth = get_userdata($author->ID);
 
 	// All current users are editors or higher 
-	if($curauth->user_level > 4 && $curauth->leadership != 'on' && $curauth->director != 'on' && $curauth->first_name != 'Rosemary' && $curauth->first_name != 'Danielle') :
+	if($curauth->user_level > 4 && $curauth->leadership != 'on' && $curauth->director != 'on' && $curauth->first_name != 'Rosemary' && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler') :
 		$count++;
 
 		// Set default avatar (values = default, wavatar, identicon, monsterid)
@@ -141,50 +141,47 @@ foreach($author_ids as $author) :
 <!-- 	<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>"> -->
 	<?php echo get_avatar($curauth->user_email, '170', $avatar); ?>
 	<article class="caption_people">
-		<span class="name"><?php echo $curauth->display_name; ?></span><br />
+		<h3 class="name"><?php echo $curauth->display_name; ?></h3>
 		<?php echo $curauth->position; ?>
 	</article>
 <!-- 		</a> -->
 </li>
 
 <?php if ($count % 7 == 0) {   
-	if('people' == get_post_type($attachments[$i]->ID)) {
+if('people' == get_post_type($attachments[$i]->ID)) {
 	setup_postdata( $attachments[$i] ); 
-
 	$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($attachments[$i]->ID),'insta', true);
 	$site_url = get_site_url();
-
+    $agent = $_SERVER['HTTP_USER_AGENT'];
 	ob_start();
 	ob_end_clean();
 	$output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $attachments[$i]->post_content, $matches);
-	$first_vid = $matches[1][0];
 
 	$value = get_post_meta($attachments[$i]->ID, 'syndication_permalink', true);
+	
 	echo '<article class="people_item">';
 
-    $agent = $_SERVER['HTTP_USER_AGENT'];
-
-	  if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
-
- 	 
-	  echo '<article class="video-wrapper"><video id="esipeople" width="240" >
-		<source src="'.$first_vid.'" type="video/mp4">
+	if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
+		echo '<article class="video-wrapper '.$attachments[$i]->ID.'">
+		<video id="esipeople" width="240" >
+			<source src="'.$first_vid.'" type="video/mp4">
 		</video><span class="awesome-icon-play"></span></article>';
-		}
-
-	  if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
-		echo '<img src="'.$image_url[0].'"/>';
-		}
-		echo '</article>';
 	}
-	if('attachment' == get_post_type($attachments[$i]->ID)) {
+
+	if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
+		echo '<img src="'.$image_url[0].'"/>';
+	}
+		
+	echo '</article>';
+}
+if('attachment' == get_post_type($attachments[$i]->ID)) {
 	$grid_thumb2 = wp_get_attachment_image_src($attachments[$i]->ID, 'grid-thumb'); ?>
-		<li class="people_item2">
-			<img src="<?php echo $grid_thumb2[0]; ?>" alt="<?php echo apply_filters('the_title', $attachments[$i]->post_title); ?>" /> 
-		</li>
-	<?php } ?>                    
+	<li class="people_item2">
+		<img src="<?php echo $grid_thumb2[0]; ?>" alt="<?php echo apply_filters('the_title', $attachments[$i]->post_title); ?>" /> 
+	</li> 
+<?php } ?>                    
 	
-	<?php  $i++; } ?>
+<?php  $i++; } ?>
 
 <?php if ($count ==3 || $count % 12 == 0) { ?>
 	<li class="people_block"></li>
@@ -204,33 +201,9 @@ foreach($author_ids as $author) :
 
 <script type="text/javascript">
 jQuery(function($){
-/* $('.people-wrap').show(); */
-/* $('#og-grid li, .info, .lower div, .lower li, #footer').hide(); */
 
 	$(document).ready(function(){
 		Grid.init();
-		/*
-var li_length = $('#og-grid li').length - 3;
-		var div_length = $('.lower div').length - 1;
-		
-		$('#og-grid li').each(function(b) {
-		  $(this).fadeOut(0).delay(150*(b++)).fadeIn(200, function(){
-			   if(li_length == b){
- 				   Grid.init(); 
-			  	   $('.info').fadeIn(300, function(){
-						$('.lower div').each(function(l) {
-							$(this).fadeOut(0).delay(100*(l++)).fadeIn(200, function() {
-								if(div_length == l){
-									
-									$('#footer').fadeIn(400);
-								}
-							});
-						});
-			  	   });
-			    }
-			});  
-		});
-*/
 	
 		$('.people_item').hover(function() {
 			jQuery(this).find('.awesome-icon-play').fadeOut();

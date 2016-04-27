@@ -7,8 +7,8 @@ module.exports = function(grunt) {
         concat: {   
 		    home: {
 		        src: [
-			        'js/froogaloop2.min.js',
-		            'js/jquery.cookie.js',
+// 			        'js/froogaloop2.min.js',
+// 		            'js/jquery.cookie.js',
 		            'js/jquery.cycle.js',
 		            'js/home.dev.js', 
 		        ],

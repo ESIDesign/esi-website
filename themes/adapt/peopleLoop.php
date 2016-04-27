@@ -20,7 +20,8 @@ $page = (isset($_GET['pageNumber'])) ? $_GET['pageNumber'] : 0;
 $count_args = array(
 	'fields' => 'all',
 /* 	'role' => 'editor', */
-	'exclude' =>  array(1, 48, 65, 54, 53, 47, 15, 64, 17, 56, 57, 36, 38, 49, 45),
+// 	'exclude' =>  array(1, 48, 65, 54, 53, 47, 15, 64, 17, 56, 57, 36, 38, 49, 45, 58),
+	'exclude' => array(1, 15, 36, 38, 45, 47, 48, 49, 53, 54, 56, 58, 95),
 	'number' => 99999
 );
 /*
@@ -49,7 +50,7 @@ $total_pages = ceil($total_users / $limit);
 // main user query
 $args  = array(
 /*     'role' => 'editor', */
-    'exclude' => array(1, 48, 65, 54, 53, 47, 15, 64, 56, 57, 36, 38, 49, 45),
+    'exclude' => array(1, 15, 36, 38, 45, 47, 48, 49, 53, 54, 56, 58, 95),
     'meta_key' => 'last_name',
 	'query_id' => 'wps_last_name',
     // return all fields
@@ -73,8 +74,8 @@ if ( ! empty( $user_query->results ) ) {
 		// Set default avatar (values = default, wavatar, identicon, monsterid)
 			$avatar = 'wavatar';
 
-	// If user level is above 0 or login name is "admin", display profile
-		if($user->user_level > 4&& $user->first_name != 'ESI') :
+			// If user level is above 0 or login name is "admin", display profile
+		if($user->user_level > 4 && $user->first_name != 'ESI') :
 ?>
 
 <a href="<?php echo get_site_url(); ?>/people"><?php 

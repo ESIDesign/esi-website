@@ -120,7 +120,7 @@ function fastImages() {
 })();
 	
 $(document).ready(function(){
-	console.log("BODY");
+// 	console.log("BODY");
 	$("body").removeClass("preload");
 	setTimeout(function(){
 		$('.home_item, .home_button, .project, .home_media').css('display','block');
@@ -172,14 +172,12 @@ if ( $(window).width() > 479) {
 	}
 */
 	} //window bigger than 767
-	
-/*
+
+
 	$('.home_item1 .cycle').cycle({
 			fx: 'fade',
-			speed: 400,
-			timeout: 20000
+			speed: 800
 	});
-*/
 	
 	$('.home_item3 .cycle').cycle({
 			fx: 'fade',

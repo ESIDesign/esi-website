@@ -98,11 +98,10 @@ if ( !empty($images) ) {
 <?php if(is_page(2)) { ?>
 <div class='sidebar-box twitter'>
 <h3>Press Inquiries</h3>
-<p><strong>Rosemary Siciliano</strong><br />
-Communications Director<br />
-212-989-9389<br />
-207.332.9008 (c)<br />
-rsiciliano (at) esidesign.com</p>
+<p><strong>Gideon D'Arcangelo</strong><br />
+VP of Creative Strategy<br />
+212-989-9367<br />
+gdarcangelo (at) esidesign.com</p>
 </div>
 
 <div class='sidebar-box video'>

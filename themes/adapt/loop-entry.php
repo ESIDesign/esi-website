@@ -8,11 +8,11 @@ $terms = get_the_terms( get_the_ID(), 'category' );
 
 <div class="loop-entry <?php if($terms) foreach ($terms as $term) echo $term->slug .' '; ?>">
 	<?php if($feat_img) { ?>
-    	<a href="<?php the_permalink(' ') ?>" class="loop-entry-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
+    	<a href="<?php echo esc_url( get_permalink(get_the_ID()) ); ?>" class="loop-entry-thumbnail"><img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>" /></a>
 	<?php } ?>
 	<div class="text">
 	<p class="date"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
-	<h3><a href="<?php the_permalink(' ') ?>"> 
+	<h3><a href="<?php echo esc_url( get_permalink(get_the_ID()) ); ?>"> 
 	<?php $title = get_the_title(); 
     echo substr($title, 0, 80);
     if(strlen($title) > 80) {
