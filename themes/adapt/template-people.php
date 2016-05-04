@@ -138,13 +138,17 @@ foreach($author_ids as $author) :
 ?>
 
 <li class="people-grid">
-<!-- 	<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>"> -->
+<?php if($curauth->description) { ?>
+	<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
+<?php } ?>
 	<?php echo get_avatar($curauth->user_email, '170', $avatar); ?>
 	<article class="caption_people">
 		<h3 class="name"><?php echo $curauth->display_name; ?></h3>
 		<?php echo $curauth->position; ?>
 	</article>
-<!-- 		</a> -->
+<?php if($curauth->description) { ?>
+	</a>
+<?php } ?>
 </li>
 
 <?php if ($count % 7 == 0) {   

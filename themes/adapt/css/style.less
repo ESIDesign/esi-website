@@ -2563,7 +2563,8 @@ h1.blog-title {
 	width: 400px;
 }
 
-h2.dropdown { 	
+h2.dropdown { 
+	cursor: pointer;	
 	float: right;
 	font-family: "proxima-nova-alt-condensed", "nimbus-sans-condensed", "freight-sans-pro", "proxima-nova", sans-serif;
 	font-size: 19px;
@@ -2598,7 +2599,7 @@ ul.filter{
 	font-size: 16px;
 	display: none;
 	position: absolute;
-	top: 30px;
+	top: 26px;
 	z-index: 1001;
 	list-style: none;
 	color: #999;
@@ -2606,9 +2607,7 @@ ul.filter{
 	line-height: 30px;
 	box-shadow: 3px 5px 17px -1px rgba(0, 0, 0, .1);
 	li{
-		height: 25px;
 		background: #FFF;
-		padding-bottom: 6px;
 		border-bottom: 1px solid #DDD;
 	}
 	a {
@@ -2627,8 +2626,8 @@ ul.filter{
 }
 
 .post-type-archive-project ul.filter {
-	left: 78px;
-	width: 200px;
+    left: 77px;
+    width: 211px;
 }
 
 .archive-post ul.filter, .archive-sidebar ul.filter  {
@@ -2884,12 +2883,12 @@ li.people-grid .caption_people  {
 	padding: 0px 0;
 	margin: 0 auto;
 /* 	text-align: center; */
-	width: 100%;
-}
-.og-grid li {
+	width: 100%; 
+	li {
 	display: inline-block;
 	margin: 0px 8px 2% 0px;
 	vertical-align: top;
+	}
 }
 
 .og-grid li > a,
@@ -2929,7 +2928,7 @@ li.people-grid .caption_people  {
 }
 
 .og-expander-inner {
-	padding: 6% 3% 0px;
+	padding: 6% 3% 2%;
 	height: 100%;
 }
 
@@ -2966,21 +2965,6 @@ li.people-grid .caption_people  {
 	background: #333;
 }
 
-.og-fullimg {
-	width: 25%;
-	float: left;
-	text-align: center;
-}
-
-.og-fullimg img {
-/* 	height:250px !important; */
-}
-
-.og-details {
-	width: 67%;
-	overflow-y: scroll;
-}
-
 .og-fullimg,
 .og-details {
 	height: 100%;
@@ -2989,33 +2973,43 @@ li.people-grid .caption_people  {
 	position: relative;
 }
 
+.og-fullimg {
+	width: 25%;
+	float: left;
+	text-align: center;
+	img {
+		display: inline-block;
+		max-height: 100%;
+		max-width: 100%;
+	}
+}
+
 .og-details {
-	padding: 0 2% 0 3.5%;
-}
-
-.og-fullimg img {
-	display: inline-block;
-	max-height: 100%;
-	max-width: 100%;
-}
-
-.og-details h3 {
-	font-weight: 300 !important;
-	font: 46px "adelle";
-	padding: 0px;
-	margin-bottom: 0px;
-	margin-top: -8px;
-	color: #dc801c;
-}
-
-.og-details h4 {
-	font-size: 22px;
-}
-
-.og-details p {
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 22px;
+//     line-height: 22px;
+    padding: 0 2% 0 3.5%;
+	width: 71%;
+	.text {
+	    height: 100%;
+	    margin-top: 1%;
+	    padding: 0 0 10%;
+		overflow-y: scroll;
+	}
+	h3 {
+		font: 46px "adelle", Helvetica, sans-serif;
+		font-weight: 300 !important;
+		padding: 0px;
+		margin-bottom: 0px;
+		margin-top: -8px;
+		color: #dc801c;
+	}
+	h4 {
+		font-size: 22px;
+	}
+	p {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 22px;
+	}
 }
 
 .og-loading {
