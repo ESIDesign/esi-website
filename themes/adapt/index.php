@@ -236,7 +236,7 @@ if ($count <= '3') { ?>
 
 
 <div class="home_button blog">
-	<a href="<?php echo get_site_url(); ?>/blog"><img src="<?php echo get_template_directory_uri(); ?>/images/blog-trans.png" alt="Blog"/></a>
+	<a href="<?php echo get_site_url(); ?>/jobs"><img src="<?php echo get_template_directory_uri(); ?>/images/join-trans.png" alt="Join"/></a>
 </div>
 
 

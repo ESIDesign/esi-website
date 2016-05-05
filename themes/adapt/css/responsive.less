@@ -48,20 +48,30 @@ img, video { max-width: 100%; }
 ================================================== */
 @media only screen and (min-width: 768px) and (max-width: 959px) {
 #wrap, .home #wrap { 
-	width: 85%; 
+	width: 92%; 
 }
     
 .home-wrap {
 	left: 30px;	
 }
 
+#masternav {
+	right: 54px;
+}
+
 .sf-menu a {
-	font: 18px/40px "proxima-nova-alt-condensed", "nimbus-sans-condensed", "proxima-nova", sans-serif;
-	padding: 28px 2px 16px;
+    font: 16px/40px "proxima-nova-alt-condensed","nimbus-sans-condensed","proxima-nova",sans-serif;
+    padding: 26px 1px 12px;
+    width: 69px;
 }
 
 form#searchform { 
-	right: -2px;
+	right: 0px;
+}
+
+input[type="text"]#s { 
+	height: 81px;
+	width: 54px;
 }
 
 .project-content {
@@ -147,22 +157,13 @@ a.all {
 	font-size: 110%;
 }
 
-.about_work1 {
+.about_work_left {
 	margin: 0;
-	width: 57%;
+// 	width: 57%;
 }
 
 .about_work_right {
-	width: 40%;
-}
-
-.about_people1 {
-	margin-left: 0;
-	width: 58%;
-}
-
-.about_people3, .about_people7 {
-	display: none;
+// 	width: 40%;
 }
 
 /* New Approach  */
@@ -608,13 +609,33 @@ a.all {
 	font-size: 110%;
 }
 
-.about_work {
-	padding-bottom: 87%;
+.about_work_right {
+	article {
+		img {
+			width: 100%;
+		}
+	}
 }
 
-.about_work1, .about_people1 {
+.about_work_left, .about_people_left {
 	margin: 1%;
 	width: 98%;
+}
+
+.about_people_right {
+	article {
+		width: 18%;
+		margin-right: 2%;
+		&:nth-child(3) {
+			margin-right: 2%;
+		}
+		&:nth-child(5) {
+			margin-right: 0;
+		}
+		&:nth-child(6) {
+			display: none;
+		}
+	}
 }
 
 .about_work h3 {
@@ -629,7 +650,7 @@ a.all {
 	display: none;
 }
 
-.about_work a.project-overlay {
+.about_work a.project-overlay, .about_people .caption_people {
 	font-size: 105%;
 }
 
@@ -655,11 +676,6 @@ a.all {
 .about_people_right {
 	width: 100%;
 }
-
-.about_people2, .about_people5, .about_people7 {
-	display: none;
-}
-
 
 /* New Approach  */
 .approach-wrap {
@@ -896,7 +912,7 @@ html {
 }
 
 #wrap, .home #wrap { 
-	width: 85%; 
+	width: 92%; 
 }
 
 .home-wrap {
@@ -1159,8 +1175,20 @@ h1.blog-title {
 	z-index: 0;
 }
 
-.people1, .people2, .people3 {
-	display: none !important;
+.about_people_right {
+	article {
+		width: 23%;
+		margin-right: 2%;
+		&:nth-child(3) {
+			margin-right: 2%;
+		}
+		&:nth-child(4) {
+			margin-right: 0;
+		}
+		&:nth-child(5) {
+			display: none;
+		}
+	}
 }
 
 /* contact & process */
@@ -1297,10 +1325,6 @@ p.by {
 .about_phil { 
 	padding-bottom: 32%;
 	clear: both;
-}
-
-.about_people3 {
-	display: none;
 }
 
 @light_green: #a3ad34;

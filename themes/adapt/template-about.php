@@ -23,17 +23,16 @@
 </div>
 
 <div class="about_work"> 
-     <div class="about_work1">
-    			<?php
-					if (get_field('module1') != "") { 
-						echo '<h2>';
-						echo get_field("module1_title");
-						echo '</h2><h3>';
-						echo strip_tags(get_field("module1"));
-						echo '</h3><h3 class="red">';
-						echo strip_tags(get_field("module1_link"), '<a>');
-						echo '</h3>';
-				} ?>
+     <div class="about_work_left">
+		<?php if (get_field('module1') != "") { 
+			echo '<h2>';
+			echo get_field("module1_title");
+			echo '</h2><h3>';
+			echo strip_tags(get_field("module1"));
+			echo '</h3><h3 class="red">';
+			echo strip_tags(get_field("module1_link"), '<a>');
+			echo '</h3>';
+		} ?>
     </div>
 					
 <div class="about_work_right">
@@ -92,7 +91,7 @@
 
 <div class="about_people">
 
-<div class="about_people1">
+<div class="about_people_left">
 	<?php
 		if (get_field('module3') != "") { 
 			echo '<h2>';
@@ -108,13 +107,11 @@
 	} ?>
 </div>		
 
-
 <div class="about_people_right">
-
 <?php
 	// Get the authors from the database ordered by user nicename
 	global $wpdb;
-	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand()";
+	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand() LIMIT 14";
 	$author_ids = $wpdb->get_results($query);
 
 	$count2 = 0;
@@ -129,12 +126,12 @@
 	$avatar = 'wavatar';
 
 	// If user level is editor or above or login name is not "admin", display profile
-	if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->first_name != 'Rosemary' && $curauth->first_name != 'Danielle' && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler') :
+	if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler') :
 	$count2++;
 ?>
 
-<?php if ($count2 == '1') { ?>
-	<article class="about_people2">
+<?php if($count2 <= 6) { ?>
+	<article>
 	<a href="<?php echo get_site_url(); ?>/people"><?php 
 		if(userphoto_exists($curauth->ID))
 	    userphoto($curauth->ID);
@@ -143,75 +140,13 @@
 		?> </a>
 		<a href="<?php echo get_site_url(); ?>/people" class="caption_people"><?php echo $curauth->first_name; ?></a>
 	</article>
-<? } ?>
-
-
-<?php if ($count2 == '2') { ?>
-	<article class="about_people3">	
-	<a href="<?php echo get_site_url(); ?>/people"><?php 
-		if(userphoto_exists($curauth->ID))
-	    userphoto($curauth->ID);
-	    else
-		echo get_avatar($curauth->user_email, '116', $avatar); 
-		?> </a>
-		<a href="<?php echo get_site_url(); ?>/people" class="caption_people"><?php echo $curauth->first_name; ?></a>
-	</article>
-<? } ?>
-	
-<?php if ($count2 == '3') { ?>
-	<article class="about_people4">	
-	<a href="<?php echo get_site_url(); ?>/people"><?php 
-		if(userphoto_exists($curauth->ID))
-	    userphoto($curauth->ID);
-	    else
-		echo get_avatar($curauth->user_email, '116', $avatar); 
-		?> </a>
-		<a href="<?php echo get_site_url(); ?>/people" class="caption_people"><?php echo $curauth->first_name; ?></a>
-	</article>
-<? } ?>
-	
-<?php if ($count2 == '4') { ?>
-	<article class="about_people5">	
-	<a href="<?php echo get_site_url(); ?>/people"><?php 
-		if(userphoto_exists($curauth->ID))
-	    userphoto($curauth->ID);
-	    else
-		echo get_avatar($curauth->user_email, '116', $avatar); 
-		?> </a>
-		<a href="<?php echo get_site_url(); ?>/people" class="caption_people"><?php echo $curauth->first_name; ?></a>
-	</article>
-<? } ?>
-	
-<?php if ($count2 == '5') { ?>
-	<article class="about_people6">	
-		<a href="<?php echo get_site_url(); ?>/people"><?php 
-			if(userphoto_exists($curauth->ID))
-		    userphoto($curauth->ID);
-		    else
-			echo get_avatar($curauth->user_email, '116', $avatar); 
-			?> </a>
-			<a href="<?php echo get_site_url(); ?>/people" class="caption_people"><?php echo $curauth->first_name; ?></a>
-	</article>
-<? } ?>
-	
-<?php if ($count2 == '6') { ?>
-	<article class="about_people7">	
-	<a href="<?php echo get_site_url(); ?>/people"><?php 
-		if(userphoto_exists($curauth->ID))
-	    userphoto($curauth->ID);
-	    else
-		echo get_avatar($curauth->user_email, '116', $avatar); 
-		?> </a>
-		<a href="<?php echo get_site_url(); ?>/people" class="caption_people"><?php echo $curauth->first_name; ?></a>
-	</article>
-<? } ?>
+<?php } ?>
 
 <?php endif; ?>
 
      	<?php endforeach; ?>
     </div><!-- About People -->
 </div>
-
 
 
 <script type="text/javascript">
@@ -230,22 +165,6 @@ jQuery(function($){
 (function() {
   $(paras[i++]).fadeIn(200, arguments.callee);
 })();
-
-
-	
-	jQuery('.about_work2, .about_work3, .about_work4, .about_work5').hover(function() {
-		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.project-overlay').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});	
-	
-	jQuery('.about_people2, .about_people3, .about_people4, .about_people5, .about_people6, .about_people7').hover(function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:1}).css('background-color', 'rgba(0,0,0,.4)');
-	},
-	function() {
-		jQuery(this).find('a.caption_people').stop(false,true).animate({opacity:.4}).css('background-color', 'transparent');
-	});
 	
 	$('body').scrollTop(0);
 	

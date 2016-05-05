@@ -81,7 +81,7 @@
 	<div class="people_excerpt"> 
 	 <h1><?php the_title(); ?></h1>
 	    <h3><?php echo get_the_content(); ?></h3>
-	    <h3><a href="<?php echo get_site_url(); ?>/careers">Join Us</a></h3>
+	    <h3><a href="<?php echo get_site_url(); ?>/jobs">Join Us</a></h3>
 	</div>
 </div>
 
