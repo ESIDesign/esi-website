@@ -28,7 +28,7 @@
 		$user_link = get_author_posts_url($curauth->ID);
 		$avatar = 'wavatar';
 ?>
-			<li class="people-grid">
+			<li class="people-grid fadein">
 				<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
 					<?php echo get_avatar($curauth->user_email, '170', $avatar); ?> 
 					<article class="caption_people">
@@ -59,7 +59,7 @@
 			// Get link to author page
 			$user_link = get_author_posts_url($curauth->ID);
 ?>
-		<li class="people-grid">
+		<li class="people-grid fadein">
 			<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
 				<?php echo get_avatar($curauth->user_email, '170', $avatar); ?>
 					<article class="caption_people">
@@ -76,7 +76,7 @@
 
 <div class="clear"></div>
 
-<div class="info">
+<div class="info fadein">
 	<div class="people_block2"></div>	 
 	<div class="people_excerpt"> 
 	 <h1><?php the_title(); ?></h1>
@@ -85,7 +85,7 @@
 	</div>
 </div>
 
-<ul class="og-grid">
+<ul class="og-grid fadein">
 <?php
 	global $wpdb;
 	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand()";
