@@ -171,10 +171,41 @@ Template Name Posts: Featured Template
 				the_field("explore");
 				echo "</div>";
 			}
-			if (get_field('news') != "") { 
-				echo "<h3>News</h3>";
-				the_field("news");
-			}
+
+			$id = get_the_id();
+			$post_news = get_post($id);
+
+			    $args = array('post_type' => 'news',
+			        'tax_query' => array(
+			            array(
+			                'taxonomy' => 'project',
+			                'field' => 'slug',
+			                'terms' => $post_news->post_name,
+			            ),
+			        ),
+			     );
+			
+			     $loop = new WP_Query($args);
+			     if($loop->have_posts()) {
+				    echo "<h3>News</h3>";
+ 			        while($loop->have_posts()) : $loop->the_post();
+					    echo '<p>';
+					    if(get_field('link') != "") {
+						    echo '<a target="_blank" href="'.get_field('link').'">';
+						}
+				        if(get_field('source') != "") {
+					        echo '<strong>'.get_field('source').'</strong>: ';
+				        }
+				        	echo '<span style="font-weight: 500 !important;">'.get_the_title().'</span>';
+						if(get_field('link') != "") {
+						    echo '</a>';
+						}
+						echo '</p>';
+			        endwhile;
+			     }
+		        wp_reset_query();
+			
+			
 			if (get_field('awards') != "") { 
 				echo "<h3>Awards</h3>";
 				the_field("awards");
@@ -225,9 +256,7 @@ Template Name Posts: Featured Template
 	  	
 	  	<h3 class="related">Related Projects <a class="all" href="<?php echo get_site_url(); ?>/work">See all projects</a></h3>
 	  	
-<?php 
-
-	$tags = get_the_terms($post->ID, 'project_cats');
+<?php $tags = get_the_terms($post->ID, 'project_cats');
 
 	$tag_ids = array();
 	foreach($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
@@ -308,8 +337,7 @@ jQuery(function($){
   $('.accordion > dt > a').click(function() {
       $this = $(this);
       $target =  $this.parent().next();
-      
-    
+          
       if($target.hasClass('active')){
         $this.removeClass('active');
         $target.removeClass('active').slideUp(); 
@@ -334,19 +362,15 @@ jQuery(function($){
 <script>
     videojs.options.flash.swf = "<?php echo get_template_directory_uri(); ?>/js/video-js.swf";
 </script>
-
 <script type="text/javascript">
-
 jQuery(function($){
 	$(document).ready(function(){
 	if($('body').hasClass('postid-2844')) {
 		var myVideo = jQuery(this).find('video#related_lab')[0];
 		$('.related-item').hover(function() {
-			$(this).find('.awesome-icon-play').fadeOut();
 			myVideo.play();
 		},
 		function() {
-			$(this).find('.awesome-icon-play').fadeIn();
 			myVideo.pause();
 		});
 	}

@@ -160,6 +160,7 @@ if('people' == get_post_type($attachments[$i]->ID)) {
 	ob_start();
 	ob_end_clean();
 	$output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $attachments[$i]->post_content, $matches);
+	$first_vid = $matches[1][0];
 
 	$value = get_post_meta($attachments[$i]->ID, 'syndication_permalink', true);
 	

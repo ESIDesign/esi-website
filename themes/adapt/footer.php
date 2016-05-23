@@ -4,9 +4,9 @@
  * @subpackage Adapt Theme
  */
 $options = get_option( 'adapt_theme_settings' );
-?>
+if(!is_single(2844)) { ?>
 </div><!-- /main -->
-
+<?php } ?>
     <div id="footer" class="clearfix">
          <div class="tweet"><p></p></div>
 		<div id="footer-bottom" class="clearfix">
@@ -24,15 +24,6 @@ $options = get_option( 'adapt_theme_settings' );
 	</div><!-- /footer -->
     
 </div><!-- wrap --> 
-
-<script type="text/javascript">
-jQuery(function($){
-
-	$(document).ready(function(){
-
-	});
-});
-</script> 
 
 <!-- WP Footer -->
 <?php wp_footer(); ?> 

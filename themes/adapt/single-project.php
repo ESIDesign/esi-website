@@ -167,10 +167,39 @@ Template Name Posts: Not Featured Template
 	  	echo "</div>";
 	  	}?>
         <?php 
-	  	if (get_field('news') != "") { 
-	  	echo "<h3>News</h3>";
-	  	the_field("news");
-	  	}?>
+		$id = get_the_id();
+		$post_news = get_post($id);
+
+		    $args = array('post_type' => 'news',
+		        'tax_query' => array(
+		            array(
+		                'taxonomy' => 'project',
+		                'field' => 'slug',
+		                'terms' => $post_news->post_name,
+		            ),
+		        ),
+		     );
+		
+		     $loop = new WP_Query($args);
+		     if($loop->have_posts()) {
+			    echo "<h3>News</h3>";
+			        while($loop->have_posts()) : $loop->the_post();
+				    echo '<p>';
+				    if(get_field('link') != "") {
+					    echo '<a target="_blank" href="'.get_field('link').'">';
+					}
+			        if(get_field('source') != "") {
+				        echo '<strong>'.get_field('source').'</strong>: ';
+			        }
+			        	echo '<span style="font-weight: 500 !important;">'.get_the_title().'</span>';
+					if(get_field('link') != "") {
+					    echo '</a>';
+					}
+					echo '</p>';
+		        endwhile;
+		     }
+	        wp_reset_query();
+	  	?>
                 <?php 
 	  	if (get_field('awards') != "") { 
 	  	echo "<h3>Awards</h3>";

@@ -4,9 +4,7 @@
  * @subpackage Adapt Theme
  * Template Name: News
  */
-?>
-
-<?php get_header(); ?>
+get_header(); ?>
 
 <div id="post" class="post clearfix archive-post news"> 
 
@@ -18,7 +16,7 @@
     global $post;
     $args = array(
         'post_type' =>'news',
-        'orderby' => 'menu_order',
+        'orderby' => 'date',
         'order' => 'ASC',
         'posts_per_page' => -1
     );
