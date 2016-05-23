@@ -346,9 +346,10 @@ var Grid = (function() {
 /* 			this.$href = $( '<a href="#">Visit website</a>' ); */
 			this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description );
 			this.$loading = $( '<div class="og-loading"></div>' );
-			this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
+// 			this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
 			this.$closePreview = $( '<span class="og-close"></span>' );
-			this.$previewInner = $( '<div class="og-expander-inner"></div>' ).append( this.$closePreview, this.$fullimage, this.$details );
+// 			this.$previewInner = $( '<div class="og-expander-inner"></div>' ).append( this.$closePreview, this.$fullimage, this.$details );
+			this.$previewInner = $( '<div class="og-expander-inner"></div>' ).append( this.$closePreview, this.$details );
 			this.$previewEl = $( '<div class="og-expander"></div>' ).append( this.$previewInner );
 			// append preview element to the item
 			this.$item.append( this.getEl() );
@@ -397,6 +398,7 @@ var Grid = (function() {
 
 			// preload large image and add it to the preview
 			// for smaller screens we don´t display the large image (the media query will hide the fullimage wrapper)
+/*
 			if( self.$fullimage.is( ':visible' ) ) {
 				this.$loading.show();
 				$( '<img/>' ).load( function() {
@@ -409,6 +411,7 @@ var Grid = (function() {
 					}
 				} ).attr( 'src', eldata.largesrc );	
 			}
+*/
 
 		},
 		open : function() {

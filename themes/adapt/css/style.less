@@ -2965,18 +2965,17 @@ li.people-grid .caption_people  {
 }
 
 .og-grid li.og-expanded > a::after {
-	top: 210px;
-/* 	top: auto; */
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-bottom-color: rgb(250,250,250);
-	border-width: 15px;
-	left: 50%;
-	margin: -20px 0 0 -15px;
+    top: 0px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #FAFAFA;
+    border-width: 12px;
+    left: 0;
+    margin: -6px 0 0 76px;
 }
 
 .og-expander {
@@ -3051,7 +3050,8 @@ li.people-grid .caption_people  {
 .og-details {
 //     line-height: 22px;
     padding: 0 2% 0 3.5%;
-	width: 71%;
+// 	width: 71%;
+	width: 90%;
 	.text {
 	    height: 100%;
 	    margin-top: 1%;
@@ -3069,10 +3069,10 @@ li.people-grid .caption_people  {
 	h4 {
 		font-size: 22px;
 	}
-	p {
+	p, .text {
 		font-weight: 400;
 		font-size: 16px;
-		line-height: 22px;
+		line-height: 130%;
 	}
 }
 
@@ -3115,12 +3115,13 @@ li.people-grid .caption_people  {
 	min-height: 625px !important;
 }
 	
-.og-details h3 { 
-	font-size: 32px; 
-}
-
-.og-details p { 
-	font-size: 15px; 
+.og-details {
+	h3 { 
+		font-size: 32px; 
+	}
+	p, .text { 
+		font-size: 15px; 
+	}	
 }
 
 }
@@ -3142,14 +3143,17 @@ li.people-grid .caption_people  {
 	float: none;
 	width: 88%;
 }
-	
-.og-details h3 { 
-	margin: .5% 0 .5%;
-	font-size: 30px; 
-}
 
-.og-details p { 
-	font-size: 91%; 
+.og-details {
+	float: none;
+	width: 88%;
+	h3 { 
+		font-size: 30px;
+		margin: .5% 0 .5%; 
+	}
+	p, .text { 
+		font-size: 91%; 
+	}	
 }
 	
 }
