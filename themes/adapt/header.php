@@ -17,12 +17,23 @@ $options = get_option( 'adapt_theme_settings' );
 
 <!-- Meta Tags -->
 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-<meta name="description" content="
-<?php if (have_posts() && is_single() OR is_page()):while(have_posts()):the_post();
+<meta name="description" content="<?php if (have_posts() && is_single() OR is_page()):while(have_posts()):the_post();
 $out_excerpt = str_replace(array("\r\n", "\r", "\n"), "", get_the_excerpt());
-echo apply_filters('the_excerpt_rss', $out_excerpt);
+if(is_page() && (get_field('meta_description') != "")) {
+	the_field('meta_description');
+} else {
+	echo apply_filters('the_excerpt_rss', $out_excerpt);
+}
 endwhile;
-endif; ?>" />
+endif; ?>"/>
+<?php if(have_posts() && is_page()):while(have_posts()):the_post();
+if(is_page() && (get_field('meta_keywords') != "")) {
+	echo '<meta name="keywords" content="';
+	the_field('meta_keywords');
+	echo '">';
+} 
+endwhile;
+endif; ?>
 
 <title><?php wp_title(''); ?><?php if(wp_title('', false)) { echo ' |'; } ?> <?php bloginfo('name'); ?></title>
     

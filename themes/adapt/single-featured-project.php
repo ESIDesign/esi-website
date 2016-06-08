@@ -23,13 +23,18 @@ Template Name Posts: Featured Template
 	    <div id="featured">
            <div class="title">
            <div class="band">
-	           <h1><?php
-	  	if (get_field('short') != "") { 
-	  	the_field("short");
-	  	}
-	  	else { ?>
-			<?php the_title(); ?>	  	
-	  	<?php } ?></h1>
+	           <?php
+			    if (get_field('short') != "") { 
+				   echo '<h1>'.get_field("short").'</h1>';
+	  			}
+	  			else {
+		  			$title = get_the_title(); 
+		  			if(strlen($title) > 37) { 
+		  				echo '<h1 style="font-size:34px">'.get_the_title().'</h1>';  
+		  			} else {
+			  			echo '<h1>'.get_the_title().'</h1>';
+		  			}	
+		  		} ?></h1>
            </div>
            <div class="triangle"></div>
            </div>
