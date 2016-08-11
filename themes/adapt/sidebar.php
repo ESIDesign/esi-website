@@ -33,92 +33,52 @@ if( $children ) {
 
 <div class="archive-sidebar <?php if(is_page(2)) { echo 'news'; } ?>">
 <?php if(!is_page(2)) { ?>
-<div class='sidebar-box'><h3><a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/tweet.png" alt="Twitter"> Twitter</a></h3>	
-<div class="twitter">
+	<div class='sidebar-box'><h3><a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/tweet.png" alt="Twitter"> Twitter</a></h3>	
+	<div class="twitter"></div>
 </div>
-</div>
 
-<div class='sidebar-box'><h3><a target="_blank" href="http://instagram.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/instagram.png" alt="Instagram"> Instagram</a></h3>	
-	<?php
-/* Only Lab Posts */
+<div class='sidebar-box'>
+	<h3><a target="_blank" href="http://instagram.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/instagram.png" alt="Instagram"> Instagram</a></h3>	
 
-// Do a new query with these IDs to get a properly-sorted list of posts
-$images = get_posts( array(
-	'post_type' => 'people',
-	'post_status' => 'publish',
-    'orderby' => 'date',
-    'order' => 'DESC',
-    'posts_per_page' => 6
-));
-		
-if ( !empty($images) ) {
-	foreach ( $images as $image ) { 
-		setup_postdata( $image ); 
-	
-		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($image->ID),'insta', true);
-		$site_url = get_site_url();
-		
-		ob_start();
-		ob_end_clean();
-		$output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $image->post_content, $matches);
-		$first_vid = $matches [1] [0];
-
-		$value = get_post_meta($image->ID, 'syndication_permalink', true); ?>
-	
-		<article class="twocol">
-		
-		<?php if(!empty($value)) { 
-			echo '<a target="_blank" href="'. $value.'" class="">';
-		} else {
-			echo '<a href="'.$site_url.'/'.$image->post_name.'" class="">';
-		}
-	
-	    $agent = $_SERVER['HTTP_USER_AGENT'];
-	
-		if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
-		  echo '<div class="video-wrapper"><video id="related_lab" width="110" >
-			<source src="'.$first_vid.'" type="video/mp4">
-			</video><span class="awesome-icon-play"></span></div></a>';
-		}
-	
-		if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
-			echo '<img src="'.$image_url[0].'"/></a>';
-		} ?>
-		</article>
-	<?php }
+<?php
+$jsonurl = "https://api.instagram.com/v1/users/self/media/recent/?access_token=266854171.7827081.6439a537b65044a7872f1d35af72fda2";	
+$json = file_get_contents($jsonurl,0,null,null);
+$json_output = json_decode($json, true);
+$count = 1;
+foreach($json_output['data'] as $item) {
+	if($item['type'] == 'image' && $count <= 6) { 
+		$count++;
+		echo '<article class="twocol instagram">';
+		echo '<a target="_blank" href="'.$item['link'].'">';
+		echo '<img src="'.$item['images']['thumbnail']['url'].'"/></a>';
+		echo '</article>';
+	} 
 } ?>
 
 </div>
 <?php } ?>
 
+<!-- News Sidebar -->
 <?php if(is_page(2)) { ?>
-<div class='sidebar-box twitter'>
-<h3>Press Inquiries</h3>
-<p><strong>Tarley Jordan</strong><br />
-Director of Marketing and Communications<br />
-212-419-9364<br />
-tjordan (at) esidesign.com</p>
-</div>
+<?php if(get_field('press_inquiries', 2) != "") {
+	echo '<div class="sidebar-box twitter">';
+	echo '<h3>Press Inquiries</h3>';
+	the_field('press_inquiries');
+	echo '</div>';
+} ?>
 
-<div class='sidebar-box video'>
-	<h3>Video<a class="all" target="_blank" href="https://vimeo.com/esidesign">See all video</a></h3>
-	<?php echo '<div class="related-item">';
-		echo '<a href=""><iframe id="player" src="https://player.vimeo.com/video/172745960?api=1&title=0&byline=0&portrait=0&player_id=player"></iframe></li></a>';
-		echo '<div class="related-caption"><a href="https://vimeo.com/109265859">';
-	  	echo 'Terrell Place, Washington DC';		
-		echo '</a></div>';
+<?php if(have_rows('videos', 2) ):
+	echo '<div class="sidebar-box video">';
+	echo '<h3>Video<a class="all" target="_blank" href="https://vimeo.com/esidesign">See all video</a></h3>';
+	while (have_rows('videos', 2) ) : the_row();
+		echo '<div class="related-item">';
+		echo '<a href="https://vimeo.com/'.get_sub_field('video_id').'" target="_blank"><iframe id="player" src="https://player.vimeo.com/video/'.get_sub_field('video_id').'?api=1&title=0&byline=0&portrait=0&player_id=player"></iframe></li></a>';
+		echo '<div class="related-caption"><a href="https://vimeo.com/'.get_sub_field('video_id').'" target="_blank">'.get_sub_field('video_title').'</a></div>';
 		echo '</div>';
-		?>
-	<?php echo '<div class="related-item">';
-		echo '<a href=""><iframe id="player" src="http://player.vimeo.com/video/74313412?api=1&title=0&byline=0&portrait=0&player_id=player"></iframe></li></a>';
-		echo '<div class="related-caption"><a href="https://vimeo.com/74313412">';
-	  	echo 'Media Architecture';		
-		echo '</a></div>';
-		echo '</div>';
-		?>
-</div>
+	endwhile;
+	echo '</div>';
+endif; ?>
 	
-
 <div class='sidebar-box'>
 <?php
 global $post;
