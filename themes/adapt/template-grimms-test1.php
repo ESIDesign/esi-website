@@ -2,6 +2,7 @@
 /**
  * @package WordPress
  * @subpackage Adapt Theme
+ * Template Name: Grimm 1
  */
 get_header('home'); ?>
 
@@ -170,7 +171,7 @@ $project_posts = get_posts($args);
 
 		$avatar = 'wavatar';
 
-		if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->ID != 2 && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler' && $curauth->first_name != 'Tarley') :
+		if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->ID != 2 && $curauth->first_name != 'Rosemary' && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler') :
 		$count++; ?>
 		
 <?php if ($count == '1') { ?>

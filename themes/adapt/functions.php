@@ -228,7 +228,7 @@ function custom_post_types_register() {
 		'supports' => array('title', 'author', 'editor','thumbnail', 'page-attributes', 'revisions', 'excerpt'),
 /* 		'taxonomies' => array('post_tag'), */
 		'has_archive' => true,
-		'rewrite' => array('with_front' => false, 'slug' => 'careers' ),
+		'rewrite' => array('with_front' => false, 'slug' => 'jobs' ),
 	  ); 
 	  flush_rewrite_rules( true );
 
@@ -693,7 +693,7 @@ function posts_custom_column_views($column_name, $id){
     }
 }
 add_filter('manage_careers_columns', 'posts_column_views');
-add_action('manage_careers_custom_column', 'posts_custom_column_views',5,2);
+add_action('manage_fs_custom_column', 'posts_custom_column_views',5,2);
 
 add_action( 'pre_user_query', 'wps_pre_user_query' );
 /*
@@ -825,6 +825,7 @@ function search($array, $key, $value)
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
+/*
 add_action("wp_enqueue_scripts", "nm_scripts", 11);
 
 function nm_scripts() {
@@ -835,6 +836,7 @@ wp_enqueue_style('thickbox.css', includes_url('/js/thickbox/thickbox.css'), null
 }
 
 }
+*/
 
 function wpsd_add_project_args() {
     global $wp_post_types;

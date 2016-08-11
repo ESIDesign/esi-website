@@ -91,49 +91,4 @@ get_header(); ?>
     videojs.options.flash.swf = "<?php echo get_template_directory_uri(); ?>/js/video-js.swf";
 </script>
 
-<script type="text/javascript">
-/*
-function filter_toggle() {
-	$("ul.filter").toggle();
-}
-*/
-
-/*
-jQuery(function($){
-	$(window).load(function(){
-		function blogIsotope() {
-			var $container = $('.blog-content');
-			$container.isotope({
-				itemSelector: '.loop-entry'
-			});
-		} 
-		
-		blogIsotope();
-		
-		$("h2.dropdown").click(function() {
-			$("ul.filter").toggle();
-		});	
-				
-		window.onresize = function() {
-		    blogIsotope();
-		};
-	});
-	
-	$(document).ready(function(){
-	
-		jQuery('.video-wrapper').hover(function() {
-			jQuery(this).find('.awesome-icon-play').fadeOut();
-			var myVideo = jQuery(this).find('video#related_lab')[0];
-			myVideo.play();
-		},
-		function() {
-			jQuery(this).find('.awesome-icon-play').fadeIn();
-			var myVideo = jQuery(this).find('video#related_lab')[0];
-			myVideo.pause();
-		});
-		
-	});
-});
-*/
-</script>
 <?php get_footer(); ?>

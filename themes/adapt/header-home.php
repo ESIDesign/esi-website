@@ -8,24 +8,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <![endif]-->
 
-<?php
-/**
- * @package WordPress
- * @subpackage Adapt Theme
- */
-$options = get_option( 'adapt_theme_settings' );
-?>
+<?php $options = get_option( 'adapt_theme_settings' ); ?>
 
 <!-- Mobile Specific
 ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<!-- Meta Tags -->
-<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-
-<meta name="Description" CONTENT="<?php if (get_field('about', 2145) != "") { 
-							  the_field('about', 2145);
-						  	} ?>">
 
 <!-- Title Tag
 ================================================== -->
@@ -45,7 +32,6 @@ $options = get_option( 'adapt_theme_settings' );
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
 <!-- WP Head
 ================================================== -->
-
 <?php wp_head(); ?>
 <?php include('analytics.php'); ?>
 </head>

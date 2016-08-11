@@ -7,33 +7,29 @@
 ?>
 <aside id="sidebar" class="clearfix">
 
-	<?php if(is_page(430)) { 
-	
-	 echo "<div class='sidebar-box'><h3 class='careers'>Career Opportunities</h3>";
-	 $children = get_pages('post_type=careers&post_status=publish');
-	 if( $children ) {
-		echo '<ul>';
-			$args = array(  'post_type' => 'careers',
-				            'post_status'=> 'publish',
-  							'sort_order' => 'ASC',
-  							'sort_column' => 'post_title',
-							'hierarchical' => 0  
- 						);
-				$mypages = get_pages($args);
-				foreach( $mypages as $page ) {    
-						
-					echo '<li><a href="'.get_permalink($page->ID).'">'.$page->post_title.'</a></li>';
+<?php if(is_page(430)) { 
+echo "<div class='sidebar-box'><h3 class='careers'>Career Opportunities</h3>";
+$children = get_pages('post_type=careers&post_status=publish');
+if( $children ) {
+	echo '<ul>';
+	$args = array(  'post_type' => 'careers',
+		            'post_status'=> 'publish',
+						'sort_order' => 'ASC',
+						'sort_column' => 'post_title',
+					'hierarchical' => 0  
+					);
+		$mypages = get_pages($args);
+		foreach( $mypages as $page ) {    
+				
+			echo '<li><a href="'.get_permalink($page->ID).'">'.$page->post_title.'</a></li>';
 
-						}
-				echo '</ul>';	
-
+				}
+		echo '</ul>';	
 }
-			if( $children == null ) { 
-			 echo "<p>There are no opportunities at this time.</p>";
-			}    
-		
-
-	}	?>
+	if( $children == null ) { 
+		echo "<p>There are no opportunities at this time.</p>";
+	}    
+}	?>
 
 <div class="archive-sidebar <?php if(is_page(2)) { echo 'news'; } ?>">
 <?php if(!is_page(2)) { ?>
@@ -48,7 +44,7 @@
 
 // Do a new query with these IDs to get a properly-sorted list of posts
 $images = get_posts( array(
-	'post_type' => 'lab',
+	'post_type' => 'people',
 	'post_status' => 'publish',
     'orderby' => 'date',
     'order' => 'DESC',
@@ -98,30 +94,26 @@ if ( !empty($images) ) {
 <?php if(is_page(2)) { ?>
 <div class='sidebar-box twitter'>
 <h3>Press Inquiries</h3>
-<p><strong>Gideon D'Arcangelo</strong><br />
-VP of Creative Strategy<br />
-212-989-9367<br />
-gdarcangelo (at) esidesign.com</p>
+<p><strong>Tarley Jordan</strong><br />
+Director of Marketing and Communications<br />
+212-419-9364<br />
+tjordan (at) esidesign.com</p>
 </div>
 
 <div class='sidebar-box video'>
 	<h3>Video<a class="all" target="_blank" href="https://vimeo.com/esidesign">See all video</a></h3>
 	<?php echo '<div class="related-item">';
+		echo '<a href=""><iframe id="player" src="https://player.vimeo.com/video/172745960?api=1&title=0&byline=0&portrait=0&player_id=player"></iframe></li></a>';
+		echo '<div class="related-caption"><a href="https://vimeo.com/109265859">';
+	  	echo 'Terrell Place, Washington DC';		
+		echo '</a></div>';
+		echo '</div>';
+		?>
+	<?php echo '<div class="related-item">';
 		echo '<a href=""><iframe id="player" src="http://player.vimeo.com/video/74313412?api=1&title=0&byline=0&portrait=0&player_id=player"></iframe></li></a>';
-
 		echo '<div class="related-caption"><a href="https://vimeo.com/74313412">';
 	  	echo 'Media Architecture';		
 		echo '</a></div>';
-
-		echo '</div>';
-		?>
-		<?php echo '<div class="related-item">';
-		echo '<a href=""><iframe id="player" src="http://player.vimeo.com/video/109265859?api=1&title=0&byline=0&portrait=0&player_id=player"></iframe></li></a>';
-
-		echo '<div class="related-caption"><a href="https://vimeo.com/109265859">';
-	  	echo 'Beacon Capital Partners: 745 Atlantic';		
-		echo '</a></div>';
-
 		echo '</div>';
 		?>
 </div>
@@ -134,7 +126,7 @@ $args = array(
 	'post_type' =>'press',
 	'orderby' => 'date',
 	'order' => 'ASC',
-	'numberposts' => 4
+	'numberposts' => 3
 );
 $posts = get_posts($args);
 $count = 0;
@@ -152,5 +144,4 @@ echo '<h3>Press Releases</h3>';
 
 </div>
 
-</aside>
-<!-- /sidebar -->
+</aside><!-- /sidebar -->
