@@ -170,7 +170,7 @@ $project_posts = get_posts($args);
 
 		$avatar = 'wavatar';
 
-		if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->ID != 2 && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler' && $curauth->first_name != 'Tarley') :
+		if($curauth->user_level >= 1 && $curauth->first_name != 'ESI' && $curauth->ID != 2 && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler' && $curauth->first_name != 'Tarley') :
 		$count++; ?>
 		
 <?php if ($count == '1') { ?>

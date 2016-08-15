@@ -37,39 +37,47 @@ removed:function(){}};d.fn.flexslider=function(h){h=h||{};if("object"===typeof h
 default:"number"===typeof h&&k.flexAnimate(h,!0)}}})(jQuery);
 
 jQuery(function($){
-		var iframe = $('#player')[0];
+	function removeOverlay() {
+	   	$(".placeholder, span#button").animate({opacity:0}, function(){
+			$(".placeholder, span#button").css('z-index',-2);
+		});
+		$('span#button').removeClass('awesome-icon-play');
+		$('span#button').addClass('awesome-icon-pause');
+   	} 
+		var iframe = document.querySelector('iframe');
 		if(iframe) {
-			var	player = $f(iframe);	
-	
-			player.addEvent("ready", function(){    		 
-				player.addEvent("play", function(){
-					$('#featured .flexslider').flexslider("pause");
-				});
-				player.addEvent("pause", function(){
-					$(".placeholder, span#button").css('z-index',2).animate({opacity:1});
-					$('span#button').removeClass('awesome-icon-pause');
-					$('span#button').addClass('awesome-icon-play');
-				});
-				player.addEvent("finish", function() {
-					$(".placeholder, span#button").animate({opacity:0}, function(){
-						$(".placeholder, span#button").css('z-index',-2);
-					});
-					$('span#button').removeClass('awesome-icon-pause');
-					$('span#button').addClass('play');
-					$("span#button").fadeIn();
-			    });
+			var player = new Vimeo.Player(iframe);	
+			if($(iframe).hasClass('autoplay')) {
+				player.ready().then(function() {
+					player.play();
+					player.setVolume(0);
+				});  	
+			} 
+	 
+			player.on("play", function(){
+				$('#featured .flexslider').flexslider("pause");
+				removeOverlay();
 			});
-		   	
-		   	$("img.placeholder, #button").on('touchstart click', function(){
-				player.api('play');
+			player.on("pause", function(){
+				$(".placeholder, span#button").css('z-index',2).animate({opacity:1});
+				$('span#button').removeClass('awesome-icon-pause');
+				$('span#button').addClass('awesome-icon-play');
+			});
+			player.on("finish", function() {
 				$(".placeholder, span#button").animate({opacity:0}, function(){
 					$(".placeholder, span#button").css('z-index',-2);
 				});
-				$('span#button').removeClass('awesome-icon-play');
-				$('span#button').addClass('awesome-icon-pause');
+				$('span#button').removeClass('awesome-icon-pause');
+				$('span#button').addClass('play');
+				$("span#button").fadeIn();
+		    });
+		   	
+		   	$("img.placeholder, #button").on('touchstart click', function(){
+				player.play();
+				removeOverlay();
 		   	});
 			
-			var isPaused = player.api('pause');
+			var isPaused = player.pause();
 			
 			if (isPaused == true) {
 				$('span#button').removeClass('awesome-icon-pause');
@@ -118,7 +126,7 @@ if ($(window).width() > 767) {
 			before: function(){
 /*
 				if(iframe){
-					player.api('pause');	
+					player.pause();	
 				}
 */
 			} 

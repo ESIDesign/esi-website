@@ -126,7 +126,7 @@
 	$avatar = 'wavatar';
 
 	// If user level is editor or above or login name is not "admin", display profile
-	if($curauth->user_level > 4 && $curauth->first_name != 'ESI' && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler' && $curauth->first_name != 'Tarley') :
+	if($curauth->user_level >= 1 && $curauth->first_name != 'ESI' && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler' && $curauth->first_name != 'Tarley') :
 	$count2++;
 ?>
 

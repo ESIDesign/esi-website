@@ -41,18 +41,18 @@ if( $children ) {
 	<h3><a target="_blank" href="http://instagram.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/instagram.png" alt="Instagram"> Instagram</a></h3>	
 
 <?php
-$jsonurl = "https://api.instagram.com/v1/users/self/media/recent/?access_token=266854171.7827081.6439a537b65044a7872f1d35af72fda2";	
+$jsonurl = "https://api.instagram.com/v1/users/self/media/recent/?access_token=266854171.7827081.6439a537b65044a7872f1d35af72fda2&count=6";	
 $json = file_get_contents($jsonurl,0,null,null);
 $json_output = json_decode($json, true);
 $count = 1;
 foreach($json_output['data'] as $item) {
-	if($item['type'] == 'image' && $count <= 6) { 
+// 	if($item['type'] == 'image' && $count <= 6) { 
 		$count++;
 		echo '<article class="twocol instagram">';
 		echo '<a target="_blank" href="'.$item['link'].'">';
 		echo '<img src="'.$item['images']['thumbnail']['url'].'"/></a>';
 		echo '</article>';
-	} 
+// 	} 
 } ?>
 
 </div>

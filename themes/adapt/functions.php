@@ -78,7 +78,7 @@ function adapt_scripts_function() {
 	}
 	
 	if ( is_singular( 'project' ) ) {
-		wp_enqueue_script('froogaloop', get_template_directory_uri() . '/js/froogaloop2.min.js');
+		wp_enqueue_script('vimeo-player', '//player.vimeo.com/api/player.js');
 		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider.min.js');
 	}
 

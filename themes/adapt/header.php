@@ -11,29 +11,42 @@ $options = get_option( 'adapt_theme_settings' );
 
 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 
-<!-- Mobile Specific
-================================================== -->
+<!-- Mobile Specific -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- Meta Tags -->
 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-<meta name="description" content="<?php if (have_posts() && is_single() OR is_page()):while(have_posts()):the_post();
+<?php if(have_posts() && is_single() OR is_page()):
+	echo '<meta name="description" content="';
+	while(have_posts()):the_post();
 $out_excerpt = str_replace(array("\r\n", "\r", "\n"), "", get_the_excerpt());
 if(is_page() && (get_field('meta_description') != "")) {
 	the_field('meta_description');
 } else {
 	echo apply_filters('the_excerpt_rss', $out_excerpt);
 }
-endwhile;
-endif; ?>"/>
-<?php if(have_posts() && is_page()):while(have_posts()):the_post();
-if(is_page() && (get_field('meta_keywords') != "")) {
-	echo '<meta name="keywords" content="';
-	the_field('meta_keywords');
+	endwhile;
 	echo '">';
-} 
+endif; 
+if(is_post_type_archive('project') && (get_field('meta_description', 7337) != "")) {
+	echo '<meta name="description" content="';
+	the_field('meta_description', 7337);
+	echo '">';
+}
+?>
+<?php if(have_posts() && is_page() OR is_single('project')):while(have_posts()):the_post();
+	if(is_page() || is_single('project') && (get_field('meta_keywords') != "")) {
+		echo '<meta name="keywords" content="';
+		the_field('meta_keywords');
+		echo '">';
+	} 
 endwhile;
-endif; ?>
+endif; 
+if(is_post_type_archive('project') && (get_field('meta_keywords', 7337) != "")) {
+	echo '<meta name="keywords" content="';
+	the_field('meta_keywords', 7337);
+	echo '">';
+} ?>
 
 <title><?php wp_title(''); ?><?php if(wp_title('', false)) { echo ' |'; } ?> <?php bloginfo('name'); ?></title>
     
@@ -45,8 +58,8 @@ endif; ?>
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="print" />
 <script src="https://use.typekit.net/jrd6ldj.js"></script>
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
-<!-- WP Head
-================================================== -->
+
+<!-- WP Head -->
 <?php wp_head(); ?>
 <?php include('analytics.php'); ?>
 <?php function isMobile() {
