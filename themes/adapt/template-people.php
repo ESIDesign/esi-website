@@ -204,7 +204,6 @@ if('attachment' == get_post_type($attachments[$i]->ID)) {
 <script src="<?php echo get_template_directory_uri(); ?>/js/grid.js"></script>
 <script type="text/javascript">
 jQuery(function($){
-
 	$(document).ready(function(){
 		Grid.init();
 	

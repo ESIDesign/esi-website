@@ -846,3 +846,17 @@ function wpsd_add_project_args() {
     $wp_post_types['project']->rest_controller_class = 'WP_REST_Posts_Controller';
 }
 add_action( 'init', 'wpsd_add_project_args', 30 );
+
+function meta_title_wp_title( $title, $sep ) {
+	
+	$meta_title = get_field('meta_title'); 
+    if ( is_page() && $meta_title) {
+    	$title = get_field('meta_title');
+        return $title;
+    }
+    
+    if ( is_post_type_archive('project')) {
+        return get_field('meta_title', 7337);    
+    }    
+}
+add_filter( 'wp_title', 'meta_title_wp_title', 10, 2 );
