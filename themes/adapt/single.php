@@ -26,7 +26,7 @@
 
 <article class="post clearfix">
 
-	<header>
+<header>
 	<p class="date"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
         <h1 class="single-title"><?php the_title(); ?></h1>
 	<div class="loop-entry-meta">
@@ -37,9 +37,8 @@
 	<a href="<?php echo get_site_url(); ?>/people"><?php the_author(); ?></a>
 <?php } ?>
         <span class="awesome-icon-comments"></span> <?php comments_popup_link('0', '1', '%'); ?></p>
-    </div>
-        <!-- /loop-entry-meta -->
-    </header>
+    </div><!-- /loop-entry-meta -->
+</header>
 
     <br />
     <div class="entry clearfix">
@@ -71,16 +70,15 @@
         <!-- /post-bottom -->
         
         
-        </div>
-        <!-- /entry -->
+        </div><!-- /entry -->
 
-	<div class="share">
+<div class="share">
 <div class="fb-share-button" style="display:inline-block;vertical-align:top;margin-right:10px;" data-href="<?php echo get_permalink(); ?>" data-layout="button_count"></div>
 <a style="display:inline-block;" href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo wp_get_shortlink(); ?>" data-counturl="<?php echo get_permalink(); ?>" data-via="esidesign">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</div>
+</div>
 		
-        <nav id="single-nav" class="clearfix"> 
+    <nav id="single-nav" class="clearfix"> 
 		<?php next_post_link('<div id="single-nav-left">%link</div>', '<span class="awesome-icon-chevron-left"></span> '.__('','adapt').'', false); ?>
 		<?php previous_post_link('<div id="single-nav-right">%link</div>', ''.__('','adapt').' <span class="awesome-icon-chevron-right"></span>', false); ?>
 	</nav>
@@ -88,19 +86,13 @@
 		<?php comments_template(); ?>
    
         
-</article>
-<!-- /post -->
+</article><!-- /post -->
 
 <?php endwhile; ?>
 <?php endif; ?>
 
-<!-- <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/video.min.js"></script> -->
-  <script type="text/javascript">
-/*
-   _V_("lab");
-    videojs.options.flash.swf = "http://www.esidesign.com/wp-content/themes/adapt2/js/video-js.swf";
-  
-*/
+
+<script type="text/javascript">
 jQuery(function($){
 	
 	$(document).ready(function(){
@@ -142,6 +134,6 @@ jQuery(function($){
 	}).resize();
   });
   });
-  </script>
+</script>
 
 <?php get_footer(); ?>

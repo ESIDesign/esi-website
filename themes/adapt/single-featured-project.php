@@ -279,7 +279,7 @@
               'compare' => 'IN'
         )
     ),
-    'post__not_in' => array($post->ID), 'caller_get_posts' => 1)  );
+    'post__not_in' => array($post->ID) )  );
 		
 if ( !empty($images) ) {
 	foreach ( $images as $image ) { 

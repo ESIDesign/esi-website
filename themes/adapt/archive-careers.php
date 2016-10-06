@@ -62,11 +62,13 @@
 		foreach( $mypages as $page ) {    
 			echo '<li><a href="'.get_permalink($page->ID).'"><h3>'.$page->post_title.'</h3><p><span class="gray">'.$page->post_excerpt.' </span>  <span class="black"> View Listing →</span></a></p></li>';
 		}
+		echo '<br /><li><h3>Don\'t see a role that fits your experience?</h3><p><span class="gray">Get in touch by emailing your cover letter and resume to </span><a href="mailto:recruit@esidesign.com"><span class="black">recruit@esidesign.com</span>.</a></p></li>';	
 		echo '</ul>';	
 	}
 	else { 
 		echo "<h3>There are no opportunities at this time.</h3>";
-	} ?>
+	} 
+	?>
 </div>
 
 <div class="career_people">
@@ -96,7 +98,7 @@ $post_ids = wp_list_pluck( $all_posts, 'ID' );
 $attachments = get_posts( array(
 	'post_type' => array('attachment', 'people', 'lab'),
 /*     'post__in'    => $post_ids, */
-	'post__in' => array(5273, 6514, 4988, 5329, 5727, 5596, 5934, 4973, 4974, 1233, 3804, 3431, 3420, 1196, 3368, 4853), 
+	'post__in' => array(5273, 6514, 4988, 7128, 5727, 5596, 5934, 4973, 4974, 1233, 3804, 3431, 3420, 1196, 3368, 4853), 
     'post_status' => array('inherit','publish'),
 /*     'orderby' => 'date', */
 	'orderby' => 'post__in',

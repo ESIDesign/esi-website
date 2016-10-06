@@ -26,6 +26,8 @@ if(!is_single(2844)) { ?>
 </div><!-- wrap --> 
 
 <!-- WP Footer -->
-<?php wp_footer(); ?> 
+<?php wp_footer(); 
+	echo convert(memory_get_usage(true));
+?> 
 </body>
 </html>

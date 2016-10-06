@@ -847,6 +847,8 @@ function wpsd_add_project_args() {
 }
 add_action( 'init', 'wpsd_add_project_args', 30 );
 
+add_theme_support( 'title-tag' );
+
 function meta_title_wp_title( $title, $sep ) {
 	
 	$meta_title = get_field('meta_title'); 
@@ -858,5 +860,11 @@ function meta_title_wp_title( $title, $sep ) {
     if ( is_post_type_archive('project')) {
         return get_field('meta_title', 7337);    
     }    
+    
+    if ( is_home()) {
+        return get_field('meta_title', 2145);    
+    }    
+    
+    return $title;
 }
-add_filter( 'wp_title', 'meta_title_wp_title', 10, 2 );
+add_filter( 'wp_title', 'meta_title_wp_title', 10, 2);

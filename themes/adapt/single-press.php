@@ -26,16 +26,16 @@
 
 <article class="post clearfix">
 
-	<header>
+<header>
 <!-- 	<p class="date gray"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p> -->
 	<p class="date gray" style="text-transform:uppercase">For Immediate Release</p>
-        <h1 class="single-title"><?php the_title(); ?></h1>
-    </header>
-		<?php
-			if(get_field('sub-headline') != '') {
-				$subheadline = get_field('sub-headline');
-				echo '<h4 style="text-align:center">'.$subheadline.'</h4>';
-			} ?>
+    <h1 class="single-title"><?php the_title(); ?></h1>
+</header>
+	
+	<?php if(get_field('sub-headline') != '') {
+			$subheadline = get_field('sub-headline');
+			echo '<h4 style="text-align:center">'.$subheadline.'</h4>';
+	} ?>
     <div class="entry clearfix">
         
 		<?php the_content(); 
@@ -51,14 +51,13 @@
 			} ?>
         <div class="clear"></div>
         
-        </div>
-        <!-- /entry -->
+    </div><!-- /entry -->
 
-	<div class="share">
+<div class="share">
 <div class="fb-share-button" style="display:inline-block;vertical-align:top;margin-right:10px;" data-href="<?php echo get_permalink(); ?>" data-layout="button_count"></div>
 <a style="display:inline-block;" href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo wp_get_shortlink(); ?>" data-counturl="<?php echo get_permalink(); ?>" data-via="esidesign">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</div>
+</div>
 		
         <nav id="single-nav" class="clearfix"> 
 		<?php next_post_link('<div id="single-nav-left">%link</div>', '<span class="awesome-icon-chevron-left"></span> '.__('','adapt').'', false); ?>
@@ -66,7 +65,6 @@
 	</nav>
         
 </article>
-<!-- /post -->
 
 <?php endwhile; ?>
 <?php endif; ?>

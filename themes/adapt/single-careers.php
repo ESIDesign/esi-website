@@ -33,44 +33,26 @@
 $children = get_pages('post_type=careers&post_status=publish');
 $id = get_the_ID();
 if( $children ) {
-echo '<br /><h2>Additional Career Opportunities</h2>';
-		echo '<ul>';
-			$args = array(  'post_type' => 'careers',
-				            'post_status'=> 'publish',
-  							'sort_order' => 'ASC',
-  							'sort_column' => 'post_title',
-							'hierarchical' => 0,
-							'exclude' => $id 
- 						);
-				$mypages = get_pages($args);
-				foreach( $mypages as $page ) {    
-						
-					echo '<li><a href="'.get_permalink($page->ID).'">'.$page->post_title.'</a></li>';
-
-						}
-				echo '</ul>';	
-
+	echo '<br /><h2>Additional Career Opportunities</h2>';
+	echo '<ul>';
+	$args = array(  
+		'post_type' => 'careers',
+        'post_status'=> 'publish',
+		'sort_order' => 'ASC',
+		'sort_column' => 'post_title',
+		'hierarchical' => 0,
+		'exclude' => $id 
+	);
+	$mypages = get_pages($args);
+	foreach( $mypages as $page ) {    		
+		echo '<li><a href="'.get_permalink($page->ID).'">'.$page->post_title.'</a></li>';
+	}
+	echo '</ul>';	
+	echo '<br /><br /><br /><h2 style="margin-bottom:1%">Don\'t see a role that fits your experience?</h3>Get in touch by emailing your cover letter and resume to <a href="mailto:recruit@esidesign.com">recruit@esidesign.com</a>.</p>';
 }
 		?>
 </article>
 <?php endwhile; ?>
 <?php endif; ?>
-
-
-
-<script type="text/javascript">
-jQuery(function($){
-	$(document).ready(function(){
-var paras = $('img.about').hide(),
-    i = 0;
-
-// If using jQuery 1.3 or lower, you need to do $(paras[i++] || []) to avoid an "undefined" error
-(function() {
-  $(paras[i++]).fadeIn(300, arguments.callee);
-})();
-});
-});
-</script>
-
 
 <?php get_footer(); ?>

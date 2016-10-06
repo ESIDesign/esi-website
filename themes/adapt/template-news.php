@@ -20,13 +20,13 @@ get_header(); ?>
         'order' => 'ASC',
         'posts_per_page' => -1
     );
-   $posts = get_posts($args);
-        $count = 0;
-        foreach ($posts as $post) : setup_postdata($post);
+	$posts = get_posts($args);
+    $count = 0;
+    foreach ($posts as $post) : setup_postdata($post);
         $count++;
-	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'grid-thumb'); 
-	$projects = get_the_terms( $post->ID, 'project' );
-	$project_ids = array();
+		$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'grid-thumb'); 
+		$projects = get_the_terms( $post->ID, 'project' );
+		$project_ids = array();
 	foreach ($projects as $project) {
 		$project_ids[] = $project->term_id;
 	} ?>
@@ -85,10 +85,5 @@ get_header(); ?>
 </div>
 
 <?php get_sidebar(); ?>
-   <script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js'></script>
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/video.min.js"></script>
-<script>
-    videojs.options.flash.swf = "<?php echo get_template_directory_uri(); ?>/js/video-js.swf";
-</script>
 
 <?php get_footer(); ?>
