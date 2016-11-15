@@ -70,11 +70,13 @@ get_header(); ?>
 	<h3><a target="_blank" href="<?php echo $link; ?>"> 
 	<?php echo the_title(); ?></a></h3>
 	<?php $project_title = get_the_title($project_ids[0]); ?>
+<!--
 	<div class="loop-entry-meta">
 		<?php if($projects) { ?>
 	<a class="all" href="">More on <?php echo $project_title; ?></a>
 	<?php } ?>
 	</div>
+-->
 	</div>
 </div>
         				       					

@@ -131,7 +131,7 @@ foreach($author_ids as $author) :
 	$curauth = get_userdata($author->ID);
 
 	// All current users are editors or higher 
-	if($curauth->user_level >= 1 && $curauth->leadership != 'on' && $curauth->director != 'on' && $curauth->first_name != 'Julie' && $curauth->first_name != 'Tyler') :
+	if($curauth->user_level >= 1 && $curauth->leadership != 'on' && $curauth->director != 'on' && $curauth->first_name != 'Asa') :
 		$count++;
 
 		// Set default avatar (values = default, wavatar, identicon, monsterid)

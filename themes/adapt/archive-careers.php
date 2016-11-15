@@ -98,13 +98,13 @@ $post_ids = wp_list_pluck( $all_posts, 'ID' );
 $attachments = get_posts( array(
 	'post_type' => array('attachment', 'people', 'lab'),
 /*     'post__in'    => $post_ids, */
-	'post__in' => array(5273, 6514, 4988, 7128, 5727, 5596, 5934, 4973, 4974, 1233, 3804, 3431, 3420, 1196, 3368, 4853), 
+	'post__in' => array(5273, 7510, 7553, 7128, 7573, 5596, 5934, 4973), 
     'post_status' => array('inherit','publish'),
 /*     'orderby' => 'date', */
 	'orderby' => 'post__in',
     'order' => 'DESC',
     'numberposts'=> 8
-) ); 
+)); 
             
     $i=0;         
 
