@@ -3,7 +3,6 @@
  * @package WordPress
  * @subpackage Adapt Theme
  */
- $options = get_option( 'adapt_theme_settings' );
 ?>
 <aside id="sidebar" class="clearfix">
 
@@ -19,19 +18,17 @@ if( $children ) {
 					'hierarchical' => 0  
 					);
 		$mypages = get_pages($args);
-		foreach( $mypages as $page ) {    
-				
+		foreach( $mypages as $page ) {    		
 			echo '<li><a href="'.get_permalink($page->ID).'">'.$page->post_title.'</a></li>';
-
-				}
+		}
 		echo '</ul>';	
-}
+	}
 	if( $children == null ) { 
 		echo "<p>There are no opportunities at this time.</p>";
-	}    
-}	?>
+	} 
+	echo '</div>';   
+} ?>
 
-<div class="archive-sidebar <?php if(is_page(2) || is_post_type_archive('press')) { echo 'news'; } ?>">
 <?php if(!is_page(2) && !is_post_type_archive('press')) { ?>
 	<div class='sidebar-box'><h3><a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/tweet.png" alt="Twitter"> Twitter</a></h3>	
 	<div class="twitter"></div>
@@ -46,20 +43,17 @@ $json = file_get_contents($jsonurl,0,null,null);
 $json_output = json_decode($json, true);
 $count = 1;
 foreach($json_output['data'] as $item) {
-// 	if($item['type'] == 'image' && $count <= 6) { 
 		$count++;
 		echo '<article class="twocol instagram">';
 		echo '<a target="_blank" href="'.$item['link'].'">';
 		echo '<img src="'.$item['images']['thumbnail']['url'].'"/></a>';
 		echo '</article>';
-// 	} 
 } ?>
-
 </div>
 <?php } ?>
 
 <!-- News Sidebar -->
-<?php if(is_page(2)) { ?>
+<?php if(is_page(2) || is_post_type_archive('press')) { ?>
 <div class='sidebar-box'>
 <?php
 global $post;
@@ -81,10 +75,9 @@ echo '<h3>Press Releases</h3>';
 echo '<a href="'.get_post_type_archive_link('press').'">View All Press Releases  →</a>';
 ?>
 </div>
-<?php } ?>
 
 <?php if(get_field('press_inquiries', 2) != "") {
-	echo '<div class="sidebar-box twitter">';
+	echo '<div class="sidebar-box press">';
 	echo '<h3>Press Inquiries</h3>';
 	the_field('press_inquiries', 2);
 	echo '</div>';
@@ -101,9 +94,8 @@ echo '<a href="'.get_post_type_archive_link('press').'">View All Press Releases 
 	endwhile;
 	echo '</div>';
 endif; ?>
+<?php } ?>
 
 <div class="clearfix"></div>
-
-</div>
 
 </aside><!-- /sidebar -->
