@@ -83,6 +83,7 @@ function adapt_scripts_function() {
 	}
 
 	if(is_home()) {
+		wp_enqueue_script('vimeo', 'https://player.vimeo.com/api/player.js', array(), '', true);
 		wp_enqueue_script('home', get_template_directory_uri() . '/js/home.min.js', array(), '', true);
 	}
 	else {

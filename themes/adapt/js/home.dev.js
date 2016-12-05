@@ -132,23 +132,25 @@ $(document).ready(function(){
 	}
 	  
 if ( $(window).width() > 479) {
-		var player = $('embed')[0];
+	var iframe = document.querySelector('iframe');
+	if(iframe) {
+		var player = new Vimeo.Player(iframe);	
+	} 
 		
 		$('.home_item1 .cycle, .home_item1 #button, .home_item1').on('click touchstart', function(ev) {
 		    $('.home_item1 .cycle, .home_item1 .project-overlay, #button').fadeOut();
-// 		    player.src += "&autoPlay=true";
+		    player.src += "&autoPlay=true";
 		    ev.preventDefault();
 		});
 
-/*
 	player.onended = function() {
 		$('img.placeholder').fadeIn();
 		player.currentTime = 0;
 	}
-*/
-/*
    	$("img.placeholder, #button").click(function(){
-   		player.api('play');
+   		player.ready().then(function() {
+		player.play();
+		});
    		$("img.placeholder").fadeOut(200);
    		$(".home_item1 span#button").removeClass('awesome-icon-play').addClass('awesome-icon-pause').fadeOut(200);
    	});
@@ -170,7 +172,6 @@ if ( $(window).width() > 479) {
 	if (isPaused == false) {
 	$('.home_item1 a.video-caption h3 span#button').removeClass('awesome-icon-play').addClass('awesome-icon-pause');
 	}
-*/
 	} //window bigger than 767
 
 

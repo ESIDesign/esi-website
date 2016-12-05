@@ -14,8 +14,8 @@ $terms = get_the_terms( get_the_ID(), 'category' );
 	<p class="date"><?php the_time('F'); ?> <?php the_time('j'); ?>, <?php the_time('Y'); ?></p>
 	<h3><a href="<?php echo esc_url( get_permalink(get_the_ID()) ); ?>"> 
 	<?php $title = get_the_title(); 
-    echo substr($title, 0, 80);
-    if(strlen($title) > 80) {
+    echo substr($title, 0, 130);
+    if(strlen($title) > 130) {
         echo '...';
     } ?>
 	</a></h3>

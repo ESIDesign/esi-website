@@ -19,7 +19,7 @@ $args2 = array(
 	'post_type' => 'attachment',
 	'post_mime_type' => 'image',
 	'post_status' => null,
-	'post__in' => array(7218)
+	'post__in' => array(7691)
 );
 $posts = get_posts($args2); ?>
 <div class="home_item home_item1">
@@ -31,12 +31,9 @@ $posts = get_posts($args2); ?>
 		<?php endforeach; ?>
 		</div>
 		<div class="project-overlay">
-			<?php
-// 				echo '<p>WATCH: ESI Design on <em>CBS This Morning</em></p>';
-				echo '<p>WATCH: Grand opening of eBay Headquarters</p>';
-			?>
+			<?php echo '<p>WATCH: Main Street: eBay’s New Front Door</p>'; ?>
 		</div>
-		<iframe width="590" height="332" src="http://abc7news.com/video/embed/?pid=1404354" frameborder="0" allowfullscreen></iframe>
+		<iframe src="https://player.vimeo.com/video/193393534" width="590" height="332" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>
 
 <?php
@@ -257,7 +254,7 @@ if ($count <= '3') { ?>
     
 
 <div class="home_button approach">
-	<a href="<?php echo get_site_url(); ?>/approach"><img src="<?php echo get_template_directory_uri(); ?>/images/approach-trans.png" alt="Approach"/></a>
+	<a href="<?php echo get_site_url(); ?>/blog"><img src="<?php echo get_template_directory_uri(); ?>/images/blog-trans.png" alt="Blog"/></a>
 </div>
     
 
