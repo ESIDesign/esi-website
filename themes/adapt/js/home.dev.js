@@ -143,7 +143,7 @@ if ( $(window).width() > 479) {
 		    ev.preventDefault();
 		});
 
-	player.onended = function() {
+	player.onended = function(e) {
 		$('img.placeholder').fadeIn();
 		player.currentTime = 0;
 	}
