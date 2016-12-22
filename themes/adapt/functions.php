@@ -68,8 +68,9 @@ function adapt_scripts_function() {
 	//Uniform & Responsify menu mobile now enqueued with yepnope in footer
 	if(is_post_type_archive( 'project' )) {
 		wp_enqueue_script('isotope', get_template_directory_uri() . '/js/jquery.isotope.min.js');
-		wp_enqueue_script('isotope_init', get_template_directory_uri() . '/js/isotope_init.js');
-		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider.min.js');
+		wp_enqueue_script('imagesloaded', get_template_directory_uri() . '/js/imagesloaded.min.js', array(), '', true);
+		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider.min.js', array(), '', true);
+		wp_enqueue_script('isotope_init', get_template_directory_uri() . '/js/isotope_init.js', array(), '', true);
 	}
 	
 	if(is_page('blog')) {

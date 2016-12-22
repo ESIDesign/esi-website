@@ -30,11 +30,7 @@
 
 <article class="post clearfix">
 <?php
-$children = get_pages('post_type=careers&post_status=publish');
 $id = get_the_ID();
-if( $children ) {
-	echo '<br /><h2>Additional Career Opportunities</h2>';
-	echo '<ul>';
 	$args = array(  
 		'post_type' => 'careers',
         'post_status'=> 'publish',
@@ -43,14 +39,17 @@ if( $children ) {
 		'hierarchical' => 0,
 		'exclude' => $id 
 	);
-	$mypages = get_pages($args);
-	foreach( $mypages as $page ) {    		
-		echo '<li><a href="'.get_permalink($page->ID).'">'.$page->post_title.'</a></li>';
+	$careers = get_pages($args);
+	if($careers) {
+		echo '<br /><h2>Additional Career Opportunities</h2>';
+		echo '<ul>';
+	foreach( $careers as $career ) {    		
+		echo '<li><a href="'.get_permalink($career->ID).'">'.$career->post_title.'</a></li>';
 	}
-	echo '</ul>';	
-	echo '<br /><br /><br /><h2 style="margin-bottom:1%">Don\'t see a role that fits your experience?</h3>Get in touch by emailing your cover letter and resume to <a href="mailto:recruit@esidesign.com">recruit@esidesign.com</a>.</p>';
-}
-		?>
+	echo '</ul><br /><br />';	
+	}
+	echo '<br /><h2 style="margin-bottom:1%">Don\'t see a role that fits your experience?</h3>Get in touch by emailing your cover letter and resume to <a href="mailto:recruit@esidesign.com">recruit@esidesign.com</a>.</p>';
+?>
 </article>
 <?php endwhile; ?>
 <?php endif; ?>

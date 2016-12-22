@@ -19,7 +19,7 @@ $args2 = array(
 	'post_type' => 'attachment',
 	'post_mime_type' => 'image',
 	'post_status' => null,
-	'post__in' => array(7691)
+	'post__in' => array(7716)
 );
 $posts = get_posts($args2); ?>
 <div class="home_item home_item1">

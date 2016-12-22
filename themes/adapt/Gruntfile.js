@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 		    build: {
 			    files: [
 				    {src: 'js/custom.dev.js', dest: 'js/custom.js'},
-				    {src: 'js/application.dev.js', dest: 'js/application.js'},
+// 				    {src: 'js/application.dev.js', dest: 'js/application.js'},
 				    {src: 'js/home.min.js', dest: 'js/home.min.js'},
 				    {src: 'js/responsive.min.js', dest: 'js/responsive.min.js'},
 				    {src: 'js/jquery.flexslider.dev.js', dest: 'js/jquery.flexslider.min.js'},

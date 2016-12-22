@@ -162,14 +162,6 @@ if ($(window).width() > 767) {
 					$('.blue_nug').show();
 					$('.triangle').show();
 					$('.project-content').animate({opacity:1}, function(){
-						var $container = $('.project-content');
-		/* 				$container.imagesLoaded(function(){ */
-						$container.isotope({
-							filter: '.featured',
-							itemSelector: '.item',
-							layoutMode: 'fitRows'
-						});
-						
 						$("#footer").fadeIn(1600);
 					});
 				});
