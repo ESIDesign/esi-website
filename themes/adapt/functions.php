@@ -62,8 +62,11 @@ function adapt_scripts_function() {
 	//get theme options
 	global $options;
 	
-	// Site wide js
-	wp_enqueue_script('jquery');	
+    if ( !is_admin() ) {
+        wp_deregister_script('jquery');
+        wp_register_script('jquery', get_template_directory_uri() . '/js/jquery.min.js', '3.1.1', false);
+        wp_enqueue_script('jquery');
+    }
 	
 	//Uniform & Responsify menu mobile now enqueued with yepnope in footer
 	if(is_post_type_archive( 'project' )) {
@@ -75,19 +78,23 @@ function adapt_scripts_function() {
 	
 	if(is_page('blog')) {
 			wp_enqueue_script('isotope', get_template_directory_uri() . '/js/jquery.isotope.min.js');
-			wp_enqueue_script('isotope_blog_init', get_template_directory_uri() . '/js/isotope_blog_init.js');
+			wp_enqueue_script('isotope_init', get_template_directory_uri() . '/js/isotope_init.js');
 	}
 	
 	if ( is_singular( 'project' ) ) {
 		wp_enqueue_script('vimeo-player', '//player.vimeo.com/api/player.js');
 		wp_enqueue_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider.min.js');
 	}
+	
+	if(is_page('people')) {
+		wp_enqueue_script('modernizer', get_template_directory_uri() . '/js/modernizr.custom.js', array('jquery'), '', true);	
+		wp_enqueue_script('grid', get_template_directory_uri() . '/js/grid.js', array('jquery', 'modernizer'), '', true);		
+	}
 
 	if(is_home()) {
 		wp_enqueue_script('vimeo', 'https://player.vimeo.com/api/player.js', array(), '', true);
 		wp_enqueue_script('home', get_template_directory_uri() . '/js/home.min.js', array(), '', true);
-	}
-	else {
+	} else {
 		wp_enqueue_script('custom', get_template_directory_uri() . '/js/custom.js', array(), '', true);
 	wp_enqueue_script('responsive', get_template_directory_uri() . '/js/responsive.min.js', array(), '', false, true);
 	}

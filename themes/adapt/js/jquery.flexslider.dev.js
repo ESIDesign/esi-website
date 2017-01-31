@@ -161,9 +161,7 @@ if ($(window).width() > 767) {
 					$('.title').show();
 					$('.blue_nug').show();
 					$('.triangle').show();
-					$('.project-content').animate({opacity:1}, function(){
-						$("#footer").fadeIn(1600);
-					});
+					$("#footer").delay(400).fadeIn(1600);
 				});
 			}
 		});

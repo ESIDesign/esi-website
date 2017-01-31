@@ -164,9 +164,9 @@ $.fn.imagesLoaded = function( callback ) {
 var Grid = (function() {
 
 		// list of items
-		var $grid = $( '.og-grid' ),
+		var $grid = $( '.people-wrap' ),
 		// the items
-		$items = $grid.children( 'li' ),
+		$items = $grid.find( '.people-grid' ),
 		// current expanded item's index
 		current = -1,
 		// position (top) of the expanded item
@@ -211,14 +211,13 @@ var Grid = (function() {
 			initEvents();
 
 		} );
-
 	}
 
 	// add more items to the grid.
 	// the new items need to appended to the grid.
 	// after that call Grid.addItems(theItems);
 	function addItems( $newitems ) {
-
+		console.log($newitems);
 		$items = $items.add( $newitems );
 
 		$newitems.each( function() {
@@ -274,7 +273,6 @@ var Grid = (function() {
 			hidePreview();
 			return false;
 		} ).children( 'a' ).on( 'click', function(e) {
-
 			var $item = $( this ).parent();
 			// check if item already opened
 			current === $item.index() ? hidePreview() : showPreview( $item );
@@ -416,7 +414,7 @@ var Grid = (function() {
 		},
 		open : function() {
 
-			setTimeout( $.proxy( function() {	
+			setTimeout( $.proxy( function() {
 				// set the height for the preview and the item
 				this.setHeights();
 				// scroll to position the preview in the right place
@@ -434,7 +432,9 @@ var Grid = (function() {
 					self.$item.removeClass( 'og-expanded' );
 					self.$previewEl.remove();
 				};
-
+				$('.people-grid').removeClass('og-expanded');
+				var newitemheight = $('.people-grid').height();
+				$('.people-grid').css( 'height', newitemheight);
 			setTimeout( $.proxy( function() {
 
 				if( typeof this.$largeImg !== 'undefined' ) {
@@ -504,7 +504,7 @@ var Grid = (function() {
 			var position = this.$item.data( 'offsetTop' ),
 				previewOffsetT = this.$previewEl.offset().top - scrollExtra,
 				scrollVal = this.height + this.$item.data( 'height' ) + marginExpanded <= winsize.height ? position : this.height < winsize.height ? previewOffsetT - ( winsize.height - this.height ) : previewOffsetT;
-			
+			console.log(scrollVal);
 			$body.animate( { scrollTop : scrollVal }, settings.speed );
 
 		},

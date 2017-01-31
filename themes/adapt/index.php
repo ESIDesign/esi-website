@@ -23,17 +23,17 @@ $args2 = array(
 );
 $posts = get_posts($args2); ?>
 <div class="home_item home_item1">
+	<div class="video-overlay">
 		<span id="button" class="awesome-icon-play"></span>
-		<div class="cycle">
 		<?php foreach($posts as $post) : setup_postdata($post);
 			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
 			<img class="placeholder" src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>"/>
 		<?php endforeach; ?>
-		</div>
 		<div class="project-overlay">
 			<?php echo '<p>WATCH: Main Street: eBay’s New Front Door</p>'; ?>
 		</div>
-		<iframe src="https://player.vimeo.com/video/193393534" width="590" height="332" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+	</div>
+	<iframe src="https://player.vimeo.com/video/193393534" width="590" height="332" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>
 
 <?php
@@ -195,12 +195,12 @@ if ($count <= '3') { ?>
 <div class="project home_item5">
 	<a href="<?php the_permalink(); ?>">
 		<?php if($post->ID == 3226) { ?>
-		<img src="<?php echo $feat_img2[0]; ?>" alt="<?php echo the_title(); ?>" />
+			<img src="<?php echo $feat_img2[0]; ?>" alt="<?php echo the_title(); ?>" />
 		<?php }
 		else {
 		echo '<div class="cycle">';
 		foreach ($attachments as $attachment) : ?>
-		<img src="<?php echo $feat_img2[0]; ?>" alt="<?php echo the_title(); ?>" />
+			<img src="<?php echo $feat_img2[0]; ?>" alt="<?php echo the_title(); ?>" />
 		<?php endforeach; 
 		echo '</div>'; 
 		} ?>

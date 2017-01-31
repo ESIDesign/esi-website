@@ -15,7 +15,6 @@ $options = get_option( 'adapt_theme_settings' );
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- Meta Tags -->
-<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 <?php if(have_posts() && is_single() OR is_page()):
 	echo '<meta name="description" content="';
 	while(have_posts()):the_post();
@@ -55,7 +54,6 @@ if(is_post_type_archive('project') && (get_field('meta_keywords', 7337) != "")) 
 <?php } ?>
 
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" />
-<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="print" />
 <script src="https://use.typekit.net/jrd6ldj.js"></script>
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
 

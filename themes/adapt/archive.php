@@ -59,6 +59,7 @@
 <!-- END post -->
 <?php endif; ?>
 <?php get_sidebar(); ?>
+<!--
    <script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js'></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/video.min.js"></script>
 <script>
@@ -66,29 +67,7 @@
 </script>
 
 <script type="text/javascript">
-function filter_toggle() {
-	$("ul.filter").toggle();
-}
-
 jQuery(function($){
-	$(window).load(function(){
-		function blogIsotope() {
-			var $container = $('.blog-content');
-			$container.isotope({
-				itemSelector: '.loop-entry'
-			});
-		} 
-		
-		blogIsotope();
-		
-		$("h2.dropdown").click(function() {
-			$("ul.filter").toggle();
-		});	
-				
-		window.onresize = function() {
-		    blogIsotope();
-		};
-	});
 	
 	$(document).ready(function(){
 	
@@ -106,4 +85,5 @@ jQuery(function($){
 	});
 });
 </script>
+-->
 <?php get_footer(); ?>

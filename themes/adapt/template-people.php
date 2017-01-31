@@ -10,7 +10,7 @@
 
 <div class="people-wrap">
 <!-- LEADERSHIP -->
-<ul id="og-grid" class="og-grid">
+<ul id="og-grid" class="og-grid og-grid1">
 <?php
 // Get users ordered by user lastname = (hack to get Ed, Susan, Gideon first)
 global $wpdb;
@@ -74,8 +74,7 @@ foreach($author_ids as $author) :
 
 	<?php endif; ?>
 <?php endforeach; ?>
-
-</ul><!-- og-grid -->
+</ul>
 
 <div class="clear"></div>
 
@@ -88,7 +87,7 @@ foreach($author_ids as $author) :
 	</div>
 </div>
 
-<ul class="og-grid fadein">
+<ul class="og-grid og-grid2 fadein">
 <?php
 global $wpdb;
 $query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand()";
@@ -198,27 +197,5 @@ if('attachment' == get_post_type($attachments[$i]->ID)) {
 
 <div class="clear"></div>
 </div>
-
-<script src="<?php echo get_template_directory_uri(); ?>/js/modernizr.custom.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/grid.js"></script>
-<script type="text/javascript">
-jQuery(function($){
-	$(document).ready(function(){
-		Grid.init();
 	
-		$('.people_item').hover(function() {
-			jQuery(this).find('.awesome-icon-play').fadeOut();
-			var myVideo = jQuery(this).find('video#esipeople')[0];
-			myVideo.play();
-		},
-		function() {
-			$(this).find('.awesome-icon-play').fadeIn();
-			var myVideo = jQuery(this).find('video#esipeople')[0];
-			myVideo.pause();
-		});
-
-	});
-});
-</script>	
 <?php get_footer(); ?>
