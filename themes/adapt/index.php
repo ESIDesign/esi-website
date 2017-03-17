@@ -22,18 +22,20 @@ $args2 = array(
 	'post__in' => array(7716)
 );
 $posts = get_posts($args2); ?>
-<div class="home_item home_item1">
+<div class="home_item home_item1 project">
 	<div class="video-overlay">
-		<span id="button" class="awesome-icon-play"></span>
+<!-- 		<span id="button" class="awesome-icon-play"></span> -->
 		<?php foreach($posts as $post) : setup_postdata($post);
 			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
-			<img class="placeholder" src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>"/>
+<!-- 			<img class="placeholder" src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>"/> -->
 		<?php endforeach; ?>
+<!--
 		<div class="project-overlay">
 			<?php echo '<p>WATCH: Main Street: eBay’s New Front Door</p>'; ?>
 		</div>
+-->
 	</div>
-	<iframe src="https://player.vimeo.com/video/193393534" width="590" height="332" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+	<iframe class="autoplay" src="https://player.vimeo.com/video/193393534" width="590" height="332" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>
 
 <?php
@@ -238,7 +240,7 @@ if ($count <= '3') { ?>
 </div>
 
 
-<div class="home_item13">
+<div class="home_item home_item13">
 	<article class="home_media">
 		<a target="_blank" href="http://www.twitter.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/home-twitter.png" alt="Twitter"/></a>
 		<a target="_blank" href="http://www.instagram.com/esidesign"><img src="<?php echo get_template_directory_uri(); ?>/images/home-insta.png" alt="Instagram"/></a>
@@ -249,7 +251,7 @@ if ($count <= '3') { ?>
 </div>
 
 <div class="home_button lab">
-	<a href="<?php echo get_site_url(); ?>/work/lab"><img src="<?php echo get_template_directory_uri(); ?>/images/lab-trans.png" alt="Lab"/></a>
+	<a href="<?php echo get_site_url(); ?>/work/design-lab"><img src="<?php echo get_template_directory_uri(); ?>/images/lab-trans.png" alt="Lab"/></a>
 </div>
     
 
