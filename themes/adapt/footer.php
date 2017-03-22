@@ -27,5 +27,11 @@ if(!is_single(2844)) { ?>
 
 <!-- WP Footer -->
 <?php wp_footer(); ?> 
+<script type="text/javascript">
+var $zoho= $zoho || {salesiq:{values:{},ready:function(){}}};var d=document;s=d.createElement("script");s.type="text/javascript";
+s.defer=true;s.src="https://salesiq.zoho.com/esidesign2/float.ls?embedname=esidesign";
+t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);
+$zoho.salesiq.ready=function(embedinfo){$zoho.salesiq.floatbutton.visible("hide");}
+</script>
 </body>
 </html>

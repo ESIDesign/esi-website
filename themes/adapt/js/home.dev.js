@@ -29,7 +29,7 @@ jQuery(function($){
 						$(person2).delay(100).animate({opacity: 1},800);
 						$(person2).delay(150).css('z-index',1);
 
-						console.log(data);
+// 						console.log(data);
 						
 						loading = false;
                     } 
@@ -60,6 +60,14 @@ if($(iframe).hasClass('autoplay')) {
 		player.play();
 		player.setVolume(0);
 	});  	
+	
+	player.on('ended', function(){
+		player.element.src = player.element.src;
+		setTimeout(function(){
+			player.play();
+			player.setVolume(0);
+		}, 400);
+	});
 } 
 }
 
@@ -183,29 +191,32 @@ if ( $(window).width() > 479) {
 	}
 
 
+/*
 	$('.home_item1 .cycle').cycle({
 			fx: 'fade',
 			speed: 800
 	});
+*/
 	
 	$('.home_item3 .cycle').cycle({
 			fx: 'fade',
+			delay: 16000,
 			speed: 1200,
-			timeout: 30000
+// 			timeout: 5000
 	});
 	
 	$('.home_item4 .cycle').cycle({
-			delay: 4000,
+			delay: 9000,
 			fx: 'fade',
 			speed: 1000,
-			timeout: 10000
+// 			timeout: 2000
 	});
 	
 	$('.home_item5 .cycle').cycle({
-			delay: 8000,
+			delay: 12000,
 			fx: 'fade',
 			speed: 1000,
-			timeout: 10000,
+// 			timeout: 3000,
 	});
 	
 

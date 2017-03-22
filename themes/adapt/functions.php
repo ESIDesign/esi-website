@@ -877,3 +877,9 @@ function meta_title_wp_title( $title, $sep ) {
     return $title;
 }
 add_filter( 'wp_title', 'meta_title_wp_title', 10, 2);
+
+add_filter('pre_user_query', function(&$query) {
+   if($query->query_vars["orderby"] == 'rand') {
+       $query->query_orderby = 'ORDER by RAND()';
+   }
+});

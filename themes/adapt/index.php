@@ -12,23 +12,10 @@ get_header('home'); ?>
 	<img class="active" src="<?php echo get_template_directory_uri(); ?>/images/esi-logo-red.jpg" alt="ESI Design"/>
 </div>
 
-<?php
-$args2 = array(
-    'orderby' => 'ID',
-	'order' => 'DESC',
-	'post_type' => 'attachment',
-	'post_mime_type' => 'image',
-	'post_status' => null,
-	'post__in' => array(7716)
-);
-$posts = get_posts($args2); ?>
 <div class="home_item home_item1 project">
 	<div class="video-overlay">
 <!-- 		<span id="button" class="awesome-icon-play"></span> -->
-		<?php foreach($posts as $post) : setup_postdata($post);
-			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb3'); ?>
-<!-- 			<img class="placeholder" src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>"/> -->
-		<?php endforeach; ?>
+<!-- 		<img class="placeholder" src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>"/> -->
 <!--
 		<div class="project-overlay">
 			<?php echo '<p>WATCH: Main Street: eBay’s New Front Door</p>'; ?>
@@ -39,27 +26,13 @@ $posts = get_posts($args2); ?>
 </div>
 
 <?php
-$post_object = get_field('featured_module',2145);
-$post = $post_object;
-$featuredid = $post->ID;
-setup_postdata($post); 
-$args2 = array(
-    'orderby' => 'menu_order',
-	'order' => 'ASC',
-	'post_type' => 'attachment',
-	'post_parent' => $post->ID,
-	'post_mime_type' => 'image',
-	'post_status' => null,
-	'numberposts' => 1
-);
-$posts = get_posts($args2); ?>
+$feat_post = get_field('featured_module', 2145);
+$featuredid = $feat_post->ID; ?>
 <div class="project home_item3 news_module">
 	<div class="cycle">
-		<a href="<?php echo get_permalink($post->ID); ?>" class="news_item">
-		<?php foreach($posts as $post) : setup_postdata($post);
-			$feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'archive-project'); ?>
+		<a href="<?php echo get_permalink($featuredid); ?>" class="news_item">
+		<?php $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id($featuredid), 'archive-project'); ?>
 			<img src="<?php echo $feat_img[0]; ?>" alt="<?php echo the_title(); ?>"/>
-		<?php endforeach; ?>
 			<h3 class="project-overlay">
 			<?php if(get_field('headline',2145)) {
 				the_field('headline',2145);
@@ -91,6 +64,10 @@ $posts = get_posts($args2); ?>
 $project_posts = get_posts($args);
     if($project_posts) { 
 		$count=0;  
+			$attachments1 = array();
+			$attachments2 = array();
+			$proj_title1 = '';
+			$proj_title2 = '';
             foreach($project_posts as $post) : setup_postdata($post);
 	            $count++;
 				$id = get_the_ID();
@@ -109,7 +86,7 @@ $project_posts = get_posts($args);
 					'post_mime_type' => 'image',
 					'post_status' => null,
 					'posts_per_page' => 3,
-					'exclude' => $exclude_id,
+					'exclude' => array($exclude_id),
 					'meta_query' => array(
 						'relation' => 'OR',
 						array(
@@ -124,106 +101,101 @@ $project_posts = get_posts($args);
 				   )
                 );
 			$attachments = get_posts($args);
-            $feat_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'archive-project');
-            $feat_img2 = wp_get_attachment_image_src(get_post_thumbnail_id(), 'grid-thumb2');
-            ?>
-            
-<?php if ($feat_img) {  ?>
 
-<?php if ($count == '1') { ?>
+			foreach ($attachments as $attachment) :
+
+				if($count == 1) { 
+					$feat_img = wp_get_attachment_image_src($attachment->ID, 'archive-project');
+					array_push($attachments1,  array('img' => '<img src="'.$feat_img[0].'" height="'.$feat_img[2].'" width="'.$feat_img[1].'" alt="'.get_the_title().'" />'));
+				} 
+			
+				if($count == 2) {
+					$feat_img = wp_get_attachment_image_src($attachment->ID, 'grid-thumb2');
+					array_push($attachments2, array('img' => '<img src="'.$feat_img[0].'" height="'.$feat_img[2].'" width="'.$feat_img[1].'" alt="'.get_the_title().'" />'));
+				}
+				
+			endforeach; 
+			
+			if (get_field('short') != "") { 
+		  		$title = get_field("short");
+		  	} else { 
+		  		$title = get_the_title();  	
+		  	} 
+		  	
+		  	if($count == 1) { 
+	        	$proj_title1 = '<h3 class="project-overlay">'.$title.'</h3>'; 
+	        }
+	        
+	        if($count == 2) {
+				$proj_title2 =  '<h3 class="project-overlay">'.$title.'</h3>'; 
+	        } 
+	        
+	        endforeach; } wp_reset_query(); ?>
+
+
 	<div class="project home_item4">
 		<a href="<?php echo get_permalink(get_the_ID()); ?>">
-		<?php if($post->ID == 3226) { ?>
-			<img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
-			<?php } 
-			else {
-			echo '<div class="cycle">';
-			foreach ($attachments as $attachment) :
-				$feat_img = wp_get_attachment_image_src($attachment->ID, 'archive-project'); ?>
-				<img src="<?php echo $feat_img[0]; ?>" height="<?php echo $feat_img[2]; ?>" width="<?php echo $feat_img[1]; ?>" alt="<?php echo the_title(); ?>" />
-			<?php endforeach; 
+			<?php echo '<div class="cycle">'; 
+				foreach($attachments1 as $attachment1) {
+					echo $attachment1['img'];
+				}
 			echo '</div>'; 
-			} ?>
-	        <h3 class="project-overlay">
-	        <?php if (get_field('short') != "") { 
-		  		the_field("short");
-		  	} else { 
-		  		the_title();  	
-		  	} ?></h3>
+			echo $proj_title1; ?>	
 	  	</a>
 	</div>
-<?php } ?>
-           
-<?php if ($count == '2') { ?>     
+             
            
 <!-- People -->
 <div class="home_item home_item12">
 
 <?php
-	global $wpdb;
-	$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand() LIMIT 0, 15";
-	$author_ids = $wpdb->get_results($query);
-	$count = 0;
-	foreach($author_ids as $author) :
-		$curauth = get_userdata($author->ID);
+	$pcount = 0;
+	$args  = array(
+		'role__in' => array('Administrator', 'Editor', 'Contributor'),
+	    'exclude' => array(1),
+	    'orderby' => 'rand',
+	    'fields'    => 'all',
+	    'number'    => 3
+	);
+
+	$user_query = new WP_User_Query( $args );
+	
+	foreach ( $user_query->results as $user ) :
+		$curauth = get_userdata($user->ID);
 
 		$avatar = 'wavatar';
 
-		if($curauth->user_level >= 1 && $curauth->first_name != 'ESI' && $curauth->ID != 2 && $curauth->first_name != 'Asa') :
-		$count++; ?>
+		$pcount++; ?>
 		
-<?php if ($count == '1') { ?>
+<?php if ($pcount == '1') { ?>
 	<a class="people_button" href="<?php echo get_site_url(); ?>/people"><img src="<?php echo get_template_directory_uri(); ?>/images/people-trans.png"/ alt="People"></a>
-	<article class="people1" itemscope itemtype="http://schema.org/Person">
-<?php } 
-if ($count == '2') { ?>
+	<article class="people1">
+<?php } if ($pcount == '2') { ?>
 	<article class="people2">
-<?php } 
-if ($count == '3') { ?>	
+<?php } if ($pcount == '3') { ?>	
 	<article class="people3">
-<?php }
-if ($count <= '3') { ?>	
+<?php } if ($pcount <= '3') { ?>	
 		<a href="<?php echo get_site_url(); ?>/people"><?php 
 	echo get_avatar($curauth->ID, '116', $avatar, $curauth->display_name); ?> 
-		<p class="caption_people"><span itemprop="name"><?php echo $curauth->first_name; ?></span></p></a>
+		<p class="caption_people"><span><?php echo $curauth->first_name; ?></span></p></a>
 	</article>
 <?php } ?>
-	<?php endif; ?>
-<?php endforeach; ?>
 
+<?php endforeach; ?>
 </div><!-- home_item12 -->      
            
  
 <div class="project home_item5">
 	<a href="<?php the_permalink(); ?>">
-		<?php if($post->ID == 3226) { ?>
-			<img src="<?php echo $feat_img2[0]; ?>" alt="<?php echo the_title(); ?>" />
-		<?php }
-		else {
-		echo '<div class="cycle">';
-		foreach ($attachments as $attachment) : ?>
-			<img src="<?php echo $feat_img2[0]; ?>" alt="<?php echo the_title(); ?>" />
-		<?php endforeach; 
+		<?php echo '<div class="cycle">'; 
+			foreach($attachments2 as $attachment2) {
+				echo $attachment2['img'];
+			}
 		echo '</div>'; 
-		} ?>
-	<h3 class="project-overlay">
-	<?php if (get_field('short') != "") { 
-	  	the_field("short");
-	}
-	else { 
-	  	the_title();  	
-	} ?>
-	</h3></a>
+		echo $proj_title2; ?>	
+	</a>
 </div>
 			
-			<?php } ?><!-- if 3rd proj -->
-
-          <?php } ?><!-- if proj feat img -->
-            
-		<?php endforeach; ?>
-	<?php wp_reset_query(); ?>
-<?php } ?><!-- if projects -->
-    
 
 <div class="home_button work">
 	<a href="<?php echo get_site_url(); ?>/work"><img src="<?php echo get_template_directory_uri(); ?>/images/work-trans.png" alt="Work"/></a>

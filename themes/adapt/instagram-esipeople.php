@@ -3,7 +3,7 @@
     echo '<?xml version="1.0" encoding="ISO-8859-1"?>';
     echo '<rss version="2.0">';
     echo '<channel>';
-    echo '<title>BKSK Instagram</title>';
+    echo '<title>#esipeople</title>';
     echo '<link>http://www.esidesign.com/wp-content/themes/adapt/instagram-esipeople.php</link>';
     echo '<description>Built October 22, 2013, Updated December 22, 2016</description>';
     echo '<language>en-us</language>';
@@ -12,7 +12,7 @@
  ?>
 
 <?php
-$jsonurl = "https://api.instagram.com/v1/users/self/media/recent/?access_token=266854171.7827081.6439a537b65044a7872f1d35af72fda2&count=10";	
+$jsonurl = "https://api.instagram.com/v1/users/self/media/recent/?access_token=266854171.7827081.6439a537b65044a7872f1d35af72fda2&count=1";	
 $json = file_get_contents($jsonurl,0,null,null);
 $json_output = json_decode($json, true);
 

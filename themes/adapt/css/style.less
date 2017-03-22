@@ -152,6 +152,20 @@ Regular 400
 	font-weight: 700;
 }
 
+@font-face {
+	font-family: 'adelle-local';
+	src: url('../fonts/adelle/Adelle-Thin.eot?#iefix') format('embedded-opentype'),  url('../fonts/adelle/Adelle-Thin.woff') format('woff'), url('../fonts/adelle/Adelle-Thin.ttf')  format('truetype'), url('../fonts/adelle/Adelle-Thin.svg#../fonts/adelle/Adelle-Thin') format('svg');
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: 'adelle-local';
+	src: url('../fonts/adelle/Adelle-Light.eot?#iefix') format('embedded-opentype'),  url('../fonts/adelle/Adelle-Light.woff') format('woff'), url('../fonts/adelle/Adelle-Light.ttf')  format('truetype'), url('../fonts/adelle/Adelle-Light.svg#../fonts/adelle/Adelle-Light') format('svg');
+	font-weight: 300;
+}
+
+
+
 /*-----------------------------------------------------------------------------------*
 /* = Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
 /*-----------------------------------------------------------------------------------*/
@@ -323,10 +337,25 @@ h1,
 h2,
 h3,
 h4 {
-    line-height: 140%;
-    font-family: "proxima-nova-alt-condensed", "proximanova", sans-serif;
-/* 	font-weight: 700; */
+    line-height: 150%;
+/*
+    a {
+	    font-weight: 300;
+    }
+*/
 }
+
+/*
+h2 a:hover,
+h3 a:hover,
+h4 a:hover { color: #999; text-decoration: none; }
+*/
+
+/*
+h1, h2 {
+	font-family: "adelle-local", "proxima-nova-alt-condensed", "proximanova", serif;
+}
+*/
 
 h1 {
 	font-size: 38px;
@@ -334,18 +363,12 @@ h1 {
 /* 	margin-bottom: 12px; */
 	margin-bottom: 2%;
 	letter-spacing: 0em;
-	font-family: "adelle", "proxima-nova-alt-condensed", "proximanova", sans-serif;
+	font-family: "adelle-local", "proxima-nova-alt-condensed", "proximanova", sans-serif;
 }
-
-/*
-.archive-post h1 {
-	margin-bottom: 40px;
-}
-*/
 
 h2 { 
 	font-size: 26px;
-	font-family: "adelle", "proxima-nova-alt-condensed", "proximanova", sans-serif;
+	font-family: "adelle-local", "proxima-nova-alt-condensed", "proximanova", sans-serif;
 }
 
 .single-project h2 {
@@ -361,12 +384,19 @@ h2.excerpt {
 	line-height: 1.3em;
 }
 
-h3 { font-size: 24px;
-	 font-weight: 300; }
+h3, h4 {
+    font-family: "proxima-nova-alt-condensed", "proximanova", sans-serif;
+}
+
+h3 { 
+	font-size: 24px;
+	font-weight: 300; 
+}
 
 .home h4 {
 	font-size: 20px;
 }
+
 h4 { font-size: 18px; }
 
 h5 {font-size: 11px;}
@@ -377,25 +407,9 @@ h4 {
     margin-bottom: 16px;
 }
 
-h1 a,
-h2 a,
-h3 a,
-h4 a { 
-	font-weight: 500;
-}
-
-/*
-body.home h1, body.home h2 {
-	font-family: "adelle" !important;
-}
-*/
-
 .archive-post h2 a {
 	font-weight: 400;
 }
-h2 a:hover,
-h3 a:hover,
-h4 a:hover { color: #999; text-decoration: none; }
 
 .single-title{ margin-top: 5px; }
 
@@ -403,16 +417,27 @@ h4 a:hover { color: #999; text-decoration: none; }
 	display: block;
 	padding-right: 10px;
 	color: @blue !important;
-	font: 50px "adelle", "proxima-nova-alt-condensed", "nimbus-sans-condensed";
+	font-size: 50px;
 	font-weight: 300;
 }
 
+/*
 #single-project-right h1 {
+	display: block;
 	color: @blue !important;
 	text-transform: uppercase;
 	font-weight: 600;
 	font-size: 42px;
 	line-height: 100%;	
+	margin-bottom: 10px;
+	width: 100%;
+}
+*/
+
+.single-project h1 a, .page-template-template-lab-php h1 a {
+/* 	color: #FFF !important; */
+	color: @blue !important;
+	font-weight: 300;
 }
 
 .band h2 {
@@ -421,21 +446,6 @@ h4 a:hover { color: #999; text-decoration: none; }
 	font-weight: 300;
 	font-size: 30px;
 	line-height: 52px;	
-}
-
-#single-project-right h1  {
-	display: block!important;
-	margin-bottom:10px;
-}
-
-#single-project-right h1 {
-	width: 100%;
-}
-
-.single-project h1 a, .page-template-template-lab-php h1 a {
-/* 	color: #FFF !important; */
-	color: @blue !important;
-	font-weight: 300;
 }
 
 /* Colors */
@@ -536,6 +546,12 @@ img.wp-image-3811, img.no-shadow {
 	position: relative;
 	margin-bottom: 0px;
 	top: 0px;
+	&:after { 
+		content: " ";
+		display: block; 
+		height: 0; 
+		clear: both;
+	}
 }
 
 /*-------------------------------------------------*
@@ -1055,7 +1071,7 @@ body.home {
 		color: #FFF;
 // 		height: 100%;
 // 		background-color: #aeaeae;
-// 		background-color: @beige;
+		background-color: @blue;
 	}
 	.text {
 		padding: 50px 20px 0 15px;
@@ -1318,7 +1334,7 @@ article.people1, article.people2, article.people3, .people_button {
 /*
 .home_item13 h3 {
 	background: url('./images/tweet.png') left top no-repeat;
-	font: 20px "adelle", "proxima-nova-alt-condensed", "proximanova", sans-serif;
+	font: 20px "adelle-local", "proxima-nova-alt-condensed", "proximanova", sans-serif;
 	font-weight: 400;
 	padding: 0px 16px 5px 32px !important;
 	margin-bottom: 2px !important;
@@ -1361,7 +1377,7 @@ article.people1, article.people2, article.people3, .people_button {
 }
 
 .home_item9_quote h3.attrib {
-	font: 22px "adelle", "proxima-nova-alt-condensed", sans-serif;
+	font: 22px "adelle-local", "proxima-nova-alt-condensed", sans-serif;
 	text-align: right;
 	margin: 10px auto;
 	width: 70%;
@@ -1386,7 +1402,7 @@ article.people1, article.people2, article.people3, .people_button {
 }
 
 .new_h2 (@color: #666){
-	font-family: "adelle", "proxima-nova-alt-condensed", "nimbus-sans-condensed";
+	font-family: "adelle-local", "proxima-nova-alt-condensed", "nimbus-sans-condensed";
 	font-size: 28px;
 	color: @color;
 	font-weight: 300;
@@ -2322,7 +2338,7 @@ iframe#mosaic_player {
 }
 
 .pull-quote {
-	font-family: "adelle", "proxima-nova-alt-condensed", "proximanova", sans-serif;
+	font-family: "adelle-local", "proxima-nova-alt-condensed", "proximanova", sans-serif;
 	font-size: 24px;
 	line-height: 130%;
 	padding-left: 14px;
@@ -2333,7 +2349,7 @@ iframe#mosaic_player {
 }
 
 .pull-quote h3 {
-	font: 22px "adelle", "proxima-nova-alt-condensed", "proximanova", sans-serif;
+	font: 22px "adelle-local", "proxima-nova-alt-condensed", "proximanova", sans-serif;
 	font-weight: 100;
 	color: #777;
 }
@@ -2602,6 +2618,7 @@ h3.name {
 }
 
 ul.filter{
+	border-top: 1px solid #DDD;
 	font-family: "proxima-nova-alt-condensed", "freight-sans-pro", "proximanova", sans-serif;
 	font-size: 16px;
 	display: none;
@@ -2613,9 +2630,10 @@ ul.filter{
 // 	height: 288px;
 	line-height: 30px;
 	box-shadow: 3px 5px 17px -1px rgba(0, 0, 0, .1);
-	li{
+	li {
 		background: #FFF;
 		border-bottom: 1px solid #DDD;
+		width: 100%;
 	}
 	a {
 		display: block;
@@ -2625,10 +2643,15 @@ ul.filter{
 		&:hover, &.active {
 			color: #666;
 		}
+
+/*
 		&#all span {
-			width: 351px !important;
+			border-top: 1px solid #DDD;
+			width: 100%;
 			word-break: none;
 		}
+*/
+
 	}
 }
 
@@ -2825,6 +2848,12 @@ li.sort{
 	animation-delay: 1s;
 }
 
+.og-grid:first-of-type li.fadein:nth-child(14) {
+	-webkit-animation-delay: 1s;
+	-moz-animation-delay: 1s;
+	animation-delay: 1s;
+}
+
 .fadein.info {
 	-webkit-animation-delay: 1.2s;
 	-moz-animation-delay: 1.2s;
@@ -2845,7 +2874,7 @@ li.sort{
 
 .people_excerpt h1 {
 	color: @orange;
-	font: 38px "adelle", "proxima-nova-alt-condensed" , serif;
+	font: 38px "adelle-local", "proxima-nova-alt-condensed" , serif;
 	font-weight: 300;
 	margin-bottom: .9%;
 }
@@ -2933,7 +2962,7 @@ li.people-grid .caption_people  {
 
 .people_item .caption_people .name, li.people-grid .caption_people .name {
 	margin: 0px;
-	font: 13px "adelle";
+	font: 13px "adelle-local", serif;
 	font-weight: 600;
 	color: @orange;
 }
@@ -3092,7 +3121,7 @@ li.people-grid .caption_people  {
 		overflow-y: scroll;
 	}
 	h3 {
-		font: 46px "adelle", Helvetica, sans-serif;
+		font: 46px "adelle-local", Helvetica, sans-serif;
 		font-weight: 300 !important;
 		padding: 0px;
 		margin-bottom: 0px;
