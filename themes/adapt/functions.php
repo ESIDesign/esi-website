@@ -495,22 +495,11 @@ function dept_user_profile_fields( $user ) { ?>
     </tr>
     
     <tr>
-        <th><label for="check">Director</label></th>
-        <td>
-        <?php 
-            //get dropdown saved value
-            $checked = get_the_author_meta( 'director', $user->ID ); //there was an extra ) here that was not needed 
-            ?>
-        <input type="checkbox" name="director" <?php if ($checked == 'on') { echo 'checked'; } ?>> Director</input>
-        </td>
-        </tr>
-    
-    <tr>
         <th><label for="check">Leadership</label></th>
         <td>
         <?php 
             //get dropdown saved value
-            $checked = get_the_author_meta( 'leadership', $user->ID ); //there was an extra ) here that was not needed 
+            $checked = get_the_author_meta( 'leadership', $user->ID ); 
             ?>
         <input type="checkbox" name="leadership" <?php if ($checked == 'on') { echo 'checked'; } ?>> Leadership</input>
         </td>
@@ -713,9 +702,9 @@ add_action( 'pre_user_query', 'wps_pre_user_query' );
 * @param WP_User_Query Object $query User Query object before query is executed
 */
 function wps_pre_user_query( &$query ) {
-global $wpdb;
-if ( isset( $query->query_vars['query_id'] ) && 'wps_last_name' == $query->query_vars['query_id'] )
-$query->query_orderby = str_replace( 'user_login', "$wpdb->usermeta.meta_value", $query->query_orderby );
+	global $wpdb;
+	if ( isset( $query->query_vars['query_id'] ) && 'wps_last_name' == $query->query_vars['query_id'] )
+	$query->query_orderby = str_replace( 'user_login', "$wpdb->usermeta.meta_value", $query->query_orderby );
 }
 
 add_filter('stylesheet_directory_uri','wpi_stylesheet_dir_uri',10,2);
@@ -883,3 +872,23 @@ add_filter('pre_user_query', function(&$query) {
        $query->query_orderby = 'ORDER by RAND()';
    }
 });
+
+if( function_exists('acf_add_options_page') ) {
+	acf_add_options_page(array(
+		'page_title' 	=> 'User Settings',
+		'menu_title'	=> 'User Settings',
+		'parent_slug' => 'users.php',
+		'menu_slug' 	=> 'user-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+		
+	acf_add_options_page(array(
+		'page_title' 	=> 'Instagram Settings',
+		'menu_title'	=> 'Instagram Settings',
+		'parent_slug' => 'edit.php?post_type=insta',
+		'menu_slug' 	=> 'insta-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+}

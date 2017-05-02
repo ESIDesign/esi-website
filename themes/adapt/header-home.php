@@ -38,5 +38,5 @@
 <body class="home preload">
 
 <div id="wrap" class="clearfix">
-
-<div id="main" class="clearfix">
+	
+<div id="main"	class="home-wrap">

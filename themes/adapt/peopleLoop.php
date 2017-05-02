@@ -33,6 +33,8 @@ $total_pages = ceil($total_users / $limit);
 $args  = array(
 	'role__in' => array('Administrator', 'Editor', 'Contributor'),
     'exclude' => array(1),
+//     'orderby' => 'ID',
+//     'order' => 'DESC',
     'meta_key' => 'last_name',
 	'query_id' => 'wps_last_name',
     // return all fields

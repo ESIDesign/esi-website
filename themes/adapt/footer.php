@@ -3,7 +3,6 @@
  * @package WordPress
  * @subpackage Adapt Theme
  */
-$options = get_option( 'adapt_theme_settings' );
 if(!is_single(2844)) { ?>
 </div><!-- /main -->
 <?php } ?>
@@ -12,7 +11,7 @@ if(!is_single(2844)) { ?>
 		<div id="footer-bottom" class="clearfix">
         
             <div id="copyright">
-                &copy; <?php echo date('Y'); ?>  <?php bloginfo( 'name' ) ?>
+                &copy; <?php echo date('Y'); ?>  <?php bloginfo('name'); ?>
             </div><!-- /copyright -->
             
 			<?php dynamic_sidebar('footer-one'); ?>

@@ -11,22 +11,28 @@
 <div class="people-wrap">
 <!-- LEADERSHIP -->
 <ul id="og-grid" class="og-grid og-grid1">
-<?php
-// Get users ordered by user lastname = (hack to get Ed, Susan, Gideon first)
-global $wpdb;
-$query = "SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'last_name' ORDER BY user_id ASC";
-$author_ids = $wpdb->get_results($query);
-$count = 0;
+<?php $leadership_ids = array();
+if( have_rows('leadership_order', 'option') ):
+    while ( have_rows('leadership_order', 'option') ) : the_row();
+    $user = get_sub_field('user');
+    array_push($leadership_ids, $user['ID']);
+    endwhile;
+endif;
+$args = array(
+	'include' => $leadership_ids,
+	'orderby' => 'include',
+	'role__not_in' => array('Subscriber', 'None')
+ );
+$user_query = new WP_User_Query( $args );
+$authors = $user_query->get_results();
+if(!empty($authors)) :
+foreach($authors as $author) :
 
-foreach($author_ids as $author) :
-	// Get user data
-	$curauth = get_userdata($author->user_id);
+	$curauth = get_userdata($author->ID);
 
-	// If user level is above 0 or login name is "admin", display profile
-	if($curauth->user_level >= 1 && $curauth->leadership == 'on' && $curauth->first_name != 'ESI') :
-	$count++;
 	$user_link = get_author_posts_url($curauth->ID);
-	$avatar = 'wavatar'; ?>
+	$avatar = 'wavatar'; 
+	if($curauth->user_level >= 1) : ?>
 	
 	<li class="people-grid fadein">
 	<?php if($curauth->description) { ?>
@@ -37,43 +43,15 @@ foreach($author_ids as $author) :
 			<h3 class="name"><?php echo $curauth->display_name; ?></h3>
 			<?php echo $curauth->position; ?>
 		</article>
-	<?php if($curauth->description) { ?>
-		</a>
-	<?php } ?>	
+	<?php if($curauth->description) { 
+		echo '</a>';
+	} ?>	
 	</li>
-	<?php endif; ?>
-<?php endforeach; ?>
 
-<!-- DIRECTORS -->
-<?php
-// Get the authors from the database ordered by user nicename
-global $wpdb;
-$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY ID ASC";
-$author_ids = $wpdb->get_results($query);
-$count = 0;
+<?php endif; endforeach;
+endif; wp_reset_query(); ?>
 
-foreach($author_ids as $author) :
-	// Get user data
-	$curauth = get_userdata($author->ID);
-	// If user level is above 0 or login name is "admin", display profile
-	if($curauth->user_level >= 1 && $curauth->director == 'on') :
-		$count++; ?>
-		<li class="people-grid fadein">
-		<?php if($curauth->description) { ?>
-			<a data-largesrc="<?php echo esi_get_avatar_url(get_avatar($curauth->ID, '250' )); ?>" data-title="<?php echo $curauth->display_name; ?>" data-position="<?php echo $curauth->position; ?>" data-description="<?php echo $curauth->description; ?>">
-		<?php } ?>
-			<?php echo get_avatar($curauth->user_email, '170', $avatar); ?>
-				<article class="caption_people">
-					<h3 class="name"><?php echo $curauth->display_name; ?></h3>
-					<?php echo $curauth->position; ?>
-				</article>
-		<?php if($curauth->description) { ?>
-			</a>
-		<?php } ?>	
-		</li>
 
-	<?php endif; ?>
-<?php endforeach; ?>
 </ul>
 
 <div class="clear"></div>
@@ -88,13 +66,7 @@ foreach($author_ids as $author) :
 </div>
 
 <ul class="og-grid og-grid2 fadein">
-<?php
-global $wpdb;
-$query = "SELECT ID, user_nicename from $wpdb->users ORDER BY rand()";
-$author_ids = $wpdb->get_results($query);
-$count = 0;
-$id = get_the_ID();
-                    
+<?php                  
 $people_args = array(
 	'post_type' => 'people' 
 );
@@ -123,16 +95,25 @@ $attachments = get_posts( array(
 ) ); 
             
 //people attachments count
-$i=0;         
+$i=0;   
+$count = 0;      
 
-foreach($author_ids as $author) :
+$args = array(
+	'exclude' => $leadership_ids,
+	'orderby' => 'rand',
+	'role__not_in' => array('Subscriber', 'None')
+ );
+$user_query = new WP_User_Query( $args );
+$authors = $user_query->get_results();
+if(!empty($authors)) :
+foreach($authors as $author) :
 
 	$curauth = get_userdata($author->ID);
 
 	// All current users are editors or higher 
-	if($curauth->user_level >= 1 && $curauth->leadership != 'on' && $curauth->director != 'on' && $curauth->first_name != 'Asa') :
+	if($curauth->user_level >= 1 && $curauth->leadership != 'on') :
+		
 		$count++;
-
 		// Set default avatar (values = default, wavatar, identicon, monsterid)
 		$avatar = 'default'; ?>
 
@@ -159,13 +140,13 @@ foreach($author_ids as $author) :
 	ob_start();
 	ob_end_clean();
 	$output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $attachments[$i]->post_content, $matches);
-	$first_vid = $matches[1][0];
 
 	$value = get_post_meta($attachments[$i]->ID, 'syndication_permalink', true);
 	
 	echo '<article class="people_item">';
 
 	if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
+		$first_vid = $matches[1][0];
 		echo '<article class="video-wrapper '.$attachments[$i]->ID.'">
 		<video id="esipeople" width="240" >
 			<source src="'.$first_vid.'" type="video/mp4">
@@ -191,8 +172,8 @@ if('attachment' == get_post_type($attachments[$i]->ID)) {
 	<li class="people_block"></li>
 <?php } ?>
 
-	<?php endif; ?>
-<?php endforeach; ?>
+<?php endif; endforeach;
+endif; ?>
 </ul>
 
 <div class="clear"></div>

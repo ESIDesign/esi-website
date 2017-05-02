@@ -39,8 +39,10 @@ jQuery(function($){
 			
 			if($('.filter a#all').hasClass('active')) {
 				$('#projects_slider').fadeIn();
+				$('.pagination').fadeIn();
  			} else {
 	 			$('#projects_slider').fadeOut();
+	 			$('.pagination').fadeOut();
  			}			
 		});
 	});

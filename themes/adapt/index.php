@@ -50,6 +50,7 @@ $featuredid = $feat_post->ID; ?>
 
 
 <?php 
+	$project_ids = array();
 	$args = array(
     'post_type' =>'project',
     'post__not_in' => array($featuredid),
@@ -71,6 +72,7 @@ $project_posts = get_posts($args);
             foreach($project_posts as $post) : setup_postdata($post);
 	            $count++;
 				$id = get_the_ID();
+				array_push($project_ids, $id);
             	if(get_field('video', $id) != "" && get_field('video_img', $id) == "") {
 					$exclude_id = get_post_thumbnail_id($id);
 				}
@@ -134,7 +136,7 @@ $project_posts = get_posts($args);
 
 
 	<div class="project home_item4">
-		<a href="<?php echo get_permalink(get_the_ID()); ?>">
+		<a href="<?php echo get_permalink($project_ids[0]); ?>">
 			<?php echo '<div class="cycle">'; 
 				foreach($attachments1 as $attachment1) {
 					echo $attachment1['img'];
@@ -186,7 +188,7 @@ $project_posts = get_posts($args);
            
  
 <div class="project home_item5">
-	<a href="<?php the_permalink(); ?>">
+	<a href="<?php the_permalink($project_ids[1]); ?>">
 		<?php echo '<div class="cycle">'; 
 			foreach($attachments2 as $attachment2) {
 				echo $attachment2['img'];

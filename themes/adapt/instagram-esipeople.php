@@ -12,13 +12,14 @@
  ?>
 
 <?php
-$jsonurl = "https://api.instagram.com/v1/users/self/media/recent/?access_token=266854171.7827081.6439a537b65044a7872f1d35af72fda2&count=1";	
+// $jsonurl = "https://api.instagram.com/v1/users/self/media/recent/?access_token=266854171.7827081.6439a537b65044a7872f1d35af72fda2&count=1";
+$jsonurl = "https://api.instagram.com/v1/tags/esipeople/media/recent?access_token=266854171.7827081.6439a537b65044a7872f1d35af72fda2&count=1";	
 $json = file_get_contents($jsonurl,0,null,null);
 $json_output = json_decode($json, true);
 
 foreach($json_output['data'] as $item) {
 	$tags = $item['tags'];
-// 	if(in_array('esipeople', $tags)) {
+	if(in_array('esipeople', $tags)) {
 	    $title = str_replace(' & ', ' &amp; ', $item['caption']['text']);
 	    $link = $item['link'];
 	    $image = $item['images']['standard_resolution']['url'];  
@@ -43,7 +44,7 @@ foreach($json_output['data'] as $item) {
 	    }  
 	    $rssfeed .= '<p style="margin-top:0px; margin-bottom:0px;"><a href="'.$link.'" title="'.$title.'">'.$title.'</a></p> <p> Posted via <a href="http://instagram.com/esidesign">Instagram</a></p>]]></description>';
 	    $rssfeed .= '</item>';
-//     }
+    }
 }
  ?>
   
