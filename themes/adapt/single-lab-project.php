@@ -182,37 +182,39 @@ Template Name Posts: Lab Template
 <?php
 /* Lab Custom Post — mostly Instagram Feed */
 $lab_args = array(
-	'post_type' => 'lab',
+	'post_type' => 'insta',
 	'post_status' => 'publish',
     'orderby' => 'date',
     'order' => 'DESC',
-    'numberposts' => 8
+    'meta_key' => 'hashtag',
+    'meta_value' => 'esilab',
+    'meta_compare' => '=',
+    'posts_per_page' => 8
 );
 $lab_posts = get_posts( $lab_args );
-
+var_dump($lab_posts);
 /* Blog Posts Category Lab  */
 $labblog_args = array(
     'post_type' => 'post',
     'category' => '282',
     'orderby' => 'date',
     'order' => 'DESC',
-    'numberposts' => 8
+    'posts_per_page' => 8
 );
 $labblog_posts = get_posts( $labblog_args );
 
 // $all_posts = array_merge( $lab_posts, $labblog_posts );
 $all_posts = array_merge( $lab_posts);
 
-$post_ids = wp_list_pluck( $all_posts, 'ID' );//Just get IDs from post objects
+$post_ids = wp_list_pluck( $all_posts, 'ID' );
 
-// Do a new query with these IDs to get a properly-sorted list of posts
 $images = get_posts( array(
-	'post_type' => array('post','lab'),
+	'post_type' => array('post','intsa'),
     'post__in'    => $post_ids,
     'post_status' => 'publish',
     'orderby' => 'date',
     'order' => 'DESC',
-    'numberposts'=> 8
+    'posts_per_page'=> 8
 ) );
 		
 if ( !empty($images) ) {

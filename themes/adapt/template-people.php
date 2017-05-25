@@ -66,9 +66,19 @@ endif; wp_reset_query(); ?>
 </div>
 
 <ul class="og-grid og-grid2 fadein">
-<?php                  
+<?php    
+$afterDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-3 month" ) );
+              
 $people_args = array(
-	'post_type' => 'people' 
+	'post_type' => 'insta',
+	'post_status' => array('publish'), 
+	'orderby' => 'date',
+	'order' => 'DESC',
+//     'meta_key' => 'hashtag',
+//     'meta_value' => 'esipeople',
+//     'meta_compare' => '=',
+    'posts_per_page' => 10,
+    'date_query' => array( 'after' => $afterDate ), 
 );
 $people_posts = get_posts( $people_args );
 
@@ -83,39 +93,38 @@ $peoplepage_posts = get_posts($peoplepage_args);
 
 $all_posts = array_merge($people_posts, $peoplepage_posts);
 
-$post_ids = wp_list_pluck( $all_posts, 'ID' );//Just get IDs from post objects
+$post_ids = wp_list_pluck( $all_posts, 'ID' );
 
-// Do a new query with these IDs to get a properly-sorted list of posts
+// Merge of Instas with hashtag esipeople & attachments tagged people
 $attachments = get_posts( array(
-	'post_type' => array('attachment', 'people'),
-    'post__in'    => $post_ids,
+	'post_type' => array('attachment', 'insta'),
+    'post__in' => $post_ids,
     'post_status' => array('inherit','publish'),
     'orderby' => 'rand',
-    'numberposts'=> 6
+    'numberposts'=> 10
 ) ); 
             
 //people attachments count
 $i=0;   
 $count = 0;      
 
+//add esi design user to list of excluded ids
+array_push($leadership_ids, 1);
+
 $args = array(
 	'exclude' => $leadership_ids,
 	'orderby' => 'rand',
-	'role__not_in' => array('Subscriber', 'None')
+	'meta_key' => 'wp_user_level',
+	'meta_value' => '1',
+	'meta_compare' => '>',
  );
 $user_query = new WP_User_Query( $args );
 $authors = $user_query->get_results();
 if(!empty($authors)) :
 foreach($authors as $author) :
-
-	$curauth = get_userdata($author->ID);
-
-	// All current users are editors or higher 
-	if($curauth->user_level >= 1 && $curauth->leadership != 'on') :
-		
+	$curauth = get_userdata($author->ID);		
 		$count++;
-		// Set default avatar (values = default, wavatar, identicon, monsterid)
-		$avatar = 'default'; ?>
+		$avatar = 'default';  ?>
 
 <li class="people-grid">
 <?php if($curauth->description) { ?>
@@ -126,38 +135,26 @@ foreach($authors as $author) :
 		<h3 class="name"><?php echo $curauth->display_name; ?></h3>
 		<?php echo $curauth->position; ?>
 	</article>
-<?php if($curauth->description) { ?>
-	</a>
-<?php } ?>
+<?php if($curauth->description) { echo '</a>'; } ?>
 </li>
 
-<?php if ($count % 7 == 0) {   
-	if('people' == get_post_type($attachments[$i]->ID)) {
-	setup_postdata( $attachments[$i] ); 
-	$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($attachments[$i]->ID),'insta', true);
-	$site_url = get_site_url();
-    $agent = $_SERVER['HTTP_USER_AGENT'];
-	ob_start();
-	ob_end_clean();
-	$output = preg_match_all('/<source.+src=[\'"]([^\'"]+)[\'"].*>/i', $attachments[$i]->post_content, $matches);
-
-	$value = get_post_meta($attachments[$i]->ID, 'syndication_permalink', true);
-	
-	echo '<article class="people_item">';
-
-	if (($output == '1') && (strlen(strstr($agent,"Firefox")) == 0)) {
-		$first_vid = $matches[1][0];
-		echo '<article class="video-wrapper '.$attachments[$i]->ID.'">
-		<video id="esipeople" width="240" >
-			<source src="'.$first_vid.'" type="video/mp4">
+<?php if ($count % 6 == 0) {   
+if('insta' == get_post_type($attachments[$i]->ID)) {
+	$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($attachments[$i]->ID),'insta',false);
+    $insta_video = get_post_meta($attachments[$i]->ID, 'video', true);
+    $value = get_post_meta($attachments[$i]->ID, 'insta_link', true);
+    
+    if($insta_video != '') {
+	    echo '<article class="people_item video-wrapper '.$attachments[$i]->ID.'">
+		<video id="esipeople" width="240" poster="'.$image_url[0].'">
+			<source src="'.$insta_video.'" type="video/mp4">
 		</video><span class="awesome-icon-play"></span></article>';
-	}
+    } else {
+	    echo '<article class="people_item">';
+	    echo '<img src="'.$image_url[0].'"/>';
+	    echo '</article>';
+    }
 
-	if (($output != '1') || (strlen(strstr($agent,"Firefox")) > 0)) {	
-		echo '<img src="'.$image_url[0].'"/>';
-	}
-		
-	echo '</article>';
 }
 if('attachment' == get_post_type($attachments[$i]->ID)) {
 	$grid_thumb2 = wp_get_attachment_image_src($attachments[$i]->ID, 'grid-thumb'); ?>
@@ -168,12 +165,11 @@ if('attachment' == get_post_type($attachments[$i]->ID)) {
 	
 <?php  $i++; } ?>
 
-<?php if ($count ==3 || $count % 12 == 0) { ?>
+<?php if ($count == 3 || $count % 14 == 0) { ?>
 	<li class="people_block"></li>
 <?php } ?>
 
-<?php endif; endforeach;
-endif; ?>
+<?php endforeach; endif; ?>
 </ul>
 
 <div class="clear"></div>

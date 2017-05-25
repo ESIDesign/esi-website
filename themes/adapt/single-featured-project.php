@@ -2,7 +2,8 @@
 /**
  * @package WordPress
  * @subpackage Adapt Theme
- Template Name Posts: Featured Template
+ Template Name: Featured Template
+ Template Post Type: project
 */
 ?>
 <?php get_header(); ?>
@@ -249,8 +250,8 @@
   		get_sidebar('lab');
   	} ?>
 	  	
-	<?php if(!is_single('408') && !is_single('409') && !is_single(2844)) { ?>
-	  	
+	<?php if(!is_single('408') && !is_single('409') && !is_single(2844)) { echo 'non';?>
+	  	hello
 	  	<h3 class="related">Related Projects <a class="all" href="<?php echo get_site_url(); ?>/work">See all projects</a></h3>
 	  	
 <?php $tags = get_the_terms($post->ID, 'project_cats');
