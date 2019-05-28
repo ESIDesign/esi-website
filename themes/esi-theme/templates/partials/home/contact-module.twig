@@ -1,0 +1,47 @@
+  <div class="swipe-section">
+    <section class="relative dark-blug-bg pt5">
+
+      <div data-js-animate-this class="talk-box flex mt5 pt5 items-center content-center justify-center z-2 animate-this">
+        <div data-js-talk-box class="absolute absolute--fill flex items-center content-center justify-center center z-0 overflow-hidden talk-box-container">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px" height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+            <path class="talk-path" d="M153.6,45.8c0,1.1,0.9,2,2,2s2-0.9,2-2s-0.9-2-2-2S153.6,44.7,153.6,45.8L153.6,45.8h-9c-0.5,0-0.8,0.3-0.9,0.8
+  l-1,7.7c-0.1,0.4-0.5,0.7-0.9,0.7s-0.8-0.3-0.9-0.7l-2.3-17.6v-0.1c-0.3-1.2-1.4-2-2.6-2s-2.2,0.9-2.5,2.1v0.1l-2,17.5
+  c-0.1,0.4-0.5,0.7-0.9,0.7s-0.8-0.3-0.9-0.7l-2.3-17.6v-0.1c-0.3-1.2-1.4-2-2.6-2s-2.2,0.9-2.5,2.1v0.1l-2,17.5
+  c-0.1,0.4-0.5,0.7-0.9,0.7s-0.8-0.3-0.9-0.7l-2.3-17.6v-0.1c-0.3-1.2-1.4-2-2.6-2s-2.2,0.9-2.5,2.1v0.1l-0.9,9H22V179h178"/>
+          </svg>
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px" height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+            <path class="talk-path" d="M44.1,45.9c0-1.1-0.9-2-2-2s-2,0.9-2,2s0.9,2,2,2S44.1,47,44.1,45.9L44.1,45.9h9c0.5,0,0.8,0.3,0.9,0.8l1,7.7
+  c0.1,0.4,0.5,0.7,0.9,0.7s0.8-0.3,0.9-0.7l2.3-17.6v-0.1c0.3-1.2,1.4-2,2.6-2s2.2,0.9,2.5,2.1v0.1l2,17.5c0.1,0.4,0.5,0.7,0.9,0.7
+  s0.8-0.3,0.9-0.7l2.6-17.7v-0.1c0.3-1.2,1.4-2,2.6-2s2.2,0.9,2.5,2.1v0.1l2,17.5c0.1,0.4,0.5,0.7,0.9,0.7s0.8-0.3,0.9-0.7l2.3-17.6
+  v-0.1c0.3-1.2,1.4-2,2.6-2s2.2,0.9,2.5,2.1v0.1l0.9,9H176V179H0"/>
+
+          </svg>
+        </div>
+
+        <div class="w-70 tc">
+          <h3
+            data-js-animate-this
+            data-y="-25"
+            data-delay="0.0"
+            class="animate-this t-50 t-red din-condensed lh-solid ttu"><span class="t-white">{{post.get_field('contact_headline')}}</span></h3>
+          <p
+            data-js-animate-this
+            data-y="-25"
+            data-delay="0.1"
+            class="animate-this t-18 t-white poppins-reg lh-copy">{{post.get_field('contact_text')}}</p>
+          <a
+            data-js-animate-this
+            data-y="-25"
+            data-delay="0.2"
+            class="animate-this mt3 dib pa3 ph4 solid-button-bg t-12 ttu lh-solid no-underline t-white poppins-semi" href="/contact"><span class="button-label db mt1">Message</span></a>
+        </div>
+
+      </div>
+      <div class="pt5 mt5">
+      {% block footer %}
+        {% include 'partials/footer.twig' %}
+      {% endblock %}
+      </div>
+    </section>
+
+  </div>

@@ -1,0 +1,81 @@
+{
+    "key": "group_59c42c4b20ff6",
+    "title": "News Post",
+    "fields": [
+        {
+            "key": "field_59c42c5046e7d",
+            "label": "Link",
+            "name": "link_out",
+            "type": "text",
+            "instructions": "Actual URL. Will link to Archive File if left blank.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https:\/\/newyorktimes.com\/article-name",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59c42c6f46e7e",
+            "label": "Source",
+            "name": "source",
+            "type": "text",
+            "instructions": "Source of the news article.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "New York Times",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59c42c7c46e7f",
+            "label": "Archive File",
+            "name": "archive",
+            "type": "file",
+            "instructions": "The archived link.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_category",
+                "operator": "==",
+                "value": "category:in-the-news"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1512597356
+}

@@ -1,0 +1,22 @@
+@import "../common/variables";
+
+.phase-item {
+  display: none;
+  overflow: hidden;
+
+  &.first {
+    display: block;
+  }
+}
+
+.phases-slider {
+  @media (max-width: 670px) {
+    .t-50 {
+      font-size: 25px;
+    }
+
+    .t-36 {
+      font-size: 18px;
+    }
+  }
+}

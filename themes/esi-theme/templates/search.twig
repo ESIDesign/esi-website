@@ -1,0 +1,97 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+
+  <section class="dark-blue-bg pv5 relative z-1">
+
+    <div class="fluid-width center pv5 min-vh-80">
+      <form role="search" method="get" class="search-form w-100 mb5" action="/">
+        <div class="flex justify-between items-center content-center w-70">
+          <span class="icon dib f-white i-30">{% include 'svg/search-icon.twig' %}</span>
+          <input id="s" type="text" data-js-search-field class="ph2 ml2 din-light-condensed t-50 lh-solid search-field bn t-blue db w-100 bg-transparent" placeholder="" value="{{ search_query }}" name="s">
+        </div>
+      </form>
+      {% if posts %}
+        {% if job_search %}
+          {% for post in posts %}
+          <article id="post-{{ post.ID }}" class="relative search-post w-100 w-70-l pb4 mv4 post-type-{{ post.post_type }}">
+            <div class="w-100 w-70-l mv2">
+              <h4 class="t-white t-20 din-condensed lh-solid o-50 ttu mb2">{{ post.title }}</h4>
+              <h5 class="t-40 t-white din-condensed lh-solid ttu">{{ post.preview().read_more('') }}</h5>
+              <h3 class="t-18 t-white din-condensed lh-solid mt4">
+                <a class="no-underline white ttu" href="{{ post.link }}">View Listing</a>
+              </h3>
+            </div>
+          </article>
+          {% endfor %}
+        {% else %}
+          {% for post in posts %}
+            {% if post.post_type == 'work' %}
+            <article id="post-{{ post.ID }}" class="relative search-post w-100 w-70-l pb4 mv4 post-type-{{ post.post_type }}">
+              <div class="row mv2">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="aspect-ratio aspect-ratio--16x9">
+                    {% if post.header_image or post.thumbnail.src %}
+                      <a href="{{ post.link }}">
+                        <div
+                          class="background-image aspect-ratio--16x9 bg-center cover"
+                          style="background-image: url( {{ (post.header_image ? TimberImage(post.header_image).src : post.thumbnail.src) }} )"
+                          alt="{{ post.title }}">
+                        </div>
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="aspect-ratio aspect-ratio--16x9">
+                    <div class="aspect-ratio--object z-1 flex items-center content-center justify-start">
+                      <div class="pl0 pl4-l">
+                        <h4 class="t-white t-20 din-condensed lh-solid o-50 ttu mb2 ttu">Work</h4>
+                        <h3 class="t-40 t-white din-condensed lh-solid ttu"><a class="no-underline white" href="{{ post.link }}">{{ post.name }}</a></h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            {% endif %}
+
+          </article>
+          {% endfor %}
+
+          {% for post in posts %}
+            {% if post.post_type == 'post' %}
+            <article id="post-{{ post.ID }}" class="relative search-post w-100 w-70-l pb4 mv4 post-type-{{ post.post_type }}">
+              <div class="w-100 w-70-l mv2">
+                <h4 class="t-white t-20 din-condensed lh-solid o-50 ttu mb2">{{ post.terms[0].name }}{% if post.terms[1].slug == 'events' %}, {{ post.terms[1].name }}{% endif %}</h4>
+                <h3 class="t-40 t-white din-condensed lh-solid">
+                  {% if post.terms[0].slug == 'in-the-news' %}
+                    <a class="no-underline white ttu" href="{{ post.link_out ? post.get_field('link_out') }}" target="_blank">{{ post.name }}</a>
+                  {% elseif post.terms[0].slug == 'awards' %}
+                    <a class="no-underline white ttu" href="{{ post.associated_project.link }}">{{ post.name }}</a>
+                  {% else %}
+                    <a class="no-underline white ttu" href="{{ post.link }}">{{ post.name }}</a>
+                  {% endif %}
+                </h3>
+                {% if post.terms[0].slug == 'in-the-news' %}
+                <h5 class="t-12 poppins-semi mt2 t-med-gray lh-solid">{{ post.source }}</h5>
+                {% endif %}
+              </div>
+            </article>
+            {% endif %}
+          {% endfor %}
+
+        {% endif %}
+      {% else %}
+        <div class="pv5">
+          <h2 class="t-pale-blue din-condensed t-50 lh-solid tc mt5 pt5">Sorry, we couldn’t find anything related to your search!</h2>
+        </div>
+      {% endif %}
+    </div>
+
+  </section>
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}

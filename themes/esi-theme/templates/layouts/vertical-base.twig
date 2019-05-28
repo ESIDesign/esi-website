@@ -1,0 +1,46 @@
+{% block html_head_container %}
+
+{% include 'partials/html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+<script>
+  window.servicesOffered = [{% for service in options.services_offered %}'{{ service.service }}'{% if not loop.last %},{% endif %}{% endfor %}];
+
+</script>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2334506-6"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments)};
+gtag('js', new Date());
+
+gtag('config', 'UA-2334506-6');
+</script>
+
+<body class="vertical-template-default single single-vertical postid-141 logged-in real-estate sidebar-primary overflow-x-hidden" data-template="base.twig">
+{% include 'partials/header.twig' %}
+
+{% block content %}
+  Sorry, no content
+{% endblock %}
+
+{#<section id="content" role="main" class="content-wrapper">
+    {% if title %}<h1>{{ title }}</h1>{% endif %}
+    <div class="wrapper {{ sidebar_class }}">
+        {% block content %}
+            Sorry, no content
+        {% endblock %}
+    </div>
+    {% if sidebar %}
+        <aside class="layout-sidebar">
+            {{ sidebar }}
+        </aside>
+    {% endif %}
+</section>#}
+{{ function('wp_footer') }}
+</body>
+</html>

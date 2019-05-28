@@ -1,0 +1,106 @@
+@import "../common/variables";
+
+.client-block {
+  width: 140px;
+  height: 140px;
+
+  .icon {
+    width: 80px;
+  }
+
+  @media (max-width: 370px) {
+    width: 100px;
+    height: 100px;
+
+    .icon {
+      width: 60px;
+    }
+  }
+}
+
+.page-template-page-about {
+  .prev-button {
+    @media (max-width: 670px) {
+      width: 30px;
+      height: 30px;
+    }
+    .icon {
+      transform: translateX(-2px);
+
+      @media (max-width: 670px) {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
+  .next-button {
+    @media (max-width: 670px) {
+      width: 30px;
+      height: 30px;
+    }
+    .icon {
+      transform: translateX(2px);
+
+      @media (max-width: 670px) {
+        width: 15px;
+        height: 15px;
+
+        transform: translateX(0px);
+      }
+    }
+  }
+
+  .carousel-controls {
+    right: 25px;
+
+    @media (max-width: 768px) {
+      right: 0;
+      height: 56.25%;
+      left: 0;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .ctrl {
+      left: 1rem;
+    }
+  }
+
+  .slick-list.draggable {
+    @extend .dark-blue-bg !optional;
+  }
+
+  .ctrl {
+    @media (max-width: 670px) {
+      top: -40px;
+      bottom: auto;
+
+      .button-bg {
+        background-color: rgba(0,0,0,0.9);
+      }
+    }
+  }
+}
+
+.metric-title {
+  @media (max-width: 1180px) {
+    font-size: 30px;
+  }
+
+  @media (max-width: 992px) {
+    font-size: 50px;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 30px;
+  }
+}
+
+.about-metric .countup {
+  display: inline-block;
+}
+
+.hidden-logos {
+  display: none;
+}

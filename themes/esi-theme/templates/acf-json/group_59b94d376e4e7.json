@@ -1,0 +1,342 @@
+{
+    "key": "group_59b94d376e4e7",
+    "title": "Home Page",
+    "fields": [
+        {
+            "key": "field_59b94d42b81bf",
+            "label": "Landing Video",
+            "name": "landing_video",
+            "type": "file",
+            "instructions": "Please upload your landing splash page video here.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5afd9ead708fa",
+            "label": "Landing Video Fallback Image",
+            "name": "video_fallback_image",
+            "type": "image",
+            "instructions": "Mobile fallback for video. Portrait aspect ratio preferred.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_59b94d96b81c0",
+            "label": "About Headline",
+            "name": "about_headline",
+            "type": "textarea",
+            "instructions": "Main headline text for the about section.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "We design experiences that <span class=\"animate-text-yellow\">engage<\/span> audiences<\/span><br \/><span data-js-animate-this data-y=\"-25\" data-delay=\"0.1\" class=\"animate-this dib\">and <span class=\"animate-text-blue\">deliver<\/span> results.<\/span>",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_59b94e77b81c1",
+            "label": "About Text",
+            "name": "about_text",
+            "type": "textarea",
+            "instructions": "Short description for the about page in the about section.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "ESI Design seamlessly weaves the physical and digital worlds together<br \/><span data-js-animate-this data-y=\"-25\" data-delay=\"0.3\" class=\"animate-this dib\">to create immersive experiences with enduring impact.",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_59b94ea8b81c2",
+            "label": "Verticals Slider",
+            "name": "verticals_slider",
+            "type": "repeater",
+            "instructions": "Vertical Information Slides.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Add Vertical",
+            "sub_fields": [
+                {
+                    "key": "field_59b94f08b81c3",
+                    "label": "Background Image",
+                    "name": "background_image",
+                    "type": "image",
+                    "instructions": "Single background image for the verticals.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "id",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_59b94f31b81c4",
+                    "label": "Headline",
+                    "name": "headline",
+                    "type": "textarea",
+                    "instructions": "This is the header text for this slide.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "We turn spaces into <span class=\"animate-text-red\">communication channels<\/span>",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_59b94f75b81c5",
+                    "label": "Button Text",
+                    "name": "button_text",
+                    "type": "textarea",
+                    "instructions": "This is the text in the button on the slide, mostly a brief description of the vertical.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "See our work in commercial real estate",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_59b9550d5ae76",
+                    "label": "Link",
+                    "name": "link",
+                    "type": "page_link",
+                    "instructions": "Link to the vertical.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "vertical"
+                    ],
+                    "taxonomy": [],
+                    "allow_null": 0,
+                    "allow_archives": 1,
+                    "multiple": 0
+                }
+            ]
+        },
+        {
+            "key": "field_59b94fc0b81c6",
+            "label": "Team Headline",
+            "name": "team_headline",
+            "type": "text",
+            "instructions": "This is the headline for the team section.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Our team’s on it from day one<\/span><br \/><span data-js-animate-this data-y=\"-25\" data-delay=\"0.5\" class=\"animate-this dib\">until it’s done",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59b950e9b81c8",
+            "label": "Team Video",
+            "name": "team_video",
+            "type": "file",
+            "instructions": "This is the background video for the team section.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_59b950ffb81c9",
+            "label": "Lab Headline",
+            "name": "lab_headline",
+            "type": "text",
+            "instructions": "Lab title headline.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "THE <span class=\"animate-text-blue\">L<\/span><span class=\"animate-text-red\">A<\/span><span class=\"animate-text-yellow\">B<\/span>",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59b953fb26787",
+            "label": "Lab Text",
+            "name": "lab_text",
+            "type": "text",
+            "instructions": "This is the body text for the lab.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Our whole studio is a prototyping lab",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59b9511db81ca",
+            "label": "Lab Video",
+            "name": "lab_video",
+            "type": "file",
+            "instructions": "Lab background video.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_59b95133b81cb",
+            "label": "Contact Headline",
+            "name": "contact_headline",
+            "type": "text",
+            "instructions": "This is the content section's headline text.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Let's <span class=\"animate-text-blue\">T<\/span><span class=\"animate-text-red\">a<\/span><span class=\"animate-text-orange\">l<\/span><span class=\"animate-text-yellow\">k<\/span>",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59b9514cb81cc",
+            "label": "Contact Text",
+            "name": "contact_text",
+            "type": "text",
+            "instructions": "This is the contact section's body text.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Ready to get started? Begin here.",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1526572258
+}

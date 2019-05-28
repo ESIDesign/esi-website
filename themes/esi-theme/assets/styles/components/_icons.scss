@@ -1,0 +1,95 @@
+@import "../common/variables";
+
+.f-white {
+  fill: $white;
+}
+
+.f-dark-blue {
+  fill: $dark-blue;
+}
+
+.f-twitter-blue {
+  fill: #009abf;
+}
+
+.f-pale-blue {
+  fill: $pale-blue;
+}
+
+.f-light-gray {
+  fill: $light-gray;
+}
+
+.f-label-gray {
+  fill: $label-gray;
+}
+
+.s-dark-blue {
+  stroke: $dark-blue;
+  
+  path,
+  line {
+    stroke: $dark-blue;
+  }
+}
+
+.s-white {
+  stroke: $white;
+  
+  path,
+  line {
+    stroke: $white;
+  }
+}
+
+.i-20 {
+  width: 20px;
+  height: 20px;
+}
+
+.i-25 {
+  width: 25px;
+  height: 25px;
+}
+
+.i-30 {
+  width: 30px;
+  height: 30px;
+}
+
+.i-40 {
+  width: 40px;
+  height: 40px;
+}
+
+.ih {
+  transform: translateY(-5px);
+}
+
+.ih-rotate {
+  transform: translateY(-5px) rotate(180deg);
+}
+
+.ih-30 {
+  width: 30px;
+}
+
+.h-30 {
+  height: 30px;
+}
+
+.ih-40 {
+  width: 40px;
+}
+
+.ih-50 {
+  width: 50px;
+}
+
+.ih-60 {
+  width: 60px;
+}
+
+.ih-80 {
+  width: 80px;
+}

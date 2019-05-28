@@ -1,0 +1,59 @@
+{
+    "key": "group_59c850c88ba14",
+    "title": "Awards Post",
+    "fields": [
+        {
+            "key": "field_59d435a329315",
+            "label": "Award Link",
+            "name": "award_link",
+            "type": "url",
+            "instructions": "Link to award",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_59f0b6d804050",
+            "label": "Featured",
+            "name": "featured",
+            "type": "true_false",
+            "instructions": "If this post should be featured in the work detail page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_category",
+                "operator": "==",
+                "value": "category:awards"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1508947726
+}

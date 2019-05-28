@@ -1,0 +1,41 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+
+  <section data-js-animate-page-in class="dark-blue-bg pv5 relative z-1">
+
+    <div class="mw6 center pv5">
+      <div class="aspect-ratio aspect-ratio--1x1">
+        <div 
+          data-js-animate-page-item
+          data-js-animate-this
+          class="aspect-ratio--object flex cover bg-center items-center content-center justify-center">
+          {% include 'svg/404-face.twig' %}
+        </div>
+        
+        <div 
+          data-js-animate-page-item
+          data-js-animate-this
+          class="aspect-ratio--object flex cover bg-center items-center content-center justify-center">
+          <h2 class="t-pale-blue din-condensed t-50 lh-solid tc mt5 pt5">Sorry, we couldn’t find that!</h2>
+        </div>
+      </div>
+
+      <form 
+        data-js-animate-page-item
+        data-js-animate-this
+        role="search" method="get" class="search-form w-100 mt5 pt5 center" action="/">
+        <h4 class="t-white din-condensed ttu t-24 lh-solid tc mb3">Try Searching</h4>
+        <div class="flex justify-between items-center content-center">
+          <span class="icon dib f-white i-30">{% include 'svg/search-icon.twig' %}</span>
+          <input id="s" type="text" data-js-search-field class=" ml2 din-light-condensed t-50 lh-solid search-field bn t-blue db w-100 bg-transparent" placeholder="" value="{{ search_query }}" name="s">
+        </div>
+      </form>
+    </div>
+
+  </section>
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}

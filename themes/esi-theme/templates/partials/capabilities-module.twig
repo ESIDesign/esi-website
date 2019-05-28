@@ -1,0 +1,22 @@
+<div data-js-animate-this data-js-capabilities-slider class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+  <div class="aspect-ratio aspect-ratio--1x1 dark-blue-bg mb3">
+    <div class="aspect-ratio--object flex items-center content-center justify-center">
+      <div data-js-cap-holder class="pa4 w-100 relative">
+        <div class="capabilities-logo absolute center left-0 right-0">{% include 'svg/es-logo.twig' %}</div>
+      </div>
+    </div>
+  </div>
+  <div data-js-capabilities-data-container class="dn">
+    <div class="capabilities-logo absolute center left-0 right-0">{% include 'svg/es-logo.twig' %}</div>
+      {% for item in options.capabilities %}
+      {% if loop.first %}
+      <h4 class="capability-item tl ttu t-red din-condensed t-36 metric-title lh-tight mv1 first">{{ item.capability }}</h4>
+      {% elseif loop.index0 == 1 %}
+      <h4 class="capability-item tl ttu din-condensed t-36 metric-title lh-tight mv1 second">{{ item.capability }}</h4>
+      {% else %}
+      <h4 class="capability-item tl ttu din-condensed t-36 metric-title lh-tight mv1 randomize">{{ item.capability }}</h4>
+      {% endif %}
+      {% endfor %}
+      <h4 class="capability-item tl ttu t-pale-blue din-condensed t-36 metric-title lh-tight mv1 last">Production</h4>
+  </div>
+</div>

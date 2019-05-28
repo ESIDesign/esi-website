@@ -1,0 +1,145 @@
+{
+    "key": "group_59e5488596e8a",
+    "title": "Phases",
+    "fields": [
+        {
+            "key": "field_5a99b143da948",
+            "label": "Phases Image",
+            "name": "phases_image",
+            "type": "image",
+            "instructions": "The background image for the Phases section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_59e773f9df9b2",
+            "label": "Phases Top Text",
+            "name": "phases_top_text",
+            "type": "text",
+            "instructions": "Add top text i.e. \"From\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59e54954c8417",
+            "label": "Phases",
+            "name": "phases",
+            "type": "repeater",
+            "instructions": "Add Phases",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_59e5495fc8418",
+                    "label": "Phase",
+                    "name": "phase",
+                    "type": "text",
+                    "instructions": "Add single phase.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_59e780e042da6",
+            "label": "Phases Static Text",
+            "name": "phases_static_text",
+            "type": "text",
+            "instructions": "Add static text i.e. \"To <span class=\"t-pale-blue\">Launch<\/span>\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59e77487e82fa",
+            "label": "Phases Bottom Text",
+            "name": "phases_bottom_text",
+            "type": "text",
+            "instructions": "Add bottom text i.e. \"We involve you in the creative process.\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "phases"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1520021860
+}

@@ -1,0 +1,653 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+  {% include 'partials/page-title.twig' with { 'page_title' : 'Our Work', 'link' : true } %}
+
+  <script>
+    window.singleWorkGallery = [{% if post.video_link %}{
+      src: "{{ post.video_link }}"
+    },{% endif %}{% for image in post.get_field('project_images') %}{
+      src: '{{ TimberImage(image.image).src("large") }}',
+      opts: {
+        caption: '{{ image.caption }}'
+      }
+    }{% if not index.last %},{% endif %}{% endfor %}];
+  </script>
+
+  <section
+    data-js-scroll-page
+    data-js-scroll-header
+    class="page-header relative z-1 fixed top-0 right-0 left-0 dark-blue-bg content-holder">
+    <div
+      style="background-image: url({{ TimberImage(post.header_image) }});"
+      class="header-image-{{ post.slug }} aspect-ratio--object cover bg-center z-1 bg-repeat-none">
+    </div>
+
+
+    <div class="absolute left-0 bottom-0 right-0 tc z-2 ph4 mb3 flex items-center content-center justify-center w-100">
+      <div>
+        <h2 class="t-50 t-white din-condensed lh-solid ttu">{{ post.work_name }}</h2>
+        <h3 class="t-24 t-white din-condensed lh-solid ttu">{{ post.location ~ (post.year != "" ? ' &bull; ' ~ post.year : '') ~ (post.square_footage != "" ? ' &bull; ' ~ post.square_footage ~ ' Sq. Ft.' : '') }}</h3>
+      </div>
+    </div>
+
+    <div data-js-share-links class="absolute right-0 bottom-0 mr2 mb2 mr4-l mb3-l flex items-center content-center justify-start z-3 button-bg pa2 share-links">
+      <a class="br-100 bg-white no-underline flex items-center content-center justify-center mh2 dib share-link" target="_blank" href="http://www.facebook.com/sharer.php?u={{ post.link }}&p[title]={{ post.title }}"><span class="icon i-20 f-dark-blue">{% include 'svg/social-icon-facebook.twig' %}</span></a>
+      <a class="br-100 bg-white no-underline flex items-center content-center justify-center mh2 dib share-link" target="_blank" href="http://twitter.com/share?text={{ post.title}}&url={{ post.link }}"><span class="icon i-20 f-dark-blue">{% include 'svg/social-icon-twitter.twig' %}</span></a>
+      <a class="br-100 bg-white no-underline flex items-center content-center justify-center mh2 dib share-link" target="_blank" href="mailto:?subject={{ post.title }}&amp;body=Check out this site {{ post.link }}."><span class="icon i-20 f-dark-blue">{% include 'svg/social-icon-email.twig' %}</span></a>
+      <span data-js-share-trigger class="icon i-30 f-white trigger pointer">{% include 'svg/share-icon.twig' %}</span>
+    </div>
+  </section>
+
+  <section
+    data-js-header-trigger
+    class="page-header relative z-0"></section>
+
+  <section
+    class="bg-white pt5 pb5 relative z-2">
+    <div class="fluid-width center">
+      <h3 class="t-30 t-dark-blue tc din-condensed lh-tight ttu mb0">{{ post.introduction_title_top_sentence }}</h3>
+      <h4 class="t-40 t-blue tc din-condensed lh-tight ttu">{{ post.introduction_title_bottom_sentence }}</h4>
+      <p class="t-14 t-dark-blue poppins-reg lh-copy tc mw6 center">{{ post.introduction_copy }}</p>
+    </div>
+
+    {% if post.video_link %}
+    <div data-js-scroll-section>
+      <section
+        data-js-animate-this
+        class="aspect-ratio aspect-ratio--16x9 relative z-1 mt5 overflow-hidden">
+        {% if post.get_field('video_cover_image')['type'] == 'image' %}
+        	<div
+        	style="background-image: url({{ TimberImage(post.get_field('video_cover_image')['id']).src('large') }})"
+          class="video-cover-image-{{ post.id }} aspect-ratio--object cover bg-center z-1">
+        {% else %}
+	       	<video
+            data-js-inline-video
+	          class="fs-video z-1"
+	          playsinline
+	          autoplay
+	          muted
+	          loop>
+	          <source src="{{ post.get_field('video_cover_image')['url'] }}" type="video/mp4">
+		   		</video>
+		   	{% endif %}
+        <div class="aspect-ratio--object z-2 flex items-center content-center justify-center">
+          <a data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="0" href="" class="dib mt0 mt4-l pa3 ph4 button-bg-blue t-12 ttu lh-solid no-underline t-white poppins-semi"><span class="button-label db mt1">Play Video</span></a>
+        </div>
+      </section>
+    </div>
+    {% endif %}
+
+    <div data-js-scroll-section class="fluid-width center mt3">
+      <div class="row pv5">
+
+        {% if post.work_pull_quote %}
+
+        <div data-js-animate-this class="col-xs-12 col-sm-12 col-md-5 col-lg-5 tc mb4 mb0-l">
+          <div class="icon dib i-40 center br-100 pale-blue-bg mb4 flex items-center content-center justify-center"><span class="icon dib f-white i-30">{% include 'svg/bulb-icon.twig' %}</span></div>
+          <h5 class="t-dark-blue t-40 tc lh-solid din-condensed ttu">{{ post.work_pull_quote }}</h5>
+          <h4 class="t-18 lh-copy t-pale-blue poppins-semi ttu">{{ post.quote_individual }}</h4>
+          <h5 class="t-14 lh-copy t-dark-blue poppins-semi ttu" >{{ post.quote_role }}</h5>
+          <h6 class="t-14 lh-copy t-dark-blue poppins-semi ttu">{{ post.quote_company }}</h6>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+
+        {% endif %}
+
+        {% if post.work_description %}
+
+        <div data-js-animate-this class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div class="ph4 work-cms-content relative mb2">
+            <div class="inner-wrap overflow-hidden">
+            	{{ post.get_field('work_description') }}
+            </div>
+            <div
+             data-js-expand
+            	class="icon arrow-icon absolute cover h2 w2 bottom--2 pointer"></div>
+          </div>
+        </div>
+
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div data-js-scroll-section class="fluid-width center mt3">
+      <div class="row">
+        {% set images_used = 0 %}
+        {% set number_of_images = post.get_field('project_images')|length %}
+        {# row 1 #}
+        {% for image in post.get_field('project_images') %}
+          {% if loop.index0 == 0 %}
+          <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3 pointer">
+            <div
+              style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+              class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+            </div>
+          </div>
+          {% set images_used = images_used + 1 %}
+
+          {% elseif loop.index0 == 1 %}
+
+          {% include 'partials/capabilities-module.twig' %}
+
+          <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3 pointer">
+            <div
+              style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+              class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+            </div>
+          </div>
+
+          {% set images_used = images_used + 1 %}
+
+          {% endif %}
+
+        {% endfor %}
+      </div>
+
+      <div class="row">
+      {# row 2 #}
+      {% for image in post.get_field('project_images') %}
+        {% if post.get_field('quote_module') %}
+          {% if loop.index0 == 2 %}
+          <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb3 pointer">
+            <div
+              style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+              class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+            </div>
+          </div>
+
+          {% set images_used = images_used + 1 %}
+
+          {# quote module #}
+          <div data-js-animate-this class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb3">
+            <div class="aspect-ratio aspect-ratio--1x1">
+              <div class="aspect-ratio--object flex items-center content-center justify-center tc">
+                <div class="ph2 ph5-l">
+                  <div class="icon dib i-40 center br-100 pale-blue-bg mb4 flex items-center content-center justify-center"><span class="icon dib f-white i-20">{% include 'svg/microphone-icon.twig' %}</span></div>
+                  <p class="t-14 lh-copy t-dark-blue poppins-reg">{{ post.quote_module }}</p>
+                  <h4 class="t-18 lh-copy t-pale-blue poppins-semi ttu">{{ post.quote_module_individual }}</h4>
+                  <h5 class="t-14 lh-copy t-dark-blue poppins-semi ttu" >{{ post.quote_module_role }}</h5>
+                  <h6 class="t-14 lh-copy t-dark-blue poppins-semi ttu">{{ post.quote_module_company }}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% endif %}
+
+        {% else %}
+        {% if loop.index0 == 2 or loop.index0 == 3 %}
+        <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb3 pointer">
+          <div
+            style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+            class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+          </div>
+        </div>
+
+        {% set images_used = images_used + 1 %}
+
+        {% endif %}
+
+
+        {% endif %}
+      {% endfor %}
+      </div>
+
+      <div class="row">
+      {# row 3 #}
+      {% for image in post.get_field('project_images') %}
+        {% if post.get_field('metrics_module') %}
+          {% if loop.index0 == (images_used) %}
+          <div data-js-animate-this class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3">
+
+            <div class="aspect-ratio aspect-ratio--1x1 pale-blue-bg">
+              {% for item in post.get_field('metrics_module') %}
+              <div data-js-slide class="metric-slide aspect-ratio--object flex items-center content-center justify-start pale-blue-bg {% if loop.index0 == 0 %}active{% endif %}">
+                <div class="ph5">
+                	<p class="t-44 metric-title lh-solid din-condensed ttu t-white">
+
+                  {{ item.metric }}
+	                </p>
+
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+          </div>
+          {% endif %}
+
+          {% if loop.index0 == (images_used) or loop.index0 == (images_used + 1) %}
+          <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3 pointer">
+            <div
+              style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+              class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+            </div>
+          </div>
+          {% endif %}
+
+        {% else %}
+          {% if loop.index0 == (images_used + 2) or loop.index0 == (images_used + 3) or loop.index0 == (images_used + 4) %}
+          <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3 pointer">
+            <div
+              style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+              class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+            </div>
+          </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      </div>
+
+      {% if post.get_field('metrics_module') %}
+      {% set images_used = images_used + 2 %}
+      {% else %}
+      {% set images_used = images_used + 3 %}
+      {% endif %}
+
+      {% if number_of_images <= 7 %}
+      <div class="row">
+        {% if featured_awards %}
+        {% for image in post.get_field('project_images') %}
+          {% if loop.index0 == images_used %}
+          <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3 pointer">
+            <div
+              style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+              class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+            </div>
+          </div>
+          <div data-js-animate-this class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3">
+            <div class="aspect-ratio aspect-ratio--1x1 dark-blue-bg">
+              <div class="aspect-ratio--object flex items-start content-center justify-center mt3">
+                <div class="ph4 tc">
+                  <h4 class="t-44 metric-title lh-solid din-condensed t-pale-blue mt4 ttu award-title">AWARDS</h4>
+                  <div data-js-carousel>
+                  {% for post in featured_awards %}
+                    {% if post.get_field('award_link') %}
+                    <a
+                      data-js-slide
+                      class="no-underline award-slide{% if loop.first %} active{% endif %}"
+                      href="{{ post.get_field('award_link') }}"
+                      target="_blank">
+                      <p class="t-44 lh-solid din-condensed metric-title award-name ttu ma0 t-white">{{ post.title }}</p>
+                    </a>
+                    {% else %}
+                    <p
+                      data-js-slide
+                      class="t-44 lh-solid din-condensed ttu ma0 metric-title award-name t-white award-slide{% if loop.first %} active{% endif %}">{{ post.title }}</p>
+                    {% endif %}
+                  {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% elseif loop.index0 == (images_used + 1) %}
+          <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3 pointer">
+            <div
+              style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+              class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+            </div>
+          </div>
+
+          {% endif %}
+        {% endfor %}
+
+        {% else %}
+        {% for image in post.get_field('project_images') %}
+          {% if loop.index0 == (images_used) or loop.index0 == (images_used + 1) %}
+          <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb3 pointer">
+            <div
+              style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+              class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+        {% endif %}
+      </div>
+      {% set images_used = images_used + 2 %}
+
+      {% else %}
+        <div class="row">
+          {% for image in post.get_field('project_images') %}
+            {% if featured_awards %}
+              {% if loop.index0 == (images_used) %}
+              <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3 pointer">
+                <div
+                  style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+                  class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+                </div>
+              </div>
+              {% set images_used = images_used + 1 %}
+              {% endif %}
+
+              {% if loop.index0 == 5 %}
+              <div data-js-animate-this class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3">
+                <div class="aspect-ratio aspect-ratio--1x1 dark-blue-bg">
+                  <div class="aspect-ratio--object flex items-start content-center justify-center mt3">
+                    <div class="ph4 tc">
+                      <h4 class="t-44 metric-title lh-solid din-condensed t-pale-blue mt4 ttu award-title">AWARDS</h4>
+                      <div data-js-carousel>
+                      {% for post in featured_awards %}
+                        {% if post.get_field('award_link') %}
+                        <a
+                          data-js-slide
+                          class="no-underline award-slide{% if loop.first %} active{% endif %}"
+                          href="{{ post.get_field('award_link') }}"
+                          target="_blank">
+                          <p class="t-44 lh-solid din-condensed metric-title award-name ttu ma0 t-white">{{ post.title }}</p>
+                        </a>
+                        {% else %}
+                        <p
+                          data-js-slide
+                          class="t-44 lh-solid din-condensed ttu ma0 metric-title award-name t-white award-slide{% if loop.first %} active{% endif %}">{{ post.title }}</p>
+                        {% endif %}
+                      {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {% endif %}
+
+            {% else %}
+
+            {% if loop.index0 == (images_used) or loop.index0 == (images_used + 1) or loop.index0 == (images_used + 2) %}
+            <div data-js-animate-this data-fancy-gallery data-gallery-target="singleWorkGallery" data-target-index="{% if post.video_link %}{{ loop.index }}{% else %}{{ loop.index0 }}{% endif %}" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3 pointer">
+              <div
+                style="background-image: url({{ TimberImage(image.preview_image ? image.preview_image : image.image).src('large') }});"
+                class="post-project-image-{{ loop.index0 }} aspect-ratio aspect-ratio--1x1 bg-center cover">
+              </div>
+            </div>
+            {% set images_used = images_used + 1 %}
+            {% endif %}
+
+
+            {% endif %}
+
+          {% endfor %}
+        </div>
+      </div>
+
+      {% endif %}
+
+    {% if news_posts %}
+
+    <div data-js-scroll-section class="fluid-width center mt5">
+      <h4 data-js-animate-this class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center">
+        <span class="icon dib f-dark-blue ih ih-40 o-40">{% include 'svg/heading-bg-socket.twig' %}</span>
+        <span class="text dib t-60 lh-solid mh2">Latest</span>
+        <span class="icon dib f-dark-blue ih ih-rotate ih-40 o-40">{% include 'svg/heading-bg-socket.twig' %}</span>
+      </h4>
+    </div>
+
+    <div data-js-scroll-section class="fluid-width center mt5">
+
+      <div data-js-animate-this class="row">
+					{% set imageArray = post.get_field('project_images') %}
+
+      	{% for post in news_posts %}
+
+          {% if loop.index0 < 3 %}
+
+	        <div
+            class="col-xs-12 col-sm-6 col-md-4 col-lg-4 mb3 is-active blog-post">
+            {% if post.terms[0].slug == 'in-the-news' %}
+              <a href="{{ post.link_out ? post.get_field('link_out') }}" target="_blank">
+            {% elseif post.terms[0].slug == 'awards' %}
+                {% if post.get_field('award_link') %}
+                    <a href="{{ post.get_field('award_link') }}" target="_blank">
+                  {% endif %}
+            {% else %}
+                  <a href="{{ post.link }}">
+            {% endif %}
+              <div class="aspect-ratio post-ratio light-gray-bg{% if not post.get_field('header_image') and not post.thumbnail %} no-image{% endif %}">
+                <div class="aspect-ratio--object">
+                  {% if post.header_image or post.thumbnail.src %}
+                    <div
+                      class="background-image aspect-ratio--16x9 bg-center cover is-loaded"
+                      style="background-image: url( {{ (post.get_field('header_image') ? TimberImage(post.get_field('header_image')).src('large') : post.thumbnail.src('large')) }} )"
+                      alt="{{ post.title }}">
+                    </div>
+                  {% else %}
+
+										<div
+                      class="background-image aspect-ratio--16x9 bg-center cover is-loaded"
+                      style="background-image: url( {{ TimberImage( random(imageArray).image ).src('large') }} )"
+                      alt="{{ post.title }}">
+                    </div>
+                  {% endif %}
+
+                  <h6 class="pt2 pb1 ph2 pa3-l lh-solid din-condensed t-18 t-label-gray ttu lh-solid no-underline">{{ post.terms[0].name }}</h6>
+                  <h5 class="ph2 ph3-l t-dark-blue t-26 lh-solid din-condensed ttu post-title">{{ post.name }}</h5>
+
+                  {% if post.terms[0].slug == 'in-the-news' %}
+                  <h5 class="absolute left-0 bottom-0 right-0 t-12 poppins-semi pa2 pa3-l t-med-gray lh-solid">{{ post.source }}</h5>
+                  {% endif %}
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {% elseif loop.index0 < 6 %}
+
+          <div
+            class="col-xs-12 col-sm-6 col-md-4 col-lg-4 mb3 is-active blog-post">
+            {% if post.terms[0].slug == 'in-the-news' %}
+              <a href="{{ post.link_out ? post.get_field('link_out') }}" target="_blank">
+            {% elseif post.terms[0].slug == 'awards' %}
+                {% if post.get_field('award_link') %}
+                    <a href="{{ post.get_field('award_link') }}" target="_blank">
+                  {% endif %}
+            {% else %}
+                  <a href="{{ post.link }}">
+            {% endif %}
+              <div class="aspect-ratio aspect-ratio--2x1 light-gray-bg no-image">
+                <div class="aspect-ratio--object">
+
+                  <h6 class="pt2 pb1 ph2 pa3-l lh-solid din-condensed t-18 t-label-gray ttu lh-solid no-underline">{{ post.terms[0].name }}</h6>
+                  <h5 class="ph2 ph3-l t-dark-blue t-26 lh-solid din-condensed ttu post-title">{{ post.name }}</h5>
+
+
+                  {% if post.terms[0].slug == 'in-the-news' %}
+                  <h5 class="absolute left-0 bottom-0 right-0 t-12 poppins-semi pa2 pa3-l t-med-gray lh-solid">{{ post.source }}</h5>
+                  {% endif %}
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {% endif %}
+
+	      {% endfor %}
+      </div>
+
+      {% if news_posts|length > 6 %}
+
+      <div data-js-more-posts-container class="dn">
+
+        <div class="row">
+
+          {% for post in news_posts %}
+
+            {% if loop.index0 > 5 %}
+
+            <div
+              class="col-xs-12 col-sm-6 col-md-4 col-lg-4 mb3 is-active blog-post">
+              {% if post.terms[0].slug == 'in-the-news' %}
+                <a href="{{ post.link_out ? post.get_field('link_out') }}" target="_blank">
+              {% elseif post.terms[0].slug == 'awards' %}
+                  {% if post.get_field('award_link') %}
+                      <a href="{{ post.get_field('award_link') }}" target="_blank">
+                    {% endif %}
+              {% else %}
+                    <a href="{{ post.link }}">
+              {% endif %}
+                <div class="aspect-ratio aspect-ratio--2x1 light-gray-bg">
+                  <div class="aspect-ratio--object">
+
+                    <h6 class="pa3 lh-solid din-condensed t-18 t-label-gray ttu lh-solid no-underline">{{ post.terms[0].name }}</h6>
+                    <h5 class="ph3 t-dark-blue t-26 lh-solid din-condensed ttu">{{ post.name }}</h5>
+
+                    {% if post.terms[0].slug == 'in-the-news' %}
+                    <h5 class="absolute left-0 bottom-0 right-0 t-12 poppins-semi pa3 t-med-gray lh-solid">{{ post.source }}</h5>
+                    {% endif %}
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            {% endif %}
+
+          {% endfor %}
+
+        </div>
+      </div>
+
+      <div class="fluid-width center flex items-center content-center justify-center mt3">
+        <button data-js-load-more-button class="pointer br-100 t-white bg-transparent bn pa0 ma0 flex items-center content-center overflow-visible justify-center">
+          <div>
+            <h3 class="t-dark-blue t-18 poppins-reg lh-solid tc o-50 ttu">More</h3>
+            <span class="icon dib f-dark-blue o-50 i-30">{% include 'svg/down-arrow.twig' %}</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    {% endif %}
+
+    {% endif %}
+
+    {% if related_works|length > 0 %}
+    <div data-js-scroll-section>
+	    <div data-js-animate-this class="fluid-width center mt5">
+	      <h4 class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center">
+	        <span class="icon dib f-dark-blue ih ih-50 o-60">{% include 'svg/heading-bg-broken.twig' %}</span>
+	        <span class="text dib t-60 lh-solid mh2">Related Work</span>
+	        <span class="icon dib f-dark-blue ih ih-50 o-60">{% include 'svg/heading-bg-broken.twig' %}</span>
+	      </h4>
+	    </div>
+
+	    <div class="mw8 ph3 center mt4">
+	      <div class="row">
+
+          {% set num_related_works = 0 %}
+
+          {% for work in related_works %}
+
+          {% if num_related_works < 2 and work.link != post.link %}
+
+              <div data-js-animate-this class="col-xs-12 col-sm-12 col-md-6 col-lg-6 work-item mb3 is-currently-active">
+                <a href="{{ work.link }}">
+                  <div
+                    class="aspect-ratio aspect-ratio--1x1 bg-center work-item-bg-wrapper">
+                    <div
+                      style="background-image: url({{ work.get_field('header_image') ? TimberImage(work.get_field('header_image')).src('large') : work.thumbnail.src('large') }});"
+                      class="aspect-ratio aspect-ratio--1x1 bg-center work-item-bg background-image is-loaded"></div>
+                    <div class="aspect-ratio--object z-1 work-item-cover">
+                    </div>
+                    <div class="aspect-ratio--object flex items-center content-center justify-start z-2 work-item-caption">
+                      <h4 class="center w-60 tc t-white din-condensed t-36 lh-tight"><span class="t-white no-underline ttu">{{ work.get_field('work_name') }}</span></h4>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              {% set num_related_works = num_related_works + 1 %}
+
+          {% endif %}
+
+          {% endfor %}
+
+	      </div>
+	    </div>
+    </div>
+	  {% endif %}
+
+  </section>
+
+  {% block print %}
+    <div id="print">
+      <!-- HEADER -->
+      <div id="header" style="height: 50px;"></div>
+      <!-- END HEADER -->
+
+      <!-- TITLE -->
+      <div class="fluid-width">
+        <h2 class="t-50 t-dark-blue din-condensed lh-solid ttu">{{ post.work_name }}</h2>
+        <h3 class="t-24 t-dark-blue din-condensed lh-solid ttu">{{ post.location ~ (post.year != "" ? ' &bull; ' ~ post.year : '') }}</h3>
+      </div>
+      <!-- END TITLE -->
+
+      <div class="spacing"></div>
+
+      <!-- IMAGE -->
+      <div class="fluid-width">
+        <img src="{{ TimberImage(post.header_image) }}">
+      </div>
+      <!-- END IMAGE -->
+      
+      <div class="spacing"></div>
+
+      <!-- INTRODUCTION -->
+      <div class="fluid-width">
+        <h3 class="t-30 t-dark-blue din-condensed lh-tight ttu mb0">{{ post.introduction_title_top_sentence }}</h3>
+        <h4 class="t-30 t-dark-blue din-condensed lh-tight ttu">{{ post.introduction_title_bottom_sentence }}</h4>
+        <p class="t-14 t-dark-blue poppins-reg lh-copy">{{ post.introduction_copy }}</p>
+      </div>
+      <!-- END INTRODUCTION -->
+
+      <div class="spacing"></div>
+
+      <!-- PULL QUOTE/DESCRIPTION -->
+      {% if post.work_pull_quote %}
+
+      <div class="fluid-width">
+        <h5 class="t-dark-blue t-26 lh-solid din-condensed">{{ post.work_pull_quote }}</h5>
+      </div>
+
+      {% endif %}
+
+      {% if post.work_description %}
+
+      <div class="fluid-width">
+        <div class="work-cms-content relative mb2">
+            {{ post.get_field('work_description') }}
+          
+        </div>
+      </div>
+
+      {% endif %}
+
+      {% if post.work_pull_quote or post.work_description %}
+
+      <div class="spacing"></div>
+
+      {% endif %}
+      <!-- END PULL QUOTE/DESCRIPTION -->
+
+      <!-- QUOTE MODULE -->
+      {% if post.get_field("quote_module") %}
+      
+      <div class="fluid-width">
+        <p class="t-26 din-condensed t-dark-blue poppins-reg">{{ post.quote_module }}</p>
+        <h4 class="t-18 lh-copy t-pale-blue poppins-semi ttu">{{ post.quote_module_individual }}</h4>
+        <h5 class="t-14 lh-copy t-dark-blue poppins-semi ttu" >{{ post.quote_module_role }}</h5>
+        <h6 class="t-14 lh-copy t-dark-blue poppins-semi ttu">{{ post.quote_module_company }}</h6>
+      </div>
+
+      {% endif %}
+      <!-- END QUOTE MODULE -->
+
+      <div class="spacing"></div>
+    </div>
+  {% endblock %}
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}

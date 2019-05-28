@@ -1,0 +1,47 @@
+<header data-js-header class="site-header flex justify-between items-start content-start fixed top-0 left-0 right-0 z-9999">
+  {% block header %}
+    <h1 data-js-site-logo class="site-name" role="banner">
+      <a class="site-logo" href="{{ site.url }}" rel="home">{% include 'svg/es-logo.twig' %}</a>
+    </h1>
+    <div data-js-nav-trigger class="pointer">
+      <button data-js-nav-trigger-animate class="nav-trigger-animate br-100 t-white button-bg nav-trigger bn pa0 ma0 flex items-center content-center justify-center tc pointer flex-column">
+        <div class="menu relative center pointer">
+          <div class="bar top"></div>
+          <div class="bar bottom"></div>
+        </div>
+      </button>
+    </div>
+
+  {% endblock %}
+</header>
+<div data-js-header class="site-header-bg fixed top-0 left-0 right-0 z-999"></div>
+<section data-js-nav-overlay data-js-animate-this class="nav-overlay fixed absolute--fill z-999 dark-blue-bg flex flex-column items-center content-center justify-center overflow-y-auto">
+  <div class="center mw8 mt3 pt3 mt5-l pt0-l nav-overlay-content">
+    <nav class="site-nav ph3 ph5-l pt0 mt0 pt3-l mt3-l cf relative z-9999">
+      <ul class="pa0 ma0 cf">
+        {% for item in options.main_nav_items %}
+        <li data-js-animate-this><a class="t-white t-60 din-condensed no-underline ttu site-nav-item site-nav-item-{{ loop.index0 }}" href="{{ item.link }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <form data-js-animate-this role="search" method="get" class="search-form w-100 ph3 ph5-l mt2 mb3 mv4-l" action="/">
+      <div class="flex justify-between items-center content-center">
+        <span class="icon dib f-white i-40">{% include 'svg/search-icon.twig' %}</span>
+        <input id="s" type="text" data-js-search-field class="ph2 ml2 din-light-condensed t-50 lh-solid search-field bn t-blue db w-100 bg-transparent" placeholder="" value="" name="s">
+      </div>
+    </form>
+
+
+    <h3 data-js-animate-this class="din-condensed t-32 lh-solid ph3 ph5-l t-white">
+      {% for item in options.sub_nav_items %}<a class="no-underline t-white ttu sub-nav-item sub-nav-item-{{ loop.index0 }}" href="{{ item.link }}">{{ item.title }}</a>{% if not loop.last %}<br>{% endif %}{% endfor %}
+    </h3>
+
+    <div data-js-animate-this class="twitter-feed ph3 ph5-l mt2 mt5-l mb5">
+      <div><span class="icon i-20 f-twitter-blue dib">{% include 'svg/social-icon-twitter.twig' %}</span></div>
+      <a class="no-underline t-22 din-condensed ttu t-white lh-solid" href="https://twitter.com/esidesign" target="_blank">@ESIDESIGN</a>
+      <a data-js-tweet-holder href="http://twitter.com/esidesign" target="_blank" class="single-tweet t-white t-14 poppins-reg lh-copy mw6 db"></a>
+    </div>
+  </div>
+
+</section>

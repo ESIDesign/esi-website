@@ -1,0 +1,28 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js ie ie6 lt-ie9 lt-ie8 lt-ie7" {{ site.language_attributes }}> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie ie7 lt-ie9 lt-ie8" {{ site.language_attributes }}> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie ie8 lt-ie9" {{ site.language_attributes }}> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" {{ site.language_attributes }}> <!--<![endif]-->
+<head>
+    <meta name="google-site-verification" content="p8kVmmyou84z_7B64WExe_bPqULSz7YHhqZAGHMOu6A" />
+    <meta charset="{{ site.charset }}">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="telephone=no" name="format-detection">
+    <title>
+        {% if wp_title %}
+            {{ wp_title }} - {{ site.name }}
+        {% else %}
+            {{ site.name }}
+        {% endif %}
+    </title>
+    <meta name="description" content="{{ site.description }}">
+    <!-- <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="{{ site.theme.link }}/style.css">
+    <meta name="twitter:image" content="{{ post.header_image ? TimberImage(post.header_image) : "https://esidesign.com/wp-content/themes/esi-theme/assets/images/logo.jpg" }}" />
+
+    {{ function('wp_head') }}

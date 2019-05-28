@@ -1,0 +1,85 @@
+{% extends "layouts/base.twig" %}
+
+
+{% block content %}
+  {% include 'partials/page-title.twig' with { 'page_title' : 'Our Work' } %}
+  <script>
+    window.featureBaseUrl = '{{ site.url }}';
+  </script>
+
+  <section data-js-animate-page-in class="bg-white mt4 mb5 pv5 work-container">
+
+      <div class="mw8 center ph3">
+
+        <div data-js-animate-this data-js-animate-page-item data-js-posts-container class="row min-vh-50">
+          {% set secondary_index = 0 %}
+
+          {% for post in posts %}
+
+          {% set column_class = '' %}
+          {% set aspect_ratio = '' %}
+
+          {% if loop.index0 < 2 %}
+            {% set column_class = 'col-md-6 col-lg-6' %}
+            {% set aspect_ratio = 'aspect-ratio--4x3' %}
+          {% elseif loop.index0 == 2 %}
+            {% set column_class = 'col-md-12 col-lg-12' %}
+            {% set aspect_ratio = 'aspect-ratio--16x9' %}
+          {% elseif loop.index0 < 6 %}
+            {% set column_class = 'col-md-4 col-lg-4' %}
+            {% set aspect_ratio = 'aspect-ratio--4x3' %}
+          {% elseif loop.index0 >= 6 %}
+            {% if secondary_index < 4 %}
+              {% set column_class = 'col-md-6 col-lg-6' %}
+              {% set aspect_ratio = 'aspect-ratio--4x3' %}
+            {% elseif secondary_index < 7 %}
+              {% set column_class = 'col-md-4 col-lg-4' %}
+              {% set aspect_ratio = 'aspect-ratio--4x3' %}
+            {% endif %}
+
+            {% set secondary_index = secondary_index + 1 %}
+
+            {% if secondary_index == 7 %}
+              {% set secondary_index = 0 %}
+            {% endif %}
+          {% endif %}
+
+          <div
+            class="col-xs-12 col-sm-12 {{ column_class }} work-item mb3 is-active blog-post"
+            data-js-post
+            data-industry="{{ post.terms[0].slug }}"
+            data-project-type="{{ post.terms[1].slug }}">
+            <a href="{{ post.link }}">
+              <div class="aspect-ratio {{ aspect_ratio }} bg-center work-item-bg-wrapper bg-black-50">
+                <div class="absolute left-0 top-0 right-0 left-0 dark-blue-bg o-30 z-0"></div>
+                <div
+                  style="background-image: url({{ post.preview_image ? TimberImage(post.preview_image).src('large') : (post.header_image ? TimberImage(post.header_image).src('large') : post.thumbnail.src) }});"
+                  class="background-image aspect-ratio--object bg-center work-item-bg z-1"></div>
+                <div class="aspect-ratio--object z-1 work-item-cover"></div>
+                <div class="aspect-ratio--object flex items-center content-center justify-start z-2 work-item-caption">
+                  <h4 class="center w-60 tc t-white din-condensed t-36 lh-tight"><span class="t-white no-underline ttu">{{ post.get_field('work_name') }}</span></h4>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+    {% if pagination.next %}
+      <span class="dn" data-js-current-page>{{ pagination.current }}</span>
+      <span class="dn" data-js-total-pages>{{ pagination.total }}</span>
+    {% endif %}
+
+  </section>
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+
+{% endblock %}

@@ -1,0 +1,34 @@
+  <section class="vh-100 relative swipe-section team-module">
+    <div
+      data-js-animate-this 
+      data-delay="1"
+      data-duration="1.5"
+      data-js-mobile-conditional-video
+      data-fallback-src="{{ post.get_field('team_fallback_image') }}"
+      class="absolute absolute--fill o-70 z-1 overflow-hidden cover bg-center">
+      <video
+        class="fs-video"
+        playsinline
+        data-autoplay
+        muted 
+        loop>
+        <source data-video-src="{{ post.get_field('team_video')['url'] }}" type="video/mp4">
+      </video>
+    </div>
+
+    <div data-js-animate-this class="absolute absolute--fill flex items-center content-center justify-center z-2 animate-this">
+      <div class="w-70 tc">
+        <h3 class="t-50 t-white din-condensed lh-solid ttu"><span 
+          data-js-animate-this
+          data-y="-25" 
+          data-delay="0.4"
+          class="animate-this dib unbreak-text">{{post.get_field('team_headline')}}<span></h3>
+        <a
+          data-js-animate-this
+          data-y="-25" 
+          data-delay="0.6"
+          class="mt3 dib pa3 ph4 button-bg t-12 ttu lh-solid no-underline t-white poppins-semi animate-this dib" href="/people"><span class="button-label db mt1">MEET OUR TEAM</span></a>
+      </div>
+
+    </div>
+  </section>

@@ -1,0 +1,131 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+  {% include 'partials/page-title.twig' with { 'page_title' : 'Latest'} %}
+  <script>
+    window.featureBaseUrl = '{{ site.url }}';
+  </script>
+  <section class="bg-white mv2 mv5-l pv5">
+    <div class="fluid-width center">
+      <div data-js-filter class="filter mb5 w-80 center">
+        <div class="filter-content flex items-start content-start justify-center flex-wrap">
+          <a
+            data-filter="all"
+            data-js-filter-item
+            class="post-filter mt2 mh1 dib pa3 button-bg-blue t-12 ttu lh-solid no-underline t-white poppins-semi" href="/latest/all"><span class="button-label db mt1">All</span></a>
+          <a
+            data-filter="in-the-news"
+            data-js-filter-item
+            class="post-filter mt2 mh1 dib pa3 button-bg-blue t-12 ttu lh-solid no-underline t-white poppins-semi" href="/latest/in-the-news"><span class="button-label db mt1">In The News</span></a>
+          <a
+            data-filter="design-thinking"
+            data-js-filter-item
+            class="post-filter mt2 mh1 dib pa3 button-bg-blue t-12 ttu lh-solid no-underline t-white poppins-semi" href="/latest/design-thinking"><span class="button-label db mt1">Design Thinking</span></a>
+          <a
+            data-filter="press-releases"
+            data-js-filter-item
+            class="post-filter mt2 mh1 dib pa3 button-bg-blue t-12 ttu lh-solid no-underline t-white poppins-semi" href="/latest/press-releases"><span class="button-label db mt1">Press Releases</span></a>
+          <a
+            data-filter="events"
+            data-js-filter-item
+            class="post-filter mt2 mh1 dib pa3 button-bg-blue t-12 ttu lh-solid no-underline t-white poppins-semi" href="/latest/events"><span class="button-label db mt1">Events</span></a>
+          <a
+            data-filter="awards"
+            data-js-filter-item
+            class="post-filter mt2 mh1 dib pa3 button-bg-blue t-12 ttu lh-solid no-underline t-white poppins-semi" href="/latest/awards"><span class="button-label db mt1">Awards</span></a>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="fluid-width center mt5 ph3 min-vh-50 relative">
+      <div
+        data-js-page-loader
+        class="page-loader absolute absolute--fill flex items-center content-center justify-center f-dark-blue">{% include 'svg/loader.twig' %}</div>
+      <div data-js-posts-container class="row">
+
+        {% if posts %}
+
+          {% for post in posts %}
+          <div
+            data-js-post
+            data-js-animate-this
+            data-post-filter='[{% for term in post.terms %}"{{ term.slug }}"{% if not loop.last %},{% endif %}{% endfor %}]'
+            class="col-xs-12 col-sm-6 col-md-4 col-lg-4 mb3 is-active blog-post">
+            {% if post.terms[0].slug == 'in-the-news' %}
+	            <a href="{{ post.link_out ? post.get_field('link_out') : post.get_field('archive') }}" target="_blank">
+	          {% elseif post.terms[0].slug == 'awards' %}
+	          		{% if post.get_field('award_link') %}
+										<a href="{{ post.get_field('award_link') }}" target="_blank">
+									{% endif %}
+	          {% else %}
+									<a href="{{ post.link }}">
+	          {% endif %}
+	            <div class="aspect-ratio post-ratio light-gray-bg">
+	              <div class="aspect-ratio--object">
+                  {% if post.header_image or post.thumbnail.src %}
+                    <div class="absolute left-0 top-0 right-0 dark-blue-bg aspect-ratio--16x9 o-30 z-0"></div>
+                    <div
+                      class="background-image aspect-ratio--16x9 bg-center cover z-1 relative"
+                      style="background-image: url( {{ (post.get_field('header_image') ? TimberImage(post.get_field('header_image')).src('large') : post.thumbnail.src('large')) }} )"
+                      alt="{{ post.title }}">
+                    </div>
+                  {% elseif post.terms[0].slug == 'awards' %}
+                  		{% set post_custom = post.get_field('associated_project')[0] %}
+                  		{% set random_image = random(post_custom.get_field('project_images')) %}
+                    <div class="absolute left-0 top-0 right-0 dark-blue-bg aspect-ratio--16x9 o-30 z-0"></div>
+                    <div
+                      class="background-image aspect-ratio--16x9 bg-center cover z-1 relative"
+                      style="background-image: url( {{ TimberImage(random_image.image).src }} )"
+                      alt="{{ post.title }}">
+                    </div>
+                  {% endif %}
+
+
+	                <h6 class="pt2 pb1 ph2 pa3-l lh-solid din-condensed t-18 t-label-gray ttu lh-solid no-underline">{{ post.terms[0].name }}{% if post.terms[1].slug == 'events' %}, {{ post.terms[1].name }}{% endif %}</h6>
+	                <h5 class="ph2 ph3-l t-dark-blue t-26 lh-solid din-condensed ttu post-title">{{ post.name }}</h5><!-- TODO: ttu -> ttc & post.name|lower -->
+
+
+                  {% if post.terms[0].slug == 'in-the-news' %}
+                  <h5 class="absolute left-0 bottom-0 right-0 t-12 poppins-semi pa2 pa3-l t-med-gray lh-solid">{{ post.source }}</h5>
+                  {% endif %}
+
+	                <!-- {% if post.terms[0].slug == 'in-the-news' %}
+	                <h5 class="absolute left-0 bottom-0 right-0 t-12 poppins-semi pa2 pa3-l t-med-gray lh-solid">{{ post.source }}</h5>
+	                {% endif %} -->
+	              </div>
+	            </div>
+	          </a>
+          </div>
+
+          {% endfor %}
+
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div id="instafeed" style="display:none;"></div>
+
+    <div class="fluid-width center flex items-center content-center justify-center mt5">
+      <button data-js-load-more-button class="pointer br-100 t-white bg-transparent bn pa0 ma0 flex items-center content-center overflow-visible justify-center is-disabled">
+        <div>
+          <span class="icon loader db f-dark-blue o-50 i-25 pa1 center mb3">{% include 'svg/loader.twig' %}</span>
+          <h3 class="t-dark-blue t-18 poppins-reg lh-solid tc o-50 ttu">More</h3>
+          <span class="icon dib f-dark-blue o-50 i-30">{% include 'svg/down-arrow.twig' %}</span>
+        </div>
+      </button>
+    </div>
+
+    {% if posts.pagination %}
+      <span class="dn" data-js-current-page>{{ posts.pagination.current }}</span>
+      <span class="dn" data-js-total-pages>{{ posts.pagination.total }}</span>
+    {% endif %}
+    </div>
+  </section>
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}

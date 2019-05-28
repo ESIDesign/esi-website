@@ -1,0 +1,52 @@
+  <section class="home-splash vh-100 relative swipe-section">
+    <div
+      data-js-animate-this
+      data-js-spash-bg
+      data-y="0"
+      data-delay="1"
+      data-target-opacity="0.7"
+      data-duration="1.5"
+      class="absolute absolute--fill o-70 z-1 overflow-hidden">
+      <video
+        class="fs-video"
+        playsinline
+        data-autoplay
+        muted
+        loop>
+        <source data-src="{{ post.get_field('landing_video')['url'] }}" type="video/mp4">
+      </video>
+      <div id="mobile-video-fallback" style="background-image:url({{ post.get_field("video_fallback_image") }});"></div>
+    </div>
+    <div
+      class="absolute absolute--fill flex items-center content-center justify-start z-2">
+      <div class="ph4">
+        <h3
+          data-js-animate-this
+          data-js-splash-title-top
+          data-y="-25"
+          data-delay="0"
+          class="t-60 din-condensed lh-tight t-white">WE TRANSFORM <br class="db dn-l"/><span class="typed t-red dib">{% for service in options.services_offered %}<span data-js-word class="word">{{ service.service }}</span>{% endfor %}</span><br />INTO EXPERIENCES</h3>
+        <a
+          data-js-animate-this
+          data-js-splash-title-bottom
+          data-y="-25"
+          data-delay="1.2"
+          class="mt2 dib pa3 ph4 button-bg t-12 ttu lh-solid no-underline t-white poppins-semi" href="/work"><span class="button-label db mt1">See Our Work</span></a>
+      </div>
+    </div>
+    <div class="absolute left-0 right-0 bottom-0 ma2 ma4-l flex justify-between items-center content-center z-4 button-holder">
+      <button
+        data-js-animate-this
+        data-js-down-button
+        data-y="-25"
+        data-delay="1.4"
+        data-js-move-down class="left-button splash-button br-100 rb-50 t-white button-bg bn pa0 ma0 pointer flex items-center content-center justify-center flex-column"><span class="icon dib f-white i-30 center">{% include 'svg/down-arrow.twig' %}</span></button>
+      <a
+        href="/contact"
+        data-js-animate-this
+        data-js-contact-button
+        data-y="-25"
+        data-delay="1.4"
+        class="right-button splash-button br-100 t-white button-bg rb-50 bn pa0 ma0 flex items-center no-underline content-center justify-center flex-column"><span class="icon dib f-white i-40 center">{% include 'svg/chat-icon.twig' %}</span></a>
+    </div>
+  </section>

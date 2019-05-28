@@ -1,0 +1,64 @@
+@import "../common/variables";
+
+.lab-mockup {
+  .lab-mockup-bg-wrapper {
+  	overflow: hidden;
+  }
+
+  .lab-mockup-cover {
+    background-color: rgba(232,56,37,0.8);
+    opacity: 0.0;
+    transition: all 0.3s ease-out;
+  }
+
+  .lab-mockup-caption {
+    opacity: 0.0;
+    transform: scale(1.2);
+    transition: all 0.3s 0.15s ease-out;
+  }
+
+  .bg-center {
+    background-size: cover;
+    transition: all 0.3s ease-out;
+  }
+
+  &:hover,
+  &:active {
+    .lab-mockup-cover {
+      opacity: 1.0;
+    }
+
+    .lab-mockup-bg {
+      transform: scale(1.2);
+    }
+
+    .lab-mockup-caption {
+      opacity: 1.0;
+      transform: scale(1);
+    }
+  }
+}
+
+.insta-overlay {
+  text-align: center;
+  padding: 50px;
+  background-color: transparent;
+
+  img,
+  video {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: auto !important;
+  }
+
+  .insta__media.video {
+    img {
+      display: none;
+    }
+  }
+
+  video.video-js {
+    display: none;
+  }
+}

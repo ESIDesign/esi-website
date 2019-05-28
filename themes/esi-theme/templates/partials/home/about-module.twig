@@ -1,0 +1,33 @@
+  <section class="vh-100 relative swipe-section about-module">
+    
+    <div class="fill-lines absolute absolute--fill flex items-start content-start justify-center overflow-hidden z-0">
+      {% include 'svg/bg-lines.twig' %}
+    </div>
+    <div class="fill-lines absolute absolute--fill flex items-start content-start justify-center z-0 overflow-hidden under z-0">
+      {% include 'svg/bg-lines.twig' %}
+    </div>
+
+    <div class="absolute absolute--fill flex items-center content-center justify-center z-1">
+      
+      <div class="w-70 tc">
+        <h3 class="t-50 t-white din-condensed lh-solid ttu"><span 
+          data-js-animate-this 
+          data-y="-25" 
+          data-delay="0"
+          class="animate-this dib unbreak-text">{{post.get_field('about_headline')|striptags('<span><br>') }}</h3>
+        <p class="t-18 t-white poppins-reg lh-copy"><span 
+          data-js-animate-this
+          data-y="-25" 
+          data-delay="0.2"
+          class="animate-this dib unbreak-text">
+        	{{post.get_field('about_text')|striptags('<span><br>')}}</span>
+        </p>
+          <a 
+          data-js-animate-this
+          data-y="-25" 
+          data-delay="0.6"
+          class="mt0 dib pa3 ph4 button-bg t-12 ttu lh-solid no-underline t-white poppins-semi animate-this" href="/about"><span class="button-label db mt1">About Us</span></a>
+      </div>
+
+    </div>
+  </section>

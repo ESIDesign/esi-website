@@ -1,0 +1,110 @@
+// Search form
+.search-form {
+  // @extend .form-inline;
+}
+.search-form label {
+  font-weight: normal;
+  // @extend .form-group;
+}
+.search-form .search-field {
+  // @extend .form-control;
+}
+.search-form .search-submit {
+  // @extend .btn;
+  // @extend .btn-primary;
+}
+
+.custom-select-container {
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    background-image: url('../images/down-arrow.png');
+    background-position: center center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotateX(180deg);
+    right: 10px;
+  }
+
+  &.is-open  {
+    &::after {
+      transform: translateY(-50%) rotateX(0deg);
+    }
+  }
+}
+
+.custom-select-container.is-disabled {
+  opacity: .333;
+}
+.custom-select-opener {
+  background-color: $white;
+  padding: 0.5rem;
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  @extend .poppins-reg !optional;
+  @extend .t-18 !optional;
+  line-height: 1.5;
+  @extend .t-dark-blue !optional;
+
+  > span {
+    display: block;
+  }
+}
+.custom-select-container select {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.custom-select-panel {
+  max-height: 0;
+  // transition: max-height .1s, overflow-y 0.1s 0.5s;
+  overflow: hidden;
+  background-color: $white;
+  position: absolute;
+  top: 100%;
+  z-index: 1;
+  width: 100%;
+}
+.custom-select-container.is-open .custom-select-panel {
+  max-height: 10.7em;
+  overflow-y: auto
+}
+.custom-select-option {
+  padding: 0.5em;
+  border-top: 1px solid $light-gray;
+  color: $med-gray;
+  line-height: 1.5;
+  @extend .pointer !optional;
+  @extend .poppins-reg !optional;
+  @extend .t-18 !optional;
+  @extend .lh-solid !optional;
+  @extend .t-dark-blue !optional;
+}
+.custom-select-option.has-focus {
+  background-color: $pale-blue;
+  color: $white;
+}
+// .custom-select-option.is-selected::before {
+//   content: "✔";
+//   padding-right: 0.5em;
+// }
+.custom-select-optgroup > .custom-select-option {
+  // padding: .5rem;
+}
+.custom-select-optgroup::before {
+  // content: attr(data-label);
+  // display: block;
+  // padding: 0.5em;
+  // color: #888;
+}

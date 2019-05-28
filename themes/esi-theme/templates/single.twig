@@ -1,0 +1,358 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+  {% include 'partials/page-title.twig' with { 'page_title' : 'Latest', 'link' : true} %}
+
+{% set cat = 'generic' %}
+{% for term in post.terms('categories') %}
+  {% if term.name == 'Press Releases' %}
+    {% set cat = 'press-release' %}
+  {% endif %}
+{% endfor %}
+
+
+{% if cat == 'press-release' %}
+
+  {# PRESS RELEASE POST #}
+<article class="post-type-{{ post.post_type }} bg-white pv5 relative z-2 cf" id="post-{{ post.ID }}">
+  <div class="fluid-width center mt5">
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <h3 class="t-dark-blue t-14 ttu lh-solid poppins-semi mb3">FOR IMMEDIATE RELEASE</h3>
+        <h1 class="t-dark-blue t-36 din-condensed ttc lh-solid mb4 pr3 w-90">{{ post.title }}</h1>
+        {% if post.get_field('header_image') %}
+        <div class="pr4-l mb4">
+          <section class="aspect-ratio aspect-ratio--16x9 relative z-1">
+
+						{% do action('bg_image_srcset_action', post.header_image, post.slug, 'header-image') %}
+            <div
+              class="header-image-{{ post.slug }} aspect-ratio--object cover bg-center z-1">
+            </div>
+          </section>
+        </div>
+        {% endif %}
+
+        <div class="cms-content pr5-l">
+          {% if post.sub_headline %}
+          <h2>{{ post.sub_headline }}</h2>
+          {% endif %}
+         	{{ post.content }}
+          {% if post.get_field('press_release_file') %}
+          <p>
+            <a href="{{post.get_field('press_release_file')}}">
+              Download Press Release
+            </a>
+          </p>
+        {% endif %}
+        </div>
+
+      </div>
+
+      {% set associated_project = post.get_field('associated_project')[0] %}
+
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 pl4-l sidebar">
+        <div class="mb4 flex items-center content-center justify-between z-3 pa2 share-links pale-blue-bg w-70">
+          <a class="br-100 bg-white no-underline flex items-center content-center justify-center mh1 dib share-link" target="_blank" href="http://www.facebook.com/sharer.php?u={{ post.link }}&p[title]={{ post.title }}"><span class="icon i-20 f-pale-blue">{% include 'svg/social-icon-facebook.twig' %}</span></a>
+          <a class="br-100 bg-white no-underline flex items-center content-center justify-center mh1 dib share-link" target="_blank" href="http://twitter.com/share?text={{ post.title}}&url={{ post.link }}"><span class="icon i-20 f-pale-blue">{% include 'svg/social-icon-twitter.twig' %}</span></a>
+          <a class="br-100 bg-white no-underline flex items-center content-center justify-center mh1 dib share-link" target="_blank" href="mailto:?subject={{ post.title }}&amp;body=Check out this site {{ post.link }}."><span class="icon i-20 f-pale-blue">{% include 'svg/social-icon-email.twig' %}</span></a>
+        </div>
+
+        {% if associated_project %}
+        <h3 class="t-pale-blue ttu din-condensed t-26 lh-solid mb2">Featured Projects</h3>
+        <!-- <div class="aspect-ratio aspect-ratio--1x1 relative cover bg-center mb3">
+          <a href="{{ associated_project.link }}">
+            <div
+              class="aspect-ratio--object cover bg-center z-1"
+              style="background-image: url({{ TimberImage(associated_project.header_image).src }});"
+              ></div>
+          </a>
+        </div>
+        <a class="no-underline t-16 poppins-reg lh-solid t-dark-blue mb5 db" href="{{ associated_project.link }}">{{associated_project.title}}</a> -->
+        {% for project in post.get_field("associated_project") %}
+        <div class="work-item mb3 is-active blog-post has-loaded is-currently-active">
+          <a href="{{ project.link }}">
+            <div class="aspect-ratio work-post-item bg-center work-item-bg-wrapper dark-blue-bg aspect-ratio--4x3">
+              <div class="absolute left-0 top-0 right-0 left-0 dark-blue-bg o-30 z-0"></div>
+              <div style="background-image: url({{ TimberImage(project.header_image).src }});" class="background-image aspect-ratio--object bg-center work-item-bg z-1 is-loaded"></div>
+              <div class="aspect-ratio--object z-1 work-item-cover"></div>
+              <div class="aspect-ratio--object flex items-center content-center justify-start z-2 work-item-caption">
+                <h4 class="center w-60 tc t-white din-condensed t-36 lh-tight"><span class="t-white no-underline ttu">{{ project.title }}</span></h4>
+              </div>
+            </div>
+          </a>
+        </div>
+        <a class="no-underline t-16 poppins-reg lh-solid t-dark-blue mb5 db"></a>
+        {% endfor %}
+
+        {% endif %}
+
+
+        <h3 class="t-pale-blue ttu din-condensed t-26 lh-solid mb2">Press Inquiries</h3>
+        <p class="no-underline t-14 poppins-reg lh-copy t-dark-blue db mt0 mb4"><span class="poppins-semi">Tarley Jordan</span><br />
+        Director, Marketing and Communications<br />
+        212-419-9364<br />
+        tjordan (at) esidesign.com</p>
+
+				<a
+          target="_blank"
+          href="https://esidesign.com/press-kit"
+					class="no-underline t-14 poppins-semi lh-copy t-pale-blue db mt0 mb4">
+					Download Press Kit
+				</a>
+
+        <h3 class="t-pale-blue ttu din-condensed t-26 lh-solid mb2">Press Releases</h3>
+        {% for press in press_posts %}
+	        <a class="no-underline t-14 poppins-reg lh-copy t-dark-blue db mb4" href="{{press.link}}">{{press.title}}</a>
+	      {% endfor %}
+
+
+
+        <h3 class="t-pale-blue ttu din-condensed t-26 lh-solid mb2">Latest Videos</h3>
+
+        {% for video in options.videos %}
+        	<a data-fancybox href="{{video.video_url}}&autoplay=1&rel=0&controls=0&showinfo=0&quality=1080p">
+		        <div class="aspect-ratio aspect-ratio--16x9 relative z-1 db mb3" >
+		          <div
+		            style="background-image: url({{video.video_image}}"
+		            class="aspect-ratio--object cover bg-center z-1">
+		          </div>
+		          <div class="aspect-ratio--object z-3 flex items-center content-center justify-center">
+		            <span class="flex items-center content-center justify-center br2 bg-black-60 pv2 ph3">
+		              <span class="icon i-20 dib f-white">{% include "svg/play-icon.twig" %}</span>
+		            </span>
+		          </div>
+		        </div>
+		      </a>
+        {% endfor %}
+
+      </div>
+
+    </div>
+  </div>
+
+</article>
+
+{% block print %}
+  <div id="print">
+    <!-- HEADER -->
+    <div id="header" style="height: 50px;"></div>
+    <!-- END HEADER -->
+
+    <!-- TITLE -->
+    <div class="fluid-width">
+      <h2 class="t-50 t-dark-blue din-condensed lh-solid ttu">{{ post.title }}</h2>
+    </div>
+    <!-- END TITLE -->
+
+    <div class="spacing"></div>
+
+    <!-- IMAGE -->
+    <div class="fluid-width">
+      <img src="{{ TimberImage(post.header_image) }}">
+    </div>
+    <!-- END IMAGE -->
+    
+    <div class="spacing"></div>
+
+    <!-- POST CONTENT -->
+    <div class="fluid-width cms-content pr5-l">
+        {% if post.sub_headline %}
+            <h2>{{ post.sub_headline }}</h2>
+        {% endif %}
+        {{ post.content }}
+    </div>
+    <!-- END POST CONTENT -->
+
+    <div class="spacing"></div>
+  </div>
+{% endblock %}
+
+{% else %}
+
+  {# NON PRESS RELEASE POST #}
+
+  {% if post.disable_header_image == true %}
+
+   <section class="mt5 relative z-0"></section>
+
+	{% elseif post.header_image or post.thumbnail.src %}
+	  <section class="page-header relative z-0 fixed top-0 left-0 right-0 dark-blue-bg content-holder">
+  	{% if post.header_image %}
+	  		{% do action('bg_image_srcset_action', post.header_image, post.slug, 'header-image') %}
+
+	    <div
+	      class="aspect-ratio--object cover bg-center z-1 bg-repeat-none header-image-{{post.slug}}">
+	      </div>
+	  {% else %}
+
+	    <div
+	      style="background-image: url({{ post.thumbnail.src }});"
+	      class="aspect-ratio--object cover bg-center z-1">
+
+	    </div>
+
+	  {% endif %}
+	
+	  </section>
+	  <section class="page-header relative z-0"></section>
+	{% elseif post.get_field('associated_project') %}
+		{% do action('bg_image_srcset_action', post.get_field('associated_project')[0].header_image, post.slug, 'header-image') %}
+		
+	  <section class="page-header relative z-0 fixed top-0 left-0 right-0 dark-blue-bg content-holder">
+	  	<div
+	    class="aspect-ratio--object cover bg-center z-1 header-image-{{post.slug}}">
+	  	</div>
+	  </section>
+
+	  <section class="page-header relative z-0"></section>
+
+	{% else %}
+	  <section class="mt5 relative z-0"></section>
+	{% endif %}
+
+  <article class="post-type-{{ post.post_type }} bg-white pv5 relative z-2" id="post-{{ post.ID }}">
+
+
+    <div class="fluid-width center">
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+          <h1 class="t-dark-blue t-36 din-condensed ttc lh-solid pr3 w-90">{{ post.title }}</h1>
+          <p class="t-16 poppins-reg lh-solid t-med-gray ma0 mv3">
+              <span class="poppins-semi">Posted</span> {{ post.post_date|date }}
+          </p>
+
+          <div class="cms-content pr5-l">
+            {{ post.content }}
+          </div>
+
+          <div class="author-content flex items-start content-start justify-start w-80 mt5">
+            <div class="w-25">
+              <div 
+              		style="background-image: url({{avatar}})"
+               	class="aspect-ratio aspect-ratio--1x1 relative br-100 overflow-hidden cover bg-center author-image bg-silver">
+                {#  <a href="{{ post.author.path }}"> #}
+                  <div
+                    class="aspect-ratio--object cover bg-center z-1 author"
+
+                    ></div>
+                {# </a> #}
+              </div>
+            </div>
+            <div class="author-info pl4 pr5 w-75">
+              <div class="t-16 lh-copy t-dark-blue poppins-reg mt0"><span class="poppins-semi">{{ post.author.name }}</span> {{ fn('the_field', 'biography', 'user_' ~ post.author.id) }}</div>
+            </div>
+          </div>
+
+
+          <div class="post-meta mt5">
+          {% if post.terms('categories') %}
+            <p class="t-16 poppins-semi t-dark-blue ttc"><span class="t-pale-blue">CATEGORIES:</span> {% for term in post.terms('categories') %}
+              <a class="t-dark-blue no-underline" href="{{term.link}}">{{term.name}}</a>{% if not loop.last %},{% endif %}
+            {% endfor %}</p>
+
+          {% endif %}
+
+          {% if post.terms('tags') %}
+            <p class="t-16 poppins-semi t-dark-blue ttc"><span class="t-pale-blue">TAGS:</span> {% for term in post.terms('tags') %}
+              <a class="t-dark-blue no-underline" href="{{term.link}}">{{term.name}}</a>{% if not loop.last %},{% endif %}
+            {% endfor %}</p>
+
+          {% endif %}
+          </div>
+
+          <div class="post-comments mt5 pr3-l">
+            <h3 class="t-pale-blue ttu t-36 lh-solid din-condensed">Join The Conversation</h3>
+            {% if post.comment_status != 'closed' %}
+            <div id="disqus_thread"></div>
+            <script>
+              /**
+               *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+               *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+               */
+
+              var disqus_config = function () {
+                  this.page.url = "{{ post.link }}";  // Replace PAGE_URL with your page's canonical URL variable
+                  this.page.identifier = "{{ post.ID }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+              };
+
+              (function() {  // DON'T EDIT BELOW THIS LINE
+                  var d = document, s = d.createElement('script');
+
+                  s.src = '//esidesignnew.disqus.com/embed.js';
+
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+              })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 pl4-l sidebar">
+          <div class="mb4 flex items-center content-center justify-between z-3 pa2 share-links pale-blue-bg w-70">
+            <a class="br-100 bg-white no-underline flex items-center content-center justify-center mh1 dib share-link" target="_blank" href="http://www.facebook.com/sharer.php?u={{ post.link }}&p[title]={{ post.title }}"><span class="icon i-20 f-pale-blue">{% include 'svg/social-icon-facebook.twig' %}</span></a>
+            <a class="br-100 bg-white no-underline flex items-center content-center justify-center mh1 dib share-link" target="_blank" href="http://twitter.com/share?text={{ post.title}}&url={{ post.link }}"><span class="icon i-20 f-pale-blue">{% include 'svg/social-icon-twitter.twig' %}</span></a>
+            <a class="br-100 bg-white no-underline flex items-center content-center justify-center mh1 dib share-link" target="_blank" href="mailto:?subject={{ post.title }}&amp;body=Check out this site {{ post.link }}."><span class="icon i-20 f-pale-blue">{% include 'svg/social-icon-email.twig' %}</span></a>
+          </div>
+
+          {% set associated_project = post.get_field('associated_project')[0] %}
+          {% if associated_project %}
+          <h3 class="t-pale-blue ttu din-condensed t-26 lh-solid mb2">Featured Projects</h3>
+          <!--
+          <div class="aspect-ratio aspect-ratio--1x1 relative cover bg-center mb3">
+            <a href="{{ associated_project.link }}">
+              <div
+                class="aspect-ratio--object cover bg-center z-1"
+                style="background-image: url({{ TimberImage(associated_project.header_image).src }});"
+                ></div>
+            </a>
+          </div>
+          <a class="no-underline t-16 poppins-reg lh-solid t-dark-blue mb5 db" href="{{ associated_project.link }}">{{associated_project.title}}</a>
+          -->
+          {% for project in post.get_field("associated_project") %}
+          <div class="work-item mb3 is-active blog-post has-loaded is-currently-active">
+            <a href="{{ project.link }}">
+              <div class="aspect-ratio work-post-item bg-center work-item-bg-wrapper dark-blue-bg aspect-ratio--4x3">
+                <div class="absolute left-0 top-0 right-0 left-0 dark-blue-bg o-30 z-0"></div>
+                <div style="background-image: url({{ TimberImage(project.header_image).src }});" class="background-image aspect-ratio--object bg-center work-item-bg z-1 is-loaded"></div>
+                <div class="aspect-ratio--object z-1 work-item-cover"></div>
+                <div class="aspect-ratio--object flex items-center content-center justify-start z-2 work-item-caption">
+                  <h4 class="center w-60 tc t-white din-condensed t-36 lh-tight"><span class="t-white no-underline ttu">{{ project.title }}</span></h4>
+                </div>
+              </div>
+            </a>
+          </div>
+          <a class="no-underline t-16 poppins-reg lh-solid t-dark-blue mb5 db"></a>
+          {% endfor %}
+          
+          {% endif %}
+
+
+          <h3 class="t-pale-blue ttu din-condensed t-26 lh-solid mb2">Related Design Thinking</h3>
+          {% for post in related_design_thinking %}
+          <a class="no-underline t-14 poppins-reg lh-copy t-dark-blue db mb4 hover-semi" href="{{post.link}}">{{post.title}}</a>
+							{% endfor %}
+          <a class="t-pale-blue ttu din-condensed t-26 lh-solid mb2 flex items-center content-center justify-start no-underline" href="https://twitter.com/esidesign" target="_blank">
+            <span class="icon i-30 f-pale-blue mr1">{% include 'svg/social-icon-twitter.twig' %}</span>
+            <span class="text dib">@ESIDESIGN</span>
+          </a>
+          <div data-js-multi-tweet class="multi-tweet"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </article>
+
+{% endif %}
+
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+
+{% endblock %}
+

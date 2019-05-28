@@ -1,0 +1,41 @@
+@import "common/variables";
+
+// Import npm dependencies
+@import "~tachyons/css/tachyons";
+@import "~fullpage.js/dist/jquery.fullpage.css";
+@import "~flexboxgrid-sass/flexboxgrid";
+@import "~@fancyapps/fancybox/dist/jquery.fancybox.css";
+@import "~slick-carousel/slick/slick.scss";
+
+@import "common/global";
+@import "common/animation";
+@import "common/typography";
+@import "common/print";
+@import "components/icons";
+@import "components/buttons";
+@import "components/comments";
+@import "components/forms";
+@import "components/wp-classes";
+@import "components/gallery-overlay";
+@import "components/capabilities";
+@import "components/phases";
+@import "layouts/header";
+@import "layouts/sidebar";
+@import "layouts/footer";
+@import "layouts/pages";
+@import "layouts/posts";
+@import "layouts/tinymce";
+
+@import "pages/page-home";
+@import "pages/page-about";
+@import "pages/page-lab";
+@import "pages/page-people";
+@import "pages/page-join-us";
+@import "pages/page-latest";
+@import "pages/page-case-studies";
+@import "pages/page-work";
+@import "pages/page-archive";
+@import "pages/page-contact";
+@import "pages/page-search";
+@import "pages/page-vertical";
+@import "pages/page-404";

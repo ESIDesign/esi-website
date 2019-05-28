@@ -1,0 +1,58 @@
+{
+  "name": "roots/sage",
+  "type": "wordpress-theme",
+  "license": "MIT",
+  "description": "WordPress starter theme with a modern development workflow",
+  "homepage": "https://roots.io/sage/",
+  "authors": [
+    {
+      "name": "Ben Word",
+      "email": "ben@benword.com",
+      "homepage": "https://github.com/retlehs"
+    },
+    {
+      "name": "Scott Walkinshaw",
+      "email": "scott.walkinshaw@gmail.com",
+      "homepage": "https://github.com/swalkinshaw"
+    }
+  ],
+  "keywords": [
+    "wordpress"
+  ],
+  "support": {
+    "issues": "https://github.com/roots/sage/issues",
+    "forum": "https://discourse.roots.io/"
+  },
+  "autoload": {
+    "psr-4": {
+      "Roots\\Sage\\": "src/lib/Sage/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "composer/installers": "~1.0",
+    "wpackagist-plugin/timber-library": "^1.1.7.1",
+    "Upstatement/routes": "*"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^2.5.1",
+    "phpmd/phpmd": "^2.4.2"
+  },
+  "extra": {
+    "installer-paths": {
+      "../../plugins/{$name}/": ["type:wordpress-plugin", "wpackagist-plugin/*"]
+    }
+  },
+  "scripts": {
+    "test": [
+      "vendor/bin/phpcs",
+      "vendor/bin/phpmd src text cleancode,codesize,controversial,design,naming,unusedcode"
+    ]
+  }
+}

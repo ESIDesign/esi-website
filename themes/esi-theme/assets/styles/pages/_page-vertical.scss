@@ -1,0 +1,10 @@
+@import "../common/variables";
+
+.single-vertical {
+  .work-item {
+  	display: block;
+    .work-item-cover {
+      background-color: rgba(220,123,44,0.5);
+    }
+  }
+}

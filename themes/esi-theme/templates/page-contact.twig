@@ -1,0 +1,176 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+
+  <section class="dark-blue-bg pv5 relative z-1">
+
+    <div class="mw6 center pt5 pb3">
+      <h4 class="tc din-light-condensed ttu flex justify-center content-center items-center ph3 relative">
+        <span class="icon dib f-white ih ih-50 h-30 o-90 with-line left">{% include 'svg/heading-bg-pulse.twig' %}</span>
+        <span class="text dib t-70 t-white lh-solid mh2">{{ post.page_title }}</span>
+        <span class="icon dib f-white ih ih-50 h-30 ih-rotate o-90 with-line right">{% include 'svg/heading-bg-pulse.twig' %}</span>
+      </h4>
+    </div>
+
+    <div class="mw6 center pv5 ph3 contact-form">
+        {{ form }}
+    </div>
+
+    <div class="hr bg-white-30 w-100 mv3"></div>
+
+
+    <div class="mw7 center pv5 tc ph3">
+        {% if post.address_section_title %}
+          <h3 class="ttu lh-solid t-50 t-white din-condensed mb4">{{ post.address_section_title }}</h3>
+        {% endif %}
+      <!-- {% if post.address_heading %} -->
+      <!-- <h3 class="t-32 lh-solid t-white poppins-semi">{{ post.address_heading }}</h3> -->
+      <!-- {% endif %} -->
+      <div class="logo">{% include 'svg/es-logo.twig' %}</div>
+
+        {% if post.address_content %}
+          <p class="lh-copy t-white poppins-reg t-18 ma0 mb0">{{ post.address_content }}</p>
+        {% endif %}
+    </div>
+
+    <div class="hr bg-white-30 w-100 mv3"></div>
+
+    <div class="mw6 center pv5 tc ph3">
+      <h3 class="ttu lh-solid t-50 t-white din-condensed">Stay Connected</h3>
+      <label for="email" class="lh-copy t-white poppins-reg t-18 ma0 mb4 db">Join Our Mailing List</label>
+
+
+      <style type="text/css">
+
+
+        /* Required text for reCAPTCHA */
+
+        .google-required-recaptcha-notice {
+          font-size: 70%;
+          margin: 2rem auto 2.5rem;
+          display: block;
+          text-align: center;
+          max-width: 298px;
+          line-height: 1.5;
+        }
+
+        .google-required-recaptcha-notice a {
+          text-decoration: none;
+          opacity: 0.4;
+          color: #fff;
+        }
+
+        .contact-form .wpcf7-response-output {
+          margin-top: 1.5rem;
+        }
+
+
+        /* Hubspot form */
+
+        .hbspt-form div.input {
+          margin-bottom: 1rem !important;
+        }
+
+        .hbspt-form .hs-form-required {
+          display: none;
+        }
+
+        .hbspt-form .hs-input {
+          width: 100%;
+          max-width: 48rem;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 2rem;
+          padding: 1rem;
+          line-height: normal;
+          font-size: 18px;
+          font-family: Poppins Regular,arial,sans-serif;
+          color: #1d252d;
+        }
+
+        .hbspt-form .hs-error-msgs {
+          margin-bottom: 0;
+        }
+
+        .hbspt-form ul.hs-error-msgs {
+          float: left;
+          width: 100%;
+          margin-top: -2rem;
+          padding-left: 0;
+          text-align: center;
+        }
+
+        .hbspt-form ul.hs-error-msgs li {
+          list-style: none;
+        }
+
+        .hbspt-form .hs-error-msgs a {
+          display: block;
+          margin-bottom: 1rem;
+          text-decoration: none;
+          color: #fff;
+          opacity: 0.4;
+        }
+
+        .hbspt-form .hs-error-msgs a:hover {
+          opacity: 1;
+        }
+
+        .hbspt-form p, .hbspt-form li label {
+          margin-top: 0;
+          font-size: 14px;
+          font-family: Poppins Regular, arial, sans-serif;
+          color: #fefefe;
+        }
+
+        @media screen and (max-width: 600px) {
+          .hbspt-form li label {
+            font-size: 12px;
+          }
+        }
+
+        .hbspt-form .hs-button {
+          border: 0;
+          margin-top: 0rem;
+          padding: 1rem;
+          padding-left: 4rem;
+          padding-right: 4rem;
+          font-size: 14px;
+          font-family: Poppins Semi Bold,arial,sans-serif;
+          text-transform: uppercase;
+          color: #fefefe;
+          background-color: rgba(70,153,201,.9);
+          cursor: pointer;
+        }
+      </style>
+
+
+      <!--[if lte IE 8]>
+      <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+      <![endif]-->
+      <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+      <script>
+          hbspt.forms.create({
+              portalId: "2835573",
+              formId: "193db2d8-c350-4a7f-b3a8-779dcf4d7964",
+              translations: {
+                  en: {
+                      required: " ",
+                      invalidEmailFormat: " "
+                  }
+              }
+          });
+      </script>
+
+
+    </div>
+
+    <div class="hr bg-white-30 w-100 mv3"></div>
+
+
+  </section>
+
+    {% block footer %}
+        {% include 'partials/footer.twig' %}
+    {% endblock %}
+{% endblock %}

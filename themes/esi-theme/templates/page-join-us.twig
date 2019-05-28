@@ -1,0 +1,176 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+  {% include 'partials/page-title.twig' with { 'page_title' : 'Jobs'} %}
+  <section
+    data-js-scroll-page
+    data-js-scroll-header
+    class="page-header relative z-0 fixed left-0 top-0 right-0 dark-blue-bg content-holder">
+    <div
+      data-js-spash-bg
+      data-y="0"
+      data-delay="0"
+      data-target-opacity="0.7"
+      data-duration="1.5"
+      data-js-mobile-conditional-video
+      data-fallback-src="{{ post.get_field('jobs_fallback_image') }}"
+      class="absolute absolute--fill o-70 z-1 overflow-hidden cover bg-center">
+	   <video
+		    class="fs-video"
+		    playsinline
+		    autoplay
+		    muted
+		    loop>
+		    <source data-video-src="{{ post.get_field('header_video')['url'] }}" type="video/mp4">
+		  </video>
+      <div id="mobile-video-fallback" style="background-image:url({{ post.get_field("video_fallback_image") }});"></div>
+		 </div>
+  </section>
+
+  <section
+    data-js-header-trigger
+    class="page-header relative z-0">
+    <a class="mt3 dib pa3 ph4 button-bg-red t-12 ttu lh-solid no-underline t-white poppins-semi absolute right-0 bottom-0 mr3 mb3 z-3" href="/people"><span class="button-label db mt1">Our Team</span></a>
+  </section>
+
+  <section class="bg-white relative z-2 pv5 job-page-content">
+
+    <div data-js-scroll-section>
+
+      <div class="fluid-width center mt2">
+        <h4 class="tc din-light-condensed ttu flex justify-center content-center items-center">
+          <span class="icon dib f-gray ih ih-30 o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>
+          <span class="text dib t-40 t-red lh-solid mh2">{{ post.get_field('description_headline') }}</span>
+          <span class="icon dib f-gray ih ih-30 ih-rotate o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>
+        </h4>
+					 <p class="t-18 poppins-reg t-dark-blue lh-copy tc w-80 center">
+					 		{{ post.get_field('description_text') }}
+					 </p>
+      </div>
+
+    </div>
+
+			{% if job_posts %}
+	    <div data-js-scroll-section>
+
+	      <div class="fluid-width center mt5">
+	      		{% for job in job_posts %}
+		        <div data-js-animate-this class="job-listing mw7 ph3 center tc mt5 pb5">
+		          <h4 class="t-32 t-red tc din-condensed lh-solid"><a class="din-condensed no-underline t-red" href="{{ job.link }}">{{ job.title }}</a></h4>
+		          <p class="t-14 poppins-reg t-dark-blue lh-copy tc">{{ job.preview().read_more('') }}</p>
+		          <a class="mt3 dib pa3 ph4 button-bg-none t-12 ttu lh-solid no-underline t-med-gray poppins-semi" href="{{ job.link }}"><span class="button-label db mt1">View Listing</span></a>
+		        </div>
+	      	{% endfor %}
+	      </div>
+
+	    </div>
+
+	  {% endif %}
+
+    <div data-js-scroll-section>
+
+      <div class="fluid-width center mt5">
+
+        <h3 data-js-animate-this class="t-red t-20 poppins-reg tc lh-solid">Don’t see a role that fits your experience?</h3>
+        <p data-js-animate-this class="t-16 poppins-reg t-dark-blue lh-copy tc w-80 lh-solid center">Get in touch by emailing your cover letter and resume to <a class="poppins-semi t-dark-blue no-underline" target="_blank" href="mailto:recruit@esidesign.com">recruit@esidesign.com</a></p>
+
+      </div>
+
+      <div data-js-animate-this class="fluid-width center mt5">
+        <h4 class="tc din-light-condensed ttu flex justify-center content-center items-center">
+          <span class="icon dib f-gray ih ih-30 o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>
+          <span class="text dib t-40 t-red lh-solid mh2">Benefits &amp; Perks</span>
+          <span class="icon dib f-gray ih ih-30 ih-rotate o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>
+        </h4>
+      </div>
+
+      <div class="fluid-width center mt5">
+
+	    		{% for perk in post.get_field('perks') %}
+
+						{% if loop.index0 % 3 == 0 %}
+		       <div class="row center-xs center-sm center-md center-lg perks-row">
+		      {% endif %}
+
+          <div data-js-animate-this class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb4 mt4">
+            <div class="ph5">
+              <h3 class="t-dark-blue t-30 din-condensed tc lh-solid ttu">{{ perk.headline }}</h3>
+              <p class="t-14 poppins-reg t-dark-blue lh-copy tc lh-solid mt0">{{perk.text}}</p>
+            </div>
+          </div>
+						{% if loop.index % 3 == 0 %}
+		       </div>
+		    		{% endif %}
+
+
+						{% if loop.last %}
+							</div>
+						{% endif %}
+
+	      {% endfor %}
+
+      </div>
+
+    </div>
+
+    <div data-js-scroll-section>
+
+      <div class="fluid-width center mt5 ph3">
+        <h4 data-js-animate-this class="tc din-light-condensed ttu flex justify-center content-center items-center">
+          <span class="icon dib f-gray ih ih-30 o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>
+          <span class="text dib t-40 t-red lh-solid mh2">MEMORABLE MOMENTS</span>
+          <span class="icon dib f-gray ih ih-30 ih-rotate o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>
+        </h4>
+        <div data-js-carousel data-js-animate-this class="relative">
+	        {% for moment in post.get_field('memorable_moments') %}
+			      <div data-js-slide>
+              <p data-js-animate-slide class="t-18 poppins-reg t-dark-blue lh-copy tc lh-solid mw6 center {% if loop.first %}active{% endif %}">{{ moment.text }}</p>
+			      </div>
+
+		      	{% endfor %}
+
+						</div>
+	      </div>
+      </div>
+
+    </div>
+
+    <div data-js-scroll-section>
+
+      <section class="instagram-feed pv5 fluid-width center">
+        <h4 data-js-animate-this class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center mb2">
+          <span class="icon dib f-gray ih ih-30 o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>
+          <a class="no-underline tc" target="_blank" href="https://www.instagram.com/explore/tags/esipeople/?hl=en"><span class="text dib t-40 t-red lh-solid mh2">LATEST #ESIPEOPLE</span></a>
+          <span class="icon dib f-gray ih ih-30 ih-rotate o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>
+        </h4>
+        <!-- <a data-js-animate-this class="t-18 db t-dark-blue poppins-reg no-underline tc" target="_blank" href="https://www.instagram.com/explore/tags/esipeople/?hl=en">#ESIPeople</a> -->
+        <div data-js-animate-this class="row mt4">
+						{% for post in instagram_posts %}
+
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mb3">
+                <a data-js-fancy-trigger data-target-index="{{ loop.index0 }}" href="#instagram-post-{{ loop.index0 }}">
+                  <div style="background-image: url({{ post.thumbnail.src }});" class="aspect-ratio aspect-ratio--1x1 bg-center contain bg-black-80"></div>
+                </a>
+                <div id="instagram-post-{{ loop.index0 }}" data-js-instagram-overlay-content class="dn mw6 center pa5 insta-overlay">
+                  <a href="{{ post.get_field('url') ? post.get_field('url') : post.insta_link }}" target="_blank">
+                    <div 
+                      class="background-hack left-0 top-0 w-100 h-100 bg-center cover aspect-ratio aspect-ratio--1x1"
+                      style="background-image:url({{post.thumbnail.src}})">
+                    </div>
+                  </a>
+                  {{ post.content }}
+                </div>
+              </div>
+
+						{% endfor %}
+        </div>
+        <!-- <div data-js-animate-this id="instafeed" class="row mt4"></div> -->
+      </section>
+
+    </div>
+
+  </section>
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}

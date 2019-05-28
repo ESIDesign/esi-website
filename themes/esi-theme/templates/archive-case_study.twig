@@ -1,0 +1,35 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+  {% include 'partials/page-title.twig' with { 'page_title' : 'Case Studies'} %}
+  <section data-js-scroll-page>
+  {% for post in posts %}
+    <section
+      data-js-scroll-section
+      data-js-tap-link
+      data-href="{{ post.link }}"
+      class="case-study-row relative z-1 pointer {% if loop.first %}has-shade{% endif %} pointer">
+      {% do action('bg_image_srcset_action', post.header_image, post.slug, 'header-image') %}
+
+      <div
+        {% if not loop.first %}data-js-animate-this{% endif %}
+        class="header-image-{{post.slug}} aspect-ratio--object cover bg-center z-1 db">
+      </div>
+
+      <div {% if not loop.first %}data-js-animate-this{% endif %} class="absolute left-0 bottom-0 z-2 ph4 mb3">
+        <div class="client-logo br-100 dark-blue-bg-75 flex items-center content-center justify-center mb3 pa2 pt3">
+          <span class="icon db w-100"><img class="w-100 db" src="{{ TimberImage(post.company_logo).src }}" /></span>
+        </div>
+        <h3 class="t-24 t-white din-condensed lh-solid mb1 ttu"><a href="{{ post.link }}" class="no-underline t-white ttu">CASE STUDY: {{ post.company_name }}</a></h3>
+        <h2 class="t-67 t-white din-condensed lh-solid"><a href="{{ post.link }}" class="no-underline t-white ttu">{{ post.title }}</a></h2>
+      </div>
+    </section>
+  {% endfor %}
+
+  </section>
+
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}

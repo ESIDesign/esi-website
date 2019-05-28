@@ -1,0 +1,227 @@
+{% extends "layouts/vertical-base.twig" %}
+
+{% block content %}
+  <section
+    data-js-scroll-page
+    data-js-scroll-header
+    class="page-header z-1 fixed top-0 right-0 left-0 dark-blue-bg content-holder">
+    <div
+      style="background-image: url({{ TimberImage(post.get_field('header_image')).src }});"
+      class="aspect-ratio--object cover bg-center z-1 bg-repeat-none">
+    </div>
+  </section>
+
+  <section
+    data-js-header-trigger
+    class="page-header relative z-0">
+  </section>
+
+  <section class="bg-white pb5 pt5 relative z-1">
+    <div>
+      <div class="fluid-width center mt3 tc">
+        <h3 class="t-50 t-dark-blue tc din-condensed lh-solid ttu">{{ post.get_field('introduction_headline') }}</h3>
+        <h4 class="t-60 t-orange tc din-condensed lh-solid ttu">{{ post.get_field('introduction_subheadline') }}</h4>
+        <p class="t-16 t-dark-blue poppins-reg lh-copy tc w-60 center">{{ post.get_field('introduction_text') }}</p>
+      </div>
+    </div>
+
+		{% for work in post.get_field('featured_works') %}
+    <div data-js-scroll-section>
+      <section class="aspect-ratio aspect-ratio--16x9 relative z-1 mt5">
+        <div
+          data-js-animate-this
+          style="background-image: url({{ work.image ? work.image : TimberImage(work.featured_work_post.get_field('header_image')).src }});"
+          class="aspect-ratio--object cover bg-center z-1">
+        </div>
+      </section>
+
+      <div class="fluid-width center mt5 tc">
+        <h3 data-js-animate-this class="t-60 t-orange tc din-condensed lh-solid ttu">{{ work.featured_work_post.get_field('work_name') }}</h3>
+        <h4 data-js-animate-this class="t-34 t-dark-blue tc din-condensed lh-solid ttu">{{ work.featured_work_post.get_field('location') }}</h4>
+        <div data-js-animate-this class="t-16 t-dark-blue poppins-reg lh-copy tc mw8 center">{{ work.featured_work_post.get_field('introduction_copy') }}</div>
+      </div>
+
+      <div data-js-animate-this class="fluid-width center flex items-center content-center justify-center">
+        <a class="mt3 dib pa3 ph4 orange-bg t-12 ttu lh-solid no-underline t-white poppins-semi" href="{{ work.featured_work_post.get_permalink() }}"><span class="button-label db mt1">Learn More</span></a>
+      </div>
+    </div>
+  	{% endfor %}
+
+    <div data-js-scroll-section>
+      <div data-js-animate-this class="fluid-width center mt5">
+        <h4 class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center">
+          <span class="icon dib f-dark-blue ih ih-50 o-60">{% include 'svg/heading-bg-broken.twig' %}</span>
+          <span class="text dib t-50 lh-solid mh2">More Work</span>
+          <span class="icon dib f-dark-blue ih ih-50 o-60">{% include 'svg/heading-bg-broken.twig' %}</span>
+        </h4>
+      </div>
+
+      <div data-js-animate-this class="fluid-width center mt5">
+        <div class="row">
+
+          {% for work in post.get_field('more_works') %}
+            <div
+            	data-js-animate-this
+            	class="col-xs-12 col-sm-12 col-md-4 col-lg-4 work-item mb3">
+            		<a class="t-white no-underline ttu" href="{{work.work.link}}">
+  	              <div
+  	                style="background-image: url({{ work.work.preview_image ? TimberImage(work.work.preview_image).src : (work.work.header_image ? TimberImage(work.work.header_image).src : work.work.thumbnail.src) }});"
+  	                class="aspect-ratio aspect-ratio--1x1 bg-center cover">
+  	                <div class="aspect-ratio--object z-1 work-item-cover">
+  	                </div>
+  	                <div class="aspect-ratio--object flex items-center content-center justify-start z-2 work-item-caption">
+  	                  <h4 class="center w-60 tc t-white din-condensed t-44 lh-tight">{{ work.work.get_field('work_name') }}</h4>
+  	                </div>
+  	              </div>
+	            	</a>
+            </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+
+    <div data-js-scroll-section>
+
+      <div data-js-animate-this class="fluid-width center mv5 pt5">
+        <h4 class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center">
+          <span class="icon dib f-dark-blue ih ih-50 o-60">{% include 'svg/heading-bg-broken.twig' %}</span>
+          <span class="text dib t-50 lh-solid mh2">HOW WE WORK</span>
+          <span class="icon dib f-dark-blue ih ih-50 o-60">{% include 'svg/heading-bg-broken.twig' %}</span>
+        </h4>
+      </div>
+
+      <div data-js-carousel data-js-animate-this class="relative">
+        
+        <div data-js-phases-slider class="phases-slider">
+          <section class="aspect-ratio aspect-ratio--16x9 relative z-1">
+            <div
+              style="background-image: url({{ options.phases_image }});"
+              class="aspect-ratio--object cover bg-center z-1">
+            </div>
+            <div class="aspect-ratio--object z-2 flex items-end content-start justify-start bg-black-30">
+              <div class="pa1 pa5-l">
+                <h3 class="t-50 t-white din-condensed tl lh-solid ttu">{{ options.phases_top_text }}</h3>
+                {% for phase in options.phases %}
+                <h3 class="t-50 din-condensed t-white tl lh-solid ttu phase-item">{{ phase.phase }}</h3>
+                {% endfor %}
+                <h3 class="t-50 t-white din-condensed tl lh-solid ttu">{{ options.phases_static_text }}</h3>
+                <p class="t-36 t-white din-condensed tl ma0 pa0 lh-solid ttu">{{ options.phases_bottom_text }}</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+
+    </div>
+
+    {% if(post.get_field('quote_text')) %}
+
+	    <div class="center mw7 mv5 pv5">
+	      <div class="ph5 tc">
+	        <div class="icon dib i-40 center br-100 orange-bg mb4 flex items-center content-center justify-center"><span class="icon dib f-white i-20">{% include 'svg/microphone-icon.twig' %}</span></div>
+	        <p class="t-14 lh-copy t-dark-blue poppins-reg">{{ post.get_field('quote_text') }}</p>
+	        <h4 class="t-18 lh-copy t-orange poppins-semi ttu">{{ post.get_field('quote_individual') }}</h4>
+	        <h5 class="t-14 lh-copy t-dark-blue poppins-semi ttu" >{{ post.get_field('quote_individual_title') }}</h5>
+	        <h6 class="t-14 lh-copy t-dark-blue poppins-semi ttu">{{ post.get_field('quote_company') }}</h6>
+	      </div>
+	    </div>
+
+	  {% endif %}
+
+		{% if post.get_field('logos_rows') %}
+		  <div data-js-scroll-section>
+
+      <div data-js-animate-this class="fluid-width center mt5">
+        <h4 class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center">
+          <span class="icon dib f-dark-blue ih ih-50 o-60">{% include 'svg/heading-bg-double-broken.twig' %}</span>
+          <span class="text dib t-50 lh-solid mh2">We Work With</span>
+          <span class="icon dib f-dark-blue ih ih-50 ih-rotate o-60">{% include 'svg/heading-bg-double-broken.twig' %}</span>
+        </h4>
+      </div>
+
+      <div class="relative">
+
+        {% for row in post.get_field('logos_rows') %}
+
+	        <div class="fluid-width center {{loop.index0 == 0 ? 'mt5' : ''}} flex items-center content-center justify-center flex-wrap">
+	        		{% for logo in row.logos_row %}
+		          <div data-js-animate-this class="client-block br-100 dark-blue-bg flex items-center content-center justify-center mh2 mb2 pa3">
+		            <span class="icon t-white"><img src="{{logo.logo}}" /></span>
+		          </div>
+	        		{% endfor %}
+	        	</div>
+
+	      {% endfor %}
+      </div>
+
+			{% endif %}
+
+    <div class="fluid-width center mt5">
+      <h4 class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center">
+        <span class="icon dib f-dark-blue ih ih-40 o-40">{% include 'svg/heading-bg-socket.twig' %}</span>
+        <span class="text dib t-50 lh-solid mh2">Latest</span>
+        <span class="icon dib f-dark-blue ih ih-rotate ih-40 o-40">{% include 'svg/heading-bg-socket.twig' %}</span>
+      </h4>
+    </div>
+
+
+    <div class="fluid-width center mt5">
+
+      <div class="row">
+
+      	{% for post in news_posts %}
+
+	        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb3">
+		        	{% if post.terms[0].slug == 'in-the-news' %}
+              <a href="{{ post.link_out ? post.get_field('link_out') }}" target="_blank">
+            {% elseif post.terms[0].slug == 'awards' %}
+                {% if post.get_field('award_link') %}
+                    <a href="{{ post.get_field('award_link') }}" target="_blank">
+                  {% endif %}
+            {% else %}
+                  <a href="{{ post.link }}">
+            {% endif %}
+              <div class="aspect-ratio post-ratio light-gray-bg">
+                <div class="aspect-ratio--object">
+                  {% if post.header_image or post.thumbnail.src %}
+                    <div class="absolute left-0 top-0 right-0 dark-blue-bg aspect-ratio--16x9 o-30 z-0"></div>
+                    <div
+                      class="background-image aspect-ratio--16x9 bg-center cover z-1 relative"
+                      style="background-image: url( {{ (post.header_image ? TimberImage(post.header_image).src : post.thumbnail.src) }} )"
+                      alt="{{ post.title }}">
+                    </div>
+                  {% elseif post.terms[0].slug == 'awards' %}
+                      {% set post_custom = post.get_field('associated_project')[0] %}
+                      {% set random_image = random(post_custom.get_field('project_images')) %}
+                    <div class="absolute left-0 top-0 right-0 dark-blue-bg aspect-ratio--16x9 o-30 z-0"></div>
+                    <div
+                      class="background-image aspect-ratio--16x9 bg-center cover z-1 relative"
+                      style="background-image: url( {{ TimberImage(random_image.image).src }} )"
+                      alt="{{ post.title }}">
+                    </div>
+                  {% endif %}
+
+
+                  <h6 class="pa3 lh-solid din-condensed t-18 t-label-gray ttu lh-solid no-underline">{{ post.terms[0].name }}{% if post.terms[1].slug == 'events' %}, {{ post.terms[1].name }}{% endif %}</h6>
+                  <h5 class="ph3 t-dark-blue t-26 lh-solid din-condensed ttu">{{ post.name }}</h5>
+
+                  {% if post.terms[0].slug == 'in-the-news' %}
+                  <h5 class="absolute left-0 bottom-0 right-0 t-12 poppins-semi pa3 t-med-gray lh-solid">{{ post.source }}</h5>
+                  {% endif %}
+                </div>
+              </div>
+            </a>
+	        </div>
+
+	      {% endfor %}
+
+      </div>
+    </div>
+  </section>
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}

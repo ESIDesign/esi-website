@@ -1,0 +1,324 @@
+{
+    "key": "group_59baf8511554c",
+    "title": "Lab Page",
+    "fields": [
+        {
+            "key": "field_59bbf44ed784d",
+            "label": "Description Headline",
+            "name": "description_headline",
+            "type": "text",
+            "instructions": "Main headline under the landing video.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "CURIOSITY",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59bbfba4e66b2",
+            "label": "Description SubHeadline",
+            "name": "description_subheadline",
+            "type": "text",
+            "instructions": "Large, red text underneath the main headline.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "DRIVES INNOVATION",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_59bbf4641e15d",
+            "label": "Description Text",
+            "name": "description_text",
+            "type": "textarea",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Our whole studio is a prototyping lab. Being surrounded by the designs day after day inspires new ideas and encourages collaboration. This results in designs that are innovative and feasible.",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_59bbf4987a730",
+            "label": "Background Video",
+            "name": "background_video",
+            "type": "file",
+            "instructions": "The background video for the video section",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_59bbfa5e3a4ef",
+            "label": "Youtube Video",
+            "name": "youtube_video",
+            "type": "url",
+            "instructions": "This is the youtube video in the lightbox popup",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_59bbfc4093a94",
+            "label": "Pull Quote",
+            "name": "pull_quote",
+            "type": "textarea",
+            "instructions": "This will go in the pull quote section, on the left side.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "The Lab is integral to ESI DESIGN’s approach to designing iteratively, through collaboration and by <span class=\"t-red\">showing, not telling.<\/span>",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_59bbfc6613452",
+            "label": "Pull Text",
+            "name": "pull_text",
+            "type": "textarea",
+            "instructions": "This goes in the pull quote section, on the right side.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Prototyping, scale mock-ups and technological trials allow us test the limits of our conceptual thinking and engage all stakeholders in a project’s vision. By collaborating in-house, on-site and off-site with iterative mock-ups, we create lasting value from our design process.",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_59bbfc8f2efa4",
+            "label": "Mock Ups",
+            "name": "mock_ups",
+            "type": "repeater",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_59bc01262efa5",
+                    "label": "Mock Up Headline",
+                    "name": "mock_up_headline",
+                    "type": "text",
+                    "instructions": "This is the headline for the mock up.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "THE BEACON AT THE TOWER AT PNC PLAZA",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_59bc01802efa6",
+                    "label": "Splash Image",
+                    "name": "image",
+                    "type": "image",
+                    "instructions": "A close-up look into what the gallery contains.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_59bc01fc663bd",
+                    "label": "Gallery",
+                    "name": "gallery",
+                    "type": "repeater",
+                    "instructions": "This is the gallery slider for this mock-up.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "",
+                    "sub_fields": [
+                        {
+                            "key": "field_59bc021f663be",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "image",
+                            "instructions": "Main slide image.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "url",
+                            "preview_size": "thumbnail",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        },
+                        {
+                            "key": "field_59bc023c663bf",
+                            "label": "Caption",
+                            "name": "caption",
+                            "type": "textarea",
+                            "instructions": "Small caption line.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "This is a small caption for the expanded gallery image.",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "field_59c3f85784bf6",
+            "label": "Instagram",
+            "name": "instagram",
+            "type": "instagram",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "client_id": "62bc68e6e83c41e8a6c88959cc3b81b9",
+            "client_secret": "5695088869.ba4c844.98a3a3e9f4c443f99ea734208ae5eeb1",
+            "cache_lifetime": 300,
+            "tag": "esilab"
+        },
+        {
+            "key": "field_59c5a9a10b80e",
+            "label": "Header Image",
+            "name": "header_image",
+            "type": "image",
+            "instructions": "Header Image visible on first landing.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-lab.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1506126263
+}

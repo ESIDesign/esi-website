@@ -1,0 +1,35 @@
+#print {
+	display: none;
+}
+
+@media only print {
+
+	body > :not(#print) {
+		display: none;
+	}
+
+	#print {
+		display: block;
+		width: 100%;
+		// max-width: 70%;
+	}
+
+	#print .spacing {
+		margin: 25px;
+		border-bottom: 1px solid #dddddd;
+	}
+
+	#print a {
+		text-decoration: none;
+	}
+
+	#print a[href]:after {
+		content: " (" attr(href) ")";
+		color: #1d252d;
+	}
+
+	#print * {
+		-webkit-print-color-adjust: exact;
+		color-adjust: exact;
+	}
+}

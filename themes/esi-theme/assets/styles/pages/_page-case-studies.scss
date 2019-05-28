@@ -1,0 +1,79 @@
+@import "../common/variables";
+
+.client-logo {
+  width: 80px;
+  height: 80px;
+
+  @media (max-width: 670px) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.case-study-row {
+  min-height: 77vh;
+}
+
+// .case-study-content-bubble {
+//   width: 500px;
+//   height: 500px;
+
+//   @media (max-width: 670px) {
+//     width: 250px;
+//     height: auto;
+//     border-radius: 3px;
+//   }
+// }
+
+// .case-study-image-bubble {
+//   width: 700px;
+//   height: 700px;
+
+  // @media (max-width: 670px) {
+//     width: 250px;
+//     height: 250px;
+//   }
+// }
+
+.case-study-heading-icon {
+  width: 40px;
+  height: 40px;
+
+  .plus {
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: -3px;
+
+    @media (max-width: 670px) {
+      top: 2px;
+    }
+  }
+
+  @media (max-width: 670px) {
+    left: 5px;
+    right: auto;
+  }
+}
+
+.single-case-study {
+  .line {
+    width: 1px;
+    background-color: $white;
+    height: 0;
+    bottom: 0;
+
+    &.last-line {
+      background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+      background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+      background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    }
+
+    @media (max-width: 670px) {
+      left: 25px;
+      right: auto;
+    }
+  }
+}

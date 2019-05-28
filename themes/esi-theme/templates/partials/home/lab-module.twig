@@ -1,0 +1,42 @@
+  <section class="vh-100 relative swipe-section">
+    <div
+      data-js-animate-this 
+      data-delay="1"
+      data-duration="1.5"
+      data-js-mobile-conditional-video
+      data-fallback-src="{{ post.get_field('lab_fallback_image') }}"
+      class="absolute absolute--fill o-70 z-1 overflow-hidden cover bg-center">
+      <video
+        class="fs-video"
+        playsinline
+        data-autoplay
+        muted 
+        loop>
+        <source data-video-src="{{ post.get_field('lab_video')['url'] }}" type="video/mp4">
+      </video>
+    </div>
+
+    <div data-js-animate-this class="absolute absolute--fill flex items-center content-center justify-center z-2 animate-this">
+      
+      <div class="w-70 tc">
+        <h3 class="t-50 t-white din-condensed lh-solid ttu">
+          <span 
+          data-js-animate-this
+          data-y="-25" 
+          data-delay="0.4"
+          class="animate-this dib unbreak-text">
+          {{post.get_field('lab_headline')}}</h3></span> 
+        <p
+          data-js-animate-this
+          data-y="-25" 
+          data-delay="0.5" 
+          class="t-18 t-white poppins-reg lh-copy unbreak-text animate-this">{{post.get_field('lab_text')}}</p>
+        <a 
+          data-js-animate-this
+          data-y="-25" 
+          data-delay="0.6"
+          class="mt3 dib pa3 ph4 button-bg t-12 ttu lh-solid no-underline t-white poppins-semi animate-this" href="/lab"><span class="button-label db mt1">About Our Lab</span></a>
+      </div>
+
+    </div>
+  </section>

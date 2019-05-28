@@ -1,0 +1,32 @@
+  <section data-js-carousel class="vh-100 relative swipe-section verticals-module dark-blue-bg overflow-hidden fp-noscroll">
+
+    {% for item in post.get_field('verticals_slider') %}
+    <div class="slick-slide relative" data-slick-slide-{{ loop.index0 }}>
+      {% do action('bg_image_srcset_action', item.background_image, loop.index0, 'verticals-slider-image') %}
+      <div
+        data-js-animate-this
+        data-delay="0.0"
+        data-duration="1.5"
+        data-target-opacity="0.7"
+        class="verticals-zoom verticals-slider-image verticals-slider-image-{{ loop.index0 }} absolute absolute--fill cover z-1 bg-center">
+      </div>
+
+      <div class="absolute absolute--fill flex items-center content-center justify-center z-2 animate-this">
+        <div class="w-70 tc">
+          <h3 class="t-50 t-white din-condensed lh-solid ttu"><span
+            data-js-animate-this
+            {% if loop.first %}data-y="-25"{% endif %}
+            data-delay="0.4"
+            class="verticals-zoom animate-this unbreak-text dib">{{ item.headline }}</span></h3>
+          {% set link_array = item.link|split('/vertical', 2) %}
+          <a
+            data-js-animate-this
+            {% if loop.first %}data-y="-25"{% endif %}
+            data-delay="0.6"
+            class="verticals-zoom mt3 dib pa3 ph4 button-bg-blue t-12 ttu lh-solid no-underline t-white poppins-semi" href="{{ attribute(link_array, 1) }}"><span class="button-label db mt1">{{ item.button_text|striptags }}</span></a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </section>

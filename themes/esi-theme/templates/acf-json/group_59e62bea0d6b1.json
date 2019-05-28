@@ -1,0 +1,64 @@
+{
+    "key": "group_59e62bea0d6b1",
+    "title": "Capabilities",
+    "fields": [
+        {
+            "key": "field_59e62bf1cab34",
+            "label": "Capabilities",
+            "name": "capabilities",
+            "type": "repeater",
+            "instructions": "Add capabilities.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_59e62c0acab35",
+                    "label": "Capability",
+                    "name": "capability",
+                    "type": "text",
+                    "instructions": "Add capability.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "capabilities"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1508256800
+}

@@ -1,0 +1,205 @@
+ {% extends "layouts/base.twig" %}
+
+{% block content %}
+  {% include 'partials/page-title.twig' with { 'page_title' : 'People'} %}
+  <section
+    data-js-scroll-page
+    data-js-scroll-header
+    class="page-header z-0 absolute top-0 right-0 left-0 dark-blue-bg content-holder overflow-hidden w-100">
+    <div
+      style="background-image: url({{ post.get_field('header_image') }});"
+      class="aspect-ratio--object cover bg-center z-1">
+    </div>
+  </section>
+
+  <section
+    data-js-header-trigger
+    class="page-header relative z-0">
+    <a class="mt3 dib pa3 ph4 button-bg-red t-12 ttu lh-solid no-underline t-white poppins-semi absolute right-0 bottom-0 mr3 mb3" href="/jobs"><span class="button-label db mt1">Join Us</span></a>
+  </section>
+
+  <section data-js-master-container class="bg-white pt3 relative z-2 no-flicker master-container">
+    <div data-js-scroll-section>
+
+      <div class="fluid-width center ph3 mt3 tc">
+        <h3 class="t-50 t-dark-blue tc din-condensed lh-solid ttu">Meet</h3>
+        <h4 class="t-60 t-red tc din-condensed lh-solid ttu">Our Team</h4>
+        <p class="t-16 t-dark-blue poppins-reg lh-copy tc mw7 center">{{post.introduction_text}}</p>
+        <a data-js-layout-switch class="mt3 pa3 ph4 button-bg-red t-12 ttu lh-solid no-underline t-white poppins-semi dn dib-l" href=""><span class="button-label db mt1">Disorganize</span></a>
+      </div>
+
+    </div>
+    <div class="mt5 mt0-l">
+      {% set i = 0 %}
+      <script>
+        window.peopleData = [{% for person in authors %}
+        {% if fn('get_field', 'leadership', 'user_' ~ person.ID) == 'Yes' and fn('get_field', 'hidden', 'user_' ~ person.ID) != 'Yes' %}
+          {
+            id: "{{ person.display_name|replace({" ": "-", "'": ""})|lower }}",
+            isLeader: true,
+            type: "person",
+            _index: {% if fn('get_field', 'overlay_biography', 'user_' ~ person.ID) %}{{ i }}{% else %}false{% endif %},
+            hasBio: {% if fn('get_field', 'overlay_biography', 'user_' ~ person.ID) %}true{% else %}false{% endif %},
+            name: "{{ person.display_name }}",
+            position: "{{ fn('the_field', 'position', 'user_' ~ person.ID) }}",
+            image  : "{{ fn('get_wp_user_avatar_src', person.ID) }}"
+            {% if fn('get_field', 'overlay_biography', 'user_' ~ person.ID) %}{% set i = i + 1 %}{% endif %}
+          },{% endif %}
+        {% endfor %}
+        {
+            id: "you",
+            isLeader: false,
+            type: "person",
+            _index: 9999,
+            hasBio: false,
+            name: "you?",
+            position: "See our Current Vacancies",
+            image  : "{{ 'images/you.jpg'|asset }}"
+        },
+        {% for person in authors %}
+          {% if fn('get_field', 'leadership', 'user_' ~ person.ID) != 'Yes' and fn('get_field', 'hidden', 'user_' ~ person.ID) != 'Yes' %}
+          {
+            id: "{{ person.display_name|replace({" ": "-", "'": ""})|lower }}",
+            isLeader: false,
+            type: "person",
+            _index: {% if fn('get_field', 'overlay_biography', 'user_' ~ person.ID) %}{{ i }}{% else %}false{% endif %},
+            hasBio: {% if fn('get_field', 'overlay_biography', 'user_' ~ person.ID) %}true{% else %}false{% endif %},
+            name: "{{ person.display_name }}",
+            position: "{{ fn('the_field', 'position', 'user_' ~ person.ID) }}",
+            image  : "{{ fn('get_wp_user_avatar_src', person.ID) }}"
+            {% if fn('get_field', 'overlay_biography', 'user_' ~ person.ID) %}{% set i = i + 1 %}{% endif %}
+          }{% if not loop.last %},{% endif %}{% endif %}{% endfor %}];
+
+          window.factoids = [{% for factoid in post.get_field('factoids') %}{
+            type: "factoid",
+            text: "{{ factoid.factoid|escape('js') }}"
+          }{% if not loop.last %},{% endif %}{% endfor %}];
+      </script>
+
+      <!-- D3 Container -->
+      <div class="pa2 ph4 pa5-l">
+        <div data-js-map class="center pa2 pa5-l people-svg-holder min-vh-100"></div>
+      </div>
+
+    </div>
+    <div class="dn people-overlays">
+      {% set loopIndex = 0 %}
+      {# Loop and print person details here #}
+
+      {% for person in authors %}
+        {% if fn('get_field', 'leadership', 'user_' ~ person.ID) == 'Yes' and fn('get_field', 'overlay_biography', 'user_' ~ person.ID) and fn('get_field', 'hidden', 'user_' ~ person.ID) != 'Yes' %}
+          <section id="{{ person.display_name|replace({" ": "-", "'": ""})|lower}}" data-index="{{ loopIndex }}" data-js-people-overlay class="people-overlay bg-white z-9999 dn vh-100 overflow-y-scroll">
+        <button data-js-overlay-control class="ml3 absolute overlay-control left-0 br-100 t-white button-bg border-button rb-30 bn pa0 ma0 flex items-center no-underline content-center justify-center prev-button pointer"><span class="icon db f-label-gray i-20">{% include 'svg/left-arrow.twig' %}</span></button>
+        <button data-js-overlay-control class="mr3 absolute overlay-control right-0 br-100 t-white button-bg border-button rb-30 bn pa0 ma0 flex items-center no-underline content-center justify-center next-button ml1 ml3-l pointer"><span class="icon db f-label-gray i-20">{% include 'svg/right-arrow.twig' %}</span></button>
+
+        <div class="w-80 mv5 ph2 ph5-l center relative">
+          <a data-fancybox-close class="mr2 mt2 ma0-l fixed absolute-l right-0 top-0 dib bg-red-button br-100 dib close-people-overlay flex items-center content-center justify-center z-9999" href=""><span class="icon db f-white i-20">{% include 'svg/close-icon.twig' %}</span></a>
+          <div class="row ph3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 tc">
+              <div class="mb4 ph3 mw5 center">
+                <div class="aspect-ratio aspect-ratio--1x1 relative br-100 cover bg-center overflow-hidden center">
+                  <div
+                    class="aspect-ratio--object cover bg-center z-1"
+                    style="background-image: url({{ fn('get_wp_user_avatar_src', person.ID) }});"
+                    ></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+              <h3 class="t-red t-42 din-condensed lh-solid ttu">{{ person.display_name }}</h3>
+              <h4 class="t-dark-blue t-22 poppins-reg lh-solid mb4">{{ fn('the_field', 'position', 'user_' ~ person.ID) }}</h4>
+
+              <div class="cms-content">
+              		<p class="t-dark-blue">
+	                {{ fn('the_field', 'overlay_biography', 'user_' ~ person.ID) }}
+	              </p>
+              </div>
+
+              {% if fn('get_field', 'twitter', 'user_' ~ person.ID) or fn('get_field', 'instagram', 'user_' ~ person.ID) or fn('get_field', 'linkedin', 'user_' ~ person.ID) %}
+
+              <h4 class="t-red din-condensed t-32 lh-solid ttu mt4">Follow</h4>
+              <div class="flex items-center content-center justify-start mt2">
+                {% if fn('get_field', 'linkedin', 'user_' ~ person.ID) %}
+                <a href="{{ fn('get_field', 'linkedin', 'user_' ~ person.ID) }}" target="_blank" class="tc br-100 t-white button-bg people-social-link dib pa0 mr2 flex items-center content-center justify-center"><span class="icon i-20 f-dark-blue">{% include 'svg/social-icon-linkedin.twig' %}</span></a>
+                {% endif %}
+                {% if fn('get_field', 'twitter', 'user_' ~ person.ID) %}
+                <a href="{{ fn('get_field', 'twitter', 'user_' ~ person.ID) }}" target="_blank" class="tc br-100 t-white button-bg people-social-link dib pa0 mr2 flex items-center content-center justify-center"><span class="icon i-20 f-dark-blue">{% include 'svg/social-icon-twitter.twig' %}</span></a>
+                {% endif %}
+                {% if fn('get_field', 'instagram', 'user_' ~ person.ID) %}
+                <a href="{{ fn('get_field', 'instagram', 'user_' ~ person.ID) }}" target="_blank" class="tc br-100 t-white button-bg people-social-link dib pa0 mr2 flex items-center content-center justify-center"><span class="icon i-20 f-dark-blue">{% include 'svg/social-icon-instagram.twig' %}</span></a>
+                {% endif %}
+              </div>
+
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </section>
+          {% set loopIndex = loopIndex + 1 %}
+        {% endif %}
+      {% endfor %}
+
+      {% for person in authors %}
+        {% if not fn('get_field', 'leadership', 'user_' ~ person.ID) != 'Yes' and fn('get_field', 'overlay_biography', 'user_' ~ person.ID) and fn('get_field', 'hidden', 'user_' ~ person.ID) != 'Yes' %}
+          <section id="{{ person.display_name|replace({" ": "-", "'": ""})|lower}}" data-index="{{ loopIndex }}" data-js-people-overlay class="people-overlay bg-white z-9999 dn vh-100 overflow-y-scroll">
+        <button data-js-overlay-control class="ml3 absolute overlay-control left-0 br-100 t-white button-bg border-button rb-30 bn pa0 ma0 flex items-center no-underline content-center justify-center prev-button pointer"><span class="icon db f-label-gray i-20">{% include 'svg/left-arrow.twig' %}</span></button>
+        <button data-js-overlay-control class="mr3 absolute overlay-control right-0 br-100 t-white button-bg border-button rb-30 bn pa0 ma0 flex items-center no-underline content-center justify-center next-button ml1 ml3-l pointer"><span class="icon db f-label-gray i-20">{% include 'svg/right-arrow.twig' %}</span></button>
+        <div class="w-80 mv5 ph2 ph5-l center relative">
+          <a data-fancybox-close class="fixed absolute-l right-0 top-0 dib bg-red-button br-100 dib close-people-overlay flex items-center content-center justify-center z-9999" href=""><span class="icon f-white i-20">{% include 'svg/close-icon.twig' %}</span></a>
+          <div class="row ph3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 tc">
+              <div class="mb4 ph3 mw5 center">
+                <div class="aspect-ratio aspect-ratio--1x1 relative br-100 cover bg-center overflow-hidden">
+                  <div
+                    class="aspect-ratio--object cover bg-center z-1"
+                    style="background-image: url({{ fn('get_wp_user_avatar_src', person.ID) }});"
+                    ></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+              <h3 class="t-red t-42 din-condensed lh-solid ttu">{{ person.display_name }}</h3>
+              <h4 class="t-dark-blue t-22 poppins-reg lh-solid mb4">{{ fn('the_field', 'position', 'user_' ~ person.ID) }}</h4>
+
+              <div class="cms-content">
+              		<p class="t-dark-blue">
+	                {{ fn('the_field', 'overlay_biography', 'user_' ~ person.ID) }}
+	              </p>
+              </div>
+
+
+              {% if fn('get_field', 'twitter', 'user_' ~ person.ID) or fn('get_field', 'instagram', 'user_' ~ person.ID) or fn('get_field', 'linkedin', 'user_' ~ person.ID) %}
+
+              <h4 class="t-red din-condensed t-32 lh-solid ttu mt4">Follow</h4>
+              <div class="flex items-center content-center justify-start mt2">
+                {% if fn('get_field', 'linkedin', 'user_' ~ person.ID) %}
+                <a href="{{ fn('get_field', 'linkedin', 'user_' ~ person.ID) }}" target="_blank" class="tc br-100 t-white button-bg people-social-link dib pa0 mr2 flex items-center content-center justify-center"><span class="icon i-20 f-dark-blue">{% include 'svg/social-icon-linkedin.twig' %}</span></a>
+                {% endif %}
+                {% if fn('get_field', 'twitter', 'user_' ~ person.ID) %}
+                <a href="{{ fn('get_field', 'twitter', 'user_' ~ person.ID) }}" target="_blank" class="tc br-100 t-white button-bg people-social-link dib pa0 mr2 flex items-center content-center justify-center"><span class="icon i-20 f-dark-blue">{% include 'svg/social-icon-twitter.twig' %}</span></a>
+                {% endif %}
+                {% if fn('get_field', 'instagram', 'user_' ~ person.ID) %}
+                <a href="{{ fn('get_field', 'instagram', 'user_' ~ person.ID) }}" target="_blank" class="tc br-100 t-white button-bg people-social-link dib pa0 mr2 flex items-center content-center justify-center"><span class="icon i-20 f-dark-blue">{% include 'svg/social-icon-instagram.twig' %}</span></a>
+                {% endif %}
+              </div>
+
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </section>
+          {% set loopIndex = loopIndex + 1 %}
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  </section>
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}

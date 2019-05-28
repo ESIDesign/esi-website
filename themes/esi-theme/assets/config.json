@@ -1,0 +1,16 @@
+{
+  "entry": {
+    "main": [
+      "./scripts/main.js",
+      "./styles/main.scss"
+    ]
+  },
+  "watch": [
+    "src/**/*.php",
+    "templates/**/*.twig"
+  ],
+  "publicPath": "/wp-content/themes/esi-theme",
+  "devUrl": "http://esi.hgv.test",
+  "proxyUrl": "http://localhost",
+  "cacheBusting": "[name]_[hash:8]"
+}

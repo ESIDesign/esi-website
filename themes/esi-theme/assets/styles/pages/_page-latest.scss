@@ -1,0 +1,53 @@
+.page-template-page-latest,
+.blog {
+  .site-header-bg {
+    opacity: 1.0;
+    background: $dark-blue;
+  }
+
+  .nav-trigger {
+    transform: translateX(-7px) translateY(-3px);
+
+    @media (max-width: 670px) {
+      transform: translateX(-7px) translateY(-1px);
+    }
+  }
+
+  .site-name {
+    transform: translateX(0px) translateY(5px);
+
+    @media (max-width: 670px) {
+      transform: translateX(7px) translateY(6px);
+    }
+  }
+
+  .title {
+    transform: translateY(11px);
+  }
+
+  .latest-instagram-label {
+    bottom: 0;
+    position: absolute;
+  }
+
+  .blog-post {
+    display: none;
+  }
+
+  .post-filter {
+    background-color: $button-bg-gray;
+
+    &.is-active,
+    &:hover {
+      background-color: $blue-button-bg;
+    }
+  }
+}
+
+.insta-overlay {
+  .insta__media {
+    img {
+      display: none;
+    }
+  }
+}

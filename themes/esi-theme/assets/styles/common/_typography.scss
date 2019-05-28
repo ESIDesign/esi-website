@@ -1,0 +1,297 @@
+@import "../common/variables";
+
+@font-face {
+  font-family: 'Poppins Semi Bold';
+  src: url('../fonts/poppins-semibold-webfont.woff2') format('woff2'),
+       url('../fonts/poppins-semibold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins Light';
+  src: url('../fonts/poppins-light-webfont.woff2') format('woff2'),
+       url('../fonts/poppins-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins Regular';
+  src: url('../fonts/poppins-regular-webfont.woff2') format('woff2'),
+       url('../fonts/poppins-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN Next LT Pro Light Condensed';
+  src: url('../fonts/dinnextltpro-lightcondensed.woff2') format('woff2'),
+       url('../fonts/dinnextltpro-lightcondensed.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN Next LT Pro Condensed';
+  src: url('../fonts/dinnextltpro-condensed.woff2') format('woff2'),
+       url('../fonts/dinnextltpro-condensed.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN Next LT Pro Condensed Bold';
+  src: url('../fonts/dinnextltpro-boldcondensed.woff2') format('woff2'),
+       url('../fonts/dinnextltpro-boldcondensed.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.poppins-semi {
+  font-family: 'Poppins Semi Bold', arial, sans-serif;
+}
+
+.poppins-reg {
+  font-family: 'Poppins Regular', arial, sans-serif;
+
+  &.hover-semi {
+    &:hover {
+      font-family: 'Poppins Semi Bold', arial, sans-serif;
+    }
+  }
+}
+
+.poppins-light {
+  font-family: 'Poppins Light', arial, sans-serif;
+
+  &.hover-semi {
+    &:hover {
+      font-family: 'Poppins Semi Bold', arial, sans-serif;
+    }
+  }
+}
+
+.din-condensed-bold {
+  font-family: 'DIN Next LT Pro Condensed Bold', arial, sans-serif;
+}
+
+.din-condensed {
+  font-family: 'DIN Next LT Pro Condensed', arial, sans-serif;
+}
+
+.din-light-condensed {
+  font-family: 'DIN Next LT Pro Light Condensed', arial, sans-serif;
+}
+
+.t-100 {
+  font-size: 100px;
+}
+
+.t-70 {
+  font-size: 70px;
+}
+
+.t-67 {
+  font-size: 67px;
+
+  @media (max-width: 670px) {
+    font-size: 34px;
+  }
+}
+
+.t-65 {
+  font-size: 65px;
+}
+
+.t-60 {
+  font-size: 60px;
+
+  @media (max-width: 670px) {
+    font-size: 50px;
+  }
+}
+
+.t-50 {
+  font-size: 50px;
+
+  @media (max-width: 670px) {
+    font-size: 38px;
+  }
+}
+
+.t-45 {
+  font-size: 45px;
+
+  @media (max-width: 670px) {
+    font-size: 24px;
+  }
+}
+
+.t-44 {
+  font-size: 44px;
+
+  @media (max-width: 670px) {
+    font-size: 20px;
+  }
+}
+
+.t-42 {
+  font-size: 42px;
+}
+
+.t-40 {
+  font-size: 40px;
+}
+
+.t-38 {
+  font-size: 38px;
+}
+
+.t-36 {
+  font-size: 36px;
+}
+
+.t-34 {
+  font-size: 34px;
+
+  @media (max-width: 1200px) {
+    font-size: 28px;
+  }
+
+  @media (max-width: 670px) {
+    font-size: 24px;
+  }
+}
+
+.t-32 {
+  font-size: 32px;
+}
+
+.t-30 {
+  font-size: 30px;
+}
+
+.t-26 {
+  font-size: 26px;
+
+  &.post-title {
+    @media (max-width: 670px) {
+      font-size: 20px;
+    }
+  }
+}
+
+.t-24 {
+  font-size: 24px;
+
+  @media (max-width: 670px) {
+    font-size: 16px;
+  }
+}
+
+.t-22 {
+  font-size: 22px;
+}
+
+.t-20 {
+  font-size: 20px;
+}
+
+.t-18 {
+  font-size: 18px;
+
+  @media (max-width: 670px) {
+    font-size: 14px;
+  }
+}
+
+.t-16 {
+  font-size: 16px;
+}
+
+.t-14 {
+  font-size: 14px;
+}
+
+.t-12 {
+  font-size: 12px;
+}
+
+.t-white {
+  color: $white;
+}
+
+.t-red {
+  color: $red;
+}
+
+.t-blue {
+  color: $blue;
+}
+
+.t-pale-blue {
+  color: $pale-blue;
+}
+
+.t-bright-blue {
+  color: $bright-blue;
+}
+
+.t-orange {
+  color: $orange;
+}
+
+.t-yellow {
+  color: $yellow;
+}
+
+.t-gold {
+  color: $gold;
+}
+
+.t-dark-blue {
+  color: $dark-blue;
+}
+
+.lh-tight {
+  line-height: 0.9;
+}
+
+.lh-heading-w-bg {
+  line-height: 0.5;
+}
+
+.t-label-gray {
+  color: $label-gray;
+}
+
+.t-med-gray {
+  color: $med-gray;
+}
+
+.with-line {
+  @media (min-width: 670px) {
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1200px;
+      height: 2px;
+      background-color: $white;
+    }
+
+    &.left {
+      &::after {
+        right: 39px;
+        top: 14px;
+      }
+    }
+
+    &.right {
+      &::after {
+        right: 39px;
+        top: 14px;
+      }
+    }
+  }
+}

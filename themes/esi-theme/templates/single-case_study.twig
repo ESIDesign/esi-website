@@ -1,0 +1,61 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+  {% include 'partials/page-title.twig' with { 'page_title' : 'Case Studies'} %}
+
+
+  <section id="post-{{ post.ID }}" data-js-single-case-study class="page-header content-holder relative z-0 will-change fixed top-0 right-0 left-0 dark-blue-bg">
+
+    <div
+      style="background-image: url({{ post.get_field('header_image') }});"
+      class="aspect-ratio--object cover bg-center z-1">
+    </div>
+
+  </section>
+
+  <section class="page-header relative z-0">
+    <div class="absolute left-0 bottom-0 right-0 tc z-2 ph4 mb3 flex items-center content-center justify-center w-100">
+      <div>
+        <div class="client-logo br-100 dark-blue-bg-75 flex items-center content-center justify-center center mb3 pt3 pb2 ph2">
+          <span class="icon dib w-100"><img src="{{ TimberImage(post.company_logo).src }}" class="w-100" /></span>
+        </div>
+        <h2 class="t-67 t-white din-condensed lh-solid ttu">{{ post.title }}</h2>
+        <span class="icon dib f-white i-30 center">{% include 'svg/down-arrow.twig' %}</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="single-case-study dark-blue-bg pb5 cf relative z-4">
+    {% for timeline_item in post.get_field('timeline_items') %}
+    {% set color = (loop.index0 % 3 == 0 ? 't-gold' : (loop.index0 % 3 == 1 ? 't-red' : 't-bright-blue')) %}
+    <section data-js-scroll-section class="relative cf">
+      <div data-js-line class="line absolute left-0 right-0 top-0 center o-50 {% if loop.last %}last-line{% endif %}"></div>
+
+      <div class="fluid-width center mv2 pv2 mv5-l pv5-l relative">
+        <div data-animate-type="bubble" data-js-animate-this class="icon f-white br-100 bg-white t-dark-blue lh-solid f-18 case-study-heading-icon tc mh3 center mt2 absolute left-0 right-0 center mt5 flex justify-center items-center content-center flex-column"><span class="icon dib f-dark-blue i-30 center">{% include 'svg/down-arrow.twig' %}</span></div>
+        <div class="flex-l justify-between items-start content-start mt5">
+          <div class="w-100 w-50-l ph3 {% if loop.index0 is even %}pl0-l pr5-l order-0{% else %}pr0-l pl5-l order-1{% endif %}">
+            {% if timeline_item.image %}
+              <div class="aspect-ratio aspect-ratio--1x1 mb4">
+                <div
+                  style="background-image: url({{ timeline_item.image }});"
+                  data-animate-type="bubble"
+                  data-js-animate-this class="absolute absolute--fill br-100 bg-white flex items-center content-center justify-center tc case-study-image-bubble cover bg-center">
+                </div>
+              </div>
+            {% endif %}
+          </div>
+          <div class="w-100 w-50-l ph3 tc {% if loop.index0 is even %}pr0-l pl5-l tl-l order-1{% else %}pl0-l pr5-l tr-l order-0{% endif %}">
+            <h3 data-animate-type="heading" data-js-animate-this class="t-50 {{ color }} lh-tight din-condensed justify-center ttu">{{ timeline_item.subheadline }}</h3>
+            <p data-animate-type="heading" data-js-animate-this class="t-16 t-white poppins-reg lh-copy">{{ timeline_item.text }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endfor %}
+  </div>
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}

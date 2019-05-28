@@ -1,0 +1,95 @@
+@import "../common/variables";
+
+.contact-form {
+  .select {
+    select {
+      width: 130%;
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+      background-image: none;
+      appearance: none;
+    }
+
+    select:focus {
+      outline: none;
+    }
+  }
+
+  span.inquiry {
+    width: 100%;
+  }
+
+  .custom-select-container.is-open .custom-select-panel {
+    max-height: 1000px;
+  }
+
+  .wpcf7-not-valid-tip {
+    @extend .din-condensed !optional;
+    @extend .t-22 !optional;
+    @extend .lh-solid !optional;
+    @extend .t-red !optional;
+    @extend .ml3 !optional;
+    @extend .mt3 !optional;
+    @extend .ttu !optional;
+    display: none;
+  }
+
+  .wpcf7-response-output {
+    border: transparent;
+    @extend .din-condensed !optional;
+    @extend .t-22 !optional;
+    @extend .lh-solid !optional;
+    @extend .t-red !optional;
+    @extend .ml3 !optional;
+    @extend .mt3 !optional;
+    @extend .ttu !optional;
+    @extend .tc !optional;
+
+    &:not(.wpcf7-validation-errors) {
+      color: white !important;
+    }
+  }
+}
+
+.hr {
+  height: 1px;
+}
+
+div.wpcf7-validation-errors {
+  @extend .bn !optional;
+  @extend .tc !optional;
+  @extend .din-condensed !optional;
+  @extend .t-22 !optional;
+  @extend .lh-solid !optional;
+  @extend .t-red !optional;
+}
+
+div.wpcf7-mail-sent-ok {
+  @extend .bn !optional;
+  @extend .tc !optional;
+  @extend .din-condensed !optional;
+  @extend .t-22 !optional;
+  @extend .lh-solid !optional;
+  @extend .t-pale-blue !optional;
+}
+
+div.wpcf7 .ajax-loader {
+  display: none;
+}
+
+.page-template-page-contact .logo {
+  width: 96px;
+  margin: 0 auto 10px;
+
+  svg {
+    
+    * {
+      fill: #fefefe;
+    }
+
+    .esi-logo-vector-1 {
+      fill: #e63c2f;
+    }
+  }
+}

@@ -1,0 +1,159 @@
+@import "../common/variables";
+
+.avatar {
+  width: 295px;
+  height: 295px;
+}
+
+.overlay-control {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.people-social-link {
+  width: 46px;
+  height: 46px;
+  border: 1px solid $light-gray;
+}
+
+.people-overlay {
+	width: 100%;
+}
+
+// .single-person-image {
+//   width: 160px;
+//   height: 160px;
+// }
+
+// .person-node {
+//   opacity: 0.0;
+//   transition: 0.2s ease-out;
+
+//   &.is-loaded {
+//     opacity: 1.0;
+//   }
+// }
+
+.close-people-overlay {
+  background-color: $red;
+  width: 48px;
+  height: 48px;
+
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.people-holder {
+  max-width: auto !important;
+  width: auto !important;
+
+  overflow: visible !important;
+  box-shadow : 0px -0px 10000px transparent;
+}
+
+.people-svg-holder {
+  max-width: 960px;
+  width: 100%;
+
+  .fact-label {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    display: table;
+
+    .t-22 {
+      vertical-align: middle;
+      display: table-cell;
+      color: $white;
+    }
+  }
+
+  .label-text {
+    transition: opacity 0.2s ease-out;
+  }
+
+  &.is-disorganized {
+    .label-text {
+      opacity: 0.0;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .is-you {
+      opacity: 0.0;
+    }
+
+    circle {
+      transform: scale(0.8);
+    }
+
+    .is-factoid {
+      .fact-label {
+        margin-top: -2px;
+      }
+
+      .t-white {
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.master-container {
+  &.is-disorganized {
+    height: 2000px;
+    overflow-y: hidden;
+  }
+}
+
+.node {
+  transition: all 0.3s ease-out;
+  opacity: 0.0;
+  -webkit-backface-visibility: hidden;
+
+  circle {
+    transform: scale(1.0);
+    // fill: rgba(0,0,0,0.3);
+  }
+
+  &.is-loaded {
+    opacity: 1.0;
+  }
+}
+
+.people-holder {
+  min-height: 100vh;
+}
+
+.page-template-page-people {
+  .cms-content {
+    p {
+      @extend .poppins-reg !optional;
+      @extend .t-dark-blue !optional;
+      @extend .lh-copy !optional;
+      @extend .t-16 !optional;
+      @extend .pt0 !optional;
+    }
+  }
+
+  .border-button {
+    border: 1px solid $label-gray;
+  }
+}
+
+.sidebar {
+  a:hover {
+    @extend .poppins-semi !optional;
+  }
+}
+
+.no-flicker {
+  -webkit-backface-visibility: hidden;
+}

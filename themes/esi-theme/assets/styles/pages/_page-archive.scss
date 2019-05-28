@@ -1,0 +1,28 @@
+@import "../common/variables";
+
+.archive.category {
+  .site-header-bg {
+    opacity: 1.0;
+    background: $dark-blue;
+  }
+
+  .nav-trigger {
+    transform: translateX(-7px) translateY(-3px);
+
+    @media (max-width: 670px) {
+      transform: translateX(-7px) translateY(-1px);
+    }
+  }
+
+  .site-name {
+    transform: translateX(0px) translateY(5px);
+
+    @media (max-width: 670px) {
+      transform: translateX(7px) translateY(6px);
+    }
+  }
+
+  .title {
+    transform: translateY(11px);
+  }
+}

@@ -1,0 +1,259 @@
+[data-js-animate-this] {
+  opacity: 0.0;
+}
+
+[data-js-animate-svg] {
+  opacity: 1.0;
+}
+
+@keyframes animateBgColor {
+  0% {
+    background-color: $red;
+  }
+  30% {
+    background-color: $orange;
+  } 
+  40% {
+    background-color: $gold;
+  } 
+  60% {
+    background-color: $yellow;
+  }
+  80% {
+    background-color: $pale-blue;
+  }
+  100% {
+    background-color: $red;
+  }
+}
+
+@keyframes animateTextColor {
+  0% {
+    color: $red;
+  }
+  20% {
+    color: $orange;
+  } 
+  40% {
+    color: $gold;
+  } 
+  60% {
+    color: $yellow;
+  }
+  80% {
+    color: $pale-blue;
+  }
+  100% {
+    color: $red;
+  }
+}
+
+@keyframes animateFillColor {
+  0% {
+    fill: $red;
+  }
+  10% {
+    fill: $orange;
+  } 
+  20% {
+    fill: $gold;
+  } 
+  30% {
+    fill: $yellow;
+  }
+  40% {
+    fill: $pale-blue;
+  }
+  50% {
+    fill: $yellow;
+  }
+  62% {
+    fill: $gold;
+  }
+  77% {
+    fill: $orange;
+  }  
+  100% {
+    fill: $red;
+  }
+}
+
+@keyframes animateToWhite {
+  0% {
+    color: $blue;
+  }
+  100% {
+    color: $white;
+  }
+}
+
+@keyframes animateToOrange {
+  0% {
+    color: $white;
+  }
+  100% {
+    color: $orange;
+  }
+}
+
+@keyframes animateTextOrange {
+  0% {
+    color: $orange;
+  } 
+  20% {
+    color: $red;
+  } 
+  40% {
+    color: $yellow;
+  }
+  60% {
+    color: $pale-blue;
+  }
+  80% {
+    color: $yellow;
+  }
+  100% {
+    color: $orange;
+  }
+}
+
+@keyframes animateToRed {
+  0% {
+    color: $white;
+  }
+  100% {
+    color: $red;
+  }
+}
+
+@keyframes animateTextRed {
+  0% {
+    color: $red;
+  }
+  20% {
+    color: $pale-blue;
+  }
+  40% {
+    color: $orange;
+  } 
+  60% {
+    color: $gold;
+  } 
+  80% {
+    color: $yellow;
+  }
+  100% {
+    color: $red;
+  }
+}
+
+@keyframes animateToBlue {
+  0% {
+    color: $white;
+  }
+  100% {
+    color: $blue;
+  }
+}
+
+@keyframes animateTextBlue {
+  0% {
+    color: $blue;
+  }
+  20% {
+    color: $gold;
+  } 
+  40% {
+    color: $pale-blue;
+  }
+  60% {
+    color: $orange;
+  } 
+  80% {
+    color: $yellow;
+  }
+  100% {
+    color: $blue;
+  }
+}
+
+@keyframes animateToGreen {
+  0% {
+    color: $white;
+  }
+  100% {
+    color: $brand-primary;
+  }
+}
+
+@keyframes animateTextGreen {
+  0% {
+    color: $brand-primary;
+  }
+  20% {
+    color: $orange;
+  } 
+  40% {
+    color: $yellow;
+  }
+  60% {
+    color: $gold;
+  } 
+  80% {
+    color: $pale-blue;
+  }
+  100% {
+    color: $brand-primary;
+  }
+}
+
+@keyframes animateToYellow {
+  0% {
+    color: $white;
+  }
+  100% {
+    color: $yellow;
+  }
+}
+
+@keyframes animateTextYellow {
+  0% {
+    color: $yellow;
+  }
+  20% {
+    color: $gold;
+  } 
+  40% {
+    color: $red;
+  }
+  60% {
+    color: $orange;
+  } 
+  80% {
+    color: $pale-blue;
+  }
+  100% {
+    color: $yellow;
+  }
+}
+
+@keyframes animateTextGold {
+  0% {
+    color: $gold;
+  }
+  20% {
+    color: $yellow;
+  } 
+  40% {
+    color: $pale-blue;
+  }
+  60% {
+    color: $orange;
+  } 
+  80% {
+    color: $red;
+  }
+  100% {
+    color: $gold;
+  }
+}

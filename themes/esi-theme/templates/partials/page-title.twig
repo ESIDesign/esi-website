@@ -1,0 +1,17 @@
+<div data-js-header class="page-title fixed mt2 tc z-9999 flex justify-center content-start tc top-0">
+  {% if link == true and page_title == 'Our Work' %}
+    <a href="/work">
+      <h1 class="title t-38 t-white din-condensed ttu">{{ page_title }}</h1>
+    </a>
+  {% elseif link == true and page_title == 'Latest' %}
+    <a href="/latest">
+      <h1 class="title t-38 t-white din-condensed ttu">{{ page_title }}</h1>
+    </a>
+  {% elseif link == true and page_title == 'Jobs' %}
+    <a href="/jobs">
+      <h1 class="title t-38 t-white din-condensed ttu">{{ page_title }}</h1>
+    </a>
+  {% else %}
+    <h1 class="title t-38 t-white din-condensed ttu">{{ page_title }}</h1>
+  {% endif %}
+</div>

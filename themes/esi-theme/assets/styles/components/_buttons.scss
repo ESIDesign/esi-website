@@ -1,0 +1,69 @@
+@import "../common/variables";
+
+.button-bg {
+  background-color: $button-bg;
+
+  @media (min-width: 670px) {
+    &:hover {
+      animation: animateBgColor 5s infinite;
+    }
+  }
+}
+
+.solid-button-bg {
+  background-color: $solid-button-bg;
+
+  @media (min-width: 670px) {
+    &:hover {
+      animation: animateBgColor 5s infinite;
+    }
+  }
+}
+
+.button-bg-blue {
+  background-color: $blue-button-bg;
+}
+
+.button-bg-red {
+  background-color: $red;
+}
+
+.border-button {
+  border: 1px solid $light-gray;
+}
+
+.button-bg-none {
+  border: 1px solid $med-gray;
+}
+
+.rb-50 {
+  width: 50px;
+  height: 50px;
+}
+
+.rb-30 {
+  width: 30px;
+  height: 30px;
+}
+
+button {
+  &.is-disabled {
+    opacity: 0.0;
+    pointer-events: none;
+  }
+
+  .loader {
+    opacity: 0.0;
+    transition: 0.1s ease-out;
+  }
+
+  &.is-loading {
+    .loader {
+      opacity: 0.5;
+    }
+  }
+}
+
+.button-label {
+  letter-spacing: 0.4px;
+}

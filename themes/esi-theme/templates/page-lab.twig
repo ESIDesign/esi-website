@@ -1,0 +1,240 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+  {% include 'partials/page-title.twig' with { 'page_title' : post.page_title } %}
+  <section
+    data-js-scroll-page
+    data-js-scroll-header
+    class="page-header relative z-0 fixed top-0 left-0 right-0 dark-blue-bg content-holder">
+  		{% do action('bg_image_srcset_action', post.header_image, post.slug, 'header-image') %}
+    <div
+      class="aspect-ratio--object cover bg-center z-1 bg-repeat-none header-image-{{ post.slug }}">
+    </div>
+  </section>
+
+  <section
+    data-js-header-trigger
+    class="page-header relative z-0"></section>
+
+  <section class="bg-white relative z-2 pt5 pb5">
+    <div data-js-scroll-section>
+      <div class="fluid-width center">
+					<h3 class="t-50 t-dark-blue tc din-condensed lh-solid">{{ post.get_field('description_headline') }}</h3>
+					<h4 class="t-70 t-red tc din-condensed lh-solid">{{ post.get_field('description_subheadline') }}</h4>
+					<p class="t-16 poppins-reg lh-copy tc w-80 center" >{{ post.get_field('description_text') }}</p>
+      </div>
+
+      <section
+        data-js-animate-this
+        class="aspect-ratio aspect-ratio--16x9 relative z-1 mt5 overflow-hidden">
+        {% if post.get_field('background_video')['type'] == 'image' %}
+        <div
+        	style="background-image: url({{post.get_field('background_video')['url']}})"
+          class="video-cover-image-{{ post.id }} aspect-ratio--object cover bg-center z-1">
+        {% else %}
+	       	<video
+            data-js-inline-video
+	          class="fs-video z-1"
+	          playsinline
+            autoplay
+            muted
+            loop>
+	          <source src="{{ post.get_field('background_video')['url'] }}" type="video/mp4">
+		   		</video>
+		   	{% endif %}
+      </section>
+
+    </div>
+    <div data-js-scroll-section>
+
+      <div class="fluid-width center mt3">
+        <div class="row pv5">
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 tc mb4 mb0-l">
+            <div data-js-animate-this class="icon dib i-40 center br-100 bg-red mb4 flex items-center content-center justify-center"><span class="icon dib f-white i-30">{% include 'svg/bulb-icon.twig' %}</span></div>
+            <h5 data-js-animate-this class="t-dark-blue t-40 tc lh-solid din-condensed ttu">{{ post.get_field('pull_quote') }}</h5>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div data-js-animate-this class="ph4 cms-content">
+            	<p>{{ post.get_field('pull_text') }}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div data-js-scroll-section>
+
+      <div data-js-animate-this class="fluid-width center mt5">
+        <h4 class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center">
+          <span class="icon dib f-dark-blue ih ih-40 o-20">{% include 'svg/heading-bg-broken.twig' %}</span>
+          <span class="text dib t-50 lh-solid mh2">Featured Mockups</span>
+          <span class="icon dib f-dark-blue ih ih-40 o-20">{% include 'svg/heading-bg-broken.twig' %}</span>
+        </h4>
+      </div>
+      
+      <div class="mw9 center mt5 ph3">
+        <div class="row">
+
+        		{% for mock in post.get_field('mock_ups') %}
+	          <a data-js-animate-this data-fancy-gallery data-gallery-target="gallery{{ loop.index0 }}" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb3 lab-mockup db" href="{{ mock.image }}">
+	            <script>
+	              window.gallery{{ loop.index0 }} = [
+	            	 {% for galleryItem in mock.gallery %}
+											{
+	                src  : '{{ galleryItem.image }}',
+	                opts : {
+	                  caption : '{{galleryItem.caption}}',
+	                },
+              		}
+              	 {% if not loop.last %},{% endif %}{% endfor %}];
+	            </script>
+              <div class="aspect-ratio aspect-ratio--1x1 bg-center lab-mockup-bg-wrapper">
+  	            <div
+  	              style="background-image: url({{ mock.image }});"
+  	              class="aspect-ratio aspect-ratio--1x1 bg-center lab-mockup-bg">
+  	            </div>
+                <div class="aspect-ratio--object z-1 lab-mockup-cover"></div>
+                <div class="aspect-ratio--object flex items-center content-center justify-start z-2 lab-mockup-caption">
+                  <h4 class="center w-60 tc t-white din-condensed t-36 lh-tight">{{mock.mock_up_headline}}</h4>
+                </div>
+              </div>
+	          </a>
+
+	        {% endfor %}
+
+        </div>
+      </div>
+    </div>
+
+    {% if latest_posts %}
+
+    <div data-js-scroll-section>
+
+      <div data-js-animate-this class="fluid-width center mt5">
+        <h4 class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center">
+          <span class="icon dib f-dark-blue ih ih-40 o-20">{% include 'svg/heading-bg-socket.twig' %}</span>
+          <span class="text dib t-50 lh-solid mh2">Latest</span>
+          <span class="icon dib f-dark-blue ih ih-rotate ih-40 o-20">{% include 'svg/heading-bg-socket.twig' %}</span>
+        </h4>
+      </div>
+
+      <div class="fluid-width center mt5">
+        <div class="row">
+
+          {% for post in latest_posts %}
+            <div
+              data-js-animate-this
+              class="col-xs-12 col-sm-4 col-md-4 col-lg-4 mb3 is-active blog-post">
+              <a href="{{ post.terms[0].slug == 'in-the-news' ? (post.link ? post.get_field('link_out') : post.archive) : post.link }}"
+                    {% if post.terms[0].slug == 'in-the-news' %} target="_blank" {% endif %}
+              >
+                <div class="aspect-ratio post-ratio light-gray-bg">
+                  <div class="aspect-ratio--object">
+                    {% if post.header_image or post.thumbnail.src %}
+                      <div
+                        class="background-image aspect-ratio--16x9 bg-center cover is-loaded"
+                        style="background-image: url( {{ (post.header_image ? TimberImage(post.header_image).src : post.thumbnail.src) }} )"
+                        alt="{{ post.title }}">
+                      </div>
+                    {% endif %}
+
+                    <h6 class="pt2 pb1 ph2 pa3-l lh-solid din-condensed t-18 t-label-gray ttu lh-solid no-underline">{{ post.terms[0].name }}</h6>
+                    <h5 class="ph2 ph3-l t-dark-blue t-26 lh-solid din-condensed ttu post-title">{{ post.name }}</h5>
+
+                    {% if post.terms[0].slug == 'in-the-news' %}
+                    <h5 class="absolute left-0 bottom-0 right-0 t-12 poppins-semi pa2 pa3-l t-med-gray lh-solid">{{ post.source }}</h5>
+                    {% endif %}
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+    <div data-js-scroll-section>
+
+      <div data-js-animate-this class="fluid-width center mt5 cf">
+        <h4 class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center">
+          <span class="icon dib f-dark-blue ih ih-40 o-20">{% include 'svg/heading-bg-broken.twig' %}</span>
+          <span class="text dib t-50 lh-solid mh2">Latest Experiments</span>
+          <span class="icon dib f-dark-blue ih ih-40 o-20">{% include 'svg/heading-bg-broken.twig' %}</span>
+        </h4>
+      </div>
+
+      <div class="mw8 center mt5 ph3">
+        <div class="row">
+          {% for post in instagram_posts %}
+            {% if loop.index0 < 6 %}
+							<div data-js-animate-this class="col-xs-6 col-sm-4 col-md-4 col-lg-4 mb3">
+								<a data-js-fancy-trigger data-target-index="{{ loop.index0 }}" href="#instagram-post-{{ loop.index0 }}">
+									<div style="background-image: url({{ post.thumbnail.src }});" class="aspect-ratio aspect-ratio--1x1 bg-center contain bg-black-80"></div>
+								</a>
+            <div id="instagram-post-{{ loop.index0 }}" data-js-instagram-overlay-content class="dn mw6 center pa5 insta-overlay w-100 relative">
+              <a href="{{ post.get_field('url') ? post.get_field('url') : post.insta_link }}" target="_blank">
+                <div 
+                  class="background-hack w-100 bg-center cover z-0 aspect-ratio aspect-ratio--1x1"
+                  style="background-image:url({{post.thumbnail.src}})">
+                </div>
+              </a>
+              {{ post.content }}
+            </div>
+							</div>
+              {% endif %}
+
+          {% endfor %}
+          </div>
+
+          <div data-js-more-posts-container class="dn">
+
+          <div class="row">
+          {% for post in instagram_posts %}
+            {% if loop.index0 > 5 %}
+              <div data-js-animate-this class="col-xs-6 col-sm-4 col-md-4 col-lg-4 mb3">
+                <a data-js-fancy-trigger data-target-index="{{ loop.index0 }}" href="#instagram-post-{{ loop.index0 }}">
+                  <div style="background-image: url({{ post.thumbnail.src }});" class="aspect-ratio aspect-ratio--1x1 bg-center contain bg-black-80"></div>
+                </a>
+                <div id="instagram-post-{{ loop.index0 }}" data-js-instagram-overlay-content class="dn mw6 center pa5 insta-overlay w-100">
+                  <a href="{{ post.get_field('url') ? post.get_field('url') : post.insta_link }}" target="_blank">
+                    <div 
+                      class="background-hack left-0 top-0 w-100 h-100 bg-center cover aspect-ratio aspect-ratio--1x1"
+                      style="background-image:url({{post.thumbnail.src}})">
+                    </div>
+                    {{ post.content }}
+                  </a>
+                </div>
+              </div>
+              {% endif %}
+          {% endfor %}
+          </div>
+
+          </div>
+
+        </div>
+        <div class="fluid-width center flex items-center content-center justify-center mt5">
+
+          <button data-js-load-insta class="pointer br-100 t-white bg-transparent bn pa0 ma0 flex items-center content-center justify-center">
+            <div>
+              <h3 class="t-dark-blue t-18 poppins-reg lh-solid tc o-50 ttu">More</h3>
+              <span class="icon dib f-dark-blue o-50 i-30">{% include 'svg/down-arrow.twig' %}</span>
+            </div>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  {% block footer %}
+    {% include 'partials/footer.twig' %}
+  {% endblock %}
+{% endblock %}
