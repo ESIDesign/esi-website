@@ -39,16 +39,11 @@
 }
 
 .work-filter {
-  background-color: white;
-  color: #1d252d;
-  border: 1px solid $dark-blue;
-  transition: all 0.3s;
-  min-width: 280px;
+  background-color: #999;
 
   &.is-active,
   &:hover {
-    background-color: $dark-blue;
-    color: white;
+    background-color: rgba(70, 153, 201, 0.9);
   }
 
   @media (max-width: 670px) {
@@ -98,7 +93,7 @@
   }
 
   .work-item-bg-wrapper {
-  	overflow: hidden;
+    overflow: hidden;
   }
 
   .work-item-cover {
@@ -137,7 +132,7 @@
       }
     }
   }
-  
+
   @media (max-width: 670px) {
     padding: 0;
     margin-bottom: 0.5rem;
@@ -187,35 +182,35 @@
   }
 
   .inner-wrap {
-		transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
     opacity: 0.0;
 
     &.show {
       opacity: 1.0;
     }
 
-		p {
-			line-height: 1.5em;
-			margin: 0 0 1.25em 0;
-		}
+    p {
+      line-height: 1.5em;
+      margin: 0 0 1.25em 0;
+    }
   }
 
-	.arrow-icon {
-		background-image: url('../images/down-arrow.png');
+  .arrow-icon {
+    background-image: url('../images/down-arrow.png');
 
-		transition: 0.5s all;
-		transform: rotate(180deg);
-	}
+    transition: 0.5s all;
+    transform: rotate(180deg);
+  }
 
-	&.expanded {
-		// .inner-wrap {
-		// 	max-height: 100rem;
-		// }
+  &.expanded {
+    // .inner-wrap {
+    // 	max-height: 100rem;
+    // }
 
-		.arrow-icon {
-			transform: rotate(0);
-		}
-	}
+    .arrow-icon {
+      transform: rotate(0);
+    }
+  }
 }
 
 .work-fader {
@@ -310,7 +305,7 @@
       }
     }
   }
-  
+
   @media only screen and (min-width: 1260px) {
     .no-image {
       padding-bottom: 53%;

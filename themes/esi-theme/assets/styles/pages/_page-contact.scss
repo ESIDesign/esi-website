@@ -93,3 +93,109 @@ div.wpcf7 .ajax-loader {
     }
   }
 }
+
+
+
+/* Styles for reCAPTCHA required notice */
+
+.google-required-recaptcha-notice {
+  font-size: 70%;
+  margin: 2rem auto 2.5rem;
+  display: block;
+  text-align: center;
+  max-width: 298px;
+  line-height: 1.5;
+}
+
+.google-required-recaptcha-notice a {
+  text-decoration: none;
+  opacity: 0.4;
+  color: #fff;
+}
+
+.google-required-recaptcha-notice a:hover {
+  opacity: 1;
+}
+
+
+/* Hubspot form */
+
+.hbspt-form div.input {
+  margin-bottom: 1rem !important;
+}
+
+.hbspt-form .hs-form-required {
+  display: none;
+}
+
+.hbspt-form .hs-input {
+  width: 100%;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  line-height: normal;
+  font-size: 18px;
+  font-family: Poppins Regular,arial,sans-serif;
+  color: #1d252d;
+}
+
+.hbspt-form .hs-error-msgs {
+  margin-bottom: 0;
+}
+
+.hbspt-form ul.hs-error-msgs {
+  float: left;
+  width: 100%;
+  margin-top: -2rem;
+  padding-left: 0;
+  text-align: center;
+}
+
+.hbspt-form ul.hs-error-msgs li {
+  list-style: none;
+}
+
+.hbspt-form .hs-error-msgs a {
+  display: block;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: #fff;
+  opacity: 0.4;
+}
+
+.hbspt-form .hs-error-msgs a:hover {
+  opacity: 1;
+}
+
+.hbspt-form p, .hbspt-form li label {
+  margin-top: 0;
+  font-size: 14px;
+  font-family: Poppins Regular, arial, sans-serif;
+  color: #fefefe;
+}
+
+@media screen and (max-width: 600px) {
+  .hbspt-form li label {
+    font-size: 12px;
+  }
+}
+
+.hbspt-form .hs-button {
+  border: 0;
+  margin-top: 0rem;
+  padding: 1rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  font-size: 14px;
+  font-family: Poppins Semi Bold,arial,sans-serif;
+  text-transform: uppercase;
+  color: #fefefe;
+  background-color: rgba(70,153,201,.9);
+  cursor: pointer;
+}
+
+.contact-form .wpcf7-response-output {
+  margin-top: 1.5rem;
+}

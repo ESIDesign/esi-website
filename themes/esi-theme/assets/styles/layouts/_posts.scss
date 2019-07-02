@@ -236,3 +236,53 @@
     }
   }
 }
+
+
+/* Post headline styles */
+
+article.post-type-post {
+
+  h1 {
+    font-family: DIN Next LT Pro Condensed, arial, sans-serif;
+    font-size: 24pt;
+    text-transform: none;
+    color: #1d252d;
+  }
+
+  h2 {
+    font-family: DIN Next LT Pro Condensed, arial, sans-serif;
+    font-size: 21pt;
+    text-transform: none;
+    margin-bottom: 0;
+    color: #4f8bbf;
+  }
+
+  h3 {
+    font-family: DIN Next LT Pro Condensed Bold, arial, sans-serif;
+    font-size: 19.5pt;
+    text-transform: none;
+    color: #1d252d;
+  }
+
+  h4 {
+    font-family: DIN Next LT Pro Condensed Bold, arial, sans-serif;
+    font-size: 19.5pt;
+    text-transform: none;
+    color: #4f8bbf;
+  }
+
+  h5 {
+    font-family: DIN Next LT Pro Condensed, arial, sans-serif;
+    font-size: 16pt;
+    text-transform: none;
+    color: #1d252d;
+  }
+
+  h6 {
+    font-family: DIN Next LT Pro Condensed, arial, sans-serif;
+    font-size: 16pt;
+    text-transform: none;
+    color: #4f8bbf;
+  }
+
+}
