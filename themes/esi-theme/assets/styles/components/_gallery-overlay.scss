@@ -57,14 +57,6 @@
     // left: 25px;
   }
 
-  .fancybox-arrow--left {
-    left: 20px;
-  }
-
-  .fancybox-arrow--right {
-    right: 20px;
-  }
-
   .fancybox-caption {
     @extend .tc !optional;
     @extend .bn !optional;
@@ -79,7 +71,6 @@
     opacity: 0.0;
     padding-left: 15px;
     padding-right: 15px;
-
     transition: opacity 0.1s ease-out;
 
     &.show {
@@ -87,32 +78,33 @@
     }
   }
 
-  .fancybox-button--arrow_left,
-  .fancybox-button--arrow_right {
+  .fancybox-arrow--left,
+  .fancybox-arrow--right {
     svg {
       display: none;
     }
   }
 
-  .fancybox-button--arrow_right {
+  .fancybox-arrow--right {
     right: 17px;
   }
 
-  .fancybox-button--arrow_left {
+  .fancybox-arrow--left {
     left: 17px;
   }
 
-  .fancybox-button--arrow_left::before {
-    transform: scaleX(-1);
-  }
-
-  .fancybox-button--arrow_left::before,
-  .fancybox-button--arrow_right::before {
-    border-radius: 50%;
+  .fancybox-arrow::after {
+    background-color: rgba(0, 0, 0, .3);
     background-image: url(../images/left-arrow.svg);
-    background-position: center center;
     background-repeat: no-repeat;
-    background-color: rgba(0,0,0,0.2);
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    top: 28px;
+    width: 40px;
+    height: 40px;
+    background-position: center center;
+    background-size: 24px 24px;
   }
 
   a,
