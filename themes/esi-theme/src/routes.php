@@ -46,3 +46,8 @@ Routes::map('work/project-type/:type', function($params) {
   $query = 'posts_per_page=-1&post_type=work&taxonomy=work_project_type&term=' . $params['type'];
   Routes::load('archive-work.php', $params, $query, 200);
 });
+
+Routes::map('jobs/:jobscore_id', function($params) {
+    $query = 'posts_per_page=-1&post_type=single-job';
+    Routes::load('single-job.php', $params, $query, 200);
+});

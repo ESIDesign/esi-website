@@ -1,0 +1,68 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    {% include 'partials/page-title.twig' with { 'page_title' : 'Jobs', 'link' : true } %}
+
+
+    <article class="post-type-job bg-white pv5 relative z-2" id="{{ job.id }}">
+
+        <div class="fluid-width center mt5">
+            <div class="row justify-center">
+
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <div class="tc">
+                        <h1 class="t-dark-blue t-60 din-condensed ttu lh-solid">{{ job.title }}</h1>
+                        <p class="t-16 poppins-reg lh-solid t-med-gray ma0 mt3">
+                            <span class="poppins-semi">Posted</span> {{ job.date_readable }}
+                        </p>
+                    </div>
+
+                    <div class="cms-content pr4-l mt5">
+                        {{ job.description }}
+
+                        <a target="_blank" class="mt3 dib pa3 ph4 button-bg-none t-12 ttu lh-solid no-underline t-med-gray poppins-semi" href="{{ job.apply_url }}">
+                            <span class="button-label db mt1">Apply</span>
+                        </a>
+
+                    </div>
+
+
+                    {% if other_jobs %}
+                        <div class="mv5">
+                            <h3 class="t-pale-blue ttu t-36 lh-solid din-condensed">Additional Opportunities</h3>
+                            {% for job_post in other_jobs %}
+                                <a class="no-underline db t-16 t-dark-blue poppins-reg mv2" href="{{ job_post.esi_link }}">{{ job_post.title }}</a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="mv5">
+                        <h3 class="t-pale-blue ttu t-36 lh-solid din-condensed">DON'T SEE A ROLE THAT FITS YOUR EXPERIENCE?</h3>
+                        <p class="t-16 lh-copy t-dark-blue poppins-reg ma0" href="">Get in touch by emailing your cover letter and resume to <a class="poppins-semi t-dark-blue no-underline" target="_blank" href="mailto:recruit@esidesign.com">recruit@esidesign.com</a>.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </article>
+
+    {% block print %}
+        <div id="print">
+            <h1 class="t-dark-blue t-60 din-condensed ttu lh-solid">{{ job.title }}</h1>
+            <p class="t-16 poppins-reg lh-solid t-med-gray ma0 mt3">
+                <span class="poppins-semi">Posted</span> {{ job.date_readable }}
+            </p>
+
+            <div class="cms-content pr4-l mt5">
+                {{ job.description }}
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block footer %}
+        {% include 'partials/footer.twig' %}
+    {% endblock %}
+{% endblock %}

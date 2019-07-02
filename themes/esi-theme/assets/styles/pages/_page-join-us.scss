@@ -66,6 +66,14 @@
   }
 }
 
+.post-type-job {
+  .button-label {
+    @extend .no-underline !optional;
+    @extend .poppins-semi !optional;
+    @extend .t-dark-blue !optional;
+  }
+}
+
 @media only screen and (min-width: 1450px) {
   .perks-row {
     padding: 0 10rem;

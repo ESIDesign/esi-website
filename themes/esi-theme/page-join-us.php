@@ -10,9 +10,9 @@ $post            = new TimberPost();
 $context['post'] = $post;
 
 $job_post_query = [
-	'post_type'      => 'job',
-	'posts_per_page' => -1,
-	'orderby'        => 'DESC'
+    'post_type'      => 'job',
+    'posts_per_page' => -1,
+    'orderby'        => 'DESC'
 ];
 
 $context['job_posts'] = Timber::get_posts($job_post_query);
@@ -31,5 +31,29 @@ $instagram = array(
 );
 
 $context['instagram_posts'] = Timber::get_posts($instagram);
+
+// Pull data from JobScore
+$url       = "https://careers.jobscore.com/jobs/esidesign/feed.json?sort=title";
+$result    = file_get_contents($url);
+$data      = json_decode($result);
+$jobs_data = $data->jobs;
+$jobs      = [];
+
+foreach ($jobs_data as $job) {
+
+    $job->title         = str_replace(' - Experience Design Firm', '', $job->title);
+    $job->esi_link = '/jobs/' . $job->url_slug;
+
+    foreach($job->custom_fields as $field) {
+        if($field->label === 'Excerpt') {
+            $job->esi_excerpt = $field->content;
+        }
+    }
+
+    $jobs[] = $job;
+}
+
+$context['jobscore_posts'] = $jobs;
+
 
 Timber::render(['page-join-us.twig', 'page.twig'], $context);
