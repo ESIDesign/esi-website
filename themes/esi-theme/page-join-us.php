@@ -15,6 +15,7 @@ $job_post_query = [
     'orderby'        => 'DESC'
 ];
 
+// These posts are ones on the ESI site.
 $context['job_posts'] = Timber::get_posts($job_post_query);
 
 $instagram = array(
@@ -41,7 +42,10 @@ $jobs      = [];
 
 foreach ($jobs_data as $job) {
 
-    $job->title         = str_replace(' - Experience Design Firm', '', $job->title);
+    // Remove this redundant string from pulled job titles
+    $job->title = str_replace(' - Experience Design Firm', '', $job->title);
+
+    // Generate link for viewing job listing on ESI site
     $job->esi_link = '/jobs/' . $job->url_slug;
 
     foreach($job->custom_fields as $field) {
