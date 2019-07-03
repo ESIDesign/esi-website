@@ -10672,22 +10672,34 @@ a {
   display: none; }
 
 @media only print {
-  body > :not(#print) {
+  body > header,
+  body > section.nav-overlay,
+  body > div.page-title,
+  body > footer,
+  .sidebar,
+  .site-header-bg,
+  .post-comments {
+    display: none; }
+  body.single-work > :not(#print),
+  body.blog > :not(#print),
+  body.single-post > :not(#print),
+  body.single-work > :not(#print),
+  body.about > :not(#print) {
     display: none; }
   #print {
     display: block;
     width: 100%; }
-  #print .spacing {
-    margin: 25px;
-    border-bottom: 1px solid #dddddd; }
-  #print a {
-    text-decoration: none; }
-  #print a[href]:after {
-    content: " (" attr(href) ")";
-    color: #1d252d; }
-  #print * {
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact; } }
+    #print .spacing {
+      margin: 25px;
+      border-bottom: 1px solid #dddddd; }
+    #print a {
+      text-decoration: none; }
+    #print a[href]:after {
+      content: " (" attr(href) ")";
+      color: #1d252d; }
+    #print * {
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact; } }
 
 .f-white {
   fill: #fefefe; }

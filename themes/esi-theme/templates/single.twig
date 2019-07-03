@@ -133,40 +133,6 @@
 
 </article>
 
-{% block print %}
-  <div id="print">
-    <!-- HEADER -->
-    <div id="header" style="height: 50px;"></div>
-    <!-- END HEADER -->
-
-    <!-- TITLE -->
-    <div class="fluid-width">
-      <h2 class="t-50 t-dark-blue din-condensed lh-solid ttu">{{ post.title }}</h2>
-    </div>
-    <!-- END TITLE -->
-
-    <div class="spacing"></div>
-
-    <!-- IMAGE -->
-    <div class="fluid-width">
-      <img src="{{ TimberImage(post.header_image) }}">
-    </div>
-    <!-- END IMAGE -->
-    
-    <div class="spacing"></div>
-
-    <!-- POST CONTENT -->
-    <div class="fluid-width cms-content pr5-l">
-        {% if post.sub_headline %}
-            <h2>{{ post.sub_headline }}</h2>
-        {% endif %}
-        {{ post.content }}
-    </div>
-    <!-- END POST CONTENT -->
-
-    <div class="spacing"></div>
-  </div>
-{% endblock %}
 
 {% else %}
 
@@ -271,7 +237,6 @@
                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
                */
-
               var disqus_config = function () {
                   this.page.url = "{{ post.link }}";  // Replace PAGE_URL with your page's canonical URL variable
                   this.page.identifier = "{{ post.ID }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
@@ -348,6 +313,43 @@
   </article>
 
 {% endif %}
+
+
+
+{% block print %}
+    <div id="print">
+        <!-- HEADER -->
+        <div id="header" style="height: 50px;"></div>
+        <!-- END HEADER -->
+
+        <!-- TITLE -->
+        <div class="fluid-width">
+            <h2 class="t-50 t-dark-blue din-condensed lh-solid ttu">{{ post.title }}</h2>
+        </div>
+        <!-- END TITLE -->
+
+        <div class="spacing"></div>
+
+        <!-- IMAGE -->
+        <div class="fluid-width">
+            <img src="{{ TimberImage(post.header_image) }}">
+        </div>
+        <!-- END IMAGE -->
+
+        <div class="spacing"></div>
+
+        <!-- POST CONTENT -->
+        <div class="fluid-width cms-content pr5-l">
+            {% if post.sub_headline %}
+                <h2>{{ post.sub_headline }}</h2>
+            {% endif %}
+            {{ post.content }}
+        </div>
+        <!-- END POST CONTENT -->
+
+        <div class="spacing"></div>
+    </div>
+{% endblock %}
 
 
   {% block footer %}
