@@ -110,8 +110,39 @@
     </div>
 
 
-    <div id="instafeed" style="display:none;"></div>
+    {#<div data-js-scroll-section>#}
 
+      {#<section class="instagram-feed pv5 fluid-width center">#}
+        {#<h4 data-js-animate-this class="tc din-light-condensed t-dark-blue ttu flex justify-center content-center items-center mb2">#}
+          {#<span class="icon dib f-gray ih ih-30 o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>#}
+          {#<a class="no-underline tc" target="_blank" href="https://www.instagram.com/esidesign"><span class="text dib t-40 t-red lh-solid mh2">LATEST FROM @ESIDESIGN</span></a>#}
+          {#<span class="icon dib f-gray ih ih-30 ih-rotate o-90">{% include 'svg/heading-bg-pulse.twig' %}</span>#}
+        {#</h4>#}
+        {#<!-- <a data-js-animate-this class="t-18 db t-dark-blue poppins-reg no-underline tc" target="_blank" href="https://www.instagram.com/explore/tags/esipeople/?hl=en">#ESIPeople</a> -->#}
+        {#<div data-js-animate-this class="row mt4">#}
+            {#{% for post in instagram_posts %}#}
+
+              {#<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mb3">#}
+                {#<a data-js-fancy-trigger data-target-index="{{ loop.index0 }}" href="#instagram-post-{{ loop.index0 }}">#}
+                  {#<div style="background-image: url({{ post.thumbnail.src }});" class="aspect-ratio aspect-ratio--1x1 bg-center contain bg-black-80"></div>#}
+                {#</a>#}
+                {#<div id="instagram-post-{{ loop.index0 }}" data-js-instagram-overlay-content class="dn mw6 center pa5 insta-overlay">#}
+                  {#<a href="{{ post.get_field('url') ? post.get_field('url') : post.insta_link }}" target="_blank">#}
+                    {#<div#}
+                            {#class="background-hack left-0 top-0 w-100 h-100 bg-center cover aspect-ratio aspect-ratio--1x1"#}
+                            {#style="background-image:url({{post.thumbnail.src}})">#}
+                    {#</div>#}
+                  {#</a>#}
+                    {#{{ post.content }}#}
+                {#</div>#}
+              {#</div>#}
+
+            {#{% endfor %}#}
+        {#</div>#}
+        {#<!-- <div data-js-animate-this id="instafeed" class="row mt4"></div> -->#}
+      {#</section>#}
+
+    {#</div>#}
 
     <div class="fluid-width center flex items-center content-center justify-center mt5">
       <button data-js-load-more-button class="pointer br-100 t-white bg-transparent bn pa0 ma0 flex items-center content-center overflow-visible justify-center is-disabled">

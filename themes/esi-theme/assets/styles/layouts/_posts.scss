@@ -154,6 +154,20 @@
     }
   }
 
+  /* For grid layouts */
+  > div {
+    font-size: 16px;
+    font-family: 'Poppins Light', arial, sans-serif;
+    color: $dark-blue;
+
+    a {
+      text-decoration: none;
+      color: $dark-blue;
+      font-family: 'Poppins Semi Bold', arial, sans-serif;
+    }
+
+  }
+
   figure {
     max-width: 100% !important;
     width: auto !important;
