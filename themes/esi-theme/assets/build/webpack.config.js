@@ -3,11 +3,10 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
-// const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = require('./config');
 
@@ -59,40 +58,21 @@ let webpackConfig = {
         ],
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         include: config.paths.assets,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style',
           use: [
-            { loader: 'cache' },
-            { loader: 'css', options: { sourceMap: config.enabled.sourceMaps } },
-            {
-              loader: 'postcss', options: {
-                config: { path: __dirname, ctx: config },
-                sourceMap: config.enabled.sourceMaps,
+              {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {
+                      // you can specify a publicPath here
+                      // by default it uses publicPath in webpackOptions.output
+                      publicPath: '../',
+                      hmr: process.env.NODE_ENV === 'development',
+                  },
               },
-            },
+              'css-loader',
+              'sass-loader',
           ],
-        }),
-      },
-      {
-        test: /\.scss$/,
-        include: config.paths.assets,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style',
-          use: [
-            { loader: 'cache' },
-            { loader: 'css', options: { sourceMap: config.enabled.sourceMaps } },
-            {
-              loader: 'postcss', options: {
-                config: { path: __dirname, ctx: config },
-                sourceMap: config.enabled.sourceMaps,
-              },
-            },
-            { loader: 'resolve-url', options: { sourceMap: config.enabled.sourceMaps } },
-            { loader: 'sass', options: { sourceMap: config.enabled.sourceMaps } },
-          ],
-        }),
       },
       {
         test: /\.(ttf|woff|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
@@ -153,10 +133,9 @@ let webpackConfig = {
       output: `[path]${assetsFilenames}.[ext]`,
       manifest: config.manifest,
     }),
-    new ExtractTextPlugin({
-      filename: `styles/${assetsFilenames}.css`,
-      allChunks: true,
-      disable: (config.enabled.watcher),
+    new MiniCssExtractPlugin({
+        filename: 'styles/[name].css',
+        chunkFilename: '[id].css',
     }),
     new webpack.ProvidePlugin({
       // 'animation.gsap': 'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js',
@@ -185,10 +164,6 @@ let webpackConfig = {
         eslint: { failOnWarning: false, failOnError: true },
       },
     }),
-    // new StyleLintPlugin({
-    //   failOnError: !config.enabled.watcher,
-    //   syntax: 'scss',
-    // }),
     new FriendlyErrorsWebpackPlugin(),
   ],
 };

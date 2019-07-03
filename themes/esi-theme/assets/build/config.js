@@ -12,6 +12,7 @@ const rootPath = (userConfig.paths && userConfig.paths.root)
   : process.cwd();
 
 const config = merge({
+  mode: isProduction ? 'production' : 'development',
   open: true,
   copy: 'images/**/*',
   proxyUrl: 'http://localhost:3000',
