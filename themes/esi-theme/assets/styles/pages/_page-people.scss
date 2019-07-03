@@ -17,10 +17,16 @@
 }
 
 .people-overlay {
-	width: 100%;
+  width: 100%;
+
+  .next-button {
+    margin-right: 2rem;
+  }
+
 }
 
-// .single-person-image {
+
+  // .single-person-image {
 //   width: 160px;
 //   height: 160px;
 // }
@@ -133,6 +139,7 @@
 }
 
 .page-template-page-people {
+
   .cms-content {
     p {
       @extend .poppins-reg !optional;
@@ -146,6 +153,15 @@
   .border-button {
     border: 1px solid $label-gray;
   }
+
+  .fancybox-slide--html {
+    padding: 0;
+  }
+
+  .fancybox-slide {
+    overflow: hidden;
+  }
+
 }
 
 .sidebar {

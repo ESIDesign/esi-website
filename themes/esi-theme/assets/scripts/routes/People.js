@@ -3,7 +3,9 @@ import Grid from 'd3-v4-grid';
 // import { forceCluster } from 'd3-force-cluster';
 
 export default {
+
   init() {
+
     let isOrganized = true;
     let $layoutButton = $('[data-js-layout-switch]');
     let $overlayControls = $('[data-js-overlay-control]');
@@ -12,7 +14,6 @@ export default {
     $overlayControls.on('click', function(e) {
       e.preventDefault();
       let instance = $.fancybox.getInstance();
-
       let $this = $(this);
 
       if ($this.hasClass('prev-button')) {
@@ -76,16 +77,19 @@ export default {
       dataHeightIndex = Math.ceil(finalData.length / numColumns);
       height = 275 * dataHeightIndex;
       translateOffset = 100;
+
     } else if (wWidth <= 768 && wWidth > 670) {
       numColumns = 2;
       dataHeightIndex = Math.ceil(finalData.length / numColumns);
       height = 285 * dataHeightIndex;
       translateOffset = 210;
+
     } else if (wWidth <= 670) {
       dataHeightIndex = Math.ceil(finalData.length);
       height = 275 * dataHeightIndex;
       numColumns = 1;
       useGrid = false;
+
     } else {
       dataHeightIndex = Math.ceil(finalData.length / numColumns);
       height = 260 * dataHeightIndex;
@@ -148,6 +152,7 @@ export default {
         node['oy'] = node.y;
         return node;
       });
+
     } else {
       processedNodes = finalData.map((node, index) => {
         node.x = (width / 2);
@@ -167,6 +172,7 @@ export default {
         force.alphaTarget(0.5).restart();
         isOrganized = false;
         $layoutButton.find('.button-label').html('Line Up');
+
       } else {
         $map.removeClass('is-disorganized');
         $masterContainer.removeClass('is-disorganized');
@@ -183,7 +189,7 @@ export default {
         let galleryTarget = d.name.replace(/ /g, '-').replace(/'/g, '').toLowerCase();
         let galleryIndex = $(`#${galleryTarget}`).data('index');
         if (galleryTarget !== 'you?' && galleryIndex !== false) {
-          window.location.hash = d.name.replace(/ /g, "-").replace(/'/g, '').toLowerCase();
+          window.location.hash = galleryTarget;
           $.fancybox.open($peopleGroup, {
             loop: true,
             arrows: false,
@@ -191,13 +197,13 @@ export default {
             smallBtn:false,
             margin: [0, 0],
             hash: '',
-            buttons : [],
-            clickContent : false,
-            clickSlide : false,
-            clickOutside : false,
-            dblclickContent : false,
-            dblclickSlide   : false,
-            dblclickOutside : false,
+            buttons: [],
+            clickContent: false,
+            clickSlide: false,
+            clickOutside: false,
+            dblclickContent: false,
+            dblclickSlide: false,
+            dblclickOutside: false,
           }, galleryIndex);
         }
       } else if (d.name === 'you?') {
@@ -272,14 +278,6 @@ export default {
       }
 
       d.oradius = 55;
-
-      // if (d.isSmall) {
-      //   d.oradius = 64;
-      // } else if (d.isLeader) {
-      //   d.oradius = 120;
-      // } else {
-      //   d.oradius = radius;
-      // }
 
     });
 
