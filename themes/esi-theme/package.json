@@ -103,7 +103,7 @@
     "import-glob": "~1.5",
     "jpegtran-bin": "^4.0.0",
     "mini-css-extract-plugin": "~0.7.0",
-    "node-sass": "~4.5",
+    "node-sass": "~4.12.0",
     "postcss-loader": "~2.0",
     "postcss-safe-parser": "~3.0",
     "resolve-url-loader": "~2.1",
