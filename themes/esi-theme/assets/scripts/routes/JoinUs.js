@@ -16,17 +16,17 @@ export default {
 
         feed.run();
 
-        // $.ajax({
-        //     type: 'GET',
-        //     url: 'https://careers.jobscore.com/jobs/esidesign/feed.json?sort=title',
-        //     data: { get_param: 'value' },
-        //     dataType: 'json',
-        //     success: function(data) {
-        //         $.each(data, function(index, element) {
-        //             console.log(data);
-        //         });
-        //     }
-        // });
+        $.ajax({
+            type: 'GET',
+            url: 'https://careers.jobscore.com/jobs/esidesign/feed.json?sort=title',
+            data: { get_param: 'value' },
+            dataType: 'json',
+            success: function(data) {
+                $.each(data, function(index, element) {
+                    console.log(data);
+                });
+            }
+        });
     },
     finalize() {
         // JavaScript to be fired on the home page, after the init JS

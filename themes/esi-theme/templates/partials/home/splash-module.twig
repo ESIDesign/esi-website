@@ -31,16 +31,36 @@
           data-js-splash-title-bottom
           data-y="-25"
           data-delay="1.2"
-          class="mt2 dib pa3 ph4 button-bg t-12 ttu lh-solid no-underline t-white poppins-semi" href="/work"><span class="button-label db mt1">See Our Work</span></a>
+          class="mt2 dib pa3 ph4 button-bg t-12 ttu lh-solid no-underline t-white poppins-semi" href="{{ post.get_field('cta_button_link') }}"><span class="button-label db mt1">{{ post.get_field('cta_button_label') }}</span></a>
       </div>
     </div>
     <div class="absolute left-0 right-0 bottom-0 ma2 ma4-l flex justify-between items-center content-center z-4 button-holder">
+      <div
+        data-js-animate-this
+        data-js-down-button
+        data-y="-25"
+        data-delay="1.4"
+        class="flex items-center content-center justify-center">
+
       <button
         data-js-animate-this
         data-js-down-button
         data-y="-25"
         data-delay="1.4"
-        data-js-move-down class="left-button splash-button br-100 rb-50 t-white button-bg bn pa0 ma0 pointer flex items-center content-center justify-center flex-column"><span class="icon dib f-white i-30 center">{% include 'svg/down-arrow.twig' %}</span></button>
+        data-js-move-down 
+        class="left-button splash-button br-100 rb-50 t-white button-bg bn pa0 ma0 pointer flex items-center content-center justify-center flex-column"><span class="icon dib f-white i-30 center">{% include 'svg/down-arrow.twig' %}</span></button>
+
+        {% if post.get_field('show_announcement') %}
+
+        <p style="display:inline-block; margin: 0 0 0 25px; pointer:default;" class="t-18 t-white poppins-reg lh-copy">{{ post.get_field('announcement_text') }}
+
+          <a class="mt2 dib pa3 ph4 button-bg t-12 ttu lh-solid no-underline t-white poppins-semi" href="{{ post.get_field('announcement_cta_button_link') }}" style="margin-left:15px;opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><span class="button-label db mt1">{{ post.get_field('announcement_cta_button_label') }}</span></a>
+        </p>
+
+        {% endif %}
+      
+      </div>
+      
       <a
         href="/contact"
         data-js-animate-this

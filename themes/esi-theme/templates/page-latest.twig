@@ -73,7 +73,7 @@
                 <div class="absolute left-0 top-0 right-0 dark-blue-bg aspect-ratio--16x9 o-30 z-0"></div>
                 <div
                   class="background-image aspect-ratio--16x9 bg-center cover z-1 relative"
-                  style="background-image: url( {{ (post.get_field('header_image') ? TimberImage(post.get_field('header_image')).src('large') : post.thumbnail.src('large')) }} )"
+                  style="background-image: url( {{ post.thumbnail ? post.thumbnail.src('large') : TimberImage(post.get_field('header_image')).src('large') }} )"
                   alt="{{ post.title }}">
                 </div>
 

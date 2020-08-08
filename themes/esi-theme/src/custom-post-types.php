@@ -35,7 +35,7 @@ function case_study() {
     'label'                 => __( 'Case Study', 'text_domain' ),
     'description'           => __( 'Case Study Post Type', 'text_domain' ),
     'labels'                => $labels,
-    'supports'              => array( 'revisions' ),
+    'supports'              => array( ),
     'hierarchical'          => false,
     'public'                => true,
     'show_ui'               => true,

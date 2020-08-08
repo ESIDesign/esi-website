@@ -4,96 +4,32 @@
 
 @media only print {
 
-	body > header,
-	body > section.nav-overlay,
-	body > div.page-title,
-	body > footer,
-	.sidebar,
-	.site-header-bg,
-	.post-comments
-	{
+	body > :not(#print) {
 		display: none;
-	}
-
-	///* Job listing and blog post */
-	//body.blog {
-	//	.job-apply-button,
-	//	.additional-opportunities,
-	//	.dont-see-a-role-that-fits-your-experience {
-	//		display: none;
-	//	}
-	//}
-
-	body.single-work,
-	body.blog,
-	body.single-post,
-	body.single-work,
-	body.about
-	{
-		> :not(#print) {
-			display: none;
-		}
 	}
 
 	#print {
 		display: block;
 		width: 100%;
+		// max-width: 70%;
+	}
 
-		.spacing {
-			margin: 25px;
-			border-bottom: 1px solid #dddddd;
-		}
+	#print .spacing {
+		margin: 25px;
+		border-bottom: 1px solid #dddddd;
+	}
 
-		a {
-			text-decoration: none;
-		}
+	#print a {
+		text-decoration: none;
+	}
 
-		a[href]:after {
-			content: " (" attr(href) ")";
-			color: #1d252d;
-		}
+	#print a[href]:after {
+		content: " (" attr(href) ")";
+		color: #1d252d;
+	}
 
-		* {
-			-webkit-print-color-adjust: exact;
-			color-adjust: exact;
-		}
+	#print * {
+		-webkit-print-color-adjust: exact;
+		color-adjust: exact;
 	}
 }
-
-
-
-//#print {
-//	display: none;
-//}
-//
-//@media only print {
-//
-//	body > :not(#print) {
-//		display: none;
-//	}
-//
-//	#print {
-//		display: block;
-//		width: 100%;
-//		// max-width: 70%;
-//	}
-//
-//	#print .spacing {
-//		margin: 25px;
-//		border-bottom: 1px solid #dddddd;
-//	}
-//
-//	#print a {
-//		text-decoration: none;
-//	}
-//
-//	#print a[href]:after {
-//		content: " (" attr(href) ")";
-//		color: #1d252d;
-//	}
-//
-//	#print * {
-//		-webkit-print-color-adjust: exact;
-//		color-adjust: exact;
-//	}
-//}

@@ -590,7 +590,7 @@
         <img src="{{ TimberImage(post.header_image) }}">
       </div>
       <!-- END IMAGE -->
-
+      
       <div class="spacing"></div>
 
       <!-- INTRODUCTION -->
@@ -617,7 +617,7 @@
       <div class="fluid-width">
         <div class="work-cms-content relative mb2">
             {{ post.get_field('work_description') }}
-
+          
         </div>
       </div>
 
@@ -632,7 +632,7 @@
 
       <!-- QUOTE MODULE -->
       {% if post.get_field("quote_module") %}
-
+      
       <div class="fluid-width">
         <p class="t-26 din-condensed t-dark-blue poppins-reg">{{ post.quote_module }}</p>
         <h4 class="t-18 lh-copy t-pale-blue poppins-semi ttu">{{ post.quote_module_individual }}</h4>
