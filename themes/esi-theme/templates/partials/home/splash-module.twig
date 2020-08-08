@@ -52,9 +52,9 @@
 
         {% if post.get_field('show_announcement') %}
 
-        <p style="display:inline-block; margin: 0 0 0 25px; pointer:default;" class="t-18 t-white poppins-reg lh-copy">{{ post.get_field('announcement_text') }}
+        <p style="display:flex; align-items:center; margin: 0 0 0 25px; pointer:default;" class="t-18 t-white poppins-reg lh-copy">{{ post.get_field('announcement_text') }}
 
-          <a class="mt2 dib pa3 ph4 button-bg t-12 ttu lh-solid no-underline t-white poppins-semi" href="{{ post.get_field('announcement_cta_button_link') }}" style="margin-left:15px;opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><span class="button-label db mt1">{{ post.get_field('announcement_cta_button_label') }}</span></a>
+          <a class="announcement-more-button dib pa3 ph4 button-bg t-12 ttu lh-solid no-underline t-white poppins-semi" href="{{ post.get_field('announcement_cta_button_link') }}" style="margin-left:15px; margin-right:25px; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><span style="white-space: nowrap;" class="button-label db mt1">{{ post.get_field('announcement_cta_button_label') }}</span></a>
         </p>
 
         {% endif %}
