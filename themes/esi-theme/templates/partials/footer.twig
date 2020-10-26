@@ -3,7 +3,7 @@
 <!-- End of HubSpot Embed Code -->
 
 <footer class="site-footer ph4 pv5 dark-blue-bg relative z-2">
-  <div class="flex justify-center items-center content-start mb4">
+  <div class="footer-social-media flex justify-center items-center content-start mb4">
     {% if options.linkedin %}
     <a href="{{ options.linkedin }}" target="_blank" class="tc br-100 t-white button-bg social-link dib pa0 mh1 flex items-center content-center justify-center social-linkedin"><span class="icon i-20 f-white">{% include 'svg/social-icon-linkedin.twig' %}</span></a>
     {% endif %}
@@ -29,18 +29,18 @@
     {% endif %}
   </div>
 
-  <div class="flex justify-center items-start content-start mw8 center flex-wrap">
+  <div class="footer-links flex justify-center items-start content-start mw8 center flex-wrap">
     {% for column in options.footer_nav_column %}
     <span class="t-white">
     </span>
     <div class="footer-nav-column w-20-l w-20-xl w-100 tc tl-l mb3">
       {% if column.acf_fc_layout == 'footer_nav_column' %}
-      <h4 class="t-40 ttu din-condensed"><a class="t-red no-underline" href="{{ column.heading_link }}">{{ column.heading }}</a></h4>
+      <h4 class="footer-link-heading t-40 ttu din-condensed"><a class="t-red no-underline" href="{{ column.heading_link }}">{{ column.heading }}</a></h4>
       <ul>
       {% for item in column.sub_items %}
         {% if item.link %}
           {% if item.text == 'Directions' %}
-          <li class="pt1"><a class="t-14 t-white poppins-reg no-underline lh-title" target="_blank" href="{{ item.link }}">{{ item.text }}</a></li>
+          <li class="footer-link pt1"><a class="t-14 t-white poppins-reg no-underline lh-title" target="_blank" href="{{ item.link }}">{{ item.text }}</a></li>
           {% else %}
           <li class="pt1"><a class="t-14 t-white poppins-reg no-underline lh-title" href="{{ item.link }}">{{ item.text }}</a></li>
           {% endif %}
