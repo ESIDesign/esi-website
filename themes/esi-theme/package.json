@@ -133,7 +133,7 @@
     "d3-v4-grid": "^2.0.2",
     "fastclick": "^1.0.6",
     "flexboxgrid-sass": "^8.0.5",
-    "fullpage.js": "^2.9.4",
+    "fullpage.js": "^4.0.5",
     "gsap": "^1.20.2",
     "headroom.js": "^0.9.4",
     "imagesloaded": "^4.1.3",
